@@ -30,7 +30,7 @@ set(APP_NAME PSE-Bee-Game)
 project(${APP_NAME})
 
 # Needed to compile on Linux
-if (UNIX)
+if (LINUX)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -no-pie")
 endif()
 
@@ -47,7 +47,7 @@ set(GAME_HEADER)
 set(GAME_RES_FOLDER
     "${CMAKE_CURRENT_SOURCE_DIR}/Resources"
     )
-if(APPLE OR WINDOWS)
+if(LINUX)
     cocos_mark_multi_resources(common_res_files RES_TO "Resources" FOLDERS ${GAME_RES_FOLDER})
 endif()
 

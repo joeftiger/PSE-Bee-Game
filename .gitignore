@@ -3,4 +3,5 @@ cmake-build-debug/
 cmake-build-release/
 
 # android build folders
-cocos2d\cocos\platform\android\libcocos2dx\build
+cocos2d/cocos/platform/android/libcocos2dx/build
+proj.android/.idea/
