@@ -29,6 +29,11 @@ set(APP_NAME PSE-Bee-Game)
 
 project(${APP_NAME})
 
+# Needed to compile on Linux
+if (UNIX)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -no-pie")
+endif()
+
 set(COCOS2DX_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cocos2d)
 set(CMAKE_MODULE_PATH ${COCOS2DX_ROOT_PATH}/cmake/Modules/)
 
