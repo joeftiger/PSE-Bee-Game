@@ -30,7 +30,8 @@ set(APP_NAME PSE-Bee-Game)
 project(${APP_NAME})
 
 # Needed to compile on Linux
-if (UNIX)
+if (CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
+    message(STATUS ">>> Linux - setting flag \"-no-pie\"")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -no-pie")
 endif()
 
