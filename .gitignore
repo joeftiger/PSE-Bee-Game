@@ -5,3 +5,6 @@ cmake-build-release/
 # android build folders
 cocos2d/cocos/platform/android/libcocos2dx/build
 proj.android/.idea/
+proj.android/app/PSE-Bee-Game.iml
+cocos2d/cocos/platform/android/libcocos2dx/libcocos2dx.iml
+proj.android/proj.android.iml
