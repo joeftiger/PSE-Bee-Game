@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.2" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="16" tileheight="16" infinite="0" nextlayerid="2" nextobjectid="1">
+ <tileset firstgid="1" name="pokemon_blue_tileset" tilewidth="16" tileheight="16" tilecount="325" columns="25">
+  <image source="pokemon_blue_tileset.png" width="400" height="208"/>
+ </tileset>
+ <layer id="1" name="Tile Layer 1" width="10" height="10">
+  <data encoding="base64" compression="zlib">
+   eJyTZmBgkEbCLFDMAaULobQ0AXVdUNoECZthUQfDvkjYD4+9DUCcBsT1QJyOpI4Nzd50NPNxYRso5kSzE919ylCshKZuOhDPgOKZONSxAvEGID4NxLOAeBMOddgwAIJGDuQ=
+  </data>
+ </layer>
+</map>
