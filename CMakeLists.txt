@@ -29,11 +29,27 @@ set(APP_NAME PSE-Bee-Game)
 
 project(${APP_NAME})
 
+# -----------------------------------------------------------------------------
+message("begin custom conf:")
+set(hostname)
+cmake_host_system_information(RESULT hostname QUERY HOSTNAME)
+
 # Needed to compile on Linux
 if (CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
-    message(STATUS ">>> Linux - setting flag \"-no-pie\"")
+    message(STATUS "Linux - setting flag \"-no-pie\"")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -no-pie")
+
+    # use new OpenGL instead of legacy (laptop/desktop Julius)
+    if (hostname STREQUAL "E580")
+        cmake_policy(SET CMP0072 NEW)
+        message(STATUS "Julius Laptop - setting flag \"CMP0072 NEW\"")
+    elseif(hostname STREQUAL "ryzen")
+        cmake_policy(SET CMP0072 NEW)
+        message(STATUS "Julius Desktop - setting flag \"CMP0072 NEW\"")
+    endif()
 endif()
+message("end custom conf\n")
+# -----------------------------------------------------------------------------
 
 set(COCOS2DX_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cocos2d)
 set(CMAKE_MODULE_PATH ${COCOS2DX_ROOT_PATH}/cmake/Modules/)
