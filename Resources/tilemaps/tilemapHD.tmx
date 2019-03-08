@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.2" orientation="isometric" renderorder="right-down" width="8" height="8" tilewidth="389" tileheight="225" infinite="0" nextlayerid="3" nextobjectid="1">
+ <tileset firstgid="1" source="../tilesets/tilesetHD.tsx"/>
+ <layer id="1" name="background" width="8" height="8">
+  <data encoding="base64" compression="zlib">
+   eJxtjtEKACAIA9VK//+PM5gwRg9HxM5pmNlpCmSz8D4CpOS7cZqrT4eTm7SH+xMe/8dRj2/gWZe8sIu7XfLxL6KsAUU=
+  </data>
+ </layer>
+</map>
