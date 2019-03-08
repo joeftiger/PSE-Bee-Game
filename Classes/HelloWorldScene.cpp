@@ -52,72 +52,86 @@ bool HelloWorld::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
+    _cam = this->getDefaultCamera();
 
-    // add a "close" icon to exit the progress. it's an autorelease object
-    auto closeItem = MenuItemImage::create(
-                                           "CloseNormal.png",
-                                           "CloseSelected.png",
-                                           CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
+    auto listener = EventListenerTouchOneByOne::create();
+    listener->onTouchBegan = [&](Touch *touch, Event *unused_event)->bool {return true;};
+    listener->onTouchEnded = CC_CALLBACK_2(HelloWorld::onTouchEnded, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
-    if (closeItem == nullptr ||
-        closeItem->getContentSize().width <= 0 ||
-        closeItem->getContentSize().height <= 0)
-    {
-        problemLoading("'CloseNormal.png' and 'CloseSelected.png'");
-    }
-    else
-    {
-        float x = origin.x + visibleSize.width - closeItem->getContentSize().width/2;
-        float y = origin.y + closeItem->getContentSize().height/2;
-        closeItem->setPosition(Vec2(x,y));
+    //load map
+    _tileMap = TMXTiledMap::create("tilemapTobi/mapISO.tmx");
+    if(_tileMap == NULL) {
+        log("tile map doesnt exist");
+        return false;
     }
 
-    // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
-    menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 1);
-
-    /////////////////////////////
-    // 3. add your codes below...
-
-    // add a label shows "Hello World"
-    // create and initialize a label
-
-    auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
-    if (label == nullptr)
-    {
-        problemLoading("'fonts/Marker Felt.ttf'");
+    //load background
+    _background = _tileMap->getLayer("Background");
+    if(_background == NULL) {
+        log("_background doesnt exist");
+        return false;
     }
-    else
-    {
-        // position the label on the center of the screen
-        label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                                origin.y + visibleSize.height - label->getContentSize().height));
+    this->addChild(_background, -1);
+    _background->setAnchorPoint(Point(0,0));
+    _background->setScale(2.0f);
 
-        // add the label as a child to this layer
-        this->addChild(label, 1);
+    /*
+    //get spawnpoint
+    TMXObjectGroup *objectGroup = _tileMap->getObjectGroup("Objects");
+    if(objectGroup == NULL) {
+        log("tile map has no object layer");
+        return false;
     }
 
-    // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
-    if (sprite == nullptr)
-    {
-        problemLoading("'HelloWorld.png'");
-    }
-    else
-    {
-        // position the sprite on the center of the screen
-        sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    ValueMap spawnPoint = objectGroup->getObject("SpawnPoint");
+    float xSpawn = spawnPoint["x"].asFloat();
+    float ySpawn = spawnPoint["y"].asFloat();
+    */
 
-        // add the sprite as a child to this layer
-        this->addChild(sprite, 0);
-    }
     return true;
 }
 
+void HelloWorld::onTouchEnded(Touch *touch, Event *unused_event) {
+
+    auto touchLocation = touch->getLocation();
+    touchLocation = Director::getInstance()->convertToGL(touchLocation);
+    touchLocation = this->convertToNodeSpace(touchLocation);
+
+    Point camPos = _cam->getPosition();
+    Point diff = touchLocation - camPos;
+
+    if ( abs(diff.x) > abs(diff.y) ) {
+        if (diff.x > 0) {
+            camPos.x += _tileMap->getTileSize().width;
+        } else {
+            camPos.x -= _tileMap->getTileSize().width;
+        }
+    } else {
+        if (diff.y > 0) {
+            camPos.y -= _tileMap->getTileSize().height;
+        } else {
+            camPos.y += _tileMap->getTileSize().height;
+        }
+    }
+
+    // safety check on the bounds of the map
+    if (camPos.x <= (_tileMap->getMapSize().width * _tileMap->getTileSize().width) &&
+        camPos.y <= (_tileMap->getMapSize().height * _tileMap->getTileSize().height) &&
+        camPos.y >= 0 &&
+        camPos.x >= 0 )
+    {
+
+        this->setCamPosition(camPos);
+    }
+
+    //this->setViewPointCenter(_player->getPosition());
+
+}
+
+void HelloWorld::setCamPosition(Point position) {
+    _cam->setPosition(position);
+}
 
 void HelloWorld::menuCloseCallback(Ref* pSender)
 {
