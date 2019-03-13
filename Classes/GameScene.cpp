@@ -28,101 +28,63 @@ bool GameScene::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     auto listener = EventListenerTouchOneByOne::create();
-    listener->onTouchBegan = [&](Touch *touch, Event *unused_event)->bool {return true;};
+    listener->onTouchBegan = CC_CALLBACK_2(GameScene::onTouchBegan, this);
+    listener->onTouchMoved = CC_CALLBACK_2(GameScene::onTouchMoved, this);
     listener->onTouchEnded = CC_CALLBACK_2(GameScene::onTouchEnded, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
-    //load map
-    _tileMap = TMXTiledMap::create("tilemapTobi/mapISO.tmx");
-    if(_tileMap == NULL) {
-        log("tile map doesnt exist");
-        return false;
-    }
 
-    //load background
+    _tileMap = TMXTiledMap::create("tilemapTobi/mapISO.tmx");
     _background = _tileMap->getLayer("Background");
-    if(_background == NULL) {
-        log("_background doesnt exist");
-        return false;
-    }
+
     this->addChild(_background, -1);
     _background->setAnchorPoint(Point(0.5,0.5));
     _background->setScale(2.0f);
 
-    _player = Sprite::create("tilemapTobi/TileGameResources/Player.png");
-    this->addChild(_player);
-
-
-
-    //get spawnpoint
-    TMXObjectGroup *objectGroup = _tileMap->getObjectGroup("Objects");
-    if(objectGroup == NULL) {
-        log("tile map has no object layer");
-        return false;
-    }
-
-    ValueMap spawnPoint = objectGroup->getObject("SpawnPoint");
-    float xSpawn = spawnPoint["x"].asFloat();
-    float ySpawn = spawnPoint["y"].asFloat();
-
-    this->setPlayerPosition(Point(xSpawn,ySpawn));
-
-    auto followPlayer = Follow::create(_player);
-    this->runAction(followPlayer);
-
+//    _player = Sprite::create("tilemapTobi/TileGameResources/Player.png");
+//    this->addChild(_player);
+//
+//
+//
+//    //get spawnpoint
+//    TMXObjectGroup *objectGroup = _tileMap->getObjectGroup("Objects");
+//    if(objectGroup == NULL) {
+//        log("tile map has no object layer");
+//        return false;
+//    }
+//
+//    ValueMap spawnPoint = objectGroup->getObject("SpawnPoint");
+//    float xSpawn = spawnPoint["x"].asFloat();
+//    float ySpawn = spawnPoint["y"].asFloat();
+//
+//    this->setPlayerPosition(Point(xSpawn,ySpawn));
+//
+//    auto followPlayer = Follow::create(_player);
+//    this->runAction(followPlayer);
 
     return true;
-}
-
-void GameScene::onTouchEnded(Touch *touch, Event *unused_event) {
-
-    auto touchLocation = touch->getLocation();
-    touchLocation = Director::getInstance()->convertToGL(touchLocation);
-    touchLocation = this->convertToNodeSpace(touchLocation);
-
-    Point playerPos = _player->getPosition();
-    Point diff = touchLocation - playerPos;
-
-    if ( abs(diff.x) > abs(diff.y) ) {
-        if (diff.x > 0) {
-            playerPos.x += _tileMap->getTileSize().width;
-        } else {
-            playerPos.x -= _tileMap->getTileSize().width;
-        }
-    } else {
-        if (diff.y > 0) {
-            playerPos.y -= _tileMap->getTileSize().height;
-        } else {
-            playerPos.y += _tileMap->getTileSize().height;
-        }
-    }
-
-    /*
-    // safety check on the bounds of the map
-    if (playerPos.x <= (_tileMap->getMapSize().width * _tileMap->getTileSize().width) &&
-        playerPos.y <= (_tileMap->getMapSize().height * _tileMap->getTileSize().height) &&
-        playerPos.y >= 0 &&
-        playerPos.x >= 0 )
-    {
-
-        this->setPlayerPosition(playerPos);
-    }
-    */
-    this->setPlayerPosition(playerPos);
 }
 
 void GameScene::setPlayerPosition(Point position) {
     _player->setPosition(position);
 }
 
-void GameScene::menuCloseCallback(Ref* pSender)
-{
-    //Close the cocos2d-x game scene and quit the application
-    Director::getInstance()->end();
+bool GameScene::onTouchBegan(Touch *touch, Event *event) {
+    _isTouched = true;
+    _touchPosition = touch->getLocation();
+    return true;
+}
 
-    /*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() as given above,instead trigger a custom event created in RootViewController.mm as below*/
+void GameScene::onTouchMoved(Touch *touch, Event *event) {
+    auto touchPos = touch->getLocation();
+    auto movement = touchPos - _touchPosition;
+    auto position = _background->getPosition();
+    _background->setPosition(position + movement);
 
-    //EventCustom customEndEvent("game_scene_close_event");
-    //_eventDispatcher->dispatchEvent(&customEndEvent);
+    this->onTouchBegan(touch, event);
+}
 
+void GameScene::onTouchEnded(void *, void *) {
+    _isTouched = false;
+    _touchPosition = Point(0, 0);
 }
