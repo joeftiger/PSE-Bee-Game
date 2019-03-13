@@ -14,15 +14,9 @@ static void problemLoading(const char* filename)
     printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in GameScene.cpp\n");
 }
 
-// on "init" you need to initialize your instance
 bool GameScene::init()
 {
-    //////////////////////////////
-    // 1. super init first
-    if ( !Scene::init() )
-    {
-        return false;
-    }
+    if ( !Scene::init()) return false;
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -34,12 +28,11 @@ bool GameScene::init()
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 
-    _tileMap = TMXTiledMap::create("tilemapTobi/mapISO.tmx");
-    _background = _tileMap->getLayer("Background");
+    _tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
+    _background = _tileMap->getLayer("background");
 
     this->addChild(_background, -1);
     _background->setAnchorPoint(Point(0.5,0.5));
-    _background->setScale(2.0f);
 
 //    _player = Sprite::create("tilemapTobi/TileGameResources/Player.png");
 //    this->addChild(_player);
