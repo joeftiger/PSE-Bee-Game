@@ -2,9 +2,25 @@
 cmake-build-debug/
 cmake-build-release/
 
+# windows build folder 
+proj.win32/Debug.win32/
+
+# bin folder
+bin/
+
 # android build folders
 cocos2d/cocos/platform/android/libcocos2dx/build
 proj.android/.idea/
 proj.android/app/PSE-Bee-Game.iml
 cocos2d/cocos/platform/android/libcocos2dx/libcocos2dx.iml
 proj.android/proj.android.iml
+*.obj
+*.dll
+*.tlog
+*.pdb
+*.db
+*.log
+*.pch
+*.idb
+*.aps
+proj.win32/.vs/PSE-Bee-Game/v15/.suo
