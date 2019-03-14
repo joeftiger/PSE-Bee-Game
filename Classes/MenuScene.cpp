@@ -1,4 +1,5 @@
-
+//Rename this to prevent issues!
+// Will be MainMenuScene
 #include "MenuScene.h"
 
 Scene* MenuScene::createScene() {

@@ -1,4 +1,4 @@
-
+//Will be renamed to prevent issues, to MainMenuScene
 
 #ifndef __MENU_SCENE_H__
 #define __MENU_SCENE_H__
