@@ -15,20 +15,18 @@ private:
     Sprite *_player;
 
     bool _isTouched;
+    Touch *_touch;
     Point _touchPosition;
 public:
     static cocos2d::Scene* createScene();
 
     bool onTouchBegan(Touch *touch, Event *event);
     void onTouchMoved(Touch *touch, Event *event);
-    void onTouchEnded(void *, void *);
+    void onTouchEnded(Touch *touch, void *);
 
     void setPlayerPosition(Point position);
 
     virtual bool init();
-    
-    // a selector callback
-    void menuCloseCallback(cocos2d::Ref* pSender);
     
     // implement the "static create()" method manually
     CREATE_FUNC(GameScene);
