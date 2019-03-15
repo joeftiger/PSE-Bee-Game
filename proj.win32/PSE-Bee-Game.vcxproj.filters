@@ -18,16 +18,7 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameScene.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-	<ClCompile Include="..\Classes\StoryScene.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-	<ClCompile Include="..\Classes\UIScene.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-	<ClCompile Include="..\Classes\MainMenuScene.cpp">
+    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,16 +29,7 @@
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameScene.h">
-      <Filter>src</Filter>
-    </ClInclude>
-	<ClInclude Include="..\Classes\StoryScene.h">
-      <Filter>src</Filter>
-    </ClInclude>
-	<ClInclude Include="..\Classes\UIScene.h">
-      <Filter>src</Filter>
-    </ClInclude>
-	<ClInclude Include="..\Classes\MainMenuScene.h">
+    <ClInclude Include="..\Classes\HelloWorldScene.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
