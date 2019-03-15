@@ -22,7 +22,6 @@ bool GameScene::init()
 
 
     _tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
-    //_tileMap->set
     _background = _tileMap->getLayer("background");
 
     this->addChild(_background, -1);
@@ -36,7 +35,7 @@ bool GameScene::init()
 //    //get spawnpoint
 //    TMXObjectGroup *objectGroup = _tileMap->getObjectGroup("Objects");
 //    if(objectGroup == NULL) {
-//        log("tile map has no objechttps://www.overleaf.com/project/5c66953c90b2c1205f6e5b1et layer");
+//        log("tile map has no object layer");
 //        return false;
 //    }
 //
@@ -57,19 +56,12 @@ void GameScene::setPlayerPosition(Point position) {
 }
 
 bool GameScene::onTouchBegan(Touch *touch, Event *event) {
-    // is is the same touch as the one for moving the screen?
-    if (_isTouched) return false;
-
     _isTouched = true;
-    _touch = touch;
-    _touchPosition = _touch->getLocation();
+    _touchPosition = touch->getLocation();
     return true;
 }
 
 void GameScene::onTouchMoved(Touch *touch, Event *event) {
-    // is is the same touch as the one for moving the screen?
-    if (_touch != touch) return;
-
     auto touchPos = touch->getLocation();
     auto movement = touchPos - _touchPosition;
     auto finalPos = _background->getPosition() + movement;
@@ -85,10 +77,7 @@ void GameScene::onTouchMoved(Touch *touch, Event *event) {
     this->onTouchBegan(touch, event);
 }
 
-void GameScene::onTouchEnded(Touch *touch, void *) {
-    // is is the same touch as the one for moving the screen?
-    if (_touch != touch) return;
-
+void GameScene::onTouchEnded(void *, void *) {
     _isTouched = false;
     _touchPosition = Point(0, 0);
 }
