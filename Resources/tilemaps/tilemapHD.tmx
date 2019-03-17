@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.2" orientation="isometric" renderorder="right-down" width="8" height="8" tilewidth="386" tileheight="223" infinite="0" nextlayerid="3" nextobjectid="1">
- <tileset firstgid="1" source="../tilesets/tilesetHD.tsx"/>
+<map version="1.0" tiledversion="1.2.2" orientation="isometric" renderorder="right-down" width="8" height="8" tilewidth="386" tileheight="223" infinite="0" nextlayerid="3" nextobjectid="1">
+ <tileset firstgid="1" source="./tilesetHD.tsx"/>
  <layer id="1" name="background" width="8" height="8">
   <data encoding="csv">
 2,5,7,7,6,3,6,6,
