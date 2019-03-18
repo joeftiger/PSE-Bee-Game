@@ -24,8 +24,8 @@ bool GameScene::init()
     _tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
     _background = _tileMap->getLayer("background");
 
-    this->addChild(_background, -1);
-    _background->setAnchorPoint(Point(0.5,0.5));
+    this->addChild(_tileMap, -1);
+    _tileMap->setAnchorPoint(Point(0.5,0.5));
 
 //    _player = Sprite::create("tilemapTobi/TileGameResources/Player.png");
 //    this->addChild(_player);
