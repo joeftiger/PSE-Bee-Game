@@ -21,8 +21,10 @@ cocos2d::Scene * MainMenu::scene()
 // on "init" you need to initialize your instance
 bool MainMenu::init()
 {
-	// TODO Set our background
-	// auto * background = cocos2d::Sprite::create("image/loading.png");
+
+	auto * background = cocos2d::Sprite::create("menu/menu-background.jpg");
+	background->setAnchorPoint(Vec2(0, 0));
+    this->addChild(background, -1000); // to ensure it's the lowest layer
 
 	cocos2d::Rect visibleRect = Director::getInstance()->getOpenGLView()->getVisibleRect();
     Size visibleSize = Director::getInstance()->getVisibleSize();
