@@ -62,6 +62,15 @@ bool GameScene::init()
 //    auto followPlayer = Follow::create(_player);
 //    this->runAction(followPlayer);
 
+
+    // Honeycounter
+    int honey = 0;
+    auto honeyLabel = Label::createWithTTF(std::to_string(honey), "fonts/OpenSans-Regular.ttf", 20);
+    honeyLabel->setPosition(Vec2(visibleRect.origin.x+visibleRect.size.width - 80, visibleRect.origin.y+visibleRect.size.height - 25 ));
+    this->addChild(honeyLabel,1);
+
+
+
     return true;
 }
 
