@@ -93,7 +93,7 @@ void MainMenu::onNewGameClick(cocos2d::Ref * sender)
 {
 	auto gameScene = Scene::create();
 	gameScene->addChild(GameScene::createScene());
-	Director::getInstance()->replaceScene(TransitionFade::create(0.5, gameScene, Color3B(255,255,255)));
+	Director::getInstance()->replaceScene(TransitionFade::create(0.5, gameScene, Color3B(255,165,0)));
 	//Without Transition: 	Director::getInstance()->replaceScene(gameScene);
 }
 

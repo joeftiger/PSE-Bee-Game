@@ -79,14 +79,14 @@ list(APPEND GAME_SOURCE
      Classes/AppDelegate.cpp
      Classes/GameScene.cpp
      Classes/StoryScene.cpp
-     Classes/UIScene.cpp
+     Classes/HUDLayer.cpp
      Classes/MainMenuScene.cpp
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
      Classes/GameScene.h
      Classes/StoryScene.h
-     Classes/UIScene.h
+     Classes/HUDLayer.h
      Classes/MainMenuScene.h
      )
 
