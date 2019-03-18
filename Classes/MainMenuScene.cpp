@@ -31,7 +31,7 @@ bool MainMenu::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 	// Create a Label to identify
-	auto label = Label::createWithTTF("Beekeeping Menu", "fonts/OpenSans-Regular.ttf", 48);
+	auto label = Label::createWithTTF("Beekeeping Menu", "fonts/OpenSans-ExtraBold.ttf", 48);
 	
 	// position the label on the top center of the screen
     label->setPosition(Vec2(origin.x + visibleSize.width/2,
