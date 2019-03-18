@@ -80,14 +80,14 @@ list(APPEND GAME_SOURCE
      Classes/GameScene.cpp
      Classes/StoryScene.cpp
      Classes/UIScene.cpp
-     Classes/MenuScene.cpp
+     Classes/MainMenuScene.cpp
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
      Classes/GameScene.h
      Classes/StoryScene.h
      Classes/UIScene.h
-     Classes/MenuScene.h
+     Classes/MainMenuScene.h
      )
 
 if(ANDROID)
