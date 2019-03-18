@@ -3,7 +3,9 @@
 #ifndef __GAME_SCENE_H__
 #define __GAME_SCENE_H__
 
+#include "MainMenuScene.h"
 #include "cocos2d.h"
+
 
 using namespace cocos2d;
 

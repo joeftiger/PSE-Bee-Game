@@ -11,6 +11,7 @@ bool GameScene::init()
 {
     if ( !Scene::init()) return false;
 
+	cocos2d::Rect visibleRect = Director::getInstance()->getOpenGLView()->getVisibleRect();
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
@@ -26,6 +27,19 @@ bool GameScene::init()
 
     this->addChild(_tileMap, -1);
     _tileMap->setAnchorPoint(Point(0.5,0.5));
+
+
+    //add the menu item for back to main menu
+    auto label = Label::createWithTTF("Main Menu", "fonts/OpenSans-Regular.ttf", 18);
+    auto menuItem = MenuItemLabel::create(label);
+    menuItem->setCallback([&](cocos2d::Ref *sender) {
+        Director::getInstance()->replaceScene(MainMenu::scene());
+    });
+
+    auto backMenu = Menu::create(menuItem, nullptr);
+    backMenu->setPosition(Vec2::ZERO);
+    backMenu->setPosition(Vec2(visibleRect.origin.x+visibleRect.size.width - 80, visibleRect.origin.y + 25));
+	this->addChild(backMenu, 1);
 
 //    _player = Sprite::create("tilemapTobi/TileGameResources/Player.png");
 //    this->addChild(_player);
