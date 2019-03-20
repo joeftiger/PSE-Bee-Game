@@ -1,6 +1,9 @@
 
 #include "GameScene.h"
+#include "DEFINITIONS.h"
 #include "SimpleAudioEngine.h"
+
+using namespace cocos2d;
 
 Scene* GameScene::createScene()
 {
@@ -21,12 +24,17 @@ bool GameScene::init()
     listener->onTouchEnded = CC_CALLBACK_2(GameScene::onTouchEnded, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
+	
 
+	/* Creating TileMap */
     _tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
     _background = _tileMap->getLayer("background");
 
     this->addChild(_tileMap, -1);
     _tileMap->setAnchorPoint(Point(0.5,0.5));
+	_tileMap->setScale(MAP_SCALE);
+
+	
 
 
     //add the menu item for back to main menu
@@ -39,7 +47,7 @@ bool GameScene::init()
     auto backMenu = Menu::create(menuItem, nullptr);
     backMenu->setPosition(Vec2::ZERO);
     backMenu->setPosition(Vec2(visibleRect.origin.x+visibleRect.size.width - 80, visibleRect.origin.y + 25));
-	this->addChild(backMenu, 1);
+	this->addChild(backMenu, 10);
 
 //    _player = Sprite::create("tilemapTobi/TileGameResources/Player.png");
 //    this->addChild(_player);
@@ -63,15 +71,31 @@ bool GameScene::init()
 //    this->runAction(followPlayer);
 
 
-    // Honeycounter
-    int honey = 0;
-    auto honeyLabel = Label::createWithTTF(std::to_string(honey), "fonts/OpenSans-Regular.ttf", 20);
+    // HoneyCounter + HoneySprite
+    honey = 0;
+    honeyLabel = Label::createWithTTF(std::to_string(honey), "fonts/OpenSans-Regular.ttf", TEXT_SIZE_HUD);
     honeyLabel->setPosition(Vec2(visibleRect.origin.x+visibleRect.size.width - 80, visibleRect.origin.y+visibleRect.size.height - 25 ));
-    this->addChild(honeyLabel,1);
+    this->addChild(honeyLabel, HUD_PRIO);
+	auto honeySprite = Sprite::create("sprites/honigglas_2d.png");
+	honeySprite->setScale(0.1f);
+	honeySprite->setAnchorPoint(Vec2(0.5f, 0.5f));
+	honeySprite->setPosition(Vec2(40,10));
+	honeyLabel->addChild(honeySprite);
 
-
+	//Timer
+	timePassed = 0;
+	timeLabel = Label::createWithTTF(std::to_string(timePassed), "fonts/OpenSans-Regular.ttf", TEXT_SIZE_HUD);
+	this->addChild(timeLabel, HUD_PRIORITY);
+	timeLabel->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - 60, visibleRect.origin.y + visibleRect.size.height - 60));
+	this->schedule(schedule_selector(GameScene::timer), UPDATE_TIME);
 
     return true;
+}
+
+void GameScene::timer(float dt) {
+	timePassed += dt;
+	__String * timeToDisplay = __String::createWithFormat("%.2f", timePassed);
+	timeLabel->setString(timeToDisplay->getCString());
 }
 
 void GameScene::setPlayerPosition(Point position) {

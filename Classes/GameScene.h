@@ -19,12 +19,22 @@ private:
     bool _isTouched;
     Touch *_touch;
     Point _touchPosition;
+
+	unsigned int honey;
+	Label *honeyLabel;
+
+	float timePassed;
+	Label *timeLabel;
+
+
 public:
     static cocos2d::Scene* createScene();
 
     bool onTouchBegan(Touch *touch, Event *event);
     void onTouchMoved(Touch *touch, Event *event);
     void onTouchEnded(void *, void *);
+
+	void timer(float dt);
 
     void setPlayerPosition(Point position);
 
