@@ -75,7 +75,7 @@ bool GameScene::init()
     honey = 0;
     honeyLabel = Label::createWithTTF(std::to_string(honey), "fonts/OpenSans-Regular.ttf", TEXT_SIZE_HUD);
     honeyLabel->setPosition(Vec2(visibleRect.origin.x+visibleRect.size.width - 80, visibleRect.origin.y+visibleRect.size.height - 25 ));
-    this->addChild(honeyLabel, HUD_PRIO);
+    this->addChild(honeyLabel, HUD_PRIORITY);
 	auto honeySprite = Sprite::create("sprites/honigglas_2d.png");
 	honeySprite->setScale(0.1f);
 	honeySprite->setAnchorPoint(Vec2(0.5f, 0.5f));
