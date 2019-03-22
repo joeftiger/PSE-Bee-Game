@@ -1,8 +1,6 @@
 
 #include "GameScene.h"
-#include "BeeStock.h"
 #include "SimpleAudioEngine.h"
-#include "math.h"
 
 Scene* GameScene::createScene()
 {
@@ -29,7 +27,6 @@ bool GameScene::init()
 
     this->addChild(_tileMap, -1);
     _tileMap->setAnchorPoint(Point(0.5,0.5));
-    _tileMap->setScale(0.5f);
 
 
     //add the menu item for back to main menu
@@ -43,8 +40,6 @@ bool GameScene::init()
     backMenu->setPosition(Vec2::ZERO);
     backMenu->setPosition(Vec2(visibleRect.origin.x+visibleRect.size.width - 80, visibleRect.origin.y + 25));
 	this->addChild(backMenu, 1);
-
-
 
 //    _player = Sprite::create("tilemapTobi/TileGameResources/Player.png");
 //    this->addChild(_player);
@@ -77,50 +72,7 @@ void GameScene::setPlayerPosition(Point position) {
 bool GameScene::onTouchBegan(Touch *touch, Event *event) {
     _isTouched = true;
     _touchPosition = touch->getLocation();
-
-	//auto sprite = static_cast<Sprite*>(event->getCurrentTarget());
-	//Point loc = sprite->convertToNodeSpace(_touchPosition);
-	
-	//Sprite* s = _background->getTileAt(Vec2(1, 1));
-	//s->setOpacity(0);
-	Point loc = this->convertToNodeSpace(_touchPosition);
-	//Rect recTemp = sprite->getBoundingBox();
-	//if (recTemp.containsPoint(loc)) {
-		log("%f %f",loc.x, loc.y );
-		//return true;
-
-	//}
-	Point p = GameScene::getClosestTile(_touchPosition);
-	auto s = _background->getTileAt(p);
-	s->setOpacity(0);
-
-	return true;
-}
-
-Point GameScene::getClosestTile(Point touchPos) {
-	int x;
-	int y;
-	float d = 1000000;
-	Point tempP;
-
-	for (x = 0; x <= 7; x++) {
-		for (y = 0;y <= 7; y++) {
-			auto temp = _background->getTileAt(Vec2(x, y));
-			auto e = temp->getPosition();
-			auto t = touchPos;
-			auto spritePos = this->convertToNodeSpace(e);
-			
-			float dTemp = sqrtf(pow(t.x - spritePos.x, 2) + pow(t.y - spritePos.y, 2));
-			if (dTemp < d) {
-				tempP = Point(x, y);
-				d = dTemp;
-			}
-
-		}
-	}
-	log("%f %f", tempP.x, tempP.y);
-	return tempP;
-
+    return true;
 }
 
 void GameScene::onTouchMoved(Touch *touch, Event *event) {

@@ -28,8 +28,6 @@ public:
 
     void setPlayerPosition(Point position);
 
-	Point getClosestTile(Point touchPos);
-
     virtual bool init();
     
     // implement the "static create()" method manually
