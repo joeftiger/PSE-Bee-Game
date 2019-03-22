@@ -13,7 +13,7 @@ using namespace cocos2d;
 class GameScene: public cocos2d::Scene
 {
 private:
-    cocos2d::Layer *_tileMapLayer;
+    TileMapLayer *_tileMapLayer;
 
     bool _isTouched;
     Point _touchPosition;

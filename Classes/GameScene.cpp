@@ -25,7 +25,7 @@ bool GameScene::init()
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	// Background TileMap
-    _tileMapLayer = TileMapLayer::createLayer();
+    _tileMapLayer = TileMapLayer::create();
     this->addChild(_tileMapLayer, -1);
 
     //add the menu item for back to main menu
