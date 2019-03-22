@@ -24,7 +24,6 @@ private:
 	float timePassed;
 	Label *timeLabel;
 
-
 public:
     static cocos2d::Scene* createScene();
 	virtual bool init();
@@ -32,6 +31,8 @@ public:
     bool onTouchBegan(Touch *touch, Event *event);
     void onTouchMoved(Touch *touch, Event *event);
     void onTouchEnded(void *, void *);
+
+	Vec2 getclosestTile(Vec2 t);
 
 	void timer(float dt);
     
