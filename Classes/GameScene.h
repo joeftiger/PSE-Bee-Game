@@ -4,6 +4,7 @@
 #define __GAME_SCENE_H__
 
 #include "MainMenuScene.h"
+#include "TileMapLayer.h"
 #include "cocos2d.h"
 
 
@@ -12,23 +13,27 @@ using namespace cocos2d;
 class GameScene: public cocos2d::Scene
 {
 private:
-    TMXTiledMap *_tileMap;
-    TMXLayer *_background;
-    Sprite *_player;
+    cocos2d::Layer *_tileMapLayer;
 
     bool _isTouched;
-    Touch *_touch;
     Point _touchPosition;
+
+	unsigned int honey;
+	Label *honeyLabel;
+
+	float timePassed;
+	Label *timeLabel;
+
+
 public:
     static cocos2d::Scene* createScene();
+	virtual bool init();
 
     bool onTouchBegan(Touch *touch, Event *event);
     void onTouchMoved(Touch *touch, Event *event);
     void onTouchEnded(void *, void *);
 
-    void setPlayerPosition(Point position);
-
-    virtual bool init();
+	void timer(float dt);
     
     // implement the "static create()" method manually
     CREATE_FUNC(GameScene);
