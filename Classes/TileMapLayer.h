@@ -20,6 +20,8 @@ public:
     ssize_t getTreeCount();
     ssize_t getFlowerCount();
 
+	TMXTiledMap *getMap();
+
     // implement the "static create()" method manually
     CREATE_FUNC(TileMapLayer);
 };

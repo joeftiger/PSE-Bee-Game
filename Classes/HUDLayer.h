@@ -7,17 +7,24 @@
 
 #include "cocos2d.h"
 
-
+using namespace cocos2d;
 
 class HUDLayer: public cocos2d::Layer
 {
+private:
 
+	unsigned int honey;
+	Label *honeyLabel;
+
+	float timePassed;
+	Label *timeLabel;
 
 public:
-	HUDLayer();
-
+	static cocos2d::Layer *createLayer();
     virtual bool init();
-    static cocos2d::Scene* scene();
+
+	void timer(float dt);
+    
     CREATE_FUNC(HUDLayer);
 };
 

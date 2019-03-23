@@ -1,12 +1,15 @@
 
 
 #include "HUDLayer.h"
+#include "DEFINITIONS.h"
+#include "MainMenuScene.h"
 
 using namespace cocos2d;
 
 
-HUDLayer::HUDLayer()
+cocos2d::Layer *HUDLayer::createLayer()
 {
+	return HUDLayer::create();
 }
 
 bool HUDLayer::init() {
@@ -16,14 +19,47 @@ bool HUDLayer::init() {
         return false;
     }
 
+	cocos2d::Rect visibleRect = Director::getInstance()->getOpenGLView()->getVisibleRect();
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+
+	//add the menu item for back to main menu
+	auto label = Label::createWithTTF("Main Menu", "fonts/OpenSans-Regular.ttf", 20);
+	auto menuItem = MenuItemLabel::create(label);
+	menuItem->setCallback([&](cocos2d::Ref *sender) {
+		Director::getInstance()->replaceScene(MainMenu::scene());
+	});
+
+	auto backMenu = Menu::create(menuItem, nullptr);
+	backMenu->setPosition(Vec2::ZERO);
+	backMenu->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - 80, visibleRect.origin.y + 25));
+	this->addChild(backMenu, 10);
+
+	// HoneyCounter + HoneySprite
+	honey = 0;
+	honeyLabel = Label::createWithTTF(std::to_string(honey), "fonts/OpenSans-Regular.ttf", TEXT_SIZE_HUD);
+	honeyLabel->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - 80, visibleRect.origin.y + visibleRect.size.height - 25));
+	this->addChild(honeyLabel, HUD_PRIORITY);
+	auto honeySprite = Sprite::create("sprites/honigglas_2d.png");
+	honeySprite->setScale(0.1f);
+	honeySprite->setAnchorPoint(Vec2(0.5f, 0.5f));
+	honeySprite->setPosition(Vec2(40, 10));
+	honeyLabel->addChild(honeySprite);
+
+	//Timer
+	timePassed = 0;
+	timeLabel = Label::createWithTTF(std::to_string(timePassed), "fonts/OpenSans-Regular.ttf", TEXT_SIZE_HUD);
+	this->addChild(timeLabel, HUD_PRIORITY);
+	timeLabel->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - 60, visibleRect.origin.y + visibleRect.size.height - 60));
+	this->schedule(schedule_selector(HUDLayer::timer), UPDATE_TIME);
+
 
     return true;
 }
 
-cocos2d::Scene * HUDLayer::scene()
-{
-	auto scene = Scene::create();
-	scene->addChild(HUDLayer::create());
-	return scene;
+void HUDLayer::timer(float dt) {
+	timePassed += dt;
+	__String * timeToDisplay = __String::createWithFormat("%.2f", timePassed);
+	timeLabel->setString(timeToDisplay->getCString());
 }
-

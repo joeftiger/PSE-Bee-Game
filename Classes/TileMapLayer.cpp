@@ -27,3 +27,7 @@ ssize_t TileMapLayer::getTreeCount() {
 ssize_t TileMapLayer::getFlowerCount() {
     return 3;
 }
+
+TMXTiledMap *TileMapLayer::getMap() {
+	return _tileMap;
+}

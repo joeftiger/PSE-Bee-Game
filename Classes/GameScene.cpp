@@ -1,6 +1,7 @@
 
 #include "GameScene.h"
 #include "DEFINITIONS.h"
+#include "HUDLayer.h"
 
 using namespace cocos2d;
 
@@ -28,80 +29,64 @@ bool GameScene::init()
     _tileMapLayer = TileMapLayer::create();
     this->addChild(_tileMapLayer, -1);
 
-    //add the menu item for back to main menu
-    auto label = Label::createWithTTF("Main Menu", "fonts/OpenSans-Regular.ttf", 20);
-    auto menuItem = MenuItemLabel::create(label);
-    menuItem->setCallback([&](cocos2d::Ref *sender) {
-        Director::getInstance()->replaceScene(MainMenu::scene());
-    });
-
-    auto backMenu = Menu::create(menuItem, nullptr);
-    backMenu->setPosition(Vec2::ZERO);
-    backMenu->setPosition(Vec2(visibleRect.origin.x+visibleRect.size.width - 80, visibleRect.origin.y + 25));
-	this->addChild(backMenu, 10);
-	
-    // HoneyCounter + HoneySprite
-    honey = 0;
-    honeyLabel = Label::createWithTTF(std::to_string(honey), "fonts/OpenSans-Regular.ttf", TEXT_SIZE_HUD);
-    honeyLabel->setPosition(Vec2(visibleRect.origin.x+visibleRect.size.width - 80, visibleRect.origin.y+visibleRect.size.height - 25 ));
-    this->addChild(honeyLabel, HUD_PRIORITY);
-	auto honeySprite = Sprite::create("sprites/honigglas_2d.png");
-	honeySprite->setScale(0.1f);
-	honeySprite->setAnchorPoint(Vec2(0.5f, 0.5f));
-	honeySprite->setPosition(Vec2(40,10));
-	honeyLabel->addChild(honeySprite);
+	//HUD Layer
+	_HUDLayer = HUDLayer::create();
+	this->addChild(_HUDLayer);
 
 	auto beeL = EventListenerTouchOneByOne::create();
 	beeL->setSwallowTouches(true);
-	beeL->onTouchBegan = [](Touch* touch, Event* event) {
+	beeL->onTouchBegan = [this](Touch* touch, Event* event) {
 		auto target = static_cast<Sprite*>(event->getCurrentTarget());
 		Vec2 locInNode = target->convertToNodeSpace(touch->getLocation());
-		log("%f %f", locInNode.x, locInNode.y);
 		Size s = target->getContentSize();
 		Rect rect = Rect(0, 0, s.width, s.height);
 		if (rect.containsPoint(locInNode)) {
 			auto s = Sprite::create("sprites/bienenstock.png");
 			target->addChild(s, 10);
-			s->setPosition(locInNode);
+			Vec2 loc = this->getClosestTile(locInNode);
+			log("%f %f", loc.x, loc.y);
+			s->setPosition(loc);
 			s->setScale(MAP_SCALE);
 			return true;
 		}
 		return false;
 	};
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(beeL, honeySprite);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(beeL, _tileMapLayer);
 
-
-	//Timer
-	timePassed = 0;
-	timeLabel = Label::createWithTTF(std::to_string(timePassed), "fonts/OpenSans-Regular.ttf", TEXT_SIZE_HUD);
-	this->addChild(timeLabel, HUD_PRIORITY);
-	timeLabel->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - 60, visibleRect.origin.y + visibleRect.size.height - 60));
-	this->schedule(schedule_selector(GameScene::timer), UPDATE_TIME);
-	
     return true;
 }
 
-Vec2 GameScene::getclosestTile(Vec2 t)
+Vec2 GameScene::getClosestTile(Vec2 t)
 {
+	auto map = _tileMapLayer->getMap();
+	auto background = map->getLayer("background");
+
+	auto t1 = _tileMapLayer->convertToNodeSpace(t);
+	Vec2 closestTile = Vec2(0, 0);
+	float minDistance = 10000000;
 	int x, y;
 	for (x = 0; x <= 7; x++) {
 		for (y = 0; y <= 7; y++) {
-			auto background = _tileMapLayer->getChildByName("background");
-		
+			auto temp = background->getTileAt(Vec2(x, y));
+			auto e = temp->getPosition();
+			auto tilePos = _tileMapLayer->convertToNodeSpace(e);
+			float distance = sqrtf(pow(t1.x - tilePos.x, 2) + pow(t1.y - tilePos.y, 2));
+			if (distance < minDistance) {
+				closestTile = Vec2(x, y);
+				minDistance = distance;
+			}
 		}
 	}
-	return Vec2();
+
+
+	return closestTile;
 }
 
-void GameScene::timer(float dt) {
-	timePassed += dt;
-	__String * timeToDisplay = __String::createWithFormat("%.2f", timePassed);
-	timeLabel->setString(timeToDisplay->getCString());
-}
 
 bool GameScene::onTouchBegan(Touch *touch, Event *event) {
     _isTouched = true;
     _touchPosition = touch->getLocation();
+
     return true;
 }
 
