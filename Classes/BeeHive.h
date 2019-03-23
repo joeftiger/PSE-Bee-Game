@@ -5,6 +5,8 @@
 #ifndef PSE_BEE_GAME_BEEHIVE_H
 #define PSE_BEE_GAME_BEEHIVE_H
 
+#include "cocos2d.h"
+
 static const int MAX_BEES = 20000;
 static const float MAX_RAW_HONEY = 2000;
 
