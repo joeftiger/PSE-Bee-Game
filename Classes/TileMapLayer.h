@@ -19,6 +19,7 @@ public:
     ssize_t getTreeCount();
     ssize_t getFlowerCount();
     std::vector<cocos2d::Sprite*> getBeeHives();
+	TMXTiledMap *getMap();
 
     // implement the "static create()" method manually
     CREATE_FUNC(TileMapLayer);

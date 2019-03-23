@@ -26,7 +26,7 @@ ssize_t TileMapLayer::getFlowerCount() {
 
 std::vector<cocos2d::Sprite*> TileMapLayer::getBeeHives() {
     auto layer = _tileMap->getLayer("objects");
-    std::vector<cocos2d::Sprite*> beeHives;
+    std::vector<cocos2d::Sprite *> beeHives;
 
     for (auto y = 0; y < layer->getLayerSize().height; y++) {
         for (auto x = 0; x < layer->getLayerSize().width; x++) {
@@ -39,4 +39,8 @@ std::vector<cocos2d::Sprite*> TileMapLayer::getBeeHives() {
         }
     }
     return beeHives;
+}
+
+TMXTiledMap *TileMapLayer::getMap() {
+	return _tileMap;
 }

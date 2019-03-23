@@ -3,9 +3,9 @@
 #ifndef __GAME_SCENE_H__
 #define __GAME_SCENE_H__
 
-#include "MainMenuScene.h"
 #include "TileMapLayer.h"
 #include "cocos2d.h"
+#include "HUDLayer.h"
 
 
 using namespace cocos2d;
@@ -14,6 +14,7 @@ class GameScene: public cocos2d::Scene
 {
 private:
     TileMapLayer *_tileMapLayer;
+	HUDLayer *_HUDLayer;
 
     bool _isTouched;
     Point _touchPosition;
@@ -24,7 +25,6 @@ private:
 	float timePassed;
 	Label *timeLabel;
 
-
 public:
     static cocos2d::Scene* createScene();
 	virtual bool init();
@@ -32,6 +32,8 @@ public:
     bool onTouchBegan(Touch *touch, Event *event);
     void onTouchMoved(Touch *touch, Event *event);
     void onTouchEnded(void *, void *);
+
+	Vec2 getClosestTile(Vec2 t);
 
 	void timer(float dt);
     
