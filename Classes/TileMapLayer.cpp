@@ -1,6 +1,7 @@
 
 #include "TileMapLayer.h"
 #include "DEFINITIONS.h"
+#include "TILE_NAMES.h"
 
 bool TileMapLayer::init() {
     if (!Layer::init()) return false;
@@ -21,4 +22,21 @@ ssize_t TileMapLayer::getTreeCount() {
 
 ssize_t TileMapLayer::getFlowerCount() {
     return 3;
+}
+
+std::vector<cocos2d::Sprite*> TileMapLayer::getBeeHives() {
+    auto layer = _tileMap->getLayer("objects");
+    std::vector<cocos2d::Sprite*> beeHives;
+
+    for (auto y = 0; y < layer->getLayerSize().height; y++) {
+        for (auto x = 0; x < layer->getLayerSize().width; x++) {
+            auto coordinate = Vec2(x, y);
+            cocos2d::Sprite *tile = layer->getTileAt(coordinate);
+
+            if (tile->getName() == BEE_HIVE) {
+                beeHives.push_back(tile);
+            }
+        }
+    }
+    return beeHives;
 }
