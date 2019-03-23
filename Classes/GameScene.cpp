@@ -43,9 +43,9 @@ bool GameScene::init()
 		if (rect.containsPoint(locInNode)) {
 			auto s = Sprite::create("sprites/bienenstock.png");
 			target->addChild(s, 10);
-			Vec2 loc = this->getClosestTile(locInNode);
-			log("%f %f", loc.x, loc.y);
-			s->setPosition(loc);
+			log("touchy");
+			Vec2 closestTilePos = this->getClosestTile(locInNode);
+			s->setPosition(closestTilePos);
 			s->setScale(MAP_SCALE);
 			return true;
 		}
@@ -62,6 +62,7 @@ Vec2 GameScene::getClosestTile(Vec2 t)
 	auto background = map->getLayer("background");
 
 	auto t1 = _tileMapLayer->convertToNodeSpace(t);
+
 	Vec2 closestTile = Vec2(0, 0);
 	float minDistance = 10000000;
 	int x, y;
@@ -70,7 +71,7 @@ Vec2 GameScene::getClosestTile(Vec2 t)
 			auto temp = background->getTileAt(Vec2(x, y));
 			auto e = temp->getPosition();
 			auto tilePos = _tileMapLayer->convertToNodeSpace(e);
-			float distance = sqrtf(pow(t1.x - tilePos.x, 2) + pow(t1.y - tilePos.y, 2));
+			float distance = sqrtf(pow(tilePos.x - t1.x , 2) + pow(tilePos.y - t1.y, 2));
 			if (distance < minDistance) {
 				closestTile = Vec2(x, y);
 				minDistance = distance;
@@ -78,8 +79,7 @@ Vec2 GameScene::getClosestTile(Vec2 t)
 		}
 	}
 
-
-	return closestTile;
+	return background->getTileAt(closestTile)->getPosition();
 }
 
 
