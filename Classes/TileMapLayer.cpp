@@ -2,11 +2,6 @@
 #include "TileMapLayer.h"
 #include "DEFINITIONS.h"
 
-
-cocos2d::Layer *TileMapLayer::createLayer() {
-    return TileMapLayer::create();
-}
-
 bool TileMapLayer::init() {
     if (!Layer::init()) return false;
 

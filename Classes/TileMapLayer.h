@@ -14,7 +14,6 @@ private:
     TMXTiledMap *_tileMap;
 
 public:
-    static cocos2d::Layer *createLayer();
     virtual bool init();
 
     ssize_t getTreeCount();

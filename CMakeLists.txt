@@ -82,6 +82,8 @@ list(APPEND GAME_SOURCE
      Classes/HUDLayer.cpp
      Classes/MainMenuScene.cpp
      Classes/TileMapLayer.cpp
+     Classes/BeeHive.cpp
+     Classes/Player.cpp
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
@@ -90,6 +92,8 @@ list(APPEND GAME_HEADER
      Classes/HUDLayer.h
      Classes/MainMenuScene.h
      Classes/TileMapLayer.h
+     Classes/BeeHive.h
+     Classes/Player.h
      )
 
 if(ANDROID)
