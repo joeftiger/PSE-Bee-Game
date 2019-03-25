@@ -84,6 +84,7 @@ list(APPEND GAME_SOURCE
      Classes/TileMapLayer.cpp
      Classes/BeeHive.cpp
      Classes/Player.cpp
+     Classes/BeeHiveAtlas.cpp
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
@@ -96,6 +97,7 @@ list(APPEND GAME_HEADER
      Classes/Player.h
      Classes/Observer.h
      Classes/Observable.h
+     Classes/BeeHiveAtlas.h
      )
 
 if(ANDROID)
