@@ -10,4 +10,8 @@
 #define UPDATE_TIME 0.01f
 #define TEXT_SIZE_HUD 20
 
+
+/* Time */
+#define LENGTH_MONTH 3 //in minutes
+#define LENGTH_YEAR 12 //in months
 #endif // __DEFINITIONS_H__
