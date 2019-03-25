@@ -9,6 +9,13 @@ bool Player::invariant() {
     return true;
 }
 
+Player *Player::getInstance() {
+    if (!_instance) {
+        _instance = new Player();
+    }
+    return _instance;
+}
+
 float Player::TotalRawHoney() {
     float total = 0.0f;
     for (BeeHive bh : _beeHives) {
