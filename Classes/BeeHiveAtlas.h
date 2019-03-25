@@ -26,6 +26,10 @@ private:
 public:
 	static BeeHiveAtlas *getInstance();
 
+	/**
+	 * Stores pointers to beehives in the specified vector.
+	 * @param beeHive container for beehive pointers
+	 */
 	void getBeeHives(std::vector<BeeHive *> *beeHive);
 
 	/**
