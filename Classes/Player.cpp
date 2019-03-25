@@ -15,6 +15,7 @@ bool Player::invariant() {
 Player *Player::getInstance() {
 	if (!_instance) {
 		_instance = new Player;
+		BeeHiveAtlas::getInstance()->subscribe(_instance);
 	}
 	return _instance;
 }
