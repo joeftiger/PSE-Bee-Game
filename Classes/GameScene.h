@@ -4,10 +4,8 @@
 
 #include "DEFINITIONS.h"
 #include "HUDLayer.h"
-#include "BeeHiveAtlas.h"
 #include "TileMapLayer.h"
 #include "cocos2d.h"
-#include "HUDLayer.h"
 
 
 using namespace cocos2d;

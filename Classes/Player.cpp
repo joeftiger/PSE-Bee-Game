@@ -6,12 +6,21 @@
 #include "Player.h"
 #include "BeeHiveAtlas.h"
 
+Player *Player::_instance = nullptr;
+
 bool Player::invariant() {
     return true;
 }
 
+Player *Player::getInstance() {
+	if (!_instance) {
+		_instance = new Player;
+	}
+	return _instance;
+}
+
 float Player::TotalRawHoney() {
-    //BeeHiveAtlas::getInstance()->getBeeHives(&_beeHives);
+    BeeHiveAtlas::getInstance()->getBeeHives(&_beeHives);
 
     float total = 0.0f;
     for (BeeHive *bh : _beeHives) {
