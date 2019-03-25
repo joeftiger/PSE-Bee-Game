@@ -14,14 +14,6 @@ BeeHiveAtlas *BeeHiveAtlas::getInstance() {
 	return _instance;
 }
 
-bool BeeHiveAtlas::hasChanged() {
-	return _hasChanged;
-}
-
-void BeeHiveAtlas::markRead() {
-	_hasChanged = false;
-}
-
 void BeeHiveAtlas::getBeeHives(std::vector<BeeHive *> *beeHive) {
 	beeHive->clear();
 	for (auto link : _tileHiveLinks) {

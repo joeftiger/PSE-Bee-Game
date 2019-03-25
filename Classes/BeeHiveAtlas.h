@@ -27,13 +27,6 @@ public:
 	static BeeHiveAtlas *getInstance();
 
 	/**
-	 * @return true if beehives have changed.
-	 */
-	bool hasChanged();
-
-	void markRead();
-
-	/**
 	 * Stores pointers to beehives in the specified vector.
 	 * @param beeHive container for beehive pointers
 	 */
