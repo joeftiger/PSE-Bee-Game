@@ -2,6 +2,7 @@
 #include "GameScene.h"
 #include "DEFINITIONS.h"
 #include "HUDLayer.h"
+#include "BeeHiveAtlas.h"
 
 using namespace cocos2d;
 
@@ -28,6 +29,10 @@ bool GameScene::init()
 	// Background TileMap
     _tileMapLayer = TileMapLayer::create();
     this->addChild(_tileMapLayer, -1);
+
+    // TileMapAtlas and observe TileMap
+    auto tileMapAtlas = BeeHiveAtlas::getInstance();
+    _tileMapLayer->observe(tileMapAtlas);
 
 	//HUD Layer
 	_HUDLayer = HUDLayer::create();
