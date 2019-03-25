@@ -89,7 +89,7 @@ void BeeHiveAtlas::subscribe(Observer *observer) {
 		}
 
 		_observers.push_back(observer);
-	}
+}
 
 void BeeHiveAtlas::notifyObservers() {
 	for (auto o : _observers) {
