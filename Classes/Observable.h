@@ -8,6 +8,8 @@
 #include "Observer.h"
 
 class Observable {
+private:
+	virtual void notifyObservers() = 0;
 public:
 	virtual void subscribe(Observer *observer) = 0;
 };
