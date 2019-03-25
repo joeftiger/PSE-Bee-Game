@@ -21,8 +21,6 @@ private:
 
 	std::vector<TileHiveLink*> _tileHiveLinks;
 
-	void init();
-
 public:
 	static BeeHiveAtlas *getInstance();
 

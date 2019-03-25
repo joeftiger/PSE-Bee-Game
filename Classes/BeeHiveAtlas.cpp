@@ -5,18 +5,6 @@
 #include "BeeHiveAtlas.h"
 #include "TileMapLayer.h"
 
-BeeHiveAtlas *BeeHiveAtlas::getInstance() {
-	if (!_instance) {
-		_instance = new BeeHiveAtlas;
-		_instance->init();
-	}
-	return _instance;
-}
-
-void BeeHiveAtlas::init() {
-
-}
-
 void BeeHiveAtlas::notify(void *observable) {
 	// not a TileMapLayer
 	if (typeid(TileMapLayer*) != typeid(observable)) return;

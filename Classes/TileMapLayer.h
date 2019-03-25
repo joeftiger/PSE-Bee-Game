@@ -18,7 +18,7 @@ private:
 
 	void notifyObservers() override;
 public:
-    virtual bool init();
+    virtual bool init() override;
 
     ssize_t getTreeCount();
     ssize_t getFlowerCount();
