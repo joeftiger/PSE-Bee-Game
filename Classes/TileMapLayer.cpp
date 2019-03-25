@@ -44,3 +44,12 @@ std::vector<cocos2d::Sprite*> TileMapLayer::getBeeHives() {
 TMXTiledMap *TileMapLayer::getMap() {
 	return _tileMap;
 }
+
+void TileMapLayer::observe(Observer *observer) {
+    // catch re-adding same observer
+    for (auto o : _observers) {
+        if (o == observer) return;
+    }
+
+    _observers.push_back(observer);
+}
