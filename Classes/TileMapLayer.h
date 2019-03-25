@@ -24,7 +24,7 @@ public:
     std::vector<cocos2d::Sprite*> getBeeHives();
 	TMXTiledMap *getMap();
 
-	void observe(Observer* observer) override;
+	void subscribe(Observer *observer) override;
 
     // implement the "static create()" method manually
     CREATE_FUNC(TileMapLayer);

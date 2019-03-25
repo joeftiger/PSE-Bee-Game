@@ -9,7 +9,7 @@
 
 class Observable {
 public:
-	virtual void observe(Observer *observer) = 0;
+	virtual void subscribe(Observer *observer) = 0;
 };
 
 #endif //PSE_BEE_GAME_OBSERVABLE_H

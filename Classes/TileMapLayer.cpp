@@ -45,7 +45,7 @@ TMXTiledMap *TileMapLayer::getMap() {
 	return _tileMap;
 }
 
-void TileMapLayer::observe(Observer *observer) {
+void TileMapLayer::subscribe(Observer *observer) {
     // catch re-adding same observer
     for (auto o : _observers) {
         if (o == observer) return;
