@@ -10,7 +10,7 @@
 #include "Observer.h"
 #include "TileMapLayer.h"
 
-class BeeHiveAtlas : public Observer {
+class BeeHiveAtlas : public Observable, public Observer {
 private:
 	struct TileHiveLink {
 		cocos2d::Sprite *beeHiveSprite;
@@ -19,10 +19,19 @@ private:
 
 	static BeeHiveAtlas *_instance;
 
+	std::vector<Observer*> _observers;
+
 	std::vector<TileHiveLink*> _tileHiveLinks;
 
 public:
 	static BeeHiveAtlas *getInstance();
+
+	/**
+	 * @return true if beehives have changed.
+	 */
+	bool hasChanged();
+
+	void markRead();
 
 	/**
 	 * Stores pointers to beehives in the specified vector.
@@ -36,6 +45,11 @@ public:
 	 * @param observable
 	 */
 	void notify(void *observable) override;
+
+	void subscribe(Observer *observer) override;
+
+private:
+	void notifyObservers() override;
 };
 
 #endif //PSE_BEE_GAME_BEEHIVEATLAS_H
