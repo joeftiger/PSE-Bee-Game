@@ -1,8 +1,10 @@
 
-
 #ifndef __GAME_SCENE_H__
 #define __GAME_SCENE_H__
 
+#include "DEFINITIONS.h"
+#include "HUDLayer.h"
+#include "BeeHiveAtlas.h"
 #include "TileMapLayer.h"
 #include "cocos2d.h"
 #include "HUDLayer.h"

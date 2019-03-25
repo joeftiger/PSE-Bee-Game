@@ -1,8 +1,6 @@
 
 #include "GameScene.h"
-#include "DEFINITIONS.h"
-#include "HUDLayer.h"
-#include "BeeHiveAtlas.h"
+
 
 using namespace cocos2d;
 

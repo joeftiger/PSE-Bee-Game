@@ -85,6 +85,8 @@ list(APPEND GAME_SOURCE
      Classes/BeeHive.cpp
      Classes/Player.cpp
      Classes/BeeHiveAtlas.cpp
+	 Classes/AboutScene.cpp
+	 Classes/OptionsScene.cpp
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
@@ -98,6 +100,8 @@ list(APPEND GAME_HEADER
      Classes/Observer.h
      Classes/Observable.h
      Classes/BeeHiveAtlas.h
+	 Classes/AboutScene.h
+	 Classes/OptionsScene.h
      )
 
 if(ANDROID)

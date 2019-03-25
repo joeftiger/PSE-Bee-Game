@@ -3,6 +3,8 @@
 #define __MAINMENU_SCENE_H__
 
 #include "GameScene.h"
+#include "AboutScene.h"
+#include "OptionsScene.h"
 #include "cocos2d.h"
 #include "ui/UIWidget.h"
 
@@ -13,12 +15,15 @@ public:
     static cocos2d::Scene* scene();
 
     virtual bool init();
-    
-    // a selector callback
-    void menuCloseCallback(cocos2d::Ref* pSender);
 	
-	//New Game Click Handler
-	void onNewGameClick(cocos2d::Ref * sender);
+	// Play Click Handler
+	void onPlayClick(cocos2d::Ref * sender);
+
+	// About Click Handler
+    void onOptionsClick(cocos2d::Ref * sender);
+
+	// About Click Handler
+    void onAboutClick(cocos2d::Ref * sender);
     
     // implement the "static create()" method manually
     CREATE_FUNC(MainMenu);

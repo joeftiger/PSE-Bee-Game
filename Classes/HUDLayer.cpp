@@ -1,11 +1,9 @@
 
-
 #include "HUDLayer.h"
 #include "DEFINITIONS.h"
 #include "MainMenuScene.h"
 
 using namespace cocos2d;
-
 
 cocos2d::Layer *HUDLayer::createLayer()
 {
@@ -34,7 +32,6 @@ bool HUDLayer::init() {
 	menuItem->setCallback([&](cocos2d::Ref *sender) {
 		Director::getInstance()->replaceScene(MainMenu::scene());
 	});
-
 	auto backMenu = Menu::create(menuItem, nullptr);
 	backMenu->setPosition(Vec2::ZERO);
 	backMenu->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - onePofScreenW*8, visibleRect.origin.y + onePofScreenH * 5));
