@@ -16,6 +16,7 @@ private:
 
     std::vector<Observer*> _observers;
 
+	void notifyObservers() override;
 public:
     virtual bool init();
 
@@ -27,7 +28,7 @@ public:
 	void subscribe(Observer *observer) override;
 
     // implement the "static create()" method manually
-    CREATE_FUNC(TileMapLayer);
+    CREATE_FUNC(TileMapLayer)
 };
 
 

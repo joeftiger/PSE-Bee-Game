@@ -53,3 +53,9 @@ void TileMapLayer::subscribe(Observer *observer) {
 
     _observers.push_back(observer);
 }
+
+void TileMapLayer::notifyObservers() {
+    for (auto o : _observers) {
+        o->notify(this);
+    }
+}
