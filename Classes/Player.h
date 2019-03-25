@@ -7,8 +7,9 @@
 
 #include <vector>
 #include "BeeHive.h"
+#include "Observer.h"
 
-class Player {
+class Player : public Observer {
 private:
     static Player *_instance;
     std::vector<BeeHive *> _beeHives;
@@ -27,6 +28,12 @@ public:
      * @return
      */
     float TotalRawHoney();
+
+    /**
+     * Notifies this player, that the beehives have changed.
+     * @param pVoid
+     */
+	void notify(void *pVoid) override;
 };
 
 #endif //PSE_BEE_GAME_PLAYER_H
