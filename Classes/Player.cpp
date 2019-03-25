@@ -4,6 +4,7 @@
 
 #include <cassert>
 #include "Player.h"
+#include "BeeHiveAtlas.h"
 
 bool Player::invariant() {
     return true;
@@ -17,9 +18,11 @@ Player *Player::getInstance() {
 }
 
 float Player::TotalRawHoney() {
+    BeeHiveAtlas::getInstance()->getBeeHives(&_beeHives);
+
     float total = 0.0f;
-    for (BeeHive bh : _beeHives) {
-        total += bh.rawHoney();
+    for (BeeHive *bh : _beeHives) {
+        total += bh->rawHoney();
     }
     return total;
 }

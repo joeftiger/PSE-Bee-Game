@@ -11,7 +11,7 @@
 class Player {
 private:
     static Player *_instance;
-    std::vector<BeeHive> _beeHives;
+    std::vector<BeeHive *> _beeHives;
 
     Player() = default;
     Player(const Player&);
