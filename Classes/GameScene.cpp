@@ -33,26 +33,6 @@ bool GameScene::init()
 	_HUDLayer = HUDLayer::create();
 	this->addChild(_HUDLayer);
 
-	auto beeL = EventListenerTouchOneByOne::create();
-	beeL->setSwallowTouches(true);
-	beeL->onTouchBegan = [this](Touch* touch, Event* event) {
-		auto target = static_cast<Sprite*>(event->getCurrentTarget());
-		Vec2 locInNode = target->convertToNodeSpace(touch->getLocation());
-		Size s = target->getContentSize();
-		Rect rect = Rect(0, 0, s.width, s.height);
-		if (rect.containsPoint(locInNode)) {
-			auto s = Sprite::create("sprites/bienenstock.png");
-			target->addChild(s, 10);
-			log("touchy");
-			Vec2 closestTilePos = this->getClosestTile(locInNode);
-			s->setPosition(closestTilePos);
-			s->setScale(MAP_SCALE);
-			return true;
-		}
-		return false;
-	};
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(beeL, _tileMapLayer);
-
     return true;
 }
 

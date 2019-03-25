@@ -1,6 +1,3 @@
-//
-// Created by tb18a517 on 13.03.2019.
-//
 
 #ifndef __HUDLAYER_H
 #define __HUDLAYER_H
@@ -19,12 +16,18 @@ private:
 	float timePassed;
 	Label *timeLabel;
 
+	float onePofScreenH;
+	float onePofScreenW;
+
+	int years;
+	int months;
+
 public:
 	static cocos2d::Layer *createLayer();
     virtual bool init();
 
 	void timer(float dt);
-    
+
     CREATE_FUNC(HUDLayer);
 };
 
