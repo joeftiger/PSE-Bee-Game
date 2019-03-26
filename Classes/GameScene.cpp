@@ -1,6 +1,7 @@
 
 #include "GameScene.h"
 #include "BeeHiveAtlas.h"
+#include "HeaderFiles/TileGID.h"
 
 using namespace cocos2d;
 
@@ -39,11 +40,11 @@ bool GameScene::init()
 	this->addChild(_HUDLayer);
 
 	//place plant
-	flower = Sprite::create("sprites/blumen1_spring_summer.png");
-	flower->setScale(0.1f);
-	flower->setAnchorPoint(Vec2(0.5f, 0.5f));
-	flower->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - 40, visibleRect.origin.y + 400));
-	this->addChild(flower, HUD_PRIORITY);
+	flower1 = Sprite::create("sprites/blumen1_spring_summer.png");
+	flower1->setScale(0.1f);
+	flower1->setAnchorPoint(Vec2(0.5f, 0.5f));
+	flower1->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - 40, visibleRect.origin.y + 400));
+	this->addChild(flower1, HUD_PRIORITY);
 
     return true;
 }
@@ -63,7 +64,7 @@ void GameScene::placeFlower(Sprite *flower) {
 bool GameScene::onTouchBegan(Touch *touch, Event *event) {
 	_isTouched = true;
 	_touchPosition = touch->getLocation();
-	placeFlower(flower);
+	placeFlower(flower1);
     return true;
 }
 
@@ -85,7 +86,7 @@ void GameScene::onTouchMoved(Touch *touch, Event *event) {
 
 void GameScene::onTouchEnded(void *, void *) {
 	if (_isDrag) {
-		_tileMapLayer->setTile(_touchPosition - _tileMapLayer->getPosition(), 1);
+		_tileMapLayer->setTile(_touchPosition - _tileMapLayer->getPosition(), flower);
 		_tileMapLayer->removeChild(drag);
 		_isDrag = false;
 	}

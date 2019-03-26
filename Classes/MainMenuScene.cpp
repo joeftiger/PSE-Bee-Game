@@ -75,19 +75,19 @@ void MainMenu::onPlayClick(cocos2d::Ref * sender)
 {
 	auto gameScene = Scene::create();
 	gameScene->addChild(GameScene::createScene());
-	Director::getInstance()->replaceScene(TransitionFade::create(0.6, gameScene, Color3B(255,165,0)));
+	Director::getInstance()->replaceScene(TransitionFade::create(0.6f, gameScene, Color3B(255,165,0)));
 }
 
 void MainMenu::onOptionsClick(cocos2d::Ref * sender)
 {
 	auto optionsScene = Scene::create();
 	optionsScene->addChild(OptionsScene::createScene());
-	Director::getInstance()->replaceScene(TransitionFade::create(0.4, optionsScene, Color3B(255,255,255)));
+	Director::getInstance()->replaceScene(TransitionFade::create(0.4f, optionsScene, Color3B(255,255,255)));
 }
 
 void MainMenu::onAboutClick(cocos2d::Ref * sender)
 {
 	auto aboutScene = Scene::create();
 	aboutScene->addChild(AboutScene::createScene());
-	Director::getInstance()->replaceScene(TransitionFade::create(0.4, aboutScene, Color3B(255,255,255)));
+	Director::getInstance()->replaceScene(TransitionFade::create(0.4f, aboutScene, Color3B(255,255,255)));
 }

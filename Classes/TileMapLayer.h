@@ -7,6 +7,7 @@
 
 #include "cocos2d.h"
 #include "Observable.h"
+#include "HeaderFiles/TileGID.h"
 
 USING_NS_CC;
 
@@ -24,7 +25,7 @@ public:
 
 	Vec2 getTilePosition(Vec2 pos);
 	Vec2 inTileMapBounds(Vec2 pos);
-	void setTile(Vec2 position, int gid);
+	void setTile(Vec2 position, TileGID gid);
 
 
     // implement the "static create()" method manually
