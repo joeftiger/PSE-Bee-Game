@@ -9,7 +9,7 @@ bool TileMapLayer::init() {
     _tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
 
     this->addChild(_tileMap, -1);
-    _tileMap->setAnchorPoint(Point(0.5,0.5));
+    _tileMap->setAnchorPoint(Point(0,0));
     _tileMap->setScale(MAP_SCALE);
 
     return true;
@@ -43,6 +43,40 @@ std::vector<cocos2d::Sprite*> TileMapLayer::getBeeHives() {
 
 TMXTiledMap *TileMapLayer::getMap() {
 	return _tileMap;
+}
+
+Vec2 TileMapLayer::getTilePosition(Vec2 pos) {
+
+	auto box = _tileMap->getBoundingBox();
+	auto A = (box.size.width*box.size.height) / 2;
+	auto d = sqrt(pow(box.size.width / 2, 2) + pow(box.size.height / 2, 2));
+	auto h = A / d;
+	auto skew = sqrt(pow(d, 2) - pow(h, 2));
+	auto angle = atan(box.size.height / box.size.width);
+
+	pos.x -= box.size.width / 2;
+	pos.y -= box.size.height;
+
+	auto temp = pos.x* cos(angle) - pos.y*sin(angle);
+	pos.y = pos.x*sin(angle) + pos.y*cos(angle);
+	pos.x = temp;
+
+	pos.y *= -1;
+
+	pos.x += skew * (pos.y / h);
+	//auto s = std::to_string(pos.x) + "   " + std::to_string(pos.y).c_str();
+	pos.x = _tileMap->getMapSize().width*pos.x / d;
+	pos.y = _tileMap->getMapSize().height*pos.y / h;
+
+
+	pos.x = (int)pos.x;
+	pos.y = (int)pos.y;
+	return pos;
+}
+
+void TileMapLayer::setTile(Vec2 position, int gid) {
+	auto layer = _tileMap->getLayer("objects");
+	layer->setTileGID(gid, getTilePosition(position)); //1 = flower; 2,3,4,5 = bush1,2,3,4; 6 = grass; 7 = road;
 }
 
 void TileMapLayer::subscribe(Observer *observer) {

@@ -19,9 +19,15 @@ private:
     bool _isTouched;
     Point _touchPosition;
 
+	Sprite *flower;
+	Sprite *drag;
+	bool _isDrag;
+
 public:
     static cocos2d::Scene* createScene();
 	virtual bool init();
+
+	void placeFlower(Sprite *flower);
 
     bool onTouchBegan(Touch *touch, Event *event);
     void onTouchMoved(Touch *touch, Event *event);

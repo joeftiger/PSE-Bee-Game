@@ -25,6 +25,9 @@ public:
     std::vector<cocos2d::Sprite*> getBeeHives();
 	TMXTiledMap *getMap();
 
+	Vec2 getTilePosition(Vec2 pos);
+	void setTile(Vec2 position, int gid);
+
 	void subscribe(Observer *observer) override;
 
     // implement the "static create()" method manually
