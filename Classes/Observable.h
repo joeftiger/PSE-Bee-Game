@@ -13,6 +13,7 @@ private:
 	/** observers having subscribed to this observable */
 	std::vector<Observer *> _observers;
 
+protected:
 	/**
 	 * Should notify all observers of a change in this observable.
 	 */
