@@ -19,12 +19,6 @@ private:
     bool _isTouched;
     Point _touchPosition;
 
-	unsigned int honey;
-	Label *honeyLabel;
-
-	float timePassed;
-	Label *timeLabel;
-
 public:
     static cocos2d::Scene* createScene();
 	virtual bool init();
@@ -32,10 +26,6 @@ public:
     bool onTouchBegan(Touch *touch, Event *event);
     void onTouchMoved(Touch *touch, Event *event);
     void onTouchEnded(void *, void *);
-
-	Vec2 getClosestTile(Vec2 t);
-
-	void timer(float dt);
     
     // implement the "static create()" method manually
     CREATE_FUNC(GameScene);

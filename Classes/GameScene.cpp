@@ -39,32 +39,6 @@ bool GameScene::init()
     return true;
 }
 
-Vec2 GameScene::getClosestTile(Vec2 t)
-{
-	auto map = _tileMapLayer->getMap();
-	auto background = map->getLayer("background");
-
-	auto t1 = _tileMapLayer->convertToNodeSpace(t);
-
-	Vec2 closestTile = Vec2(0, 0);
-	float minDistance = 10000000;
-	int x, y;
-	for (x = 0; x <= 7; x++) {
-		for (y = 0; y <= 7; y++) {
-			auto temp = background->getTileAt(Vec2(x, y));
-			auto e = temp->getPosition();
-			auto tilePos = _tileMapLayer->convertToNodeSpace(e);
-			float distance = sqrtf(pow(tilePos.x - t1.x , 2) + pow(tilePos.y - t1.y, 2));
-			if (distance < minDistance) {
-				closestTile = Vec2(x, y);
-				minDistance = distance;
-			}
-		}
-	}
-
-	return background->getTileAt(closestTile)->getPosition();
-}
-
 
 bool GameScene::onTouchBegan(Touch *touch, Event *event) {
     _isTouched = true;
