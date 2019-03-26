@@ -19,8 +19,6 @@ private:
 
 	static BeeHiveAtlas *_instance;
 
-	std::vector<Observer*> _observers;
-
 	std::vector<TileHiveLink*> _tileHiveLinks;
 
 public:
@@ -38,11 +36,6 @@ public:
 	 * @param observable
 	 */
 	void notify(void *observable) override;
-
-	void subscribe(Observer *observer) override;
-
-private:
-	void notifyObservers() override;
 };
 
 #endif //PSE_BEE_GAME_BEEHIVEATLAS_H

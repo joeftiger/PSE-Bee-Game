@@ -73,18 +73,3 @@ void BeeHiveAtlas::notify(void *observable) {
 		this->notifyObservers();
 	}
 }
-
-void BeeHiveAtlas::subscribe(Observer *observer) {
-		// catch re-adding same observer
-		for (auto o : _observers) {
-			if (o == observer) return;
-		}
-
-		_observers.push_back(observer);
-}
-
-void BeeHiveAtlas::notifyObservers() {
-	for (auto o : _observers) {
-		o->notify(this);
-	}
-}

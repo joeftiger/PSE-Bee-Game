@@ -8,8 +8,9 @@
 #include <vector>
 #include "BeeHive.h"
 #include "Observer.h"
+#include "Observable.h"
 
-class Player : public Observer {
+class Player : public Observer, public Observable {
 private:
     static Player *_instance;
     std::vector<BeeHive *> _beeHives;
