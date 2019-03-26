@@ -28,6 +28,7 @@ bool GameScene::init()
 	// Background TileMap
     _tileMapLayer = TileMapLayer::create();
     this->addChild(_tileMapLayer, -1);
+	_tileMapLayer->setPosition(Vec2(visibleRect.origin.x - visibleRect.size.width, visibleRect.origin.y - visibleRect.size.height));
 
     // TileMapAtlas and observe TileMap
     auto tileMapAtlas = BeeHiveAtlas::getInstance();

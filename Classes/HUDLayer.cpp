@@ -17,8 +17,6 @@ bool HUDLayer::init() {
         return false;
     }
 
-	
-
 	cocos2d::Rect visibleRect = Director::getInstance()->getOpenGLView()->getVisibleRect();
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();

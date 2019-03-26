@@ -68,10 +68,21 @@ Vec2 TileMapLayer::getTilePosition(Vec2 pos) {
 	pos.x = _tileMap->getMapSize().width*pos.x / d;
 	pos.y = _tileMap->getMapSize().height*pos.y / h;
 
-
 	pos.x = (int)pos.x;
 	pos.y = (int)pos.y;
-	return pos;
+	
+	return inTileMapBounds(pos);
+}
+
+Vec2 TileMapLayer::inTileMapBounds(Vec2 pos) {
+	if (pos.x < _tileMap->getMapSize().width && pos.y < _tileMap->getMapSize().height && pos.x >= 0 && pos.y >= 0) {
+		return pos;
+	}
+	else {
+		log("%s %i %i","Out of Map", pos.x, pos.y);
+		//TODO: Return actual closest tile to position out of bounds
+		return Vec2(0,0);
+	}
 }
 
 void TileMapLayer::setTile(Vec2 position, int gid) {

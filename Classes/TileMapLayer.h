@@ -26,6 +26,7 @@ public:
 	TMXTiledMap *getMap();
 
 	Vec2 getTilePosition(Vec2 pos);
+	Vec2 inTileMapBounds(Vec2 pos);
 	void setTile(Vec2 position, int gid);
 
 	void subscribe(Observer *observer) override;
