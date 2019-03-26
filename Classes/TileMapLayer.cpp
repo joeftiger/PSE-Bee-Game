@@ -2,6 +2,7 @@
 #include "TileMapLayer.h"
 #include "DEFINITIONS.h"
 #include "TILE_NAMES.h"
+#include "HeaderFiles/TileGID.h"
 
 bool TileMapLayer::init() {
     if (!Layer::init()) return false;
@@ -94,7 +95,7 @@ Vec2 TileMapLayer::inTileMapBounds(Vec2 pos) {
 	}
 }
 
-void TileMapLayer::setTile(Vec2 position, int gid) {
+void TileMapLayer::setTile(Vec2 position, TileGID gid) {
 	auto layer = _tileMap->getLayer("objects");
 	layer->setTileGID(gid, getTilePosition(position)); //1 = flower; 2,3,4,5 = bush1,2,3,4; 6 = grass; 7 = road;
 }

@@ -19,7 +19,7 @@ private:
     bool _isTouched;
     Point _touchPosition;
 
-	Sprite *flower;
+	Sprite *flower1;
 	Sprite *drag;
 	bool _isDrag;
 
