@@ -14,9 +14,6 @@ class TileMapLayer : public cocos2d::Layer, public Observable {
 private:
     TMXTiledMap *_tileMap;
 
-    std::vector<Observer*> _observers;
-
-	void notifyObservers() override;
 public:
     virtual bool init() override;
 
@@ -29,7 +26,6 @@ public:
 	Vec2 inTileMapBounds(Vec2 pos);
 	void setTile(Vec2 position, int gid);
 
-	void subscribe(Observer *observer) override;
 
     // implement the "static create()" method manually
     CREATE_FUNC(TileMapLayer)

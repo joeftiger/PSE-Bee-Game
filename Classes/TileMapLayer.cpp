@@ -89,18 +89,3 @@ void TileMapLayer::setTile(Vec2 position, int gid) {
 	auto layer = _tileMap->getLayer("objects");
 	layer->setTileGID(gid, getTilePosition(position)); //1 = flower; 2,3,4,5 = bush1,2,3,4; 6 = grass; 7 = road;
 }
-
-void TileMapLayer::subscribe(Observer *observer) {
-    // catch re-adding same observer
-    for (auto o : _observers) {
-        if (o == observer) return;
-    }
-
-    _observers.push_back(observer);
-}
-
-void TileMapLayer::notifyObservers() {
-    for (auto o : _observers) {
-        o->notify(this);
-    }
-}
