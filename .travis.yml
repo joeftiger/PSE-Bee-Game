@@ -3,5 +3,9 @@ compiler: gcc
 before_install:
  - sudo apt-get update
  - sudo apt-get install -y cmake
+ - sudo apt-get install -y libx11-dev libxmu-dev libglu1-mesa-dev 
+libgl2ps-dev libxi-dev' libzip-dev libpng-dev libcurl4-gnutls-dev 
+libfontconfig1-dev libsqlite3-dev libglew-dev' libssl-dev libgtk-3-dev 
+binutils
 script:
  - mkdir ./build && cd ./build/ && cmake .. && cmake --build .
