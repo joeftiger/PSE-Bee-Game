@@ -37,7 +37,8 @@ cmake_host_system_information(RESULT hostname QUERY HOSTNAME)
 
 # Needed to compile on Linux
 if (CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
-    if (NOT $ENV{TRAVIS_CI_TEST_BUILD} EQUAL true)
+    if (NOT $ENV{TRAVIS_CI_TEST_BUILD} 
+STREQUAL "true")
         message(STATUS "Linux - setting flag \"-no-pie\"")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -no-pie")
     endif()
