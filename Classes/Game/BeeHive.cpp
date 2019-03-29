@@ -71,7 +71,7 @@ void BeeHive::update() {
     if (!hasFullStorage()) {
         float modifier = std::min(_beesAlive / 1000, 5);
         float resultingHoney = _rawHoney + modifier;
-        _rawHoney += std::min(MAX_RAW_HONEY, resultingHoney);
+        _rawHoney = std::min(MAX_RAW_HONEY, resultingHoney);
     }
     assert(invariant());
 }
