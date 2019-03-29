@@ -90,6 +90,7 @@ list(APPEND GAME_SOURCE
      Classes/Game/BeeHiveAtlas.cpp
      Classes/About/AboutScene.cpp
      Classes/Options/OptionsScene.cpp
+     Classes/Options/ShopScene.cpp
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
@@ -105,6 +106,7 @@ list(APPEND GAME_HEADER
      Classes/Game/BeeHiveAtlas.h
      Classes/About/AboutScene.h
      Classes/Options/OptionsScene.h
+     Classes/Options/ShopScene.h
      )
 
 if(ANDROID)
