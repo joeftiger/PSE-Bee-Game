@@ -9,5 +9,9 @@ Scene* ShopScene::createScene()
 }
 
 bool ShopScene::init(){
+    if ( !Scene::init()) return false;
+
+
+
     return true;
 }
