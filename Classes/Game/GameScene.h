@@ -6,11 +6,12 @@
 #include "HUDLayer.h"
 #include "TileMapLayer.h"
 #include "cocos2d.h"
+#include "TouchUtil.h"
 
 
 using namespace cocos2d;
 
-class GameScene: public cocos2d::Scene
+class GameScene: public cocos2d::Scene, private TouchUtil
 {
 private:
     TileMapLayer *_tileMapLayer;
@@ -18,10 +19,6 @@ private:
 
     bool _isTouched;
     Point _touchPosition;
-
-	Sprite *flower1;
-	Sprite *drag;
-	bool _isDrag;
 
 public:
     static cocos2d::Scene* createScene();

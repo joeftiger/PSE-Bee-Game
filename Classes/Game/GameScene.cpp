@@ -39,32 +39,27 @@ bool GameScene::init()
 	_HUDLayer = HUDLayer::create();
 	this->addChild(_HUDLayer);
 
-	//place plant
-	flower1 = Sprite::create("sprites/blumen1_spring_summer.png");
-	flower1->setScale(0.1f);
-	flower1->setAnchorPoint(Vec2(0.5f, 0.5f));
-	flower1->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - 40, visibleRect.origin.y + 400));
-	this->addChild(flower1, HUD_PRIORITY);
+
+	//initialize sprites to drag, we may want to make buttons some day;
+    addToSpriteList("sprites/blumen1_spring_summer.png", Vec2(visibleRect.size.width*4/5, visibleRect.size.height/2), flower);
+    addToSpriteList("sprites/busch1_spring_summer.png", Vec2(visibleRect.size.width*4/5, visibleRect.size.height/4), bush1);
+    addToSpriteList("sprites/busch2_spring_summer.png", Vec2(visibleRect.size.width*4/5, visibleRect.size.height*3/4), bush2);
+    addToSpriteList("sprites/busch3_spring_summer.png", Vec2(visibleRect.size.width*4/5, visibleRect.size.height*0/4), bush3);
+    addToSpriteList("sprites/busch4_spring_summer.png", Vec2(visibleRect.size.width*3/5, visibleRect.size.height*3/4), bush4);
+    addToSpriteList("sprites/steinplattenboden.png", Vec2(visibleRect.size.width*2/5, visibleRect.size.height*3/4), road);
+
+    addListTo(this);
 
     return true;
-}
-
-void GameScene::placeFlower(Sprite *flower) {
-	if (flower->getBoundingBox().containsPoint(_touchPosition))
-	{
-		auto name = flower->getResourceName();
-		_isDrag = true;
-		drag = Sprite::create(name);
-		drag->setScale(MAP_SCALE / 2);
-		drag->setAnchorPoint(Vec2(0.5f, 0.5f));
-		_tileMapLayer->addChild(drag, HUD_PRIORITY);
-	}
 }
 
 bool GameScene::onTouchBegan(Touch *touch, Event *event) {
 	_isTouched = true;
 	_touchPosition = touch->getLocation();
-	placeFlower(flower1);
+	getDrag(_touchPosition);
+	if(_isDrag){
+	    this->addChild(drag);
+	}
     return true;
 }
 
@@ -75,8 +70,7 @@ void GameScene::onTouchMoved(Touch *touch, Event *event) {
 	_touchPosition = touchPos;
 
 	if (_isDrag) {
-		drag->setPosition(touchPos - _tileMapLayer->getPosition());
-		drag->setLocalZOrder(_tileMapLayer->getContentSize().height * 4 - drag->getPositionY()); //sperimental way to give the right priority
+		drag->setPosition(touchPos);
 	}
 	else {
 		_tileMapLayer->setPosition(finalPos);
@@ -86,8 +80,8 @@ void GameScene::onTouchMoved(Touch *touch, Event *event) {
 
 void GameScene::onTouchEnded(void *, void *) {
 	if (_isDrag) {
-		_tileMapLayer->setTile(_touchPosition - _tileMapLayer->getPosition(), flower);
-		_tileMapLayer->removeChild(drag);
+		_tileMapLayer->setTile(_touchPosition - _tileMapLayer->getPosition(), drag->getTag());
+		this->removeChild(drag);
 		_isDrag = false;
 	}
 	_isTouched = false;
