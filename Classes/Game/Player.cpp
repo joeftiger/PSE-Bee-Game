@@ -29,5 +29,9 @@ float Player::TotalRawHoney() {
 }
 
 void Player::notify(void *pVoid) {
-	BeeHiveAtlas::getInstance()->getBeeHives(&_beeHives);
+	BeeHiveAtlas::getInstance()->getBeeHives(_beeHives);
+}
+
+std::unordered_map<Items, size_t> *Player::getInventory() {
+    return _inventory;
 }
