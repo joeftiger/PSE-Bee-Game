@@ -17,12 +17,24 @@ bool TileMapLayer::init() {
 }
 
 ssize_t TileMapLayer::getTreeCount() {
-    auto layer = _tileMap->getLayer("trees");
-    return layer->getChildren().size();
+	return 2;
 }
 
 ssize_t TileMapLayer::getFlowerCount() {
-    return 3;
+	auto layer = _tileMap->getLayer("background");
+	auto count = 0;
+
+	for (auto y = 0; y < layer->getLayerSize().height; y++) {
+		for (auto x = 0; x < layer->getLayerSize().width; x++) {
+			auto coordinate = Vec2(x, y);
+			auto gid = layer->getTileGIDAt(coordinate);
+
+			if (gid == TileGID::flower) {
+				count++;
+			}
+		}
+	}
+    return count;
 }
 
 std::vector<cocos2d::Sprite*> TileMapLayer::getBeeHives() {
