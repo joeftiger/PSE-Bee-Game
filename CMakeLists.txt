@@ -77,31 +77,31 @@ endif()
 # add cross-platforms source files and header files 
 list(APPEND GAME_SOURCE
      Classes/AppDelegate.cpp
-     Classes/GameScene.cpp
-     Classes/StoryScene.cpp
-     Classes/HUDLayer.cpp
-     Classes/MainMenuScene.cpp
-     Classes/TileMapLayer.cpp
-     Classes/BeeHive.cpp
-     Classes/Player.cpp
-     Classes/BeeHiveAtlas.cpp
-	 Classes/AboutScene.cpp
-	 Classes/OptionsScene.cpp
+     Classes/Game/GameScene.cpp
+     Classes/Story/StoryScene.cpp
+     Classes/Game/HUDLayer.cpp
+     Classes/MainMenu/MainMenuScene.cpp
+     Classes/Game/TileMapLayer.cpp
+     Classes/Game/BeeHive.cpp
+     Classes/Game/Player.cpp
+     Classes/Game/BeeHiveAtlas.cpp
+     Classes/About/AboutScene.cpp
+     Classes/Options/OptionsScene.cpp
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
-     Classes/GameScene.h
-     Classes/StoryScene.h
-     Classes/HUDLayer.h
-     Classes/MainMenuScene.h
-     Classes/TileMapLayer.h
-     Classes/BeeHive.h
-     Classes/Player.h
+     Classes/Game/GameScene.h
+     Classes/Story/StoryScene.h
+     Classes/Game/HUDLayer.h
+     Classes/MainMenu/MainMenuScene.h
+     Classes/Game/TileMapLayer.h
+     Classes/Game/BeeHive.h
+     Classes/Game/Player.h
      Classes/Observer.h
      Classes/Observable.h
-     Classes/BeeHiveAtlas.h
-	 Classes/AboutScene.h
-	 Classes/OptionsScene.h
+     Classes/Game/BeeHiveAtlas.h
+     Classes/About/AboutScene.h
+     Classes/Options/OptionsScene.h
      )
 
 if(ANDROID)
