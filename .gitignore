@@ -24,3 +24,6 @@ proj.android/proj.android.iml
 *.idb
 *.aps
 proj.win32/.vs/PSE-Bee-Game/v15/.suo
+
+# IDE folder
+.idea/
