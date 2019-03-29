@@ -5,7 +5,7 @@
 #ifndef _ABOUTSCENE_H
 #define _ABOUTSCENE_H
 
-#include "MainMenuScene.h"
+#include "MainMenu/MainMenuScene.h"
 #include "cocos2d.h"
 #include "ui/UIWidget.h"
 

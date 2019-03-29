@@ -1,7 +1,7 @@
 
 #include "TileMapLayer.h"
-#include "DEFINITIONS.h"
-#include "TILE_NAMES.h"
+#include "HeaderFiles/DEFINITIONS.h"
+#include "HeaderFiles/TILE_NAMES.h"
 #include "HeaderFiles/TileGID.h"
 
 bool TileMapLayer::init() {

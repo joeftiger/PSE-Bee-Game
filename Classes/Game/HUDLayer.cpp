@@ -1,7 +1,7 @@
 
 #include "HUDLayer.h"
-#include "DEFINITIONS.h"
-#include "MainMenuScene.h"
+#include "HeaderFiles/DEFINITIONS.h"
+#include "MainMenu/MainMenuScene.h"
 
 using namespace cocos2d;
 

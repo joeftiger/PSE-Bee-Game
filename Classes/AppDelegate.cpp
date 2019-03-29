@@ -23,8 +23,8 @@
  ****************************************************************************/
 
 #include "AppDelegate.h"
-#include "GameScene.h"
-#include "MainMenuScene.h"
+#include "Game/GameScene.h"
+#include "MainMenu/MainMenuScene.h"
 
 USING_NS_CC;
 

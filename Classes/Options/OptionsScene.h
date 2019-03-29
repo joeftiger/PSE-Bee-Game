@@ -5,7 +5,7 @@
 #ifndef _OPTIONSSCENE_H
 #define _OPTIONSSCENE_H
 
-#include "MainMenuScene.h"
+#include "MainMenu/MainMenuScene.h"
 #include "cocos2d.h"
 #include "ui/UIWidget.h"
 
