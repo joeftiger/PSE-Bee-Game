@@ -15,7 +15,7 @@ bool GameScene::init()
     if ( !Scene::init()) return false;
 
 	cocos2d::Rect visibleRect = Director::getInstance()->getOpenGLView()->getVisibleRect();
-    auto visibleSize = Director::getInstance()->getVisibleSize();
+    auto visibleSize = visibleRect.size;
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     // Touch Event Listener
@@ -29,7 +29,7 @@ bool GameScene::init()
 	// Background TileMap
     _tileMapLayer = TileMapLayer::create();
     this->addChild(_tileMapLayer, -1);
-	_tileMapLayer->setPosition(Vec2(visibleRect.origin.x - visibleRect.size.width, visibleRect.origin.y - visibleRect.size.height));
+	_tileMapLayer->setPosition(Vec2(visibleRect.origin.x - visibleSize.width, visibleRect.origin.y - visibleSize.height));
 
     // TileMapAtlas and observe TileMap
     auto tileMapAtlas = BeeHiveAtlas::getInstance();
@@ -40,15 +40,23 @@ bool GameScene::init()
 	this->addChild(_HUDLayer);
 
 
-	//initialize sprites to drag, we may want to make buttons some day;
-    addToSpriteList("sprites/blumen1_spring_summer.png", Vec2(visibleRect.size.width*4/5, visibleRect.size.height/2), flower);
-    addToSpriteList("sprites/busch1_spring_summer.png", Vec2(visibleRect.size.width*4/5, visibleRect.size.height/4), bush1);
-    addToSpriteList("sprites/busch2_spring_summer.png", Vec2(visibleRect.size.width*4/5, visibleRect.size.height*3/4), bush2);
-    addToSpriteList("sprites/busch3_spring_summer.png", Vec2(visibleRect.size.width*4/5, visibleRect.size.height*0/4), bush3);
-    addToSpriteList("sprites/busch4_spring_summer.png", Vec2(visibleRect.size.width*3/5, visibleRect.size.height*3/4), bush4);
-    addToSpriteList("sprites/steinplattenboden.png", Vec2(visibleRect.size.width*2/5, visibleRect.size.height*3/4), road);
 
-    addListTo(this);
+    //create an item panel/layer
+    _itemPanel = LayerColor::create(Color4B::WHITE, visibleSize.width/4, visibleSize.height);
+    _itemPanel->setPosition(visibleSize.width*3/4, 0);
+    _itemPanel->setOpacity(GLubyte(90));
+
+	//initialize sprites to drag, we may want to make buttons some day;
+    addToSpriteList("sprites/blumen1_spring_summer.png", Vec2(0 + 10, 0), flower);
+    addToSpriteList("sprites/busch1_spring_summer.png", Vec2(_itemPanel->getContentSize().width/3 + 10, _itemPanel->getContentSize().height/7), bush1);
+    addToSpriteList("sprites/busch2_spring_summer.png", Vec2(0 + 10, _itemPanel->getContentSize().height*2/7), bush2);
+    addToSpriteList("sprites/busch3_spring_summer.png", Vec2(_itemPanel->getContentSize().width/3 + 10, _itemPanel->getContentSize().height*3/7), bush3);
+    addToSpriteList("sprites/busch4_spring_summer.png", Vec2(0 + 10, _itemPanel->getContentSize().height*4/7), bush4);
+    addToSpriteList("sprites/steinplattenboden.png", Vec2(_itemPanel->getContentSize().width/3 + 10, _itemPanel->getContentSize().height*5/7), road);
+
+    _HUDLayer->addChild(_itemPanel);
+
+    addListTo(_itemPanel);
 
     return true;
 }
@@ -56,7 +64,7 @@ bool GameScene::init()
 bool GameScene::onTouchBegan(Touch *touch, Event *event) {
 	_isTouched = true;
 	_touchPosition = touch->getLocation();
-	getDrag(_touchPosition);
+	getDrag(_touchPosition, _itemPanel->getPosition());
 	if(_isDrag){
 	    this->addChild(drag);
 	}

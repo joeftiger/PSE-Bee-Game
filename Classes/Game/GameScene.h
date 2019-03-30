@@ -16,6 +16,7 @@ class GameScene: public cocos2d::Scene, private TouchUtil
 private:
     TileMapLayer *_tileMapLayer;
 	HUDLayer *_HUDLayer;
+	LayerColor *_itemPanel;
 
     bool _isTouched;
     Point _touchPosition;

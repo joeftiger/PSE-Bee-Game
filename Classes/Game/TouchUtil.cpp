@@ -14,17 +14,17 @@ using namespace cocos2d;
 using namespace std;
 
 
-Sprite *TouchUtil::getDrag(Point touch) {
+Sprite *TouchUtil::getDrag(Point screenTouch, Point layerTouch) {
     for(auto sprite : spriteList)
     {
-        if (sprite->getBoundingBox().containsPoint(touch)) {
+        if (sprite->getBoundingBox().containsPoint(screenTouch - layerTouch)) {
             auto name = sprite->getResourceName();
             _isDrag = true;
             drag = Sprite::create(name);
+            drag->setPosition(screenTouch);
             drag->setTag(sprite->getTag());
             drag->setScale(MAP_SCALE / 2);
             drag->setAnchorPoint(Vec2(0.5f, 0));
-            drag->setPosition(touch);
             return drag;
         }
     }
@@ -43,6 +43,11 @@ bool TouchUtil::isDrag() {
     return _isDrag;
 }
 
+void TouchUtil::addListTo(Layer *layer) {
+    for(auto sprite : spriteList) {
+        layer->addChild(sprite);
+    }
+}
 void TouchUtil::addListTo(Scene *scene) {
     for(auto sprite : spriteList) {
         scene->addChild(sprite);

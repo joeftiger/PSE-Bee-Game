@@ -18,11 +18,13 @@ protected:
     vector<Sprite*> spriteList;
 public:
 
-    Sprite *getDrag(Point touch);
+    Sprite *getDrag(Point screenTouch, Point layerTouch);
     void addToSpriteList(string name, Vec2 pos, int tag);
     bool isDrag();
+    void addListTo(Layer *layer); //overloading
     void addListTo(Scene *scene);
 };
+
 
 
 #endif //PSE_BEE_GAME_DRAGDROP_H
