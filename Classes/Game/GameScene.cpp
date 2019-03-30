@@ -40,23 +40,16 @@ bool GameScene::init()
 	this->addChild(_HUDLayer);
 
 
-
-    //create an item panel/layer
+	//Item Panel, may want to make his own layer class
     _itemPanel = LayerColor::create(Color4B::WHITE, visibleSize.width/4, visibleSize.height);
     _itemPanel->setPosition(visibleSize.width*3/4, 0);
     _itemPanel->setOpacity(GLubyte(90));
 
-	//initialize sprites to drag, we may want to make buttons some day;
-    addToSpriteList("sprites/blumen1_spring_summer.png", Vec2(0 + 10, 0), flower);
-    addToSpriteList("sprites/busch1_spring_summer.png", Vec2(_itemPanel->getContentSize().width/3 + 10, _itemPanel->getContentSize().height/7), bush1);
-    addToSpriteList("sprites/busch2_spring_summer.png", Vec2(0 + 10, _itemPanel->getContentSize().height*2/7), bush2);
-    addToSpriteList("sprites/busch3_spring_summer.png", Vec2(_itemPanel->getContentSize().width/3 + 10, _itemPanel->getContentSize().height*3/7), bush3);
-    addToSpriteList("sprites/busch4_spring_summer.png", Vec2(0 + 10, _itemPanel->getContentSize().height*4/7), bush4);
-    addToSpriteList("sprites/steinplattenboden.png", Vec2(_itemPanel->getContentSize().width/3 + 10, _itemPanel->getContentSize().height*5/7), road);
-
-    _HUDLayer->addChild(_itemPanel);
+    initializeItemPanel();
 
     addListTo(_itemPanel);
+
+    this->addChild(_itemPanel);
 
     return true;
 }
@@ -64,7 +57,7 @@ bool GameScene::init()
 bool GameScene::onTouchBegan(Touch *touch, Event *event) {
 	_isTouched = true;
 	_touchPosition = touch->getLocation();
-	getDrag(_touchPosition, _itemPanel->getPosition());
+	setDrag(_touchPosition, _itemPanel->getPosition());
 	if(_isDrag){
 	    this->addChild(drag);
 	}
@@ -95,6 +88,15 @@ void GameScene::onTouchEnded(void *, void *) {
 	_isTouched = false;
 	_isDrag = false;
 	_touchPosition = Point(0, 0);
+}
+
+void GameScene::initializeItemPanel() {
+    addToSpriteList("sprites/blumen1_spring_summer.png", Vec2(0 + 10, 0), flower);
+    addToSpriteList("sprites/busch1_spring_summer.png", Vec2(_itemPanel->getContentSize().width/3 + 10, _itemPanel->getContentSize().height/7), bush1);
+    addToSpriteList("sprites/busch2_spring_summer.png", Vec2(0 + 10, _itemPanel->getContentSize().height*2/7), bush2);
+    addToSpriteList("sprites/busch3_spring_summer.png", Vec2(_itemPanel->getContentSize().width/3 + 10, _itemPanel->getContentSize().height*3/7), bush3);
+    addToSpriteList("sprites/busch4_spring_summer.png", Vec2(0 + 10, _itemPanel->getContentSize().height*4/7), bush4);
+    addToSpriteList("sprites/steinplattenboden.png", Vec2(_itemPanel->getContentSize().width/3 + 10, _itemPanel->getContentSize().height*5/7), road);
 }
 
 

@@ -97,7 +97,5 @@ Vec2 TileMapLayer::inTileMapBounds(Vec2 pos) {
 
 void TileMapLayer::setTile(Vec2 position, int gid) {
 	auto layer = _tileMap->getLayer("objects");
-	auto tile = layer->getTileAt(getTilePosition(position));
-	CCLOG("" + tile->getTag());
 	layer->setTileGID(gid, getTilePosition(position)); //1 = flower; 2,3,4,5 = bush1,2,3,4; 6 = grass; 7 = road
 }

@@ -14,7 +14,7 @@ using namespace cocos2d;
 using namespace std;
 
 
-Sprite *TouchUtil::getDrag(Point screenTouch, Point layerTouch) {
+void TouchUtil::setDrag(Point screenTouch, Point layerTouch) {
     for(auto sprite : spriteList)
     {
         if (sprite->getBoundingBox().containsPoint(screenTouch - layerTouch)) {
@@ -25,9 +25,12 @@ Sprite *TouchUtil::getDrag(Point screenTouch, Point layerTouch) {
             drag->setTag(sprite->getTag());
             drag->setScale(MAP_SCALE / 2);
             drag->setAnchorPoint(Vec2(0.5f, 0));
-            return drag;
         }
     }
+}
+
+Sprite *TouchUtil::getDrag() {
+    return drag;
 }
 
 void TouchUtil::addToSpriteList(string name, Vec2 pos, int tag) {
@@ -53,5 +56,3 @@ void TouchUtil::addListTo(Scene *scene) {
         scene->addChild(sprite);
     }
 }
-
-

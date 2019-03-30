@@ -18,7 +18,8 @@ protected:
     vector<Sprite*> spriteList;
 public:
 
-    Sprite *getDrag(Point screenTouch, Point layerTouch);
+    void setDrag(Point screenTouch, Point layerTouch);
+    Sprite *getDrag();
     void addToSpriteList(string name, Vec2 pos, int tag);
     bool isDrag();
     void addListTo(Layer *layer); //overloading

@@ -11,15 +11,16 @@
 
 using namespace cocos2d;
 
-class GameScene: public cocos2d::Scene, private TouchUtil
+class GameScene: public cocos2d::Scene, public TouchUtil
 {
 private:
     TileMapLayer *_tileMapLayer;
 	HUDLayer *_HUDLayer;
-	LayerColor *_itemPanel;
 
     bool _isTouched;
     Point _touchPosition;
+
+    LayerColor* _itemPanel;
 
 public:
     static cocos2d::Scene* createScene();
@@ -30,6 +31,8 @@ public:
     bool onTouchBegan(Touch *touch, Event *event);
     void onTouchMoved(Touch *touch, Event *event);
     void onTouchEnded(void *, void *);
+
+    void initializeItemPanel();
     
     // implement the "static create()" method manually
     CREATE_FUNC(GameScene);
