@@ -2,6 +2,7 @@
 #include "GameScene.h"
 #include "BeeHiveAtlas.h"
 #include "HeaderFiles/TileGID.h"
+#include "ItemPanelLayer.h"
 
 using namespace cocos2d;
 
@@ -15,7 +16,7 @@ bool GameScene::init()
     if ( !Scene::init()) return false;
 
 	cocos2d::Rect visibleRect = Director::getInstance()->getOpenGLView()->getVisibleRect();
-    auto visibleSize = visibleRect.size;
+    visibleSize = visibleRect.size;
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     // Touch Event Listener
@@ -39,14 +40,9 @@ bool GameScene::init()
 	_HUDLayer = HUDLayer::create();
 	this->addChild(_HUDLayer);
 
-
-	//Item Panel, may want to make his own layer class
-    _itemPanel = LayerColor::create(Color4B::WHITE, visibleSize.width/4, visibleSize.height);
-    _itemPanel->setPosition(visibleSize.width*3/4, 0);
-    _itemPanel->setOpacity(GLubyte(90));
-
-    initializeItemPanel();
-
+    //Item Panel Layer
+	_itemPanel = ItemPanelLayer::create();
+	_itemPanel->initializeItemPanel(this);
     addListTo(_itemPanel);
 
     this->addChild(_itemPanel);
@@ -57,9 +53,9 @@ bool GameScene::init()
 bool GameScene::onTouchBegan(Touch *touch, Event *event) {
 	_isTouched = true;
 	_touchPosition = touch->getLocation();
-	setDrag(_touchPosition, _itemPanel->getPosition());
-	if(_isDrag){
-	    this->addChild(drag);
+	ShowHideItemPanel();
+	if(_isItemShow) {
+        touchOnItemPanel();
 	}
     return true;
 }
@@ -90,13 +86,28 @@ void GameScene::onTouchEnded(void *, void *) {
 	_touchPosition = Point(0, 0);
 }
 
-void GameScene::initializeItemPanel() {
-    addToSpriteList("sprites/blumen1_spring_summer.png", Vec2(0 + 10, 0), flower);
-    addToSpriteList("sprites/busch1_spring_summer.png", Vec2(_itemPanel->getContentSize().width/3 + 10, _itemPanel->getContentSize().height/7), bush1);
-    addToSpriteList("sprites/busch2_spring_summer.png", Vec2(0 + 10, _itemPanel->getContentSize().height*2/7), bush2);
-    addToSpriteList("sprites/busch3_spring_summer.png", Vec2(_itemPanel->getContentSize().width/3 + 10, _itemPanel->getContentSize().height*3/7), bush3);
-    addToSpriteList("sprites/busch4_spring_summer.png", Vec2(0 + 10, _itemPanel->getContentSize().height*4/7), bush4);
-    addToSpriteList("sprites/steinplattenboden.png", Vec2(_itemPanel->getContentSize().width/3 + 10, _itemPanel->getContentSize().height*5/7), road);
+void GameScene::touchOnItemPanel() {
+    if(_itemPanel->getBoundingBox().containsPoint(_touchPosition)) {
+        setDrag(_touchPosition, _itemPanel->getPosition());
+        if(_isDrag){
+            this->addChild(drag);
+        }
+    }
+}
+
+void GameScene::ShowHideItemPanel() {
+    if(_itemPanel->getShowRec()->getBoundingBox().containsPoint(_touchPosition - _itemPanel->getPosition())) {
+        if(_isItemShow) {
+            MoveBy *hide = MoveBy::create(0.2, Vec2(_itemPanel->getBoundingBox().size.width, 0));
+            _itemPanel->runAction(hide);
+            _isItemShow = false;
+
+        } else {
+            MoveBy *show = MoveBy::create(0.2, Vec2(-_itemPanel->getBoundingBox().size.width, 0));
+            _itemPanel->runAction(show);
+            _isItemShow = true;
+        }
+    }
 }
 
 
