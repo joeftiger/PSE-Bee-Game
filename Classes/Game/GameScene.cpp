@@ -9,14 +9,14 @@
 
 using namespace cocos2d;
 
-Scene* GameScene::createScene()
+Layer* GameScene::createScene()
 {
     return GameScene::create();
 }
 
 bool GameScene::init()
 {
-    if ( !Scene::init()) return false;
+    if ( !Layer::init()) return false;
 
 	Size visibleSize = Director::getInstance()->getWinSize();
 
@@ -27,9 +27,6 @@ bool GameScene::init()
     listener->onTouchMoved = CC_CALLBACK_2(GameScene::onTouchMoved, this);
     listener->onTouchEnded = CC_CALLBACK_2(GameScene::onTouchEnded, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-
-    //camera
-    camera = this->getDefaultCamera();
 
 	// Background TileMap
     _tileMapLayer = TileMapLayer::create();
@@ -48,7 +45,6 @@ bool GameScene::init()
 	_itemPanel = ItemPanelLayer::create();
 	_itemPanel->initializeItemPanel(this);
     addListTo(_itemPanel);
-
     this->addChild(_itemPanel);
 
     return true;
@@ -115,6 +111,10 @@ void GameScene::ShowHideItemPanel() {
             _isItemShow = true;
         }
     }
+}
+
+void GameScene::setCamera(Camera *c) {
+    camera = c;
 }
 
 

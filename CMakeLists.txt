@@ -170,7 +170,7 @@ endif()
 set(all_code_files
     ${GAME_HEADER}
     ${GAME_SOURCE}
-        Classes/Game/ItemPanelLayer.cpp Classes/Game/ItemPanelLayer.h)
+        Classes/Game/ItemPanelLayer.cpp Classes/Game/ItemPanelLayer.h Classes/Game/Container.cpp Classes/Game/Container.h)
 if(NOT ANDROID)
     add_executable(${APP_NAME} ${all_code_files})
 else()
