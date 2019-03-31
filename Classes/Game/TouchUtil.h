@@ -20,7 +20,7 @@ public:
 
     void setDrag(Point screenTouch, Point layerTouch);
     Sprite *getDrag();
-    void addToSpriteList(string name, Vec2 pos, int tag);
+    void addToSpriteList(string name, Vec2 pos, int tag, Size scale);
     bool isDrag();
     void addListTo(Layer *layer); //overloading
     void addListTo(Scene *scene);

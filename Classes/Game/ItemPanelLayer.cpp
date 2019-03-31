@@ -39,12 +39,22 @@ bool ItemPanelLayer::init() {
 }
 
 void ItemPanelLayer::initializeItemPanel(TouchUtil *parent) {
-    parent->addToSpriteList("sprites/blumen1_spring_summer.png", Vec2(0 + 10, 0), flower);
-    parent->addToSpriteList("sprites/busch1_spring_summer.png", Vec2(this->getContentSize().width/3 + 10, this->getContentSize().height/7), bush1);
-    parent->addToSpriteList("sprites/busch2_spring_summer.png", Vec2(0 + 10, this->getContentSize().height*2/7), bush2);
-    parent->addToSpriteList("sprites/busch3_spring_summer.png", Vec2(this->getContentSize().width/3 + 10, this->getContentSize().height*3/7), bush3);
-    parent->addToSpriteList("sprites/busch4_spring_summer.png", Vec2(0 + 10, this->getContentSize().height*4/7), bush4);
-    parent->addToSpriteList("sprites/steinplattenboden.png", Vec2(this->getContentSize().width/3 + 10, this->getContentSize().height*5/7), road);
+    auto box = this->getBoundingBox().size;
+
+    parent->addToSpriteList("tilemaps/Tiles/blumen1_spring_summer.png", Vec2(0, box.height/6), flower1, box);
+    parent->addToSpriteList("tilemaps/Tiles/blumen2_spring_summer.png", Vec2(box.width/3, box.height/6), flower2, box);
+    parent->addToSpriteList("tilemaps/Tiles/blumen3_spring_summer.png", Vec2(box.width*2/3, box.height/6), flower3, box);
+    parent->addToSpriteList("tilemaps/Tiles/blumen4_spring_summer.png", Vec2(0, box.height*2/6), flower4, box);
+
+    parent->addToSpriteList("tilemaps/Tiles/steinplattenboden.png", Vec2(box.width/3, box.height*2/6), road, box);
+    parent->addToSpriteList("tilemaps/Tiles/busch1_spring_summer.png", Vec2(box.width*2/3, box.height*2/6), bush1, box);
+    parent->addToSpriteList("tilemaps/Tiles/busch2_spring_summer.png", Vec2(0, box.height*3/6), bush2, box);
+    parent->addToSpriteList("tilemaps/Tiles/busch3_spring_summer.png", Vec2(box.width/3, box.height*3/6), bush3, box);
+    parent->addToSpriteList("tilemaps/Tiles/busch4_spring_summer.png", Vec2(box.width*2/3, box.height*3/6), bush4, box);
+
+    parent->addToSpriteList("tilemaps/Tiles/bienenstock1_gross.png", Vec2(0, box.height*4/6), beehiveBig, box);
+    parent->addToSpriteList("tilemaps/Tiles/bienenstock1_mittel.png", Vec2(box.width/3, box.height*4/6), beehiveMiddle, box);
+    parent->addToSpriteList("tilemaps/Tiles/bienenstock1_klein.png", Vec2(box.width*2/3, box.height*4/6), beehiveSmall, box);
 }
 
 LayerColor* ItemPanelLayer::getShowRec() {
