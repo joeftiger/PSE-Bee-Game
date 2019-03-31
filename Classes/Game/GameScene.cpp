@@ -3,6 +3,8 @@
 #include "BeeHiveAtlas.h"
 #include "HeaderFiles/TileGID.h"
 #include "SaveLoad/SaveLoad.h"
+#include "ItemPanelLayer.h"
+
 
 using namespace cocos2d;
 
@@ -16,7 +18,7 @@ bool GameScene::init()
     if ( !Scene::init()) return false;
 
 	cocos2d::Rect visibleRect = Director::getInstance()->getOpenGLView()->getVisibleRect();
-    auto visibleSize = Director::getInstance()->getVisibleSize();
+    visibleSize = visibleRect.size;
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     // Touch Event Listener
@@ -30,7 +32,7 @@ bool GameScene::init()
 	// Background TileMap
     _tileMapLayer = TileMapLayer::create();
     this->addChild(_tileMapLayer, -1);
-	_tileMapLayer->setPosition(Vec2(visibleRect.origin.x - visibleRect.size.width, visibleRect.origin.y - visibleRect.size.height));
+	_tileMapLayer->setPosition(Vec2(visibleRect.origin.x - visibleSize.width, visibleRect.origin.y - visibleSize.height));
 
     // TileMapAtlas and observe TileMap
     auto tileMapAtlas = BeeHiveAtlas::getInstance();
@@ -40,32 +42,23 @@ bool GameScene::init()
 	_HUDLayer = HUDLayer::create();
 	this->addChild(_HUDLayer);
 
-	//place plant
-	flower1 = Sprite::create("sprites/blumen1_spring_summer.png");
-	flower1->setScale(0.1f);
-	flower1->setAnchorPoint(Vec2(0.5f, 0.5f));
-	flower1->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - 40, visibleRect.origin.y + 400));
-	this->addChild(flower1, HUD_PRIORITY);
+    //Item Panel Layer
+	_itemPanel = ItemPanelLayer::create();
+	_itemPanel->initializeItemPanel(this);
+    addListTo(_itemPanel);
+
+    this->addChild(_itemPanel);
 
     return true;
-}
-
-void GameScene::placeFlower(Sprite *flower) {
-	if (flower->getBoundingBox().containsPoint(_touchPosition))
-	{
-		auto name = flower->getResourceName();
-		_isDrag = true;
-		drag = Sprite::create(name);
-		drag->setScale(MAP_SCALE / 2);
-		drag->setAnchorPoint(Vec2(0.5f, 0.5f));
-		_tileMapLayer->addChild(drag, HUD_PRIORITY);
-	}
 }
 
 bool GameScene::onTouchBegan(Touch *touch, Event *event) {
 	_isTouched = true;
 	_touchPosition = touch->getLocation();
-	placeFlower(flower1);
+	ShowHideItemPanel();
+	if(_isItemShow) {
+        touchOnItemPanel();
+	}
     return true;
 }
 
@@ -76,8 +69,7 @@ void GameScene::onTouchMoved(Touch *touch, Event *event) {
 	_touchPosition = touchPos;
 
 	if (_isDrag) {
-		drag->setPosition(touchPos - _tileMapLayer->getPosition());
-		drag->setLocalZOrder(_tileMapLayer->getContentSize().height * 4 - drag->getPositionY()); //sperimental way to give the right priority
+		drag->setPosition(touchPos);
 	}
 	else {
 		_tileMapLayer->setPosition(finalPos);
@@ -87,13 +79,37 @@ void GameScene::onTouchMoved(Touch *touch, Event *event) {
 
 void GameScene::onTouchEnded(void *, void *) {
 	if (_isDrag) {
-		_tileMapLayer->setTile(_touchPosition - _tileMapLayer->getPosition(), flower);
-		_tileMapLayer->removeChild(drag);
+		_tileMapLayer->setTile(_touchPosition - _tileMapLayer->getPosition(), drag->getTag());
+		this->removeChild(drag);
 		_isDrag = false;
 	}
 	_isTouched = false;
 	_isDrag = false;
 	_touchPosition = Point(0, 0);
+}
+
+void GameScene::touchOnItemPanel() {
+    if(_itemPanel->getBoundingBox().containsPoint(_touchPosition)) {
+        setDrag(_touchPosition, _itemPanel->getPosition());
+        if(_isDrag){
+            this->addChild(drag);
+        }
+    }
+}
+
+void GameScene::ShowHideItemPanel() {
+    if(_itemPanel->getShowRec()->getBoundingBox().containsPoint(_touchPosition - _itemPanel->getPosition())) {
+        if(_isItemShow) {
+            MoveBy *hide = MoveBy::create(0.2, Vec2(_itemPanel->getBoundingBox().size.width, 0));
+            _itemPanel->runAction(hide);
+            _isItemShow = false;
+
+        } else {
+            MoveBy *show = MoveBy::create(0.2, Vec2(-_itemPanel->getBoundingBox().size.width, 0));
+            _itemPanel->runAction(show);
+            _isItemShow = true;
+        }
+    }
 }
 
 

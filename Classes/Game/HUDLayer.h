@@ -6,7 +6,7 @@
 
 using namespace cocos2d;
 
-class HUDLayer: public cocos2d::Layer
+class HUDLayer: public Layer
 {
 private:
 
