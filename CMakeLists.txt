@@ -91,6 +91,7 @@ list(APPEND GAME_SOURCE
      Classes/About/AboutScene.cpp
      Classes/Options/OptionsScene.cpp
      Classes/Shop/ShopScene.cpp
+     Classes/Game/TouchUtil.cpp
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
@@ -107,6 +108,7 @@ list(APPEND GAME_HEADER
      Classes/About/AboutScene.h
      Classes/Options/OptionsScene.h
      Classes/Shop/ShopScene.h
+     Classes/Game/TouchUtil.h
      )
 
 if(ANDROID)
@@ -165,7 +167,7 @@ endif()
 set(all_code_files
     ${GAME_HEADER}
     ${GAME_SOURCE}
-    )
+        Classes/Game/ItemPanelLayer.cpp Classes/Game/ItemPanelLayer.h)
 if(NOT ANDROID)
     add_executable(${APP_NAME} ${all_code_files})
 else()

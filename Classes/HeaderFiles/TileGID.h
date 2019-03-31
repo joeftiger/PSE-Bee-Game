@@ -12,12 +12,12 @@
 */
 enum TileGID {
 	flower = 1,
-	bush1,
-	bush2, 
-	bush3,
-	bush4,
-	grass,
-	road
+	bush1 = 2,
+	bush2 = 3,
+	bush3 = 4,
+	bush4 = 5,
+	grass = 6,
+	road =7
 };
 
 #endif /* TILEGID_H */
