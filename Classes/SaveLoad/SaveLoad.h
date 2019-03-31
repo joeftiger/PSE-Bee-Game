@@ -4,6 +4,7 @@
 
 #include "cocos2d.h"
 #include "Game/TileMapLayer.h"
+#include "Game/BeeHive.h"
 #include "json/rapidjson.h"
 #include "json/document.h"
 
@@ -28,6 +29,10 @@ public:
 	static void jsonToFile(rapidjson::Document & jsonObj, std::string fullPath);
 
 	static std::string jsonToString(rapidjson::Document & jsonObj);
+
+	static void saveBeehives(std::vector<BeeHive> BeeHives);
+
+	static void loadBeehives();
 
 };
 

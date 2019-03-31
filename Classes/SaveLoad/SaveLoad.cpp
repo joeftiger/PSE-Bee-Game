@@ -100,6 +100,8 @@ std::string SaveLoad::jsonToString(rapidjson::Document &jsonObj) {
 	return std::string(buffer.GetString());
 }
 
+
+
 /**
 	Loads data from disk
 */
@@ -132,4 +134,32 @@ void SaveLoad::loadMap() {
 bool SaveLoad::fileExists(std::string filename) {
 	std::ifstream infile(filename);
 	return infile.good();
+}
+
+void SaveLoad::saveBeehives(std::vector<BeeHive> BeeHives) {
+	rapidjson::Document d;
+	rapidjson::StringBuffer s;
+	Writer<rapidjson::StringBuffer> writer(s);
+	writer.StartObject();
+
+	for (BeeHive b : BeeHives) {
+		//TODO: add actual implementation for saving
+		writer.Key("Position");
+		writer.StartArray();
+		//writer.Int(b.getPosition().x)
+		//writer.Int(b.getPosition().y)
+		writer.EndArray();
+		writer.Key("BeesAlive");
+		writer.Int(b.beesAlive());
+	}
+
+	writer.EndObject();
+
+	d.Parse(s.GetString());
+	log("%s %s", "json1", s.GetString());
+	jsonToFile(jsonToString(d), getPath("beehives.json"));
+}
+
+void SaveLoad::loadBeehives() {
+
 }
