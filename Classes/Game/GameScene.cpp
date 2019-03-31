@@ -3,6 +3,7 @@
 #include "BeeHiveAtlas.h"
 #include "HeaderFiles/TileGID.h"
 #include "ItemPanelLayer.h"
+#include "AppDelegate.h"
 
 using namespace cocos2d;
 
@@ -15,9 +16,7 @@ bool GameScene::init()
 {
     if ( !Scene::init()) return false;
 
-	cocos2d::Rect visibleRect = Director::getInstance()->getOpenGLView()->getVisibleRect();
-    visibleSize = visibleRect.size;
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	Size visibleSize = Director::getInstance()->getWinSize();
 
     // Touch Event Listener
     auto listener = EventListenerTouchOneByOne::create();
@@ -26,6 +25,9 @@ bool GameScene::init()
     listener->onTouchMoved = CC_CALLBACK_2(GameScene::onTouchMoved, this);
     listener->onTouchEnded = CC_CALLBACK_2(GameScene::onTouchEnded, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+    //camera
+    camera = this->getDefaultCamera();
 
 	// Background TileMap
     _tileMapLayer = TileMapLayer::create();
@@ -63,21 +65,24 @@ bool GameScene::onTouchBegan(Touch *touch, Event *event) {
 void GameScene::onTouchMoved(Touch *touch, Event *event) {
 	auto touchPos = touch->getLocation();
 	auto movement = touchPos - _touchPosition;
-	auto finalPos = _tileMapLayer->getPosition() + movement;
 	_touchPosition = touchPos;
 
+
 	if (_isDrag) {
-		drag->setPosition(touchPos);
+		drag->setPosition(touchPos - cameraTravel);
 	}
 	else {
-		_tileMapLayer->setPosition(finalPos);
+	    cameraTravel += movement;
+		camera->setPosition(camera->getPosition() - movement);
+		_HUDLayer->setPosition(_HUDLayer->getPosition() - movement);
+        _itemPanel->setPosition(_itemPanel->getPosition() - movement);
 	}
     
 }
 
 void GameScene::onTouchEnded(void *, void *) {
 	if (_isDrag) {
-		_tileMapLayer->setTile(_touchPosition - _tileMapLayer->getPosition(), drag->getTag());
+		_tileMapLayer->setTile(_touchPosition - cameraTravel - _tileMapLayer->getPosition(), drag->getTag());
 		this->removeChild(drag);
 		_isDrag = false;
 	}
@@ -87,8 +92,8 @@ void GameScene::onTouchEnded(void *, void *) {
 }
 
 void GameScene::touchOnItemPanel() {
-    if(_itemPanel->getBoundingBox().containsPoint(_touchPosition)) {
-        setDrag(_touchPosition, _itemPanel->getPosition());
+    if(_itemPanel->getBoundingBox().containsPoint(_touchPosition - cameraTravel)) {
+        setDrag(_touchPosition - cameraTravel, _itemPanel->getPosition());
         if(_isDrag){
             this->addChild(drag);
         }
@@ -96,7 +101,7 @@ void GameScene::touchOnItemPanel() {
 }
 
 void GameScene::ShowHideItemPanel() {
-    if(_itemPanel->getShowRec()->getBoundingBox().containsPoint(_touchPosition - _itemPanel->getPosition())) {
+    if(_itemPanel->getShowRec()->getBoundingBox().containsPoint(_touchPosition - cameraTravel - _itemPanel->getPosition())) {
         if(_isItemShow) {
             MoveBy *hide = MoveBy::create(0.2, Vec2(_itemPanel->getBoundingBox().size.width, 0));
             _itemPanel->runAction(hide);

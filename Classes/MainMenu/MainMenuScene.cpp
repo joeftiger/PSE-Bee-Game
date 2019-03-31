@@ -1,5 +1,6 @@
 
 #include "MainMenuScene.h"
+#include "Game/GameScene.h"
 
 cocos2d::Scene * MainMenu::scene()
 {

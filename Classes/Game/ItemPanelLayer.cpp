@@ -20,11 +20,10 @@ bool ItemPanelLayer::init() {
     {
         return false;
     }
-    Rect visibleRect = Director::getInstance()->getOpenGLView()->getVisibleRect();
-    auto visibleSize = visibleRect.size;
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    //Item Panel, may want to make his own layer class
+    Size visibleSize = Director::getInstance()->getWinSize();
+
+    //Item Panel
     this->setColor(Color3B::WHITE);
     this->setContentSize(Size(visibleSize.width/4, visibleSize.height));
     this->setPosition(visibleSize.width, 0);

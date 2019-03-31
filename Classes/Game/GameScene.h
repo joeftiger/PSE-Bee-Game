@@ -16,20 +16,20 @@ class GameScene: public cocos2d::Scene, public TouchUtil
 {
 private:
     Size visibleSize;
+    Camera *camera;
     TileMapLayer *_tileMapLayer;
 	HUDLayer *_HUDLayer;
 
     bool _isTouched;
     bool _isItemShow = false;
     Point _touchPosition;
+    Point cameraTravel = Vec2(0,0);
 
     ItemPanelLayer *_itemPanel;
 
 public:
     static cocos2d::Scene* createScene();
 	virtual bool init();
-
-	void placeFlower(Sprite *flower);
 
     bool onTouchBegan(Touch *touch, Event *event);
     void onTouchMoved(Touch *touch, Event *event);
