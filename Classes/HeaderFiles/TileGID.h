@@ -11,6 +11,7 @@
 	road = 7
 */
 enum TileGID {
+	empty = 0,
 	flower = 1,
 	bush1,
 	bush2, 

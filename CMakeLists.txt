@@ -91,6 +91,7 @@ list(APPEND GAME_SOURCE
      Classes/About/AboutScene.cpp
      Classes/Options/OptionsScene.cpp
      Classes/Shop/ShopScene.cpp
+     Classes/SaveLoad/SaveLoad.cpp
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
@@ -107,6 +108,7 @@ list(APPEND GAME_HEADER
      Classes/About/AboutScene.h
      Classes/Options/OptionsScene.h
      Classes/Shop/ShopScene.h
+	 Classes/SaveLoad/SaveLoad.h
      )
 
 if(ANDROID)
