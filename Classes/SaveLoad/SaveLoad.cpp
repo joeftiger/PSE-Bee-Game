@@ -137,13 +137,16 @@ bool SaveLoad::fileExists(std::string filename) {
 }
 
 void SaveLoad::saveBeehives(std::vector<BeeHive> BeeHives) {
+	//different approach -> https://stackoverflow.com/questions/50728931/save-load-vector-of-object-using-rapidjson-c
 	rapidjson::Document d;
 	rapidjson::StringBuffer s;
 	Writer<rapidjson::StringBuffer> writer(s);
 	writer.StartObject();
+	
 
 	for (BeeHive b : BeeHives) {
-		//TODO: add actual implementation for saving
+		//TODO: add actual implementation for saving, add BeeHive.getPosition()
+		
 		writer.Key("Position");
 		writer.StartArray();
 		//writer.Int(b.getPosition().x)
