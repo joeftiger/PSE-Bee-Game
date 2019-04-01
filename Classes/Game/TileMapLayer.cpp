@@ -29,7 +29,7 @@ ssize_t TileMapLayer::getFlowerCount() {
 			auto coordinate = Vec2(x, y);
 			auto gid = layer->getTileGIDAt(coordinate);
 
-			if (gid == TileGID::flower) {
+			if (gid == TileGID::flower1 || gid == TileGID::flower2 || gid == TileGID::flower3 || gid == TileGID::flower4) {
 				count++;
 			}
 		}
@@ -37,9 +37,9 @@ ssize_t TileMapLayer::getFlowerCount() {
     return count;
 }
 
-std::vector<cocos2d::Sprite*> TileMapLayer::getBeeHives() {
+std::vector<cocos2d::Vec2> TileMapLayer::getBeeHives() {
     auto layer = _tileMap->getLayer("objects");
-    std::vector<cocos2d::Sprite *> beeHives;
+    std::vector<cocos2d::Vec2> beeHives;
 
     for (auto y = 0; y < layer->getLayerSize().height; y++) {
         for (auto x = 0; x < layer->getLayerSize().width; x++) {
@@ -47,7 +47,7 @@ std::vector<cocos2d::Sprite*> TileMapLayer::getBeeHives() {
             cocos2d::Sprite *tile = layer->getTileAt(coordinate);
 
             if (tile->getName() == BEE_HIVE) {
-                beeHives.push_back(tile);
+                beeHives.push_back(coordinate);
             }
         }
     }
@@ -107,7 +107,7 @@ Vec2 TileMapLayer::inTileMapBounds(Vec2 pos) {
 	}
 }
 
-void TileMapLayer::setTile(Vec2 position, TileGID gid) {
+void TileMapLayer::setTile(Vec2 position, int gid) {
 	auto layer = _tileMap->getLayer("objects");
-	layer->setTileGID(gid, getTilePosition(position)); //1 = flower; 2,3,4,5 = bush1,2,3,4; 6 = grass; 7 = road;
+	layer->setTileGID(gid, getTilePosition(position)); //1 = flower; 2,3,4,5 = bush1,2,3,4; 6 = grass; 7 = road
 }

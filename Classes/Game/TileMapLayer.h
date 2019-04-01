@@ -20,12 +20,18 @@ public:
 
     ssize_t getTreeCount();
     ssize_t getFlowerCount();
-    std::vector<cocos2d::Sprite*> getBeeHives();
+
+    /**
+     * Returns the positions of each beehive on the tile map.
+     * @return a list of beehive-positions
+     */
+    std::vector<Vec2> getBeeHives();
+
 	TMXTiledMap *getMap();
 
 	Vec2 getTilePosition(Vec2 pos);
 	Vec2 inTileMapBounds(Vec2 pos);
-	void setTile(Vec2 position, TileGID gid);
+	void setTile(Vec2 position, int gid);
 
 
     // implement the "static create()" method manually

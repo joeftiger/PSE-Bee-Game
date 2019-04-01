@@ -6,16 +6,18 @@
 #define PSE_BEE_GAME_BEEHIVE_H
 
 #include "cocos2d.h"
+#include "../HeaderFiles/Restorable.h"
 
 static const int MAX_BEES = 20000;
-static const float MAX_RAW_HONEY = 2000;
+static const float MAX_RAW_HONEY = 2000.0f;
 
-class BeeHive {
+class BeeHive : Restorable {
 private:
     int _beesAlive;
     int _varoaAlive;
-
     float _rawHoney;
+
+    cocos2d::Vec2 _position;
 
     bool invariant();
 
@@ -50,13 +52,18 @@ public:
      */
     bool isFull();
 
+    /**
+     * @return number of bees
+     */
     int beesAlive();
 
+    /**
+     * @return number of varoa
+     */
     int varoaAlive();
 
     /**
-     * Returns the total raw honey currently in the beehive.
-     * @return the total raw honey
+     * @return total raw honey
      */
     float rawHoney();
 
@@ -81,9 +88,24 @@ public:
     float takeRawHoney(float amount);
 
     /**
+     * @return position in the tilemap
+     */
+    cocos2d::Vec2 position();
+
+    /**
+     * Sets the position of the beehive.
+     * @param pos the position
+     */
+    void setPosition(cocos2d::Vec2 pos);
+
+    /**
      *
      */
     void update();
+
+    void toJSON(rapidjson::Document &doc) override;
+
+    void fromJSON(rapidjson::Document &doc) override;
 };
 
 #endif //PSE_BEE_GAME_BEEHIVE_H

@@ -68,7 +68,7 @@ add_subdirectory(${COCOS2DX_ROOT_PATH}/cocos ${ENGINE_BINARY_PATH}/cocos/core)
 
 # record sources, headers, resources...
 set(GAME_SOURCE)
-set(GAME_HEADER)
+set(GAME_HEADER Classes/HeaderFiles/Restorable.h)
 
 set(GAME_RES_FOLDER
     "${CMAKE_CURRENT_SOURCE_DIR}/Resources"
@@ -79,34 +79,38 @@ endif()
 
 # add cross-platforms source files and header files 
 list(APPEND GAME_SOURCE
-     Classes/AppDelegate.cpp
-     Classes/Game/GameScene.cpp
-     Classes/Story/StoryScene.cpp
-     Classes/Game/HUDLayer.cpp
-     Classes/MainMenu/MainMenuScene.cpp
-     Classes/Game/TileMapLayer.cpp
-     Classes/Game/BeeHive.cpp
-     Classes/Game/Player.cpp
-     Classes/Game/BeeHiveAtlas.cpp
-     Classes/About/AboutScene.cpp
-     Classes/Options/OptionsScene.cpp
-     Classes/Shop/ShopScene.cpp
+        Classes/AppDelegate.cpp
+        Classes/Game/GameScene.cpp
+        Classes/Story/StoryScene.cpp
+        Classes/Game/HUDLayer.cpp
+        Classes/MainMenu/MainMenuScene.cpp
+        Classes/Game/TileMapLayer.cpp
+        Classes/Game/BeeHive.cpp
+        Classes/Game/Player.cpp
+        Classes/Game/BeeHiveAtlas.cpp
+        Classes/About/AboutScene.cpp
+        Classes/Options/OptionsScene.cpp
+        Classes/Shop/ShopScene.cpp
+        Classes/SaveLoad/SaveLoad.cpp
+        Classes/Game/TouchUtil.cpp
      )
 list(APPEND GAME_HEADER
-     Classes/AppDelegate.h
-     Classes/Game/GameScene.h
-     Classes/Story/StoryScene.h
-     Classes/Game/HUDLayer.h
-     Classes/MainMenu/MainMenuScene.h
-     Classes/Game/TileMapLayer.h
-     Classes/Game/BeeHive.h
-     Classes/Game/Player.h
-     Classes/Observer.h
-     Classes/Observable.h
-     Classes/Game/BeeHiveAtlas.h
-     Classes/About/AboutScene.h
-     Classes/Options/OptionsScene.h
-     Classes/Shop/ShopScene.h
+        Classes/AppDelegate.h
+        Classes/Game/GameScene.h
+        Classes/Story/StoryScene.h
+        Classes/Game/HUDLayer.h
+        Classes/MainMenu/MainMenuScene.h
+        Classes/Game/TileMapLayer.h
+        Classes/Game/BeeHive.h
+        Classes/Game/Player.h
+        Classes/Observer.h
+        Classes/Observable.h
+        Classes/Game/BeeHiveAtlas.h
+        Classes/About/AboutScene.h
+        Classes/Options/OptionsScene.h
+        Classes/Shop/ShopScene.h
+        Classes/SaveLoad/SaveLoad.h
+        Classes/Game/TouchUtil.h
      )
 
 if(ANDROID)
@@ -165,7 +169,7 @@ endif()
 set(all_code_files
     ${GAME_HEADER}
     ${GAME_SOURCE}
-    )
+        Classes/Game/ItemPanelLayer.cpp Classes/Game/ItemPanelLayer.h Classes/HeaderFiles/Restorable.h)
 if(NOT ANDROID)
     add_executable(${APP_NAME} ${all_code_files})
 else()

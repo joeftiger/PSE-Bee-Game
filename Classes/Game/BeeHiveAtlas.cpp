@@ -14,10 +14,10 @@ BeeHiveAtlas *BeeHiveAtlas::getInstance() {
 	return _instance;
 }
 
-void BeeHiveAtlas::getBeeHives(std::vector<BeeHive *> *beeHive) {
-	beeHive->clear();
-	for (auto link : _tileHiveLinks) {
-		beeHive->push_back(link->beeHive);
+void BeeHiveAtlas::getBeeHives(std::vector<BeeHive *> *beeHives) {
+	beeHives->clear();
+	for (auto bh : _beeHives) {
+		beeHives->push_back(bh);
 	}
 }
 
@@ -25,46 +25,31 @@ void BeeHiveAtlas::notify(void *observable) {
 	// not a TileMapLayer
 	if (typeid(TileMapLayer*) != typeid(observable)) return;
 
-	auto *layer = (TileMapLayer *) observable;
-	auto hiveSprites = layer->getBeeHives();
-
+	auto layer = (TileMapLayer *) observable;
+	auto positions = layer->getBeeHives();
 	bool notifyObservers = false;
 
-	// remove redundant hives
-	for (auto sprite : hiveSprites) {
-		int pos = -1;
+	// add missing beehives
+	for (const auto &pos : positions) {
+		auto index = -1;
 
-		// do we already have the hive?
-		for (int i = 0; i < _tileHiveLinks.size(); i++) {
-			pos = i;
-			if (sprite == _tileHiveLinks[i]->beeHiveSprite) {
-				pos = -1;
+		// do we have a hive with that position?
+		for (auto i = 0; i < _beeHives.size(); i++) {
+			index = i;
+
+			// hive exists
+			if (pos == _beeHives[i]->position()) {
+				index = -1;
 				break;
 			}
 		}
 
-		if (pos != -1) {
-			auto t = _tileHiveLinks[pos];
-			_tileHiveLinks.erase(_tileHiveLinks.begin() + pos);
-			delete t;   // delete object from memory
-			notifyObservers = true;
-		}
-	}
+		// create bee hive
+		if (index != -1) {
+			auto hive = new BeeHive;
+			hive->setPosition(pos);
+			_beeHives.push_back(hive);
 
-	// add missing hives
-	for (auto sprite : hiveSprites) {
-		bool hasHive = false;
-
-		// do we already have the hive?
-		for (auto link : _tileHiveLinks) {
-			if (sprite == link->beeHiveSprite) {
-				hasHive = true;
-				break;
-			}
-		}
-
-		if (!hasHive) {
-			_tileHiveLinks.push_back(new TileHiveLink{sprite, new BeeHive() });
 			notifyObservers = true;
 		}
 	}
