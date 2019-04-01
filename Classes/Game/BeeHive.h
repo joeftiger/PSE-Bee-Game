@@ -15,8 +15,9 @@ class BeeHive : Restorable {
 private:
     int _beesAlive;
     int _varoaAlive;
-
     float _rawHoney;
+
+    cocos2d::Vec2 _position;
 
     bool invariant();
 
@@ -51,13 +52,18 @@ public:
      */
     bool isFull();
 
+    /**
+     * @return number of bees
+     */
     int beesAlive();
 
+    /**
+     * @return number of varoa
+     */
     int varoaAlive();
 
     /**
-     * Returns the total raw honey currently in the beehive.
-     * @return the total raw honey
+     * @return total raw honey
      */
     float rawHoney();
 
@@ -80,6 +86,11 @@ public:
      * @throws std::out_of_range() if amount is an invalid value
      */
     float takeRawHoney(float amount);
+
+    /**
+     * @return position in the tilemap
+     */
+    cocos2d::Vec2 position();
 
     /**
      *

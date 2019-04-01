@@ -76,11 +76,17 @@ void BeeHive::update() {
     assert(invariant());
 }
 
+cocos2d::Vec2 BeeHive::position() {
+    return _position;
+}
+
 void BeeHive::toJSON(rapidjson::Document &doc) {
     doc.SetObject();
     doc.AddMember("_beesAlive", _beesAlive, doc.GetAllocator());
     doc.AddMember("_varoaAlive", _varoaAlive, doc.GetAllocator());
     doc.AddMember("_rawHoney", _rawHoney, doc.GetAllocator());
+    doc.AddMember("_posX", int(_position.x), doc.GetAllocator());
+    doc.AddMember("_posY", int(_position.y), doc.GetAllocator());
 }
 
 void BeeHive::fromJSON(rapidjson::Document &doc) {
@@ -92,4 +98,10 @@ void BeeHive::fromJSON(rapidjson::Document &doc) {
 
     assert(doc["_rawHoney"].IsFloat());
     _rawHoney = doc["_rawHoney"].GetFloat();
+
+    assert(doc["_posX"].IsInt());
+    _position.x = doc["_posX"].GetInt();
+
+    assert(doc["_posY"].IsInt());
+    _position.y = doc["_posY"].GetInt();
 }
