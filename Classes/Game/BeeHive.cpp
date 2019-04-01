@@ -75,3 +75,21 @@ void BeeHive::update() {
     }
     assert(invariant());
 }
+
+void BeeHive::toJSON(rapidjson::Document &doc) {
+    doc.SetObject();
+    doc.AddMember("_beesAlive", _beesAlive, doc.GetAllocator());
+    doc.AddMember("_varoaAlive", _varoaAlive, doc.GetAllocator());
+    doc.AddMember("_rawHoney", _rawHoney, doc.GetAllocator());
+}
+
+void BeeHive::fromJSON(rapidjson::Document &doc) {
+    assert(doc[_beesAlive].IsInt());
+    _beesAlive = doc["_beesAlive"].GetInt();
+
+    assert(doc["_varoaAlive"].IsInt());
+    _varoaAlive = doc["_varoaAlive"].GetInt();
+
+    assert(doc["_rawHoney"].IsFloat());
+    _rawHoney = doc["_rawHoney"].GetFloat();
+}
