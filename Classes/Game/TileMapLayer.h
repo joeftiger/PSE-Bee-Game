@@ -20,7 +20,13 @@ public:
 
     ssize_t getTreeCount();
     ssize_t getFlowerCount();
-    std::vector<cocos2d::Sprite*> getBeeHives();
+
+    /**
+     * Returns the positions of each beehive on the tile map.
+     * @return a list of beehive-positions
+     */
+    std::vector<Vec2> getBeeHives();
+
 	TMXTiledMap *getMap();
 
 	Vec2 getTilePosition(Vec2 pos);

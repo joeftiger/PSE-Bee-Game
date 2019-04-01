@@ -37,9 +37,9 @@ ssize_t TileMapLayer::getFlowerCount() {
     return count;
 }
 
-std::vector<cocos2d::Sprite*> TileMapLayer::getBeeHives() {
+std::vector<cocos2d::Vec2> TileMapLayer::getBeeHives() {
     auto layer = _tileMap->getLayer("objects");
-    std::vector<cocos2d::Sprite *> beeHives;
+    std::vector<cocos2d::Vec2> beeHives;
 
     for (auto y = 0; y < layer->getLayerSize().height; y++) {
         for (auto x = 0; x < layer->getLayerSize().width; x++) {
@@ -47,7 +47,7 @@ std::vector<cocos2d::Sprite*> TileMapLayer::getBeeHives() {
             cocos2d::Sprite *tile = layer->getTileAt(coordinate);
 
             if (tile->getName() == BEE_HIVE) {
-                beeHives.push_back(tile);
+                beeHives.push_back(coordinate);
             }
         }
     }
