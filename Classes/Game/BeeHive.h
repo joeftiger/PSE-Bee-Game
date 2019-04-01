@@ -93,6 +93,12 @@ public:
     cocos2d::Vec2 position();
 
     /**
+     * Sets the position of the beehive.
+     * @param pos the position
+     */
+    void setPosition(cocos2d::Vec2 pos);
+
+    /**
      *
      */
     void update();

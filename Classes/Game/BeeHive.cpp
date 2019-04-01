@@ -80,6 +80,10 @@ cocos2d::Vec2 BeeHive::position() {
     return _position;
 }
 
+void BeeHive::setPosition(cocos2d::Vec2 pos) {
+    _position.x = pos.x;
+    _position.y = pos.y;
+}
 void BeeHive::toJSON(rapidjson::Document &doc) {
     doc.SetObject();
     doc.AddMember("_beesAlive", _beesAlive, doc.GetAllocator());
@@ -105,3 +109,4 @@ void BeeHive::fromJSON(rapidjson::Document &doc) {
     assert(doc["_posY"].IsInt());
     _position.y = doc["_posY"].GetInt();
 }
+
