@@ -3,7 +3,6 @@
 //
 
 #include "AboutScene.h"
-#include "MainMenu/MainMenuScene.h"
 
 using namespace cocos2d;
 
