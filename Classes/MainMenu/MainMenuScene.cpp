@@ -1,6 +1,6 @@
 
 #include "MainMenuScene.h"
-#include "Game/Container.h"
+#include "Game/GameScene.h"
 
 cocos2d::Scene * MainMenu::scene()
 {
@@ -75,7 +75,7 @@ bool MainMenu::init()
 void MainMenu::onPlayClick(cocos2d::Ref * sender)
 {
 	auto gameScene = Scene::create();
-	gameScene->addChild(Container::createScene());
+	gameScene->addChild(GameScene::createScene());
 	Director::getInstance()->replaceScene(TransitionFade::create(0.6f, gameScene, Color3B(255,165,0)));
 }
 

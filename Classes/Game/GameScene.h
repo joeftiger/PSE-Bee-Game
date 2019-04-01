@@ -12,7 +12,7 @@
 
 using namespace cocos2d;
 
-class GameScene: public cocos2d::Layer, public TouchUtil
+class GameScene: public cocos2d::Scene, public TouchUtil
 {
 private:
     Size visibleSize;
@@ -28,7 +28,7 @@ private:
     ItemPanelLayer *_itemPanel;
 
 public:
-    static cocos2d::Layer* createScene();
+    static cocos2d::Scene* createScene();
 	virtual bool init();
 
     bool onTouchBegan(Touch *touch, Event *event);
@@ -37,8 +37,6 @@ public:
 
     void touchOnItemPanel();
     void ShowHideItemPanel();
-
-    void setCamera(Camera *c);
     
     // implement the "static create()" method manually
     CREATE_FUNC(GameScene);
