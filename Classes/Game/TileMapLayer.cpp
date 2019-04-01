@@ -29,7 +29,7 @@ ssize_t TileMapLayer::getFlowerCount() {
 			auto coordinate = Vec2(x, y);
 			auto gid = layer->getTileGIDAt(coordinate);
 
-			if (gid == TileGID::flower1 || gid == TileGID::flower2 || gid == TileGID::flower3 || gid == TileGID::flower4) {
+			if (gid == TileGID::flower) {
 				count++;
 			}
 		}
