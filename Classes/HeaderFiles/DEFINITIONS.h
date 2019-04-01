@@ -5,7 +5,7 @@
 #define HUD_PRIORITY 10
 
 
-#define MAP_SCALE 0.66f
+#define MAP_SCALE 0.2f
 
 #define UPDATE_TIME 0.01f
 #define TEXT_SIZE_HUD 20

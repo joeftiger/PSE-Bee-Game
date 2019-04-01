@@ -23,7 +23,7 @@ void TouchUtil::setDrag(Point screenTouch, Point layerTouch) {
             drag = Sprite::create(name);
             drag->setPosition(screenTouch);
             drag->setTag(sprite->getTag());
-            drag->setScale(MAP_SCALE / 2);
+            drag->setScale(MAP_SCALE);
             drag->setAnchorPoint(Vec2(0.5f, 0));
         }
     }
@@ -33,10 +33,10 @@ Sprite *TouchUtil::getDrag() {
     return drag;
 }
 
-void TouchUtil::addToSpriteList(string name, Vec2 pos, int tag) {
+void TouchUtil::addToSpriteList(string name, Vec2 pos, int tag, Size scale) {
     auto sprite = Sprite::create(name);
     sprite->setTag(tag);
-    sprite->setScale(0.2f);
+    sprite->setScale(scale.width/(sprite->getBoundingBox().size.width*3));
     sprite->setAnchorPoint(Vec2(0,0));
     sprite->setPosition(Vec2(pos.x, pos.y));
     spriteList.push_back(sprite);
