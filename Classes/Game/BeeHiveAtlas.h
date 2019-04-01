@@ -12,14 +12,8 @@
 
 class BeeHiveAtlas : public Observable, public Observer {
 private:
-	struct TileHiveLink {
-		cocos2d::Sprite *beeHiveSprite;
-		BeeHive *beeHive;
-	};
-
 	static BeeHiveAtlas *_instance;
-
-	std::vector<TileHiveLink*> _tileHiveLinks;
+	std::vector<BeeHive*> _beeHives;
 
 public:
 	static BeeHiveAtlas *getInstance();
@@ -28,7 +22,7 @@ public:
 	 * Stores pointers to beehives in the specified vector.
 	 * @param beeHive container for beehive pointers
 	 */
-	void getBeeHives(std::vector<BeeHive *> *beeHive);
+	void getBeeHives(std::vector<BeeHive *> *beeHives);
 
 	/**
 	 * Notifies this BeeHiveAtlas, that the observable has been changed.
