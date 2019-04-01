@@ -17,8 +17,9 @@ Scene* GameScene::createScene()
 bool GameScene::init()
 {
     if ( !Scene::init()) return false;
-
+    
 	Size visibleSize = Director::getInstance()->getWinSize();
+	Director::getInstance()->setClearColor(Color4F(0.5,0.73,0.14,1));
 
     // Touch Event Listener
     auto listener = EventListenerTouchOneByOne::create();
