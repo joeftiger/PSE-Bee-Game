@@ -22,6 +22,7 @@ void BeeHiveAtlas::getBeeHives(std::vector<BeeHive *> *beeHives) {
 }
 
 void BeeHiveAtlas::notify(void *observable) {
+    cocos2d::log("BeeHiveAtlas:\tBeing notified...");
 	// not a TileMapLayer
 	if (typeid(TileMapLayer*) != typeid(observable)) return;
 
@@ -53,6 +54,8 @@ void BeeHiveAtlas::notify(void *observable) {
 			notifyObservers = true;
 		}
 	}
+
+	cocos2d::log("BeeHiveAtlas:\tHaving %zu beehives.", _beeHives.size());
 
 	if (notifyObservers) {
 		this->notifyObservers();
