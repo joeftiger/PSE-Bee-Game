@@ -6,7 +6,7 @@
 #define PSE_BEE_GAME_PLAYER_H
 
 #include <vector>
-#include <Shop/Items.h>
+#include <HeaderFiles/TileGID.h>
 #include "BeeHive.h"
 #include "Observer.h"
 #include "Observable.h"
@@ -15,7 +15,7 @@ class Player : public Observer, public Observable {
 private:
     static Player *_instance;
     std::vector<BeeHive *> *_beeHives;
-    std::unordered_map<Items, size_t> *_inventory;
+    std::unordered_map<TileGID, size_t> *_inventory;
 
     Player() = default;
     Player(const Player&);
@@ -36,7 +36,7 @@ public:
      * Returns the item inventory of the player.
      * @return the inventory
      */
-    std::unordered_map<Items, size_t> *getInventory();
+    std::unordered_map<TileGID, size_t> *getInventory();
 
     /**
      * Notifies this player, that the beehives have changed.

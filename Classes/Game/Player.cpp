@@ -22,7 +22,7 @@ Player *Player::getInstance() {
 
 float Player::TotalRawHoney() {
     float total = 0.0f;
-    for (BeeHive *bh : _beeHives) {
+    for (auto bh : *_beeHives) {
         total += bh->rawHoney();
     }
     return total;
@@ -32,6 +32,6 @@ void Player::notify(void *pVoid) {
 	BeeHiveAtlas::getInstance()->getBeeHives(_beeHives);
 }
 
-std::unordered_map<Items, size_t> *Player::getInventory() {
+std::unordered_map<TileGID, size_t> *Player::getInventory() {
     return _inventory;
 }
