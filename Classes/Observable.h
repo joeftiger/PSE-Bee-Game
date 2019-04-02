@@ -17,7 +17,7 @@ protected:
 	/**
 	 * Should notify all observers of a change in this observable.
 	 */
-	const virtual void notifyObservers() {
+	const void notifyObservers() {
 		for (auto o : _observers) {
 			o->notify(this);
 		}
@@ -32,6 +32,7 @@ public:
 	std::vector<Observer *> *observers() {
 		return &_observers;
 	}
+
 	/**
 	 * Adds the specified observer to the list of observers.
 	 * @param observer the subscribing observer
