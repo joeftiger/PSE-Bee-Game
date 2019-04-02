@@ -23,6 +23,8 @@ void BeeHiveAtlas::getBeeHives(std::vector<BeeHive *> *beeHives) {
 
 void BeeHiveAtlas::notify(void *observable) {
     cocos2d::log("BeeHiveAtlas:\tBeing notified...");
+    //FIXME: Only gets notified. observable does not seem to be of type TileMapLayer
+
 	// not a TileMapLayer
 	if (typeid(TileMapLayer*) != typeid(observable)) return;
 
