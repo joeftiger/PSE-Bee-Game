@@ -2,7 +2,6 @@
 #include <HeaderFiles/CHILD_NAMES.h>
 #include "TileMapLayer.h"
 #include "HeaderFiles/DEFINITIONS.h"
-#include "HeaderFiles/TILE_NAMES.h"
 #include "HeaderFiles/TileGID.h"
 
 bool TileMapLayer::init() {
@@ -47,9 +46,11 @@ std::vector<cocos2d::Vec2> TileMapLayer::getBeeHives() {
     for (auto y = 0; y < layer->getLayerSize().height; y++) {
         for (auto x = 0; x < layer->getLayerSize().width; x++) {
             auto coordinate = Vec2(x, y);
-            cocos2d::Sprite *tile = layer->getTileAt(coordinate);
+            auto gid = layer->getTileGIDAt(coordinate);
 
-            if (tile->getName() == BEE_HIVE) {
+            if (gid == beehiveSmall ||
+            	gid == beehiveMiddle ||
+            	gid == beehiveBig) {
                 beeHives.push_back(coordinate);
             }
         }
