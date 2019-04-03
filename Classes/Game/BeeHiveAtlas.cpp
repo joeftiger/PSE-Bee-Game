@@ -2,6 +2,7 @@
 // Created by julius on 25.03.19.
 //
 
+#include <HeaderFiles/CHILD_NAMES.h>
 #include "BeeHiveAtlas.h"
 #include "TileMapLayer.h"
 
@@ -14,44 +15,39 @@ BeeHiveAtlas *BeeHiveAtlas::getInstance() {
 	return _instance;
 }
 
-void BeeHiveAtlas::getBeeHives(std::vector<BeeHive *> *beeHives) {
-	beeHives->clear();
-	for (auto bh : _beeHives) {
-		beeHives->push_back(bh);
+void BeeHiveAtlas::getBeeHives(std::vector<std::reference_wrapper<BeeHive>> &beeHives) {
+	beeHives.clear();
+	for (BeeHive &bh : _beeHives) {
+		beeHives.emplace_back(bh);
 	}
 }
 
 void BeeHiveAtlas::notify(void *observable) {
     cocos2d::log("BeeHiveAtlas:\tBeing notified...");
-    //FIXME: Only gets notified. observable does not seem to be of type TileMapLayer
+    // FIXME: Only gets notified. observable does not seem to be of type TileMapLayer
 
 	// not a TileMapLayer
-	if (typeid(TileMapLayer*) != typeid(observable)) return;
-
-	auto layer = (TileMapLayer *) observable;
+	auto layer = (TileMapLayer*) cocos2d::Director::getInstance()->getRunningScene()->getChildByName(TILE_MAP_LAYER_NAME);
 	auto positions = layer->getBeeHives();
 	bool notifyObservers = false;
 
 	// add missing beehives
 	for (const auto &pos : positions) {
-		auto index = -1;
+		auto hasHive = false;
 
 		// do we have a hive with that position?
-		for (auto i = 0; i < _beeHives.size(); i++) {
-			index = i;
-
-			// hive exists
-			if (pos == _beeHives[i]->position()) {
-				index = -1;
+		for (BeeHive &bh : _beeHives) {
+			if (pos == bh.position()) {
+				hasHive = true;
 				break;
 			}
 		}
 
 		// create bee hive
-		if (index != -1) {
-			auto hive = new BeeHive;
-			hive->setPosition(pos);
-			_beeHives.push_back(hive);
+		if (!hasHive) {
+			BeeHive hive;
+			hive.setPosition(pos);
+			_beeHives.emplace_back(hive);
 
 			notifyObservers = true;
 		}

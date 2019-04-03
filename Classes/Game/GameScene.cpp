@@ -39,7 +39,7 @@ bool GameScene::init()
 
     // TileMapAtlas and observe TileMap
     auto tileMapAtlas = BeeHiveAtlas::getInstance();
-	_tileMapLayer->subscribe(tileMapAtlas);
+	_tileMapLayer->subscribe(*tileMapAtlas);
 
 	//HUD Layer
 	_HUDLayer = HUDLayer::create();

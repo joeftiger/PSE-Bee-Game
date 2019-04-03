@@ -14,7 +14,7 @@
 class Player : public Observer, public Observable {
 private:
     static Player *_instance;
-    std::vector<BeeHive *> *_beeHives;
+    std::vector<std::reference_wrapper<BeeHive>> _beeHives;
     std::unordered_map<TileGID, size_t> *_inventory;
 
     Player() = default;
@@ -30,7 +30,7 @@ public:
      * Returns the total raw honey currently in the BeeHiveAtlas
      * @return
      */
-    float TotalRawHoney();
+    float totalRawHoney();
 
     /**
      * Returns the item inventory of the player.

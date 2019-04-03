@@ -1,4 +1,5 @@
 
+#include <HeaderFiles/CHILD_NAMES.h>
 #include "TileMapLayer.h"
 #include "HeaderFiles/DEFINITIONS.h"
 #include "HeaderFiles/TILE_NAMES.h"
@@ -12,6 +13,8 @@ bool TileMapLayer::init() {
     this->addChild(_tileMap, -1);
     _tileMap->setAnchorPoint(Point(0,0));
     _tileMap->setScale(MAP_SCALE);
+
+    this->setName(TILE_MAP_LAYER_NAME);
 
     return true;
 }
