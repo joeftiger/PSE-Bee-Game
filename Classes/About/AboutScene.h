@@ -7,6 +7,7 @@
 
 #include "MainMenu/MainMenuScene.h"
 #include "cocos2d.h"
+#include "ui/UIRichText.h"
 
 
 using namespace cocos2d;
