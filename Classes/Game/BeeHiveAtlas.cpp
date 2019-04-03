@@ -24,9 +24,7 @@ void BeeHiveAtlas::getBeeHives(std::vector<std::reference_wrapper<BeeHive>> &bee
 
 void BeeHiveAtlas::notify(void *observable) {
     cocos2d::log("BeeHiveAtlas:\tBeing notified...");
-    // FIXME: Only gets notified. observable does not seem to be of type TileMapLayer
 
-	// not a TileMapLayer
 	auto layer = (TileMapLayer*) cocos2d::Director::getInstance()->getRunningScene()->getChildByName(TILE_MAP_LAYER_NAME);
 	auto positions = layer->getBeeHives();
 	bool notifyObservers = false;
