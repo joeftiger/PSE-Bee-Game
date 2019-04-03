@@ -41,6 +41,9 @@ void BeeHiveAtlas::notify(void *observable) {
 			}
 		}
 
+		// FIXME: The BeeHiveAtlas adds beehives even though they already exist.
+		// The code looks fine to me though. I am confused.
+
 		// create bee hive
 		if (!hasHive) {
 			BeeHive hive;
