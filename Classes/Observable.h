@@ -51,11 +51,11 @@ public:
 	 * @param observer the unsubscribing observer
 	 */
 	const void unsubscribe(Observer &observer) {
-	    auto fun = [&observer](Observer &o) -> bool {
-            return &o == &observer;
+	    auto comparator = [&observer](Observer &element) -> bool {
+            return &element == &observer;
         };
-	    auto it = std::find_if(std::begin(_observers), std::end(_observers), fun);
-        _observers.erase(it);
+	    auto iterator = std::find_if(std::begin(_observers), std::end(_observers), comparator);
+	    _observers.erase(iterator);
 	}
 };
 
