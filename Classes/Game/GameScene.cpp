@@ -52,6 +52,16 @@ bool GameScene::init()
 
     this->addChild(_itemPanel);
 
+	std::vector<BeeHive> test;
+
+	BeeHive b = BeeHive();
+	b.setPosition(Vec2(1, 1));
+	BeeHive c = BeeHive();
+	c.setPosition(Vec2(1, 1));
+	test.push_back(b);
+	test.push_back(c);
+	SaveLoad::saveBeehive(test);
+
     return true;
 }
 

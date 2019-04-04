@@ -7,6 +7,7 @@
 #include "json/rapidjson.h"
 #include "json/istreamwrapper.h"
 #include "json/ostreamwrapper.h"
+#include "json/prettywriter.h"
 
 using namespace rapidjson;
 
@@ -161,6 +162,21 @@ void SaveLoad::saveBeehives(std::vector<BeeHive> BeeHives) {
 	d.Parse(s.GetString());
 	log("%s %s", "json1", s.GetString());
 	jsonToFile(jsonToString(d), getPath("beehives.json"));
+}
+
+void SaveLoad::saveBeehive(std::vector<BeeHive> BeeHives) {
+	rapidjson::Document doc;
+	rapidjson::StringBuffer jsonBuffer;
+	rapidjson::PrettyWriter<rapidjson::StringBuffer> jsonWriter(jsonBuffer);
+	doc.SetObject();
+	rapidjson::Document subDoc(&doc.GetAllocator());
+
+	for (BeeHive b : BeeHives) {
+		b.toJSON(subDoc);
+		doc.AddMember("BeeHive", subDoc, doc.GetAllocator());
+	}
+
+	doc.Accept(jsonWriter);
 }
 
 void SaveLoad::loadBeehives() {
