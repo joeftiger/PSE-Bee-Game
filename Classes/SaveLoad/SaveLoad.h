@@ -31,7 +31,7 @@ public:
 	static std::string jsonToString(rapidjson::Document & jsonObj);
 
 	static void saveBeehives(std::vector<BeeHive> BeeHives);
-	static void saveBeehive(std::vector<BeeHive> BeeHives);
+
 	static void loadBeehives();
 
 };

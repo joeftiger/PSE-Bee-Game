@@ -138,47 +138,47 @@ bool SaveLoad::fileExists(std::string filename) {
 }
 
 void SaveLoad::saveBeehives(std::vector<BeeHive> BeeHives) {
-	//different approach -> https://stackoverflow.com/questions/50728931/save-load-vector-of-object-using-rapidjson-c
-	rapidjson::Document d;
-	rapidjson::StringBuffer s;
-	Writer<rapidjson::StringBuffer> writer(s);
-	writer.StartObject();
-	
-
-	for (BeeHive b : BeeHives) {
-		//TODO: add actual implementation for saving, add BeeHive.getPosition()
-		
-		writer.Key("Position");
-		writer.StartArray();
-		//writer.Int(b.getPosition().x)
-		//writer.Int(b.getPosition().y)
-		writer.EndArray();
-		writer.Key("BeesAlive");
-		writer.Int(b.beesAlive());
-	}
-
-	writer.EndObject();
-
-	d.Parse(s.GetString());
-	log("%s %s", "json1", s.GetString());
-	jsonToFile(jsonToString(d), getPath("beehives.json"));
-}
-
-void SaveLoad::saveBeehive(std::vector<BeeHive> BeeHives) {
 	rapidjson::Document doc;
 	rapidjson::StringBuffer jsonBuffer;
 	rapidjson::PrettyWriter<rapidjson::StringBuffer> jsonWriter(jsonBuffer);
-	doc.SetObject();
-	rapidjson::Document subDoc(&doc.GetAllocator());
-
+	doc.SetArray();
+	assert(doc.IsArray());
 	for (BeeHive b : BeeHives) {
-		b.toJSON(subDoc);
-		doc.AddMember("BeeHive", subDoc, doc.GetAllocator());
+		b.toJSON(doc);
 	}
-
 	doc.Accept(jsonWriter);
+	jsonToFile(jsonToString(doc), getPath("beehives.json"));
 }
 
 void SaveLoad::loadBeehives() {
+	std::ifstream ifs(getPath("beehives.json"));
 
+	if (!ifs.is_open()) {
+		log("Couldnt load beehives");
+		return;
+	}
+	IStreamWrapper isw(ifs);
+	rapidjson::Document doc;
+	doc.ParseStream(isw);
+	
+	StringBuffer buffer;
+	Writer<StringBuffer> writer(buffer);
+	doc.Accept(writer);
+	log("%s %s", "loaded", buffer.GetString());
+
+	for (int i = 0; i < doc.Size(); i++) {
+		rapidjson::Document subDoc;
+		rapidjson::Value& data = doc[i];
+		subDoc.SetObject();
+		subDoc.AddMember("beehive", data, subDoc.GetAllocator());
+
+		StringBuffer buffer2;
+		Writer<StringBuffer> writer2(buffer2);
+		subDoc.Accept(writer2);
+		log("%s", buffer2.GetString());
+		BeeHive b = BeeHive();
+		b.fromJSON(subDoc);
+		
+		//log("%f %f", b.position().x, b.position().y);
+	}
 }
