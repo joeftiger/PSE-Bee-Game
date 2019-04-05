@@ -154,32 +154,30 @@ void SaveLoad::loadBeehives() {
 	std::ifstream ifs(getPath("beehives.json"));
 
 	if (!ifs.is_open()) {
-		log("Couldnt load beehives");
+		log("Couldn't load beehives");
 		return;
 	}
 	IStreamWrapper isw(ifs);
 	rapidjson::Document doc;
 	doc.ParseStream(isw);
 	
-	StringBuffer buffer;
-	Writer<StringBuffer> writer(buffer);
-	doc.Accept(writer);
-	log("%s %s", "loaded", buffer.GetString());
+	//StringBuffer buffer;
+	//Writer<StringBuffer> writer(buffer);
+	//doc.Accept(writer);
+	//log("%s %s", "loaded", buffer.GetString());
 
 	for (int i = 0; i < doc.Size(); i++) {
 		rapidjson::Document subDoc;
-		rapidjson::Value myArray(kArrayType);
 		rapidjson::Value& data = doc[i];
 		subDoc.SetObject();
-		myArray.PushBack(data, subDoc.GetAllocator());;
-		subDoc.AddMember("beehive", myArray, subDoc.GetAllocator());
+		subDoc.AddMember("beeHive", data, subDoc.GetAllocator());
 
-		StringBuffer buffer2;
-		Writer<StringBuffer> writer2(buffer2);
-		subDoc.Accept(writer2);
-
+		StringBuffer buffer;
+		Writer<StringBuffer> writer(buffer);
+		subDoc.Accept(writer);
+		log("BeeHive String %s", buffer.GetString());
 		BeeHive b = BeeHive();
 		b.fromJSON(subDoc);
-		//TODO: Add new beehives somewhere
+		//TODO: Add new beehives to list
 	}
 }

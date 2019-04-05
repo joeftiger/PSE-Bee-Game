@@ -95,25 +95,24 @@ void BeeHive::toJSON(rapidjson::Document &doc) {
 }
 
 void BeeHive::fromJSON(rapidjson::Document &doc) {
+	assert(doc.HasMember("beeHive"));
+	const rapidjson::Value& beeHive = doc["beeHive"];
 
-	const rapidjson::Value& beeHive = doc["beehive"];
-	assert(beeHive.IsArray());
-	const rapidjson::Value& data = beeHive[0];
+	//assert(beeHive.HasMember("_beesAlive"));
+	assert(beeHive.HasMember("_beesAlive") && beeHive["_beesAlive"].IsInt());
+	_beesAlive = beeHive["_beesAlive"].GetInt();
 
-    assert(data["_beesAlive"].IsInt());
-    _beesAlive = data["_beesAlive"].GetInt();
+	assert(beeHive["_varoaAlive"].IsInt());
+	_beesAlive = beeHive["_varoaAlive"].GetInt();
 
-    assert(data["_varoaAlive"].IsInt());
-    _varoaAlive = data["_varoaAlive"].GetInt();
+	assert(beeHive["_rawHoney"].IsFloat());
+	_rawHoney = beeHive["_rawHoney"].GetFloat();
 
-    assert(data["_rawHoney"].IsFloat());
-    _rawHoney = data["_rawHoney"].GetFloat();
+	assert(beeHive["_posX"].IsInt());
+	_position.x = beeHive["_posX"].GetInt();
 
-    assert(data["_posX"].IsInt());
-    _position.x = data["_posX"].GetInt();
-
-	assert(data["_posY"].IsInt());
-    _position.y = data["_posY"].GetInt();
+	assert(beeHive["_posY"].IsInt());
+	_position.y = beeHive["_posY"].GetInt();
 
 }
 
