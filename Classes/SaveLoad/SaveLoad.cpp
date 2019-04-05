@@ -168,17 +168,18 @@ void SaveLoad::loadBeehives() {
 
 	for (int i = 0; i < doc.Size(); i++) {
 		rapidjson::Document subDoc;
+		rapidjson::Value myArray(kArrayType);
 		rapidjson::Value& data = doc[i];
 		subDoc.SetObject();
-		subDoc.AddMember("beehive", data, subDoc.GetAllocator());
+		myArray.PushBack(data, subDoc.GetAllocator());;
+		subDoc.AddMember("beehive", myArray, subDoc.GetAllocator());
 
 		StringBuffer buffer2;
 		Writer<StringBuffer> writer2(buffer2);
 		subDoc.Accept(writer2);
-		log("%s", buffer2.GetString());
+
 		BeeHive b = BeeHive();
 		b.fromJSON(subDoc);
-		
-		//log("%f %f", b.position().x, b.position().y);
+		//TODO: Add new beehives somewhere
 	}
 }
