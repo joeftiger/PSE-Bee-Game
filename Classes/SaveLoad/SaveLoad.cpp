@@ -7,6 +7,7 @@
 #include "json/rapidjson.h"
 #include "json/istreamwrapper.h"
 #include "json/ostreamwrapper.h"
+#include "json/prettywriter.h"
 
 using namespace rapidjson;
 
@@ -137,32 +138,46 @@ bool SaveLoad::fileExists(std::string filename) {
 }
 
 void SaveLoad::saveBeehives(std::vector<BeeHive> BeeHives) {
-	//different approach -> https://stackoverflow.com/questions/50728931/save-load-vector-of-object-using-rapidjson-c
-	rapidjson::Document d;
-	rapidjson::StringBuffer s;
-	Writer<rapidjson::StringBuffer> writer(s);
-	writer.StartObject();
-	
-
+	rapidjson::Document doc;
+	rapidjson::StringBuffer jsonBuffer;
+	rapidjson::PrettyWriter<rapidjson::StringBuffer> jsonWriter(jsonBuffer);
+	doc.SetArray();
+	assert(doc.IsArray());
 	for (BeeHive b : BeeHives) {
-		//TODO: add actual implementation for saving, add BeeHive.getPosition()
-		
-		writer.Key("Position");
-		writer.StartArray();
-		//writer.Int(b.getPosition().x)
-		//writer.Int(b.getPosition().y)
-		writer.EndArray();
-		writer.Key("BeesAlive");
-		writer.Int(b.beesAlive());
+		b.toJSON(doc);
 	}
-
-	writer.EndObject();
-
-	d.Parse(s.GetString());
-	log("%s %s", "json1", s.GetString());
-	jsonToFile(jsonToString(d), getPath("beehives.json"));
+	doc.Accept(jsonWriter);
+	jsonToFile(jsonToString(doc), getPath("beehives.json"));
 }
 
 void SaveLoad::loadBeehives() {
+	std::ifstream ifs(getPath("beehives.json"));
 
+	if (!ifs.is_open()) {
+		log("Couldn't load beehives");
+		return;
+	}
+	IStreamWrapper isw(ifs);
+	rapidjson::Document doc;
+	doc.ParseStream(isw);
+	
+	//StringBuffer buffer;
+	//Writer<StringBuffer> writer(buffer);
+	//doc.Accept(writer);
+	//log("%s %s", "loaded", buffer.GetString());
+
+	for (int i = 0; i < doc.Size(); i++) {
+		rapidjson::Document subDoc;
+		rapidjson::Value& data = doc[i];
+		subDoc.SetObject();
+		subDoc.AddMember("beeHive", data, subDoc.GetAllocator());
+
+		StringBuffer buffer;
+		Writer<StringBuffer> writer(buffer);
+		subDoc.Accept(writer);
+		log("BeeHive String %s", buffer.GetString());
+		BeeHive b = BeeHive();
+		b.fromJSON(subDoc);
+		//TODO: Add new beehives to list
+	}
 }
