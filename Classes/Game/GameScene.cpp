@@ -62,10 +62,7 @@ bool GameScene::init()
 bool GameScene::onTouchBegan(Touch *touch, Event *event) {
 	_isTouched = true;
 	_touchPosition = touch->getLocation();
-	ShowHideItemPanel();
-	if(_isItemShow) {
-        touchOnItemPanel();
-	}
+	_itemPanel->showHideItemPanel(_touchPosition);
     return true;
 }
 
@@ -91,31 +88,6 @@ void GameScene::onTouchEnded(void *, void *) {
         _itemPanel->setIsDrag(false);
 	}
 	_isTouched = false;
-	_touchPosition = Point(0, 0);
-}
-
-void GameScene::touchOnItemPanel() {
-    if(_itemPanel->getBoundingBox().containsPoint(_touchPosition)) {
-        _itemPanel->setDrag(_touchPosition, _itemPanel->getPosition());
-        if(_itemPanel->isDrag()){
-            _itemPanel->addChild(_itemPanel->getDrag());
-        }
-    }
-}
-
-void GameScene::ShowHideItemPanel() {
-    if(_itemPanel->getShowRec()->getBoundingBox().containsPoint(_touchPosition - _itemPanel->getPosition())) {
-        if(_isItemShow) {
-            MoveBy *hide = MoveBy::create(0.2, Vec2(_itemPanel->getBoundingBox().size.width, 0));
-            _itemPanel->runAction(hide);
-            _isItemShow = false;
-
-        } else {
-            MoveBy *show = MoveBy::create(0.2, Vec2(-_itemPanel->getBoundingBox().size.width, 0));
-            _itemPanel->runAction(show);
-            _isItemShow = true;
-        }
-    }
 }
 
 

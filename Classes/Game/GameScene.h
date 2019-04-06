@@ -21,7 +21,6 @@ private:
 	HUDLayer *_HUDLayer;
 
     bool _isTouched;
-    bool _isItemShow = false;
     Node *container;
     Point _touchPosition;
     Point cameraTravel = Vec2(0,0);

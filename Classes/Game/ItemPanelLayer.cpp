@@ -64,3 +64,30 @@ void ItemPanelLayer::initializeItemPanel() {
 LayerColor* ItemPanelLayer::getShowRec() {
     return _showRec;
 }
+
+void ItemPanelLayer::showHideItemPanel(Point touchPos) {
+    if(this->getShowRec()->getBoundingBox().containsPoint(touchPos - this->getPosition())) {
+        if(_isItemShow) {
+            MoveBy *hide = MoveBy::create(0.2, Vec2(this->getBoundingBox().size.width, 0));
+            this->runAction(hide);
+            _isItemShow = false;
+
+        } else {
+            MoveBy *show = MoveBy::create(0.2, Vec2(-this->getBoundingBox().size.width, 0));
+            this->runAction(show);
+            _isItemShow = true;
+        }
+    }
+    if(_isItemShow) {
+        touchOnItemPanel(touchPos);
+    }
+}
+
+void ItemPanelLayer::touchOnItemPanel(Point touchPos) {
+    if(this->getBoundingBox().containsPoint(touchPos)) {
+        this->setDrag(touchPos, this->getPosition());
+        if(this->isDrag()){
+            this->addChild(this->getDrag());
+        }
+    }
+}
