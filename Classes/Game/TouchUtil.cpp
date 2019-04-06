@@ -20,7 +20,7 @@ void TouchUtil::setDrag(Point screenTouch, Point layerTouch) {
             auto name = sprite->getResourceName();
             _isDrag = true;
             drag = Sprite::create(name);
-            drag->setPosition(screenTouch);
+            drag->setPosition(screenTouch  - layerTouch);
             drag->setTag(sprite->getTag());
             drag->setScale(MAP_SCALE);
             drag->setAnchorPoint(Vec2(0.5f, 0));
@@ -54,4 +54,8 @@ void TouchUtil::addListTo(Scene *scene) {
     for(auto sprite : spriteList) {
         scene->addChild(sprite);
     }
+}
+
+void TouchUtil::setIsDrag(bool isDrag){
+    _isDrag = isDrag;
 }

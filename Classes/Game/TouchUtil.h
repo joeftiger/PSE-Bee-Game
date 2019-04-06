@@ -24,6 +24,7 @@ public:
     bool isDrag();
     void addListTo(Layer *layer); //overloading
     void addListTo(Scene *scene);
+    void setIsDrag(bool isDrag);
 };
 
 

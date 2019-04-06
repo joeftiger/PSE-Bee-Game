@@ -10,7 +10,7 @@
 
 using namespace cocos2d;
 
-class ItemPanelLayer: public LayerColor{
+class ItemPanelLayer: public LayerColor, public TouchUtil {
     private:
         LayerColor *_showRec;
 
@@ -18,7 +18,7 @@ class ItemPanelLayer: public LayerColor{
         static LayerColor *createLayer();
         virtual bool init();
 
-        void initializeItemPanel(TouchUtil *parent);
+        void initializeItemPanel();
         LayerColor* getShowRec();
 
         CREATE_FUNC(ItemPanelLayer);

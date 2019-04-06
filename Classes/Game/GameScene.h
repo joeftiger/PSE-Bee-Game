@@ -12,7 +12,7 @@
 
 using namespace cocos2d;
 
-class GameScene: public cocos2d::Scene, public TouchUtil
+class GameScene: public cocos2d::Scene
 {
 private:
     Size visibleSize;
@@ -22,6 +22,7 @@ private:
 
     bool _isTouched;
     bool _isItemShow = false;
+    Node *container;
     Point _touchPosition;
     Point cameraTravel = Vec2(0,0);
 
