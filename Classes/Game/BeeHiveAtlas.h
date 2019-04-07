@@ -10,7 +10,7 @@
 #include "Observer.h"
 #include "TileMapLayer.h"
 
-class BeeHiveAtlas : public Observable, public Observer {
+class BeeHiveAtlas : public cocos2d::Node, public Observable, public Observer {
 private:
 	static BeeHiveAtlas *_instance;
 	std::vector <BeeHive> _beeHives;
@@ -22,7 +22,7 @@ public:
 	 * Stores pointers to beehives in the specified vector.
 	 * @param beeHive container for beehive pointers
 	 */
-	void getBeeHives(std::vector <std::reference_wrapper<BeeHive>> &beeHives);
+	void getBeeHives(std::vector <BeeHive> &beeHives);
 
 	/**
 	 * Notifies this BeeHiveAtlas, that the observable has been changed.
@@ -30,6 +30,8 @@ public:
 	 * @param observable
 	 */
 	void notify(void *observable) override;
+
+	void update(float dt);
 };
 
 #endif //PSE_BEE_GAME_BEEHIVEATLAS_H

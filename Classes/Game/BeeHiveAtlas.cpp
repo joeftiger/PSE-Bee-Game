@@ -11,11 +11,12 @@ BeeHiveAtlas *BeeHiveAtlas::_instance = nullptr;
 BeeHiveAtlas *BeeHiveAtlas::getInstance() {
 	if (!_instance) {
 		_instance = new BeeHiveAtlas;
+		_instance->schedule(schedule_selector(BeeHiveAtlas::update), 1);
 	}
 	return _instance;
 }
 
-void BeeHiveAtlas::getBeeHives(std::vector <std::reference_wrapper<BeeHive>> &beeHives) {
+void BeeHiveAtlas::getBeeHives(std::vector <BeeHive> &beeHives) {
 	beeHives.clear();
 	for (BeeHive &bh : _beeHives) {
 		beeHives.emplace_back(bh);
@@ -59,5 +60,12 @@ void BeeHiveAtlas::notify(void *observable) {
 
 	if (notifyObservers) {
 		this->notifyObservers();
+	}
+}
+
+void BeeHiveAtlas::update(float dt) {
+	cocos2d::log("%f", dt);
+	for (auto bh : _beeHives) {
+		bh.update();
 	}
 }
