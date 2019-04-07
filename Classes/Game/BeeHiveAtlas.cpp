@@ -11,6 +11,8 @@ BeeHiveAtlas *BeeHiveAtlas::_instance = nullptr;
 BeeHiveAtlas *BeeHiveAtlas::getInstance() {
 	if (!_instance) {
 		_instance = new BeeHiveAtlas;
+
+		// FIXME: The scheduler apparently does not run, as BeeHiveAtlas::update is never called!
 		_instance->schedule(schedule_selector(BeeHiveAtlas::update), 1.0f);
 	}
 	return _instance;
