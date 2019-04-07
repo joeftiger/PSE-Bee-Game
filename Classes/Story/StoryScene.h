@@ -7,14 +7,14 @@
 
 using namespace cocos2d;
 
-class StoryScene: public cocos2d::Scene {
+class StoryScene : public cocos2d::Scene {
 
 public:
-    static cocos2d::Scene* createScene();
+	static cocos2d::Scene *createScene();
 
-    virtual bool init();
+	virtual bool init();
 
-    CREATE_FUNC(StoryScene);
+	CREATE_FUNC(StoryScene);
 
 };
 

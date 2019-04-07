@@ -15,7 +15,7 @@ BeeHiveAtlas *BeeHiveAtlas::getInstance() {
 	return _instance;
 }
 
-void BeeHiveAtlas::getBeeHives(std::vector<std::reference_wrapper<BeeHive>> &beeHives) {
+void BeeHiveAtlas::getBeeHives(std::vector <std::reference_wrapper<BeeHive>> &beeHives) {
 	beeHives.clear();
 	for (BeeHive &bh : _beeHives) {
 		beeHives.emplace_back(bh);
@@ -23,9 +23,10 @@ void BeeHiveAtlas::getBeeHives(std::vector<std::reference_wrapper<BeeHive>> &bee
 }
 
 void BeeHiveAtlas::notify(void *observable) {
-    cocos2d::log("BeeHiveAtlas:\tBeing notified...");
+	cocos2d::log("BeeHiveAtlas:\tBeing notified...");
 
-	auto layer = (TileMapLayer*) cocos2d::Director::getInstance()->getRunningScene()->getChildByName(TILE_MAP_LAYER_NAME);
+	auto layer = (TileMapLayer *) cocos2d::Director::getInstance()->getRunningScene()->getChildByName(
+			TILE_MAP_LAYER_NAME);
 	auto positions = layer->getBeeHives();
 	bool notifyObservers = false;
 

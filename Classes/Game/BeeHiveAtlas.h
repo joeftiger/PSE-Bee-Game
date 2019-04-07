@@ -13,7 +13,7 @@
 class BeeHiveAtlas : public Observable, public Observer {
 private:
 	static BeeHiveAtlas *_instance;
-	std::vector<std::reference_wrapper<BeeHive>> _beeHives;
+	std::vector <std::reference_wrapper<BeeHive>> _beeHives;
 
 public:
 	static BeeHiveAtlas *getInstance();
@@ -22,7 +22,7 @@ public:
 	 * Stores pointers to beehives in the specified vector.
 	 * @param beeHive container for beehive pointers
 	 */
-	void getBeeHives(std::vector<std::reference_wrapper<BeeHive>> &beeHives);
+	void getBeeHives(std::vector <std::reference_wrapper<BeeHive>> &beeHives);
 
 	/**
 	 * Notifies this BeeHiveAtlas, that the observable has been changed.

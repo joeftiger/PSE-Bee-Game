@@ -13,34 +13,36 @@
 
 class Player : public Observer, public Observable {
 private:
-    static Player *_instance;
-    std::vector<std::reference_wrapper<BeeHive>> _beeHives;
-    std::unordered_map<TileGID, size_t> *_inventory;
+	static Player *_instance;
+	std::vector <std::reference_wrapper<BeeHive>> _beeHives;
+	std::unordered_map <TileGID, size_t> *_inventory;
 
-    Player() = default;
-    Player(const Player&);
-    ~Player() = default;
+	Player() = default;
 
-    bool invariant();
+	Player(const Player &);
+
+	~Player() = default;
+
+	bool invariant();
 
 public:
-    static Player* getInstance();
+	static Player *getInstance();
 
-    /**
-     * @return the total raw honey currently in the BeeHiveAtlas
-     */
-    float totalRawHoney();
+	/**
+	 * @return the total raw honey currently in the BeeHiveAtlas
+	 */
+	float totalRawHoney();
 
-    /**
-     * Returns the item inventory of the player.
-     * @return the inventory
-     */
-    std::unordered_map<TileGID, size_t> *getInventory();
+	/**
+	 * Returns the item inventory of the player.
+	 * @return the inventory
+	 */
+	std::unordered_map <TileGID, size_t> *getInventory();
 
-    /**
-     * Notifies this player, that the beehives have changed.
-     * @param pVoid
-     */
+	/**
+	 * Notifies this player, that the beehives have changed.
+	 * @param pVoid
+	 */
 	void notify(void *pVoid) override;
 };
 

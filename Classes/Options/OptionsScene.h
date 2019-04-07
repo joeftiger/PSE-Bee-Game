@@ -11,20 +11,19 @@
 
 using namespace cocos2d;
 
-class OptionsScene : public cocos2d::Scene
-{
+class OptionsScene : public cocos2d::Scene {
 private:
 
 	float onePofScreenH;
-    float onePofScreenW;
+	float onePofScreenW;
 
 public:
-    static cocos2d::Scene* createScene();
+	static cocos2d::Scene *createScene();
 
-    virtual bool init();
+	virtual bool init();
 
-    // implement the "static create()" method manually
-    CREATE_FUNC(OptionsScene);
+	// implement the "static create()" method manually
+	CREATE_FUNC(OptionsScene);
 };
 
 

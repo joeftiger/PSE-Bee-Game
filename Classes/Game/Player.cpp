@@ -9,7 +9,7 @@
 Player *Player::_instance = nullptr;
 
 bool Player::invariant() {
-    return true;
+	return true;
 }
 
 Player *Player::getInstance() {
@@ -21,17 +21,17 @@ Player *Player::getInstance() {
 }
 
 float Player::totalRawHoney() {
-    float total = 0.0f;
-    for (BeeHive &bh : _beeHives) {
-        total += bh.rawHoney();
-    }
-    return total;
+	float total = 0.0f;
+	for (BeeHive &bh : _beeHives) {
+		total += bh.rawHoney();
+	}
+	return total;
 }
 
 void Player::notify(void *pVoid) {
 	BeeHiveAtlas::getInstance()->getBeeHives(_beeHives);
 }
 
-std::unordered_map<TileGID, size_t> *Player::getInventory() {
-    return _inventory;
+std::unordered_map <TileGID, size_t> *Player::getInventory() {
+	return _inventory;
 }

@@ -3,17 +3,16 @@
 #include "StoryScene.h"
 
 
-Scene* StoryScene::createScene() {
-    return StoryScene::create();
+Scene *StoryScene::createScene() {
+	return StoryScene::create();
 }
 
 bool StoryScene::init() {
 
-    if ( !Scene::init() )
-    {
-        return false;
-    }
+	if (!Scene::init()) {
+		return false;
+	}
 
 
-    return true;
+	return true;
 }
