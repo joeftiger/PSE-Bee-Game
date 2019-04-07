@@ -27,8 +27,7 @@ public:
     static Player* getInstance();
 
     /**
-     * Returns the total raw honey currently in the BeeHiveAtlas
-     * @return
+     * @return the total raw honey currently in the BeeHiveAtlas
      */
     float totalRawHoney();
 
