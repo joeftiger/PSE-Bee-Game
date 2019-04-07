@@ -22,8 +22,8 @@ Player *Player::getInstance() {
 
 float Player::totalRawHoney() {
 	float total = 0.0f;
-	for (BeeHive &bh : _beeHives) {
-		total += bh.rawHoney();
+	for (auto bh : _beeHives) {
+		total += bh->rawHoney();
 	}
 	return total;
 }

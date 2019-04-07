@@ -16,9 +16,9 @@ BeeHiveAtlas *BeeHiveAtlas::getInstance() {
 	return _instance;
 }
 
-void BeeHiveAtlas::getBeeHives(std::vector <BeeHive> &beeHives) {
+void BeeHiveAtlas::getBeeHives(std::vector <BeeHive *> &beeHives) {
 	beeHives.clear();
-	for (BeeHive &bh : _beeHives) {
+	for (auto bh : _beeHives) {
 		beeHives.emplace_back(bh);
 	}
 }
@@ -37,16 +37,16 @@ void BeeHiveAtlas::notify(void *observable) {
 
 		// do we have a hive with that position?
 		for (auto bh : _beeHives) {
-			if (pos == bh.position()) {
+			if (pos == bh->position()) {
 				hasHive = true;
 				break;
 			}
 		}
-		
+
 		// create bee hive
 		if (!hasHive) {
-			BeeHive hive;
-			hive.setPosition(pos);
+			auto hive = new BeeHive();
+			hive->setPosition(pos);
 			_beeHives.emplace_back(hive);
 
 			notifyObservers = true;
@@ -63,6 +63,7 @@ void BeeHiveAtlas::notify(void *observable) {
 void BeeHiveAtlas::update(float dt) {
 	cocos2d::log("%f", dt);
 	for (auto bh : _beeHives) {
-		bh.update();
+		bh->update();
 	}
 }
+
