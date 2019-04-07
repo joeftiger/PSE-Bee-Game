@@ -31,7 +31,7 @@ void BeeHiveAtlas::notify(void *observable) {
 	bool notifyObservers = false;
 
 	// add missing beehives
-	for (const auto pos : positions) {
+	for (const auto &pos : positions) {
 		auto hasHive = false;
 
 		// do we have a hive with that position?
