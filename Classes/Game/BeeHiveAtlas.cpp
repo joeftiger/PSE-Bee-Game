@@ -11,7 +11,7 @@ BeeHiveAtlas *BeeHiveAtlas::_instance = nullptr;
 BeeHiveAtlas *BeeHiveAtlas::getInstance() {
 	if (!_instance) {
 		_instance = new BeeHiveAtlas;
-		_instance->schedule(schedule_selector(BeeHiveAtlas::update), 1);
+		_instance->schedule(schedule_selector(BeeHiveAtlas::update), 1.0f);
 	}
 	return _instance;
 }
@@ -42,10 +42,7 @@ void BeeHiveAtlas::notify(void *observable) {
 				break;
 			}
 		}
-
-		// FIXME: The BeeHiveAtlas adds beehives even though they already exist.
-		// The code looks fine to me though. I am confused.
-
+		
 		// create bee hive
 		if (!hasHive) {
 			BeeHive hive;
