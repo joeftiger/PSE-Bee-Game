@@ -31,9 +31,9 @@ public:
 
 	Vec2 getTilePosition(Vec2 pos);
 
-	Vec2 inTileMapBounds(Vec2 pos);
+	Vec2 inTileMapBounds(const Vec2& pos);
 
-	void setTile(Vec2 position, int gid);
+	void setTile(const Vec2& position, int gid);
 
 
 	// implement the "static create()" method manually
