@@ -13,7 +13,7 @@
 class BeeHiveAtlas : public Observable, public Observer {
 private:
 	static BeeHiveAtlas *_instance;
-	std::vector <std::reference_wrapper<BeeHive>> _beeHives;
+	std::vector <BeeHive> _beeHives;
 
 public:
 	static BeeHiveAtlas *getInstance();
