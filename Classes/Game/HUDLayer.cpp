@@ -3,6 +3,7 @@
 #include "HeaderFiles/DEFINITIONS.h"
 #include "MainMenu/MainMenuScene.h"
 #include "Player.h"
+#include "SaveLoad/SaveLoad.h"
 
 using namespace cocos2d;
 
@@ -27,6 +28,7 @@ bool HUDLayer::init() {
 	auto label = Label::createWithTTF("Main Menu", "fonts/OpenSans-Regular.ttf", 20);
 	auto menuItem = MenuItemLabel::create(label);
 	menuItem->setCallback([&](cocos2d::Ref *sender) {
+		SaveLoad::saveMap();
 		Director::getInstance()->replaceScene(MainMenu::scene());
 	});
 	auto backMenu = Menu::create(menuItem, nullptr);

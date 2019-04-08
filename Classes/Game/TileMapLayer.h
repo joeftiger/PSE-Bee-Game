@@ -29,6 +29,8 @@ public:
 
 	TMXTiledMap *getMap();
 
+	TMXLayer *getLayer();
+
 	Vec2 getTilePosition(Vec2 pos);
 
 	Vec2 inTileMapBounds(const Vec2& pos);

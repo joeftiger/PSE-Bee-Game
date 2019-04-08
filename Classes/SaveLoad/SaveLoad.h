@@ -23,7 +23,7 @@ public:
 	SaveLoad();
 
 
-	static void saveMap(TMXTiledMap *map);
+	static void saveMap();
 
 	static std::vector<std::vector<int>> loadMap();
 

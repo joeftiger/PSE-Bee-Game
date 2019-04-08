@@ -63,6 +63,10 @@ TMXTiledMap *TileMapLayer::getMap() {
 	return _tileMap;
 }
 
+TMXLayer *TileMapLayer::getLayer() {
+	return _tileMap->getLayer("objects");
+}
+
 Vec2 TileMapLayer::getTilePosition(Vec2 pos) {
 
 	auto box = _tileMap->getBoundingBox();

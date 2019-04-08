@@ -15,19 +15,18 @@ using namespace rapidjson;
 SaveLoad::SaveLoad() {
 }
 
-void SaveLoad::saveMap(TMXTiledMap *map) {
-	auto layer = map->getLayer("objects");
+void SaveLoad::saveMap() {
+	auto tileMapLayer = (TileMapLayer *)cocos2d::Director::getInstance()->getRunningScene()->getChildByName("TileMapLayer");
+	auto layer = tileMapLayer->getLayer();
 
 	rapidjson::Document d;
 	rapidjson::StringBuffer s;
 	Writer <rapidjson::StringBuffer> writer(s);
 	writer.StartObject();
-	writer.Key("yo");
-	writer.String("asldmas");
-	for (int i = 0; i < map->getMapSize().width - 1; i++) {
+	for (int i = 0; i < layer->getLayerSize().width - 1; i++) {
 		writer.Key("row");
 		writer.StartArray();
-		for (int j = 0; j < map->getMapSize().height - 1; j++) {
+		for (int j = 0; j < layer->getLayerSize().height - 1; j++) {
 			writer.Uint(layer->getTileGIDAt(Vec2(i, j)));
 		}
 		writer.EndArray();
@@ -36,7 +35,7 @@ void SaveLoad::saveMap(TMXTiledMap *map) {
 	//TODO: save honey, money to json
 
 	writer.EndObject();
-	log("%s %s", "json1", s.GetString());
+	log("%s %s", "tileMapJson", s.GetString());
 	d.Parse(s.GetString());
 
 	jsonToFile(jsonToString(d), getPath("tilemap.json"));
@@ -185,14 +184,10 @@ void SaveLoad::loadBeehives() {
 		log("Couldn't load beehives");
 		return;
 	}
+
 	IStreamWrapper isw(ifs);
 	rapidjson::Document doc;
 	doc.ParseStream(isw);
-
-	//StringBuffer buffer;
-	//Writer<StringBuffer> writer(buffer);
-	//doc.Accept(writer);
-	//log("%s %s", "loaded", buffer.GetString());
 
 	for (int i = 0; i < doc.Size(); i++) {
 		rapidjson::Document subDoc;
@@ -206,6 +201,6 @@ void SaveLoad::loadBeehives() {
 		log("BeeHive String %s", buffer.GetString());
 		BeeHive b = BeeHive();
 		b.fromJSON(subDoc);
-		//TODO: Add new beehives to list
 	}
+	//TODO: return all beeHives as vector?
 }
