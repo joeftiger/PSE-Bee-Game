@@ -1,27 +1,28 @@
-
+#define USE_SD true
 #include <HeaderFiles/CHILD_NAMES.h>
 #include "TileMapLayer.h"
 #include "HeaderFiles/DEFINITIONS.h"
 #include "HeaderFiles/TileGID.h"
 
 bool TileMapLayer::init() {
-	if (!Layer::init()) return false;
+    if (!Layer::init()) return false;
+    static bool useSD = false;
 
-	static bool useSD = false;
-	#if (useSD == true)
-		//TODO Change following to use tielmapSD instead of HD, when the new tilemap is uploaded
-        _tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
-    #else
-        _tileMap = TMXTiledMap::create("tilemaps/tilemapSD.tmx");
-    #endif
+#if (USE_SD == true)
+    cocos2d::log("Using SD");
+    _tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
+#else
+    cocos2d::log("Using HD");
+    _tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
+#endif
 
-	this->addChild(_tileMap, -1);
-	_tileMap->setAnchorPoint(Point(0, 0));
-	_tileMap->setScale(MAP_SCALE);
+    this->addChild(_tileMap, -1);
+    _tileMap->setAnchorPoint(Point(0, 0));
+    _tileMap->setScale(MAP_SCALE);
 
-	this->setName(TILE_MAP_LAYER_NAME);
+    this->setName(TILE_MAP_LAYER_NAME);
 
-	return true;
+    return true;
 }
 
 ssize_t TileMapLayer::getTreeCount() {
@@ -121,4 +122,8 @@ void TileMapLayer::setTile(const Vec2& position, int gid) {
 	auto layer = _tileMap->getLayer("objects");
 	layer->setTileGID(gid, getTilePosition(position)); //1 = flower; 2,3,4,5 = bush1,2,3,4; 6 = grass; 7 = road
 	notifyObservers();
+}
+
+void TileMapLayer::booleanInverter() {
+	useSD = !useSD;
 }

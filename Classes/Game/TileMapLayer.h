@@ -15,11 +15,15 @@ private:
 	TMXTiledMap *_tileMap;
 
 public:
+
+	bool useSD = false;
+
 	virtual bool init() override;
 
 	ssize_t getTreeCount();
 
 	ssize_t getFlowerCount();
+
 
 	/**
 	 * Returns the positions of each beehive on the tile map.
@@ -34,6 +38,8 @@ public:
 	Vec2 inTileMapBounds(const Vec2& pos);
 
 	void setTile(const Vec2& position, int gid);
+
+	void booleanInverter();
 
 
 	// implement the "static create()" method manually
