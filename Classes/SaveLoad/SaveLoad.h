@@ -22,7 +22,10 @@ private:
 public:
 	SaveLoad();
 
-	static void saveMap(TMXTiledMap* map);
+
+	static void saveMap(TMXTiledMap *map);
+
+	static void loadMap();
 
 	static std::vector<std::vector<int>> loadMap();
 
@@ -34,7 +37,12 @@ public:
 
 	static void deleteBeeHivesSave();
 
-	static void saveBeehives(std::vector<BeeHive> BeeHives);
+	static void jsonToFile(rapidjson::Document &jsonObj, std::string fullPath);
+
+	static std::string jsonToString(rapidjson::Document &jsonObj);
+
+
+	static void saveBeehives(std::vector <BeeHive*> BeeHives);
 
 	static void loadBeehives();
 
