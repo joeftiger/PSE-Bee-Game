@@ -17,7 +17,8 @@ public:
 
 	SaveLoad();
 
-	static void saveMap(TMXTiledMap* map);
+	static void saveMap(TMXTiledMap *map);
+
 	static void loadMap();
 
 	static bool fileExists(std::string filename);
@@ -26,11 +27,11 @@ public:
 
 	static void jsonToFile(std::string, std::string fullpath);
 
-	static void jsonToFile(rapidjson::Document & jsonObj, std::string fullPath);
+	static void jsonToFile(rapidjson::Document &jsonObj, std::string fullPath);
 
-	static std::string jsonToString(rapidjson::Document & jsonObj);
+	static std::string jsonToString(rapidjson::Document &jsonObj);
 
-	static void saveBeehives(std::vector<BeeHive> BeeHives);
+	static void saveBeehives(std::vector <BeeHive> BeeHives);
 
 	static void loadBeehives();
 

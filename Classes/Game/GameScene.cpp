@@ -9,36 +9,34 @@
 
 using namespace cocos2d;
 
-Scene* GameScene::createScene()
-{
-    return GameScene::create();
+Scene *GameScene::createScene() {
+	return GameScene::create();
 }
 
-bool GameScene::init()
-{
-    if ( !Scene::init()) return false;
-    
+bool GameScene::init() {
+	if (!Scene::init()) return false;
+
 	Size visibleSize = Director::getInstance()->getWinSize();
 	//Director::getInstance()->setClearColor(Color4F(0.5,0.73,0.14,1));
 
-    // Touch Event Listener
-    auto listener = EventListenerTouchOneByOne::create();
+	// Touch Event Listener
+	auto listener = EventListenerTouchOneByOne::create();
 	listener->setSwallowTouches(true);
-    listener->onTouchBegan = CC_CALLBACK_2(GameScene::onTouchBegan, this);
-    listener->onTouchMoved = CC_CALLBACK_2(GameScene::onTouchMoved, this);
-    listener->onTouchEnded = CC_CALLBACK_2(GameScene::onTouchEnded, this);
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+	listener->onTouchBegan = CC_CALLBACK_2(GameScene::onTouchBegan, this);
+	listener->onTouchMoved = CC_CALLBACK_2(GameScene::onTouchMoved, this);
+	listener->onTouchEnded = CC_CALLBACK_2(GameScene::onTouchEnded, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
-    //camera
-    camera = this->getDefaultCamera();
-    this->removeChild(camera);
+	//camera
+	camera = this->getDefaultCamera();
+	this->removeChild(camera);
 
 	// Background TileMap
-    _tileMapLayer = TileMapLayer::create();
-    this->addChild(_tileMapLayer, -1);
+	_tileMapLayer = TileMapLayer::create();
+	this->addChild(_tileMapLayer, -1);
 
-    // TileMapAtlas and observe TileMap
-    auto tileMapAtlas = BeeHiveAtlas::getInstance();
+	// TileMapAtlas and observe TileMap
+	auto tileMapAtlas = BeeHiveAtlas::getInstance();
 	_tileMapLayer->subscribe(*tileMapAtlas);
 
 	//HUD Layer
@@ -48,22 +46,22 @@ bool GameScene::init()
 	_itemPanel = ItemPanelLayer::create();
 
 	//camera and huds container
-    container = Node::create();
-    container->addChild(camera);
-    this->addChild(container);
-    container->addChild(_itemPanel);
-    container->addChild(_HUDLayer);
+	container = Node::create();
+	container->addChild(camera);
+	this->addChild(container);
+	container->addChild(_itemPanel);
+	container->addChild(_HUDLayer);
 
-    container->setPosition(Vec2(2000, 2000));
-    cameraTravel -= container->getPosition();
-    return true;
+	container->setPosition(Vec2(2000, 2000));
+	cameraTravel -= container->getPosition();
+	return true;
 }
 
 bool GameScene::onTouchBegan(Touch *touch, Event *event) {
 	_isTouched = true;
 	_touchPosition = touch->getLocation();
 	_itemPanel->showHideItemPanel(_touchPosition);
-    return true;
+	return true;
 }
 
 void GameScene::onTouchMoved(Touch *touch, Event *event) {
@@ -74,9 +72,8 @@ void GameScene::onTouchMoved(Touch *touch, Event *event) {
 
 	if (_itemPanel->isDrag()) {
 		_itemPanel->getDrag()->setPosition(touchPos - _itemPanel->getPosition());
-	}
-	else {
-	    cameraTravel += movement;
+	} else {
+		cameraTravel += movement;
 		container->setPosition(container->getPosition() - movement);
 	}
 }
@@ -85,7 +82,7 @@ void GameScene::onTouchEnded(void *, void *) {
 	if (_itemPanel->isDrag()) {
 		_tileMapLayer->setTile(_touchPosition - cameraTravel, _itemPanel->getDrag()->getTag());
 		_itemPanel->removeChild(_itemPanel->getDrag());
-        _itemPanel->setIsDrag(false);
+		_itemPanel->setIsDrag(false);
 	}
 	_isTouched = false;
 }

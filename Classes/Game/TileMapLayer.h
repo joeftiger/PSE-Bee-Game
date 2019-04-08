@@ -12,29 +12,32 @@ USING_NS_CC;
 
 class TileMapLayer : public cocos2d::Layer, public Observable {
 private:
-    TMXTiledMap *_tileMap;
+	TMXTiledMap *_tileMap;
 
 public:
-    virtual bool init() override;
+	virtual bool init() override;
 
-    ssize_t getTreeCount();
-    ssize_t getFlowerCount();
+	ssize_t getTreeCount();
 
-    /**
-     * Returns the positions of each beehive on the tile map.
-     * @return a list of beehive-positions
-     */
-    std::vector<Vec2> getBeeHives();
+	ssize_t getFlowerCount();
+
+	/**
+	 * Returns the positions of each beehive on the tile map.
+	 * @return a list of beehive-positions
+	 */
+	std::vector <Vec2> getBeeHives();
 
 	TMXTiledMap *getMap();
 
 	Vec2 getTilePosition(Vec2 pos);
-	Vec2 inTileMapBounds(Vec2 pos);
-	void setTile(Vec2 position, int gid);
+
+	Vec2 inTileMapBounds(const Vec2& pos);
+
+	void setTile(const Vec2& position, int gid);
 
 
-    // implement the "static create()" method manually
-    CREATE_FUNC(TileMapLayer)
+	// implement the "static create()" method manually
+	CREATE_FUNC(TileMapLayer)
 };
 
 

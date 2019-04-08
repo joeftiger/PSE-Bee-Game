@@ -17,9 +17,9 @@
 	road = 18
 */
 enum TileGID {
-    beehiveBig = 1,
-    beehiveSmall = 2,
-    beehiveMiddle = 3,
+	beehiveBig = 1,
+	beehiveSmall = 2,
+	beehiveMiddle = 3,
 	flower1 = 11,
 	flower2 = 12,
 	flower3 = 13,
