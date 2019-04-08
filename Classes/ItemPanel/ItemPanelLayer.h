@@ -6,7 +6,7 @@
 #define PSE_BEE_GAME_ITEMPANELLayer_H
 
 #include "cocos2d.h"
-#include "TouchUtil.h"
+#include "Game/TouchUtil.h"
 
 using namespace cocos2d;
 

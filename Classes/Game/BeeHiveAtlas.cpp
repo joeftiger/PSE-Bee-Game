@@ -11,13 +11,16 @@ BeeHiveAtlas *BeeHiveAtlas::_instance = nullptr;
 BeeHiveAtlas *BeeHiveAtlas::getInstance() {
 	if (!_instance) {
 		_instance = new BeeHiveAtlas;
+
+		// FIXME: The scheduler apparently does not run, as BeeHiveAtlas::update is never called!
+		_instance->schedule(schedule_selector(BeeHiveAtlas::update), 1.0f);
 	}
 	return _instance;
 }
 
-void BeeHiveAtlas::getBeeHives(std::vector <std::reference_wrapper<BeeHive>> &beeHives) {
+void BeeHiveAtlas::getBeeHives(std::vector <BeeHive *> &beeHives) {
 	beeHives.clear();
-	for (BeeHive &bh : _beeHives) {
+	for (auto bh : _beeHives) {
 		beeHives.emplace_back(bh);
 	}
 }
@@ -31,24 +34,21 @@ void BeeHiveAtlas::notify(void *observable) {
 	bool notifyObservers = false;
 
 	// add missing beehives
-	for (const auto pos : positions) {
+	for (const auto &pos : positions) {
 		auto hasHive = false;
 
 		// do we have a hive with that position?
 		for (auto bh : _beeHives) {
-			if (pos == bh.position()) {
+			if (pos == bh->position()) {
 				hasHive = true;
 				break;
 			}
 		}
 
-		// FIXME: The BeeHiveAtlas adds beehives even though they already exist.
-		// The code looks fine to me though. I am confused.
-
 		// create bee hive
 		if (!hasHive) {
-			BeeHive hive;
-			hive.setPosition(pos);
+			auto hive = new BeeHive();
+			hive->setPosition(pos);
 			_beeHives.emplace_back(hive);
 
 			notifyObservers = true;
@@ -61,3 +61,11 @@ void BeeHiveAtlas::notify(void *observable) {
 		this->notifyObservers();
 	}
 }
+
+void BeeHiveAtlas::update(float dt) {
+	cocos2d::log("%f", dt);
+	for (auto bh : _beeHives) {
+		bh->update();
+	}
+}
+

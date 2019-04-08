@@ -135,14 +135,14 @@ bool SaveLoad::fileExists(std::string filename) {
 	return infile.good();
 }
 
-void SaveLoad::saveBeehives(std::vector <BeeHive> BeeHives) {
+void SaveLoad::saveBeehives(std::vector <BeeHive*> BeeHives) {
 	rapidjson::Document doc;
 	rapidjson::StringBuffer jsonBuffer;
 	rapidjson::PrettyWriter <rapidjson::StringBuffer> jsonWriter(jsonBuffer);
 	doc.SetArray();
 	assert(doc.IsArray());
-	for (BeeHive b : BeeHives) {
-		b.toJSON(doc);
+	for (auto b : BeeHives) {
+		b->toJSON(doc);
 	}
 	doc.Accept(jsonWriter);
 	jsonToFile(jsonToString(doc), getPath("beehives.json"));

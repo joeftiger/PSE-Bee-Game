@@ -14,7 +14,7 @@
 class Player : public Observer, public Observable {
 private:
 	static Player *_instance;
-	std::vector <std::reference_wrapper<BeeHive>> _beeHives;
+	std::vector <BeeHive *> _beeHives;
 	std::unordered_map <TileGID, size_t> *_inventory;
 
 	Player() = default;

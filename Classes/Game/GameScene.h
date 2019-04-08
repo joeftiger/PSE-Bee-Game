@@ -7,7 +7,7 @@
 #include "TileMapLayer.h"
 #include "cocos2d.h"
 #include "TouchUtil.h"
-#include "ItemPanelLayer.h"
+#include "ItemPanel/ItemPanelLayer.h"
 
 
 using namespace cocos2d;

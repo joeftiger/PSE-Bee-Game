@@ -2,6 +2,7 @@
 #include "HUDLayer.h"
 #include "HeaderFiles/DEFINITIONS.h"
 #include "MainMenu/MainMenuScene.h"
+#include "Player.h"
 
 using namespace cocos2d;
 
@@ -72,6 +73,8 @@ void HUDLayer::timer(float dt) {
 		years++;
 	}
 
+	auto h = std::to_string((int) Player::getInstance()->totalRawHoney());
+	honeyLabel->setString(h);
 	__String *timeToDisplay = __String::createWithFormat("%i", months);
 	timeLabel->setString(timeToDisplay->getCString());
 }

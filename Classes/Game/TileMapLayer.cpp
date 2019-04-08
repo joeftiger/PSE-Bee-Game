@@ -7,7 +7,13 @@
 bool TileMapLayer::init() {
 	if (!Layer::init()) return false;
 
-	_tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
+	static bool useSD = false;
+	#if (useSD == true)
+		//TODO Change following to use tielmapSD instead of HD, when the new tilemap is uploaded
+        _tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
+    #else
+        _tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
+    #endif
 
 	this->addChild(_tileMap, -1);
 	_tileMap->setAnchorPoint(Point(0, 0));
@@ -92,7 +98,7 @@ Vec2 TileMapLayer::getTilePosition(Vec2 pos) {
 	return inTileMapBounds(pos);
 }
 
-Vec2 TileMapLayer::inTileMapBounds(Vec2 pos) {
+Vec2 TileMapLayer::inTileMapBounds(const Vec2& pos) {
 	auto height = _tileMap->getMapSize().height - 1;
 	auto width = _tileMap->getMapSize().width - 1;
 	if (pos.x <= width && pos.y <= height && pos.x >= 0 && pos.y >= 0) {
@@ -111,7 +117,7 @@ Vec2 TileMapLayer::inTileMapBounds(Vec2 pos) {
 	}
 }
 
-void TileMapLayer::setTile(Vec2 position, int gid) {
+void TileMapLayer::setTile(const Vec2& position, int gid) {
 	auto layer = _tileMap->getLayer("objects");
 	layer->setTileGID(gid, getTilePosition(position)); //1 = flower; 2,3,4,5 = bush1,2,3,4; 6 = grass; 7 = road
 	notifyObservers();
