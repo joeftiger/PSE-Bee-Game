@@ -12,7 +12,7 @@ bool TileMapLayer::init() {
 		//TODO Change following to use tielmapSD instead of HD, when the new tilemap is uploaded
         _tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
     #else
-        _tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
+        _tileMap = TMXTiledMap::create("tilemaps/tilemapSD.tmx");
     #endif
 
 	this->addChild(_tileMap, -1);
