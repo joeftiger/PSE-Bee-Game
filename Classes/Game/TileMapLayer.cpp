@@ -7,7 +7,13 @@
 bool TileMapLayer::init() {
 	if (!Layer::init()) return false;
 
-	_tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
+	static bool useSD = false;
+	#if (useSD == true)
+		//TODO Change following to use tielmapSD instead of HD, when the new tilemap is uploaded
+        _tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
+    #else
+        _tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
+    #endif
 
 	this->addChild(_tileMap, -1);
 	_tileMap->setAnchorPoint(Point(0, 0));
