@@ -6,34 +6,43 @@
 #define PSE_BEE_GAME_PLAYER_H
 
 #include <vector>
+#include <HeaderFiles/TileGID.h>
 #include "BeeHive.h"
 #include "Observer.h"
 #include "Observable.h"
 
 class Player : public Observer, public Observable {
 private:
-    static Player *_instance;
-    std::vector<BeeHive *> _beeHives;
+	static Player *_instance;
+	std::vector <BeeHive *> _beeHives;
+	std::unordered_map <TileGID, size_t> *_inventory;
 
-    Player() = default;
-    Player(const Player&);
-    ~Player() = default;
+	Player() = default;
 
-    bool invariant();
+	Player(const Player &);
+
+	~Player() = default;
+
+	bool invariant();
 
 public:
-    static Player* getInstance();
+	static Player *getInstance();
 
-    /**
-     * Returns the total raw honey currently in the BeeHiveAtlas
-     * @return
-     */
-    float TotalRawHoney();
+	/**
+	 * @return the total raw honey currently in the BeeHiveAtlas
+	 */
+	float totalRawHoney();
 
-    /**
-     * Notifies this player, that the beehives have changed.
-     * @param pVoid
-     */
+	/**
+	 * Returns the item inventory of the player.
+	 * @return the inventory
+	 */
+	std::unordered_map <TileGID, size_t> *getInventory();
+
+	/**
+	 * Notifies this player, that the beehives have changed.
+	 * @param pVoid
+	 */
 	void notify(void *pVoid) override;
 };
 

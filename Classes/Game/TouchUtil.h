@@ -13,19 +13,24 @@ using namespace std;
 
 class TouchUtil {
 protected:
-    bool _isDrag = false;
-    Sprite *drag;
-    vector<Sprite*> spriteList;
+	bool _isDrag = false;
+	Sprite *drag;
+	vector<Sprite *> spriteList;
 public:
 
-    void setDrag(Point screenTouch, Point layerTouch);
-    Sprite *getDrag();
-    void addToSpriteList(string name, Vec2 pos, int tag, Size scale);
-    bool isDrag();
-    void addListTo(Layer *layer); //overloading
-    void addListTo(Scene *scene);
-};
+	void setDrag(Point screenTouch, Point layerTouch);
 
+	Sprite *getDrag();
+
+	void addToSpriteList(string name, Vec2 pos, int tag, Size scale);
+
+	bool isDrag();
+
+	void addListTo(Layer *layer); //overloading
+	void addListTo(Scene *scene);
+
+	void setIsDrag(bool isDrag);
+};
 
 
 #endif //PSE_BEE_GAME_DRAGDROP_H

@@ -6,8 +6,7 @@
 
 using namespace cocos2d;
 
-class HUDLayer: public Layer
-{
+class HUDLayer : public Layer {
 private:
 
 	unsigned int honey;
@@ -24,11 +23,12 @@ private:
 
 public:
 	static cocos2d::Layer *createLayer();
-    virtual bool init();
+
+	virtual bool init();
 
 	void timer(float dt);
 
-    CREATE_FUNC(HUDLayer);
+	CREATE_FUNC(HUDLayer);
 };
 
 
