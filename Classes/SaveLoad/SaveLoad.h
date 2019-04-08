@@ -13,22 +13,26 @@ using namespace cocos2d;
 
 class SaveLoad {
 private:
-public:
+	
+	static std::string getPath(std::string fileName);
+	static void jsonToFile(std::string, std::string fullpath);
+	static void jsonToFile(rapidjson::Document & jsonObj, std::string fullPath);
+	static std::string jsonToString(rapidjson::Document & jsonObj);
 
+public:
 	SaveLoad();
 
 	static void saveMap(TMXTiledMap* map);
-	static void loadMap();
 
-	static bool fileExists(std::string filename);
+	static std::vector<std::vector<int>> loadMap();
 
-	static std::string getPath(std::string fileName);
+	static bool tileMapSaveExists();
 
-	static void jsonToFile(std::string, std::string fullpath);
+	static bool beeHiveSaveExists();
 
-	static void jsonToFile(rapidjson::Document & jsonObj, std::string fullPath);
+	static void deleteTileMapSave();
 
-	static std::string jsonToString(rapidjson::Document & jsonObj);
+	static void deleteBeeHivesSave();
 
 	static void saveBeehives(std::vector<BeeHive> BeeHives);
 

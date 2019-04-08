@@ -99,7 +99,7 @@ void BeeHive::fromJSON(rapidjson::Document &doc) {
 	const rapidjson::Value& beeHive = doc["beeHive"];
 
 	//assert(beeHive.HasMember("_beesAlive"));
-	assert(beeHive.HasMember("_beesAlive") && beeHive["_beesAlive"].IsInt());
+	assert(beeHive["_beesAlive"].IsInt());
 	_beesAlive = beeHive["_beesAlive"].GetInt();
 
 	assert(beeHive["_varoaAlive"].IsInt());

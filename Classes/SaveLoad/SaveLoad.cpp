@@ -8,24 +8,23 @@
 #include "json/istreamwrapper.h"
 #include "json/ostreamwrapper.h"
 #include "json/prettywriter.h"
+#include "Game/GameScene.h"
 
 using namespace rapidjson;
 
-SaveLoad::SaveLoad()
-{
+
+
+SaveLoad::SaveLoad() {
 }
 
-void SaveLoad::saveMap(TMXTiledMap* map)
-{
+void SaveLoad::saveMap(TMXTiledMap* map) {	
 	auto layer = map->getLayer("objects");
 
     rapidjson::Document d;
     rapidjson::StringBuffer s;
     Writer<rapidjson::StringBuffer> writer(s);
     writer.StartObject();
-	writer.Key("yo");
-	writer.String("asldmas");
-	for (int i = 0; i < map->getMapSize().width - 1; i++) {
+	for (int i = 0; i <	map->getMapSize().width - 1; i++) {
 	    writer.Key("row");
 	    writer.StartArray();
 		for (int j = 0; j < map->getMapSize().height - 1; j++) {
@@ -34,7 +33,7 @@ void SaveLoad::saveMap(TMXTiledMap* map)
 		writer.EndArray();
 	}
 
-	//TODO: save honey, money, beehives to json
+	//TODO: save honey, money to json
 
 	writer.EndObject();
 	log("%s %s", "json1", s.GetString());
@@ -106,13 +105,15 @@ std::string SaveLoad::jsonToString(rapidjson::Document &jsonObj) {
 /**
 	Loads data from disk
 */
-void SaveLoad::loadMap() {
+std::vector<std::vector<int>> SaveLoad::loadMap() {
 	std::string path = getPath("tilemap.json");
 	std::ifstream ifs(path);
 
+	std::vector<std::vector<int>> vec;
+	std::vector<int> temp;
 	if (!ifs.is_open()) {
 		log("%s", "Couldn't load map");
-		return;
+		return vec;
 	}
 	
 	IStreamWrapper isw(ifs);
@@ -125,16 +126,44 @@ void SaveLoad::loadMap() {
 
 	if (d.HasParseError()) {
 		log("%u",d.GetParseError());
-		return;
+		return vec;
 	}
 
 	log("%s %s", "loaded", buffer.GetString());
 	ifs.close();
+
+	for (rapidjson::Value::ConstMemberIterator itr = d.MemberBegin(); itr != d.MemberEnd(); ++itr) {
+		assert(itr->value.IsArray());
+		for (auto& m : itr->value.GetArray()) {
+			//log("%i", m.GetInt());
+			assert(m.IsInt());
+			temp.push_back(m.GetInt());
+		}
+		vec.push_back(temp);
+	}
+	
+	
+
+	return vec;
 }
 
-bool SaveLoad::fileExists(std::string filename) {
-	std::ifstream infile(filename);
+bool SaveLoad::tileMapSaveExists() {
+	return FileUtils::getInstance()->isFileExist(getPath("tilemap.json"));
+}
+
+bool SaveLoad::beeHiveSaveExists() {
+	std::ifstream infile(getPath("beehives.json"));
 	return infile.good();
+}
+
+void SaveLoad::deleteTileMapSave() {
+	FileUtils::getInstance()->removeFile(getPath("tilemap.json"));
+	assert(!tileMapSaveExists());
+}
+
+void SaveLoad::deleteBeeHivesSave() {
+	FileUtils::getInstance()->removeFile(getPath("beehives.json"));
+	assert(!beeHiveSaveExists());
 }
 
 void SaveLoad::saveBeehives(std::vector<BeeHive> BeeHives) {
