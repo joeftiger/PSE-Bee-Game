@@ -25,8 +25,6 @@ public:
 
 	static void saveMap(TMXTiledMap *map);
 
-	static void loadMap();
-
 	static std::vector<std::vector<int>> loadMap();
 
 	static bool tileMapSaveExists();
@@ -36,11 +34,6 @@ public:
 	static void deleteTileMapSave();
 
 	static void deleteBeeHivesSave();
-
-	static void jsonToFile(rapidjson::Document &jsonObj, std::string fullPath);
-
-	static std::string jsonToString(rapidjson::Document &jsonObj);
-
 
 	static void saveBeehives(std::vector <BeeHive*> BeeHives);
 

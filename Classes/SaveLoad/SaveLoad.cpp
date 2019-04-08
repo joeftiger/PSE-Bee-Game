@@ -111,6 +111,7 @@ std::vector<std::vector<int>> SaveLoad::loadMap() {
 
 	std::vector<std::vector<int>> vec;
 	std::vector<int> temp;
+
 	if (!ifs.is_open()) {
 		log("%s", "Couldn't load map");
 		return vec;
@@ -141,9 +142,6 @@ std::vector<std::vector<int>> SaveLoad::loadMap() {
 		}
 		vec.push_back(temp);
 	}
-	
-	
-
 	return vec;
 }
 
@@ -155,7 +153,6 @@ bool SaveLoad::beeHiveSaveExists() {
 	std::ifstream infile(getPath("beehives.json"));
 	return infile.good();
 }
-
 
 void SaveLoad::deleteTileMapSave() {
 	FileUtils::getInstance()->removeFile(getPath("tilemap.json"));
