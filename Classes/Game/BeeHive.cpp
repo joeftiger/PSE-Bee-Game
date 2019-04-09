@@ -80,7 +80,7 @@ cocos2d::Vec2 BeeHive::position() {
 	return _position;
 }
 
-void BeeHive::setPosition(cocos2d::Vec2 pos) {
+void BeeHive::setPosition(const cocos2d::Vec2& pos) {
 	_position.x = pos.x;
 	_position.y = pos.y;
 }
