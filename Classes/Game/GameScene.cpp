@@ -51,7 +51,7 @@ bool GameScene::init() {
 	this->addChild(container);
 	container->addChild(_itemPanel);
 	container->addChild(_HUDLayer);
-	container->setPosition(Vec2(_tileMapLayer->getMap()->getBoundingBox().size.width/2, _tileMapLayer->getMap()->getBoundingBox().size.height/2));
+	container->setPosition(Vec2(_tileMapLayer->getMap()->getBoundingBox().size.width/2 - visibleSize.width/2, _tileMapLayer->getMap()->getBoundingBox().size.height/2 - visibleSize.height/2));
 	cameraTravel -= container->getPosition();
 	return true;
 }

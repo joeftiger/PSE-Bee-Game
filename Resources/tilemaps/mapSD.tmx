@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="isometric" renderorder="right-down" width="30" height="30" tilewidth="388" tileheight="223" infinite="0" nextlayerid="4" nextobjectid="1">
+<map version="1.2" tiledversion="1.2.3" orientation="isometric" renderorder="right-down" width="30" height="30" tilewidth="387" tileheight="223" infinite="0" nextlayerid="4" nextobjectid="1">
  <tileset firstgid="1" source="spritesheetSD.tsx"/>
  <layer id="2" name="background" width="30" height="30">
   <data encoding="csv">
