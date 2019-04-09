@@ -30,7 +30,7 @@ ssize_t TileMapLayer::getTreeCount() {
 }
 
 ssize_t TileMapLayer::getFlowerCount() {
-	auto layer = _tileMap->getLayer("background");
+	auto layer = _tileMap->getLayer("objects");
 	auto count = 0;
 
 	for (auto y = 0; y < layer->getLayerSize().height; y++) {
