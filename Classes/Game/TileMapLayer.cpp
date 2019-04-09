@@ -1,4 +1,4 @@
-
+#define USE_SD true
 #include <HeaderFiles/CHILD_NAMES.h>
 #include "TileMapLayer.h"
 #include "HeaderFiles/DEFINITIONS.h"
@@ -6,13 +6,20 @@
 #include "SaveLoad/SaveLoad.h"
 
 bool TileMapLayer::init() {
-	if (!Layer::init()) return false;
+    if (!Layer::init()) return false;
+    static bool useSD = false;
 
-	_tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
+#if (USE_SD == true)
+    cocos2d::log("Using SD");
+    _tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
+#else
+    cocos2d::log("Using HD");
+    _tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
+#endif
 
-	this->addChild(_tileMap, -1);
-	_tileMap->setAnchorPoint(Point(0, 0));
-	_tileMap->setScale(MAP_SCALE);
+    this->addChild(_tileMap, -1);
+    _tileMap->setAnchorPoint(Point(0, 0));
+    _tileMap->setScale(MAP_SCALE);
 
 	this->setName(TILE_MAP_LAYER_NAME);
 	this->loadMap();
@@ -122,6 +129,7 @@ void TileMapLayer::setTile(const Vec2& position, int gid) {
 	notifyObservers();
 }
 
+
 void TileMapLayer::loadMap() {
 	auto data = SaveLoad::loadMap();
 	auto layer = this->getLayer();
@@ -135,3 +143,8 @@ void TileMapLayer::loadMap() {
 		}
 	}
 }
+
+void TileMapLayer::booleanInverter() {
+	useSD = !useSD;
+}
+
