@@ -109,7 +109,6 @@ std::vector<std::vector<int>> SaveLoad::loadMap() {
 	std::ifstream ifs(path);
 
 	std::vector<std::vector<int>> vec;
-	std::vector<int> temp;
 
 	if (!ifs.is_open()) {
 		log("%s", "Couldn't load map");
@@ -134,6 +133,7 @@ std::vector<std::vector<int>> SaveLoad::loadMap() {
 
 	for (rapidjson::Value::ConstMemberIterator itr = d.MemberBegin(); itr != d.MemberEnd(); ++itr) {
 		assert(itr->value.IsArray());
+		std::vector<int> temp;
 		for (auto& m : itr->value.GetArray()) {
 			log("%i", m.GetInt());
 			assert(m.IsInt());

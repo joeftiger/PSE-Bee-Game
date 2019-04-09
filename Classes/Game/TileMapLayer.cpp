@@ -138,8 +138,8 @@ void TileMapLayer::loadMap() {
 	for (int x = 0; x < data.size(); x++) {
 		for (int y = 0; y < data.size(); y++) {
 			//log("%i", data[x][y]);
-			//layer->setTileGID(data[x][y], Vec2(x, y));
-			this->setTile(Vec2(x, y), data[x][y]);
+			layer->setTileGID(data[x][y], Vec2(x, y));
+			//this->setTile(Vec2(x, y), data[x][y]);
 		}
 	}
 }
