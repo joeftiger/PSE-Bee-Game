@@ -47,6 +47,7 @@ bool OptionsScene::init() {
                                      "menu/CheckBox_Disable.png",
                                      "menu/CheckBoxNode_Disable.png");
 
+	checkbox->setScale(3);
     checkbox->setPosition(Vec2(origin.x + visibleSize.width / 2,
                                origin.y + 0.5*visibleSize.height - title->getContentSize().height));
 
@@ -59,7 +60,7 @@ bool OptionsScene::init() {
                 break;
             case ui::Widget::TouchEventType::ENDED:
                 std::cout << "checkbox 1 clicked" << std::endl;
-                //TODO Insert switch of variable useSD (from TileMapLayer.cpp)
+                //TileMapLayer.booleanInverter();
                 break;
             default:
                 break;
