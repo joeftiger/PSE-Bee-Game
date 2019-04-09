@@ -12,9 +12,6 @@
 
 using namespace rapidjson;
 
-SaveLoad::SaveLoad() {
-}
-
 void SaveLoad::saveMap() {
 	auto tileMapLayer = (TileMapLayer *)cocos2d::Director::getInstance()->getRunningScene()->getChildByName("TileMapLayer");
 	auto layer = tileMapLayer->getLayer();
@@ -23,18 +20,19 @@ void SaveLoad::saveMap() {
 	rapidjson::StringBuffer s;
 	Writer <rapidjson::StringBuffer> writer(s);
 	writer.StartObject();
+
 	for (int i = 0; i < layer->getLayerSize().width; i++) {
-		writer.Key("row");
+		std::string s = std::to_string(i);
+		writer.Key(s.c_str());
 		writer.StartArray();
 		for (int j = 0; j < layer->getLayerSize().height; j++) {
 			writer.Uint(layer->getTileGIDAt(Vec2(i, j)));
 		}
 		writer.EndArray();
 	}
-
+	writer.EndObject();
 	//TODO: save honey, money to json
 
-	writer.EndObject();
 	log("%s %s", "tileMapJson", s.GetString());
 	d.Parse(s.GetString());
 
@@ -52,7 +50,7 @@ std::string SaveLoad::getPath(std::string fileName) {
 		fs->createDirectory(path + "saves/");
 	}
 	path = path + "saves/" + fileName;
-	cocos2d::log("%s %s", "path", path.c_str());
+	cocos2d::log("%s %s", "writable path", path.c_str());
 	return path;
 }
 
@@ -102,7 +100,7 @@ std::string SaveLoad::jsonToString(rapidjson::Document &jsonObj) {
 
 
 /**
-	Loads data from disk
+	Loads tileMap data from disk
 */
 std::vector<std::vector<int>> SaveLoad::loadMap() {
 	std::string path = getPath("tilemap.json");
@@ -112,7 +110,9 @@ std::vector<std::vector<int>> SaveLoad::loadMap() {
 
 	if (!ifs.is_open()) {
 		log("%s", "Couldn't load map");
-		return vec;
+		std::ofstream f(getPath("tilemap.json"));
+		f.close();
+		std::ifstream ifs(getPath("tilemap.json"));
 	}
 
 	IStreamWrapper isw(ifs);
@@ -128,20 +128,16 @@ std::vector<std::vector<int>> SaveLoad::loadMap() {
 		return vec;
 	}
 
-	log("%s %s", "loaded", buffer.GetString());
 	ifs.close();
-
 	for (rapidjson::Value::ConstMemberIterator itr = d.MemberBegin(); itr != d.MemberEnd(); ++itr) {
 		assert(itr->value.IsArray());
 		std::vector<int> temp;
 		for (auto& m : itr->value.GetArray()) {
-			//log("%i", m.GetInt());
 			assert(m.IsInt());
 			temp.push_back(m.GetInt());
 		}
 		vec.push_back(temp);
 	}
-
 	
 	return vec;
 }
@@ -151,8 +147,7 @@ bool SaveLoad::tileMapSaveExists() {
 }
 
 bool SaveLoad::beeHiveSaveExists() {
-	std::ifstream infile(getPath("beehives.json"));
-	return infile.good();
+	return FileUtils::getInstance()->isFileExist(getPath("beehives.json"));
 }
 
 void SaveLoad::deleteTileMapSave() {

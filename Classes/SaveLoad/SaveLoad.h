@@ -15,13 +15,14 @@ class SaveLoad {
 private:
 	
 	static std::string getPath(std::string fileName);
+
 	static void jsonToFile(std::string, std::string fullpath);
+
 	static void jsonToFile(rapidjson::Document & jsonObj, std::string fullPath);
+	
 	static std::string jsonToString(rapidjson::Document & jsonObj);
 
 public:
-	SaveLoad();
-
 
 	static void saveMap();
 
