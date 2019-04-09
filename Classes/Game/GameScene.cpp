@@ -5,6 +5,7 @@
 #include "SaveLoad/SaveLoad.h"
 #include "ItemPanel/ItemPanelLayer.h"
 #include "AppDelegate.h"
+#include "Player.h"
 
 
 using namespace cocos2d;
@@ -38,6 +39,11 @@ bool GameScene::init() {
 	// TileMapAtlas and observe TileMap
 	auto tileMapAtlas = BeeHiveAtlas::getInstance();
 	_tileMapLayer->subscribe(*tileMapAtlas);
+
+	// subscribe player to tileMapAtlas
+	auto player = Player::getInstance();
+	player->subscribe(*tileMapAtlas);
+
 	tileMapAtlas->notify(_tileMapLayer);
 
 	//HUD Layer
