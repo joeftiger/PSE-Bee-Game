@@ -23,10 +23,10 @@ void SaveLoad::saveMap() {
 	rapidjson::StringBuffer s;
 	Writer <rapidjson::StringBuffer> writer(s);
 	writer.StartObject();
-	for (int i = 0; i < layer->getLayerSize().width - 1; i++) {
+	for (int i = 0; i < layer->getLayerSize().width; i++) {
 		writer.Key("row");
 		writer.StartArray();
-		for (int j = 0; j < layer->getLayerSize().height - 1; j++) {
+		for (int j = 0; j < layer->getLayerSize().height; j++) {
 			writer.Uint(layer->getTileGIDAt(Vec2(i, j)));
 		}
 		writer.EndArray();
@@ -135,12 +135,14 @@ std::vector<std::vector<int>> SaveLoad::loadMap() {
 	for (rapidjson::Value::ConstMemberIterator itr = d.MemberBegin(); itr != d.MemberEnd(); ++itr) {
 		assert(itr->value.IsArray());
 		for (auto& m : itr->value.GetArray()) {
-			//log("%i", m.GetInt());
+			log("%i", m.GetInt());
 			assert(m.IsInt());
 			temp.push_back(m.GetInt());
 		}
 		vec.push_back(temp);
 	}
+
+	
 	return vec;
 }
 

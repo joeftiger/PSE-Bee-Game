@@ -14,6 +14,8 @@ class TileMapLayer : public cocos2d::Layer, public Observable {
 private:
 	TMXTiledMap *_tileMap;
 
+	void loadMap();
+
 public:
 	virtual bool init() override;
 

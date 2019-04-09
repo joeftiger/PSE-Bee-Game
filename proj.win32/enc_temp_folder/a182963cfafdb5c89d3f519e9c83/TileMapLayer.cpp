@@ -65,6 +65,7 @@ TMXTiledMap *TileMapLayer::getMap() {
 }
 
 TMXLayer *TileMapLayer::getLayer() {
+	log("getting layer..");
 	return _tileMap->getLayer("objects");
 }
 
