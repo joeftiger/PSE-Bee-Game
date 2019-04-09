@@ -10,14 +10,15 @@ bool TileMapLayer::init() {
 #if (USE_SD == true)
     cocos2d::log("Using SD");
     _tileMap = TMXTiledMap::create("tilemaps/mapSD.tmx");
+    _tileMap->setScale(MAP_SCALE_SD);
 #else
     cocos2d::log("Using HD");
     _tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
+    _tileMap->setScale(MAP_SCALE_HD);
 #endif
 
     this->addChild(_tileMap, -1);
     _tileMap->setAnchorPoint(Point(0, 0));
-    _tileMap->setScale(MAP_SCALE);
 
     this->setName(TILE_MAP_LAYER_NAME);
 

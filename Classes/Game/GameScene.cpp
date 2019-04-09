@@ -51,14 +51,7 @@ bool GameScene::init() {
 	this->addChild(container);
 	container->addChild(_itemPanel);
 	container->addChild(_HUDLayer);
-
-	#if (USE_SD == true)
-        cocos2d::log("Using SD");
-        container->setPosition(Vec2(500, 500));
-    #else
-        cocos2d::log("Using HD");
-        container->setPosition(Vec2(2000, 2000));
-    #endif
+	container->setPosition(Vec2(_tileMapLayer->getMap()->getBoundingBox().size.width/2, _tileMapLayer->getMap()->getBoundingBox().size.height/2));
 	cameraTravel -= container->getPosition();
 	return true;
 }

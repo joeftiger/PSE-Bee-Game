@@ -21,7 +21,7 @@ void TouchUtil::setDrag(Point screenTouch, Point layerTouch) {
 			drag = Sprite::create(name);
 			drag->setPosition(screenTouch - layerTouch);
 			drag->setTag(sprite->getTag());
-			drag->setScale(MAP_SCALE);
+			drag->setScale(MAP_SCALE_HD);
 			drag->setAnchorPoint(Vec2(0.5f, 0));
 		}
 	}
