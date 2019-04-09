@@ -11,8 +11,6 @@ BeeHiveAtlas *BeeHiveAtlas::_instance = nullptr;
 BeeHiveAtlas *BeeHiveAtlas::getInstance() {
 	if (!_instance) {
 		_instance = new BeeHiveAtlas;
-		// FIXME: The scheduler apparently does not run, as BeeHiveAtlas::update is never called!
-		//_instance->schedule(schedule_selector(BeeHiveAtlas::update), 1.0f);
 		Director::getInstance()->getScheduler()->schedule(schedule_selector(BeeHiveAtlas::update), _instance, 1.0f, false);
 	}
 	
@@ -64,7 +62,7 @@ void BeeHiveAtlas::notify(void *observable) {
 }
 
 void BeeHiveAtlas::update(float dt) {
-	//cocos2d::log("%f", dt);
+	//cocos2d::log("BeeHiveAtlas:\tUpdating beehives.");
 	for (auto bh : _beeHives) {
 		bh->update();
 	}
