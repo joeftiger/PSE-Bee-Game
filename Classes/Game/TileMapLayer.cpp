@@ -9,8 +9,7 @@ bool TileMapLayer::init() {
 
 #if (USE_SD == true)
     cocos2d::log("Using SD");
-    //_tileMap = TMXTiledMap::create("tilemaps/mapSD.tmx");
-    _tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
+    _tileMap = TMXTiledMap::create("tilemaps/mapSD.tmx");
 #else
     cocos2d::log("Using HD");
     _tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
