@@ -63,13 +63,13 @@ float BeeHive::takeRawHoney(float amount) {
 
 void BeeHive::update() {
 	if (!isFull()) {
-		int modifier = std::min(_beesAlive / 100, 20);
+		int modifier = std::min(_beesAlive / 30, 100);
 		int resultingBees = _beesAlive + modifier;
 		_beesAlive = std::min(MAX_BEES, resultingBees);
 	}
 
 	if (!hasFullStorage()) {
-		float modifier = std::min(_beesAlive / 1000, 5);
+		float modifier = std::min(_beesAlive / 100.0f, 100.0f);
 		float resultingHoney = _rawHoney + modifier;
 		_rawHoney = std::min(MAX_RAW_HONEY, resultingHoney);
 	}
