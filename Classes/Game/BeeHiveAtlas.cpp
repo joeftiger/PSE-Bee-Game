@@ -29,6 +29,9 @@ void BeeHiveAtlas::notify(void *observable) {
 
 	auto layer = (TileMapLayer *) cocos2d::Director::getInstance()->getRunningScene()->getChildByName(
 			TILE_MAP_LAYER_NAME);
+	if (layer == nullptr) {
+	    layer = (TileMapLayer *) observable;
+	}
 	auto positions = layer->getBeeHives();
 	bool notifyObservers = false;
 
