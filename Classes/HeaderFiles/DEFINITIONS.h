@@ -10,6 +10,7 @@
 #define UPDATE_TIME 0.01f
 #define TEXT_SIZE_HUD 20
 
+#define USE_SD true
 
 /* Time */
 #define LENGTH_MONTH 3 //in minutes
