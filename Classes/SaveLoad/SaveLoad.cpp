@@ -135,7 +135,7 @@ std::vector<std::vector<int>> SaveLoad::loadMap() {
 		assert(itr->value.IsArray());
 		std::vector<int> temp;
 		for (auto& m : itr->value.GetArray()) {
-			log("%i", m.GetInt());
+			//log("%i", m.GetInt());
 			assert(m.IsInt());
 			temp.push_back(m.GetInt());
 		}
