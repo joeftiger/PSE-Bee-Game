@@ -40,10 +40,8 @@ bool GameScene::init() {
 	auto tileMapAtlas = BeeHiveAtlas::getInstance();
 	_tileMapLayer->subscribe(*tileMapAtlas);
 
-	// subscribe player to tileMapAtlas
-	auto player = Player::getInstance();
-	player->subscribe(*tileMapAtlas);
-
+	// getInstance() subscribes to TileMapAtlas, if not called already
+	Player::getInstance();
 	tileMapAtlas->notify(_tileMapLayer);
 
 	//HUD Layer
