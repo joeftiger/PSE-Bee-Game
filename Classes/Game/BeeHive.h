@@ -96,7 +96,7 @@ public:
 	 * Sets the position of the beehive.
 	 * @param pos the position
 	 */
-	void setPosition(cocos2d::Vec2 pos);
+	void setPosition(const cocos2d::Vec2& pos);
 
 	/**
 	 *
