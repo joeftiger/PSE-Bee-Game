@@ -35,6 +35,7 @@ bool HUDLayer::init() {
 	auto menuItem = MenuItemLabel::create(label);
 	menuItem->setCallback([&](cocos2d::Ref *sender) {
 		SaveLoad::saveMap();
+		SaveLoad::saveBeehives();
 		//TODO: Add beehives here or create general method in saveload
 		Director::getInstance()->replaceScene(MainMenu::scene());
 	});
@@ -84,6 +85,9 @@ bool HUDLayer::init() {
 	return true;
 }
 
+/**
+
+*/
 void HUDLayer::timer(float dt) {
 	timePassed += dt;
 
@@ -112,22 +116,26 @@ std::string HUDLayer::stringShortener(std::string s) {
 	std::string temp;
 
 	switch (s.length()) {
+
 	case 4:
 		temp = s.substr(0, 1);
 		temp += '.';
 		temp += s.substr(1, 1);
 		temp += 'k';
 		return temp;
+
 	case 5:
 		temp = s.substr(0, 2);
 		temp += '.';
 		temp += s.substr(2, 1);
 		temp += 'k';
 		return temp;
+
 	case 6:
 		temp = s.substr(0, 3);
 		temp += 'k';
 		return temp;
+
 	default: return s;
 	}
 }

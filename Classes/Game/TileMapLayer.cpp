@@ -142,6 +142,11 @@ void TileMapLayer::loadMap() {
 			}
 		}
 	}
+
+	if (SaveLoad::beeHiveSaveExists()) {
+		SaveLoad::loadBeehives();
+	}
+
 }
 
 void TileMapLayer::booleanInverter() {
