@@ -55,7 +55,7 @@ void BeeHiveAtlas::notify(void *observable) {
 	}
 }
 
-void BeeHiveAtlas::update(float dt) {
+void BeeHiveAtlas::updateBeeHives(float dt) {
 	for (auto const& pair : _beeHives) {
 		pair.second->update();
 	}

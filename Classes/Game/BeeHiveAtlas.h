@@ -19,7 +19,7 @@ private:
 
 	BeeHiveAtlas(const BeeHiveAtlas &);
 
-	~BeeHiveAtlas() final = default;
+	~BeeHiveAtlas() = default;
 
 public:
 	static BeeHiveAtlas *getInstance();
@@ -37,7 +37,7 @@ public:
 	 */
 	void notify(void *observable) override;
 
-	void update(float dt);
+	void updateBeeHives(float dt);
 
 	void toJSON(rapidjson::Document &doc) override;
 
