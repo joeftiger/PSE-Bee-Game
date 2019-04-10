@@ -15,6 +15,9 @@ private:
 	float timePassed;
 	Label *timeLabel;
 
+	float money;
+	Label *moneyLabel;
+
 	float onePofScreenH;
 	float onePofScreenW;
 
