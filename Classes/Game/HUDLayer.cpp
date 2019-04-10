@@ -98,8 +98,7 @@ void HUDLayer::timer(float dt) {
 	}
 	
 	auto h = std::to_string((int) Player::getInstance()->totalRawHoney());
-	auto h1 = std::to_string(100000);
-	honeyLabel->setString(stringShortener(h1));
+	honeyLabel->setString(stringShortener(h));
 	
 	__String *timeToDisplay = __String::createWithFormat("%i", months);
 	timeLabel->setString(timeToDisplay->getCString());
