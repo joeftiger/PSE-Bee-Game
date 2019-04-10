@@ -11,7 +11,7 @@ BeeHiveAtlas *BeeHiveAtlas::_instance = nullptr;
 BeeHiveAtlas *BeeHiveAtlas::getInstance() {
 	if (!_instance) {
 		_instance = new BeeHiveAtlas;
-		Director::getInstance()->getScheduler()->schedule(schedule_selector(BeeHiveAtlas::update), _instance, 1.0f, false);
+		 Director::getInstance()->getScheduler()->schedule(schedule_selector(BeeHiveAtlas::update), _instance, 1.0f, false);
 	}
 	
 	return _instance;
@@ -19,8 +19,8 @@ BeeHiveAtlas *BeeHiveAtlas::getInstance() {
 
 void BeeHiveAtlas::getBeeHives(std::vector <BeeHive *> &beeHives) {
 	beeHives.clear();
-	for (auto bh : _beeHives) {
-		beeHives.emplace_back(bh);
+	for (auto const& pair : _beeHives) {
+		beeHives.emplace_back(pair.second);
 	}
 }
 
@@ -37,21 +37,11 @@ void BeeHiveAtlas::notify(void *observable) {
 
 	// add missing beehives
 	for (const auto &pos : positions) {
-		auto hasHive = false;
-
-		// do we have a hive with that position?
-		for (auto bh : _beeHives) {
-			if (pos == bh->position()) {
-				hasHive = true;
-				break;
-			}
-		}
-
-		// create bee hive
-		if (!hasHive) {
+		// more efficient direct call than count() > 0
+		if (_beeHives.find(pos) == _beeHives.end()) {
 			auto hive = new BeeHive();
 			hive->setPosition(pos);
-			_beeHives.emplace_back(hive);
+			_beeHives.emplace(pos, hive);
 
 			notifyObservers = true;
 		}
@@ -66,8 +56,16 @@ void BeeHiveAtlas::notify(void *observable) {
 
 void BeeHiveAtlas::update(float dt) {
 	//cocos2d::log("BeeHiveAtlas:\tUpdating beehives.");
-	for (auto bh : _beeHives) {
-		bh->update();
+	for (auto const& pair : _beeHives) {
+		pair.second->update();
 	}
+}
+
+void BeeHiveAtlas::toJSON(rapidjson::Document &doc) {
+
+}
+
+void BeeHiveAtlas::fromJSON(rapidjson::Document &doc) {
+
 }
 
