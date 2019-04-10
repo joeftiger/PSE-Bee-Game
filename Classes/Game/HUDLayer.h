@@ -31,6 +31,8 @@ public:
 
 	void timer(float dt);
 
+	std::string stringShortener(std::string s);
+
 	CREATE_FUNC(HUDLayer);
 };
 

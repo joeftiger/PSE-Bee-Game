@@ -96,9 +96,39 @@ void HUDLayer::timer(float dt) {
 		months = 0;
 		years++;
 	}
-
+	
 	auto h = std::to_string((int) Player::getInstance()->totalRawHoney());
-	honeyLabel->setString(h);
+	auto h1 = std::to_string(100000);
+	honeyLabel->setString(stringShortener(h1));
+	
 	__String *timeToDisplay = __String::createWithFormat("%i", months);
 	timeLabel->setString(timeToDisplay->getCString());
+}
+/**
+	Abbriviates string if longer than 4 Digits
+	@param s string to be shortened
+	@return shortened string
+*/
+std::string HUDLayer::stringShortener(std::string s) {
+	std::string temp;
+
+	switch (s.length()) {
+	case 4:
+		temp = s.substr(0, 1);
+		temp += '.';
+		temp += s.substr(1, 1);
+		temp += 'k';
+		return temp;
+	case 5:
+		temp = s.substr(0, 2);
+		temp += '.';
+		temp += s.substr(2, 1);
+		temp += 'k';
+		return temp;
+	case 6:
+		temp = s.substr(0, 3);
+		temp += 'k';
+		return temp;
+	default: return s;
+	}
 }
