@@ -114,6 +114,5 @@ void BeeHive::fromJSON(rapidjson::Document &doc) {
 
 	assert(beeHive["_posY"].IsInt());
 	_position.y = beeHive["_posY"].GetInt();
-
 }
 
