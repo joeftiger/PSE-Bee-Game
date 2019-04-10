@@ -24,8 +24,14 @@ bool HUDLayer::init() {
 	onePofScreenH = visibleSize.height / 100;
 	onePofScreenW = visibleSize.width / 100;
 
+	//create label configuration, can be reused in all labels
+	TTFConfig labelConfig;
+	labelConfig.fontFilePath = FONT;
+	labelConfig.fontSize = TEXT_SIZE_HUD;
+
 	//add the menu item for back to main menu
-	auto label = Label::createWithTTF("Main Menu", "fonts/OpenSans-Regular.ttf", 20);
+	auto label = Label::createWithTTF(labelConfig, "Main Menu"); 
+	label->enableOutline(Color4B::BLACK, 1);
 	auto menuItem = MenuItemLabel::create(label);
 	menuItem->setCallback([&](cocos2d::Ref *sender) {
 		SaveLoad::saveMap();
@@ -39,24 +45,39 @@ bool HUDLayer::init() {
 
 	// HoneyCounter + HoneySprite
 	honey = 0;
-	honeyLabel = Label::createWithTTF(std::to_string(honey), "fonts/OpenSans-Regular.ttf", TEXT_SIZE_HUD);
-	honeyLabel->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - onePofScreenW * 8,
+	honeyLabel = Label::createWithTTF(labelConfig, std::to_string(honey));
+	honeyLabel->enableOutline(Color4B::BLACK, 1);
+	honeyLabel->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - onePofScreenW * 20,
 	                             visibleRect.origin.y + visibleRect.size.height - onePofScreenH * 5));
 	this->addChild(honeyLabel, HUD_PRIORITY);
 	auto honeySprite = Sprite::create("sprites/honigglas_2d.png");
 	honeySprite->setScale(0.1f);
 	honeySprite->setAnchorPoint(Vec2(0.5f, 0.5f));
-	honeySprite->setPosition(Vec2(40, 10));
+	honeySprite->setPosition(Vec2(-30, 15));
 	honeyLabel->addChild(honeySprite);
+
+	//MoneyCounter + MoneySprite
+	money = 0;
+	moneyLabel = Label::createWithTTF(labelConfig, std::to_string(honey));
+	moneyLabel->enableOutline(Color4B::BLACK, 1);
+	moneyLabel->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - onePofScreenW * 11,
+								visibleRect.origin.y + visibleRect.size.height - onePofScreenH * 5));
+	this->addChild(moneyLabel, HUD_PRIORITY);
+	auto moneySprite = Sprite::create("sprites/muenze_einzeln.png");
+	moneySprite->setScale(0.1f);
+	moneySprite->setAnchorPoint(Vec2(0.5f, 0.5f));
+	moneySprite->setPosition(Vec2(-30, 15));
+	moneyLabel->addChild(moneySprite);
 
 	//Timer
 	timePassed = 0;
 	months = 0;
 	years = 0;
-	timeLabel = Label::createWithTTF(std::to_string(timePassed), "fonts/OpenSans-Regular.ttf", TEXT_SIZE_HUD);
+	timeLabel = Label::createWithTTF(labelConfig, std::to_string(timePassed));
+	timeLabel->enableOutline(Color4B::BLACK, 1);
 	this->addChild(timeLabel, HUD_PRIORITY);
-	timeLabel->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - onePofScreenW * 6,
-	                            visibleRect.origin.y + visibleRect.size.height - onePofScreenH * 12));
+	timeLabel->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - onePofScreenW * 5,
+	                            visibleRect.origin.y + visibleRect.size.height - onePofScreenH * 5));
 	this->schedule(schedule_selector(HUDLayer::timer), UPDATE_TIME);
 
 	return true;
