@@ -8,6 +8,7 @@
 #include "json/rapidjson.h"
 #include "json/document.h"
 #include "Game/BeeHiveAtlas.h"
+#include "HeaderFiles/CHILD_NAMES.h"
 
 using namespace cocos2d;
 
@@ -20,7 +21,7 @@ private:
 
 	static void jsonToFile(rapidjson::Document & jsonObj, std::string fullPath);
 	
-	static std::string jsonToString(rapidjson::Document & jsonObj);
+	static std::string docToString(rapidjson::Document & jsonObj);
 
 public:
 
