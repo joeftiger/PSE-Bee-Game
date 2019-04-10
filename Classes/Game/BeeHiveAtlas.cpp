@@ -11,7 +11,7 @@ BeeHiveAtlas *BeeHiveAtlas::_instance = nullptr;
 BeeHiveAtlas *BeeHiveAtlas::getInstance() {
 	if (!_instance) {
 		_instance = new BeeHiveAtlas;
-		Director::getInstance()->getScheduler()->schedule(schedule_selector(BeeHiveAtlas::update), _instance, 1.0f, false);
+		//Director::getInstance()->getScheduler()->schedule(schedule_selector(BeeHiveAtlas::update), _instance, 1.0f, false);
 	}
 	
 	return _instance;

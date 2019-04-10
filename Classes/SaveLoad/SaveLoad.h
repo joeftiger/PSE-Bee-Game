@@ -7,7 +7,7 @@
 #include "Game/BeeHive.h"
 #include "json/rapidjson.h"
 #include "json/document.h"
-
+#include "Game/BeeHiveAtlas.h"
 
 using namespace cocos2d;
 
@@ -36,7 +36,7 @@ public:
 
 	static void deleteBeeHivesSave();
 
-	static void saveBeehives(std::vector <BeeHive*> BeeHives);
+	static void saveBeehives();
 
 	static void loadBeehives();
 

@@ -8,7 +8,6 @@
 #include "json/istreamwrapper.h"
 #include "json/ostreamwrapper.h"
 #include "json/prettywriter.h"
-#include "Game/GameScene.h"
 
 using namespace rapidjson;
 
@@ -160,14 +159,16 @@ void SaveLoad::deleteBeeHivesSave() {
 	assert(!beeHiveSaveExists());
 }
 
-void SaveLoad::saveBeehives(std::vector <BeeHive*> BeeHives) {
+void SaveLoad::saveBeehives() {
+	std::vector <BeeHive *> beeHives;
+	BeeHiveAtlas::getInstance()->getBeeHives(beeHives);
 
 	rapidjson::Document doc;
 	rapidjson::StringBuffer jsonBuffer;
 	rapidjson::PrettyWriter <rapidjson::StringBuffer> jsonWriter(jsonBuffer);
 	doc.SetArray();
 	assert(doc.IsArray());
-	for (auto b : BeeHives) {
+	for (auto b : beeHives) {
 		b->toJSON(doc);
 	}
 	doc.Accept(jsonWriter);

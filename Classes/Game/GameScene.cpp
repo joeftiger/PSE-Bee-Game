@@ -39,6 +39,7 @@ bool GameScene::init() {
 	// TileMapAtlas and observe TileMap
 	auto tileMapAtlas = BeeHiveAtlas::getInstance();
 	_tileMapLayer->subscribe(*tileMapAtlas);
+	this->getScheduler()->schedule(schedule_selector(BeeHiveAtlas::update), tileMapAtlas,1.0f, false);
 
 	// getInstance() subscribes to TileMapAtlas, if not called already
 	Player::getInstance();
