@@ -96,6 +96,7 @@ void GameScene::onTouchEnded(void *, void *) {
 
 void GameScene::saveGameState(float dt) {
 	SaveLoad::saveMap();
+	SaveLoad::saveBeehives();
 	//TODO: Add beehives here or create general method in saveload
 }
 
