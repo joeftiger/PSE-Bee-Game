@@ -25,7 +25,7 @@ bool HUDLayer::init() {
 
 	//create label configuration, can be reused in all labels
 	TTFConfig labelConfig;
-	labelConfig.fontFilePath = "fonts/OpenSans-Regular.ttf";
+	labelConfig.fontFilePath = FONT;
 	labelConfig.fontSize = TEXT_SIZE_HUD;
 
 	//add the menu item for back to main menu
