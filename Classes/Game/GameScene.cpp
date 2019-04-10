@@ -58,6 +58,8 @@ bool GameScene::init() {
 	container->addChild(_HUDLayer);
 	container->setPosition(Vec2(_tileMapLayer->getMap()->getBoundingBox().size.width/2 - visibleSize.width/2, _tileMapLayer->getMap()->getBoundingBox().size.height/2 - visibleSize.height/2));
 	cameraTravel -= container->getPosition();
+
+	this->schedule(schedule_selector(GameScene::saveGameState), 60);
 	return true;
 }
 
@@ -91,4 +93,8 @@ void GameScene::onTouchEnded(void *, void *) {
 	_isTouched = false;
 }
 
+void GameScene::saveGameState(float dt) {
+	SaveLoad::saveMap();
+	//TODO: Add beehives here or create general method in saveload
+}
 

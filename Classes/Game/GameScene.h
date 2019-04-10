@@ -37,6 +37,8 @@ public:
 
 	void onTouchEnded(void *, void *);
 
+	void saveGameState(float dt);
+
 	void touchOnItemPanel();
 
 	void ShowHideItemPanel();
