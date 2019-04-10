@@ -115,8 +115,7 @@ void HUDLayer::timer(float dt) {
 std::string HUDLayer::stringShortener(std::string s) {
 	std::string temp;
 
-	switch (s.length()) {
-
+	switch (s.length()) {	
 	case 4:
 		temp = s.substr(0, 1);
 		temp += '.';
@@ -135,7 +134,30 @@ std::string HUDLayer::stringShortener(std::string s) {
 		temp = s.substr(0, 3);
 		temp += 'k';
 		return temp;
+	
+	case 7:
+		temp = s.substr(0, 1);
+		temp += '.';
+		temp += s.substr(1, 1);
+		temp += 'm';
+		return temp;
 
-	default: return s;
+	case 8:
+		temp = s.substr(0, 2);
+		temp += '.';
+		temp += s.substr(2, 1);
+		temp += 'm';
+		return temp;
+
+	case 9:
+		temp = s.substr(0, 3);
+		temp += 'm';
+		return temp;
+
+	case 10:
+		temp = "stop playing already";
+		return temp;
+	default: 
+		return s;
 	}
 }
