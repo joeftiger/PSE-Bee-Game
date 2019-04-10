@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="isometric" renderorder="right-down" width="30" height="30" tilewidth="387" tileheight="223" infinite="0" nextlayerid="5" nextobjectid="1">
+<map version="1.2" tiledversion="1.2.3" orientation="isometric" renderorder="right-down" width="30" height="30" tilewidth="387" tileheight="223" infinite="0" nextlayerid="6" nextobjectid="1">
  <tileset firstgid="1" source="spritesheetSD.tsx"/>
- <layer id="0" name="background" width="30" height="30">
+ <layer id="5" name="background" width="30" height="30">
   <data encoding="csv">
 17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,
 17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,
@@ -69,7 +69,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="2" name="permissions" width="30" height="30" visible="0" opacity="0.5">
+ <layer id="2" name="obstructions" width="30" height="30" visible="0" opacity="0.5">
   <data encoding="csv">
 20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
 20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,
