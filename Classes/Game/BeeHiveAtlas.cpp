@@ -5,6 +5,8 @@
 #include <HeaderFiles/CHILD_NAMES.h>
 #include "BeeHiveAtlas.h"
 #include "TileMapLayer.h"
+#include <json/stringbuffer.h>
+#include <json/writer.h>
 
 BeeHiveAtlas *BeeHiveAtlas::_instance = nullptr;
 
@@ -54,17 +56,33 @@ void BeeHiveAtlas::notify(void *observable) {
 }
 
 void BeeHiveAtlas::update(float dt) {
-	//cocos2d::log("BeeHiveAtlas:\tUpdating beehives.");
 	for (auto const& pair : _beeHives) {
 		pair.second->update();
 	}
 }
 
 void BeeHiveAtlas::toJSON(rapidjson::Document &doc) {
-
+	for (auto const& pair : _beeHives) {
+		pair.second->toJSON(doc);
+	}
 }
 
 void BeeHiveAtlas::fromJSON(rapidjson::Document &doc) {
+	_beeHives.clear();
 
+	for (int i = 0; i < doc.Size(); i++) {
+		rapidjson::Document subDoc;
+		rapidjson::Value &data = doc[i];
+		subDoc.SetObject();
+		subDoc.AddMember("beeHive", data, subDoc.GetAllocator());
+
+		rapidjson::StringBuffer buffer;
+		rapidjson::Writer <rapidjson::StringBuffer> writer(buffer);
+		subDoc.Accept(writer);
+		auto b = new BeeHive();
+		b->fromJSON(subDoc);
+
+		_beeHives.emplace(b->position(), b);
+	}
 }
 

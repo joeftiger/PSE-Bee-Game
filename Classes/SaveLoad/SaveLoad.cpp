@@ -168,9 +168,12 @@ void SaveLoad::saveBeehives() {
 	rapidjson::PrettyWriter <rapidjson::StringBuffer> jsonWriter(jsonBuffer);
 	doc.SetArray();
 	assert(doc.IsArray());
-	for (auto b : beeHives) {
+	BeeHiveAtlas::getInstance()->toJSON(doc);
+
+	/*for (auto b : beeHives) {
 		b->toJSON(doc);
-	}
+	}*/
+
 	doc.Accept(jsonWriter);
 	jsonToFile(jsonToString(doc), getPath("beehives.json"));
 }
@@ -187,7 +190,9 @@ void SaveLoad::loadBeehives() {
 	rapidjson::Document doc;
 	doc.ParseStream(isw);
 
-	for (int i = 0; i < doc.Size(); i++) {
+	BeeHiveAtlas::getInstance()->fromJSON(doc);
+
+	/*for (int i = 0; i < doc.Size(); i++) {
 		rapidjson::Document subDoc;
 		rapidjson::Value &data = doc[i];
 		subDoc.SetObject();
@@ -199,6 +204,6 @@ void SaveLoad::loadBeehives() {
 		log("BeeHive String %s", buffer.GetString());
 		BeeHive b = BeeHive();
 		b.fromJSON(subDoc);
-	}
+	}*/
 	//TODO: return all beeHives as vector?
 }
