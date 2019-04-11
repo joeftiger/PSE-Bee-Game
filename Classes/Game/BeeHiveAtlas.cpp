@@ -27,14 +27,15 @@ void BeeHiveAtlas::getBeeHives(std::vector <BeeHive *> &beeHives) {
 
 void BeeHiveAtlas::notify(void *observable) {
 	cocos2d::log("BeeHiveAtlas:\tBeing notified...");
+	bool notifyObservers = false;
 
 	auto layer = (TileMapLayer *) cocos2d::Director::getInstance()->getRunningScene()->getChildByName(
 			TILE_MAP_LAYER_NAME);
 	if (layer == nullptr) {
 	    layer = (TileMapLayer *) observable;
+	    notifyObservers = true;
 	}
 	auto positions = layer->getBeeHives();
-	bool notifyObservers = false;
 
 	// add missing beehives
 	for (const auto &pos : positions) {

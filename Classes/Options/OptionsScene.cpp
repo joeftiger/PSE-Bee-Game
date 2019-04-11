@@ -47,7 +47,7 @@ bool OptionsScene::init() {
                                      "menu/CheckBox_Disable.png",
                                      "menu/CheckBoxNode_Disable.png");
 
-	checkbox->setScale(3);
+	checkbox->setScale(1.5f);
     checkbox->setPosition(Vec2(origin.x + visibleSize.width / 2,
                                origin.y + 0.5*visibleSize.height - title->getContentSize().height));
 

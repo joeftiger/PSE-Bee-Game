@@ -16,6 +16,11 @@ private:
 
 	void loadMap();
 
+	/**
+	 * Initialzes the obstruction layer accordin to obstructing tiles in the object layer
+	 */
+	void initObstructionLayer();
+
 public:
 
 	bool useSD = false;

@@ -175,6 +175,28 @@ void TileMapLayer::loadMap() {
 		SaveLoad::loadBeehives();
 	}
 
+	initObstructionLayer();
+}
+
+void TileMapLayer::initObstructionLayer() {
+	auto objects = _tileMap->getLayer("objects");
+	auto obstructions = _tileMap->getLayer("obstructions");
+	auto size = objects->getLayerSize();
+
+	for (auto x = 0; x < size.width; x++) {
+		for (auto y = 0; y < size.height; y++) {
+			auto pos = Vec2(x, y);
+			auto gid = objects->getTileGIDAt(pos);
+
+			if (gid == beehiveSmall ||
+			    gid == beehiveMiddle ||
+			    gid == beehiveBig) {
+				obstructions->setTileGID(obstruction, pos);
+			} else {
+				obstructions->setTileGID(no_obstruction, pos);
+			}
+		}
+	}
 }
 
 void TileMapLayer::booleanInverter() {
