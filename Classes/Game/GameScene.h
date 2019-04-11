@@ -31,6 +31,8 @@ public:
 
 	virtual bool init();
 
+	void beeHiveAtlasUpdate(float dt);
+
 	bool onTouchBegan(Touch *touch, Event *event);
 
 	void onTouchMoved(Touch *touch, Event *event);

@@ -36,7 +36,6 @@ bool HUDLayer::init() {
 	menuItem->setCallback([&](cocos2d::Ref *sender) {
 		SaveLoad::saveMap();
 		SaveLoad::saveBeehives();
-		//TODO: Add beehives here or create general method in saveload
 		Director::getInstance()->replaceScene(MainMenu::scene());
 	});
 	auto backMenu = Menu::create(menuItem, nullptr);

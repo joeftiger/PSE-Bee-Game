@@ -155,10 +155,6 @@ void SaveLoad::saveBeehives() {
 	assert(doc.IsArray());
 	BeeHiveAtlas::getInstance()->toJSON(doc);
 
-	/*for (auto b : beeHives) {
-		b->toJSON(doc);
-	}*/
-
 	doc.Accept(jsonWriter);
 	jsonToFile(docToString(doc), getPath("beehives.json"));
 }
@@ -180,20 +176,6 @@ void SaveLoad::loadBeehives() {
 
 	BeeHiveAtlas::getInstance()->fromJSON(doc);
 
-	/*for (int i = 0; i < doc.Size(); i++) {
-		rapidjson::Document subDoc;
-		rapidjson::Value &data = doc[i];
-		subDoc.SetObject();
-		subDoc.AddMember("beeHive", data, subDoc.GetAllocator());
-
-		StringBuffer buffer;
-		Writer <StringBuffer> writer(buffer);
-		subDoc.Accept(writer);
-		log("BeeHive String %s", buffer.GetString());
-		BeeHive b = BeeHive();
-		b.fromJSON(subDoc);
-	}*/
-	//TODO: return all beeHives as vector?
 }
 
 /**

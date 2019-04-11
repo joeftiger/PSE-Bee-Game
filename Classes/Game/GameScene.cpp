@@ -39,7 +39,8 @@ bool GameScene::init() {
 	// TileMapAtlas and observe TileMap
 	auto tileMapAtlas = BeeHiveAtlas::getInstance();
 	_tileMapLayer->subscribe(*tileMapAtlas);
-	this->getScheduler()->schedule(schedule_selector(BeeHiveAtlas::updateBeeHives), tileMapAtlas,1.0f, false);
+	//this->scheduleUpdate();
+	//this->getScheduler()->schedule(schedule_selector(BeeHiveAtlas::updateBeeHives), tileMapAtlas,1.0f, false, s);
 
 	// getInstance() subscribes to TileMapAtlas, if not called already
 	Player::getInstance();
@@ -60,8 +61,16 @@ bool GameScene::init() {
 	container->setPosition(Vec2(_tileMapLayer->getMap()->getBoundingBox().size.width/2 - visibleSize.width/2, _tileMapLayer->getMap()->getBoundingBox().size.height/2 - visibleSize.height/2));
 	cameraTravel -= container->getPosition();
 
-	this->schedule(schedule_selector(GameScene::saveGameState), 60);
+	this->schedule(schedule_selector(GameScene::saveGameState), 60.0f);
+	this->schedule(schedule_selector(GameScene::beeHiveAtlasUpdate), 1.0f);
 	return true;
+}
+
+/**
+	Calls BeeHiveUpdate every dt seconds
+*/
+void GameScene::beeHiveAtlasUpdate(float dt) {
+	BeeHiveAtlas::getInstance()->updateBeeHives(dt);
 }
 
 bool GameScene::onTouchBegan(Touch *touch, Event *event) {
