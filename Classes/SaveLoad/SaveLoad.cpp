@@ -11,8 +11,11 @@
 
 using namespace rapidjson;
 
+/**
+	Saves the current tileMap in json-format into "tilemap.json"
+*/
 void SaveLoad::saveMap() {
-	auto tileMapLayer = (TileMapLayer *)cocos2d::Director::getInstance()->getRunningScene()->getChildByName("TileMapLayer");
+	auto tileMapLayer = (TileMapLayer *)cocos2d::Director::getInstance()->getRunningScene()->getChildByName(TILE_MAP_LAYER_NAME);
 	auto layer = tileMapLayer->getLayer();
 
 	rapidjson::Document d;
@@ -35,7 +38,7 @@ void SaveLoad::saveMap() {
 	log("%s %s", "tileMapJson", s.GetString());
 	d.Parse(s.GetString());
 
-	jsonToFile(jsonToString(d), getPath("tilemap.json"));
+	jsonToFile(docToString(d), getPath("tilemap.json"));
 }
 
 /**
@@ -55,8 +58,8 @@ std::string SaveLoad::getPath(std::string fileName) {
 
 /**
 	Writes a json-string into file on disk
-	@param json
-	@param fullPath
+	@param json a string of json objects
+	@param fullPath use getPath() to get a writable path
 */
 void SaveLoad::jsonToFile(std::string json, std::string fullPath) {
 	bool b = FileUtils::getInstance()->writeStringToFile(json, fullPath);
@@ -66,40 +69,19 @@ void SaveLoad::jsonToFile(std::string json, std::string fullPath) {
 }
 
 /**
-	Test-Method, currently unused
-*/
-void SaveLoad::jsonToFile(rapidjson::Document &jsonObj, std::string fullPath) {
-//	std::ofstream outputFile;
-//
-//	outputFile.open(fullPath);
-//	if (outputFile.is_open()) {
-//		std::string json = jsonToString(jsonObj);
-//		outputFile << json;
-//	}
-//	outputFile.close();
-
-	std::ofstream ofs{R"(C:/Users/Tobias/AppData/Local/PSE-Bee-Game/tilemap.json)"};
-	if (!ofs.is_open()) {
-		log("%s", "Couldn't open file");
-	}
-	OStreamWrapper osw(ofs);
-	Writer <OStreamWrapper> out(osw);
-	jsonObj.Accept(out);
-}
-
-/**
 	Converts rapidjson::Document object into a string
+	@param rapidjson::Document 
+	@return std::string string for the given Document
 */
-std::string SaveLoad::jsonToString(rapidjson::Document &jsonObj) {
+std::string SaveLoad::docToString(rapidjson::Document &jsonObj) {
 	rapidjson::StringBuffer buffer;
 	rapidjson::Writer <rapidjson::StringBuffer> jsonWriter(buffer);
 	jsonObj.Accept(jsonWriter);
 	return std::string(buffer.GetString());
 }
 
-
 /**
-	Loads tileMap data from disk
+	Loads tileMap data from file
 */
 std::vector<std::vector<int>> SaveLoad::loadMap() {
 	std::string path = getPath("tilemap.json");
@@ -159,6 +141,9 @@ void SaveLoad::deleteBeeHivesSave() {
 	assert(!beeHiveSaveExists());
 }
 
+/**
+	Saves all beeHives on the current tileMap into a json-array and writes them into "beehives.json"
+*/
 void SaveLoad::saveBeehives() {
 	std::vector <BeeHive *> beeHives;
 	BeeHiveAtlas::getInstance()->getBeeHives(beeHives);
@@ -175,9 +160,12 @@ void SaveLoad::saveBeehives() {
 	}*/
 
 	doc.Accept(jsonWriter);
-	jsonToFile(jsonToString(doc), getPath("beehives.json"));
+	jsonToFile(docToString(doc), getPath("beehives.json"));
 }
 
+/**
+	reads all beehives from "beehives.json" and returns them
+*/
 void SaveLoad::loadBeehives() {
 	std::ifstream ifs(getPath("beehives.json"));
 
@@ -206,4 +194,26 @@ void SaveLoad::loadBeehives() {
 		b.fromJSON(subDoc);
 	}*/
 	//TODO: return all beeHives as vector?
+}
+
+/**
+	Test-Method, currently unused
+*/
+void SaveLoad::jsonToFile(rapidjson::Document &jsonObj, std::string fullPath) {
+	//	std::ofstream outputFile;
+	//
+	//	outputFile.open(fullPath);
+	//	if (outputFile.is_open()) {
+	//		std::string json = jsonToString(jsonObj);
+	//		outputFile << json;
+	//	}
+	//	outputFile.close();
+
+	std::ofstream ofs{ R"(C:/Users/Tobias/AppData/Local/PSE-Bee-Game/tilemap.json)" };
+	if (!ofs.is_open()) {
+		log("%s", "Couldn't open file");
+	}
+	OStreamWrapper osw(ofs);
+	Writer <OStreamWrapper> out(osw);
+	jsonObj.Accept(out);
 }

@@ -157,6 +157,7 @@ std::string HUDLayer::stringShortener(std::string s) {
 	case 10:
 		temp = "stop playing already";
 		return temp;
+
 	default: 
 		return s;
 	}

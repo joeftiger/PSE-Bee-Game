@@ -6,7 +6,7 @@
 
 bool TileMapLayer::init() {
     if (!Layer::init()) return false;
-    static bool useSD = false;
+	useSD = true;
 
 #if (USE_SD == true)
     cocos2d::log("Using SD");
@@ -123,10 +123,37 @@ Vec2 TileMapLayer::inTileMapBounds(const Vec2& pos) {
 	}
 }
 
+bool TileMapLayer::canSetTile(const Vec2 &position, int gid) {
+	auto layer = _tileMap->getLayer("obstructions");
+	auto pos = getTilePosition(position);
+
+	return layer->getTileGIDAt(pos) == no_obstruction;
+}
+
 void TileMapLayer::setTile(const Vec2& position, int gid) {
 	auto layer = _tileMap->getLayer("objects");
-	layer->setTileGID(gid, getTilePosition(position)); //1 = flower; 2,3,4,5 = bush1,2,3,4; 6 = grass; 7 = road
-	notifyObservers();
+	auto pos = getTilePosition(position);
+	layer->setTileGID(gid, pos); //1 = flower; 2,3,4,5 = bush1,2,3,4; 6 = grass; 7 = road
+
+	if (gid == beehiveSmall ||
+		gid == beehiveMiddle ||
+		gid == beehiveBig) {
+
+		/*
+		 * FIXME: obstructions is always NULL, even though defined in the mapSD.tmx
+		auto obstructions = _tileMap->getLayer("obstructions");
+		assert(obstructions != nullptr);
+
+		obstructions->setTileGID(obstruction, pos);
+		 */
+
+		notifyObservers();
+	}
+}
+
+void TileMapLayer::showObstructions(bool visible) {
+	auto layer = _tileMap->getLayer("obstructions");
+	layer->setVisible(visible);
 }
 
 
@@ -152,4 +179,3 @@ void TileMapLayer::loadMap() {
 void TileMapLayer::booleanInverter() {
 	useSD = !useSD;
 }
-
