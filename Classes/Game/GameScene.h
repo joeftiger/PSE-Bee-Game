@@ -6,7 +6,7 @@
 #include "HUDLayer.h"
 #include "TileMapLayer.h"
 #include "cocos2d.h"
-#include "TouchUtil.h"
+#include "ItemPanel/TouchUtil.h"
 #include "ItemPanel/ItemPanelLayer.h"
 
 

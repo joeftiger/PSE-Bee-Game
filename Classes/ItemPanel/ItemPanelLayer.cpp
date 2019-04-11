@@ -3,8 +3,9 @@
 //
 
 #include <HeaderFiles/TileGID.h>
+#include <HeaderFiles/CHILD_NAMES.h>
 #include "ItemPanelLayer.h"
-#include "Game/TouchUtil.h"
+#include "TouchUtil.h"
 #include "HeaderFiles/DEFINITIONS.h"
 #include "MainMenu/MainMenuScene.h"
 
@@ -77,10 +78,18 @@ void ItemPanelLayer::showHideItemPanel(Point touchPos) {
 			this->runAction(hide);
 			_isItemShow = false;
 
+			auto tileMapLayer = (TileMapLayer *) Director::getInstance()->getRunningScene()->getChildByName(
+					TILE_MAP_LAYER_NAME);
+			tileMapLayer->showObstructions(false);
 		} else {
 			MoveBy *show = MoveBy::create(0.2, Vec2(-this->getBoundingBox().size.width, 0));
 			this->runAction(show);
 			_isItemShow = true;
+
+			auto tileMapLayer = (TileMapLayer *) Director::getInstance()->getRunningScene()->getChildByName(
+					TILE_MAP_LAYER_NAME);
+			assert(tileMapLayer != nullptr);
+			tileMapLayer->showObstructions(true);
 		}
 	}
 	if (_isItemShow) {
