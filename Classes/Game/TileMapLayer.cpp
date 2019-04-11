@@ -23,6 +23,7 @@ bool TileMapLayer::init() {
 
 	this->setName(TILE_MAP_LAYER_NAME);
 	this->loadMap();
+	this->showObstructions(false);
 	return true;
 }
 
@@ -140,12 +141,12 @@ void TileMapLayer::setTile(const Vec2& position, int gid) {
 		gid == beehiveBig) {
 
 		/*
-		 * FIXME: obstructions is always NULL, even though defined in the mapSD.tmx
+		 * FIXME: obstructions is always NULL, even though defined in the mapSD.tmx */
+		assert(_tileMap->getLayerNum() == 3);
 		auto obstructions = _tileMap->getLayer("obstructions");
 		assert(obstructions != nullptr);
 
 		obstructions->setTileGID(obstruction, pos);
-		 */
 
 		notifyObservers();
 	}

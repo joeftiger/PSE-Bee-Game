@@ -96,7 +96,13 @@ void GameScene::onTouchMoved(Touch *touch, Event *event) {
 
 void GameScene::onTouchEnded(void *, void *) {
 	if (_itemPanel->isDrag()) {
-		_tileMapLayer->setTile(_touchPosition - cameraTravel, _itemPanel->getDrag()->getTag());
+		auto pos = _touchPosition - cameraTravel;
+		auto gid = _itemPanel->getDrag()->getTag();
+
+		if (_tileMapLayer->canSetTile(pos, gid)) {
+			_tileMapLayer->setTile(pos, gid);
+		}
+
 		_itemPanel->removeChild(_itemPanel->getDrag());
 		_itemPanel->setIsDrag(false);
 	}
