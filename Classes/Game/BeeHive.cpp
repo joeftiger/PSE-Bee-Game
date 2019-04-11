@@ -104,7 +104,7 @@ void BeeHive::fromJSON(rapidjson::Document &doc) {
 	_beesAlive = beeHive["_beesAlive"].GetInt();
 
 	assert(beeHive["_varoaAlive"].IsInt());
-	_beesAlive = beeHive["_varoaAlive"].GetInt();
+	_varoaAlive = beeHive["_varoaAlive"].GetInt();
 
 	assert(beeHive["_rawHoney"].IsFloat());
 	_rawHoney = beeHive["_rawHoney"].GetFloat();
