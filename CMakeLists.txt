@@ -93,7 +93,7 @@ list(APPEND GAME_SOURCE
         Classes/Shop/ShopScene.cpp
         Classes/SaveLoad/SaveLoad.cpp
         Classes/ItemPanel/TouchUtil.cpp
-        Classes/TileMapObjects/Tile.cpp
+        Classes/TileMapObjects/TileGID.cpp
         Classes/TileMapObjects/Tree.cpp
      )
 list(APPEND GAME_HEADER
@@ -113,7 +113,7 @@ list(APPEND GAME_HEADER
         Classes/Shop/ShopScene.h
         Classes/SaveLoad/SaveLoad.h
         Classes/ItemPanel/TouchUtil.h
-        Classes/TileMapObjects/Tile.h
+        Classes/TileMapObjects/TileGID.h
         Classes/TileMapObjects/Tree.h
      )
 
