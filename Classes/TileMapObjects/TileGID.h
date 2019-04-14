@@ -9,7 +9,7 @@
 #include <TileMapObjects/Placeable.h>
 
 /**
- * A tile is a placeable object
+ * A tile is a placeable object for the tilemap of the TileMapLayer.
  */
 class TileGID : public Placeable {
 public:
