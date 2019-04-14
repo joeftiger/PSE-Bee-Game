@@ -1,7 +1,7 @@
 
 #include "GameScene.h"
 #include "BeeHiveAtlas.h"
-#include "HeaderFiles/TileGID.h"
+#include "TileMapObjects/TileGID.h"
 #include "SaveLoad/SaveLoad.h"
 #include "ItemPanel/ItemPanelLayer.h"
 #include "AppDelegate.h"

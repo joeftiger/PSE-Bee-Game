@@ -32,6 +32,6 @@ void Player::notify(void *pVoid) {
 	BeeHiveAtlas::getInstance()->getBeeHives(_beeHives);
 }
 
-std::unordered_map <TileGID, size_t> *Player::getInventory() {
+std::unordered_map <Placeable, size_t> *Player::getInventory() {
 	return _inventory;
 }

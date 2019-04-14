@@ -1,7 +1,7 @@
 #include <HeaderFiles/CHILD_NAMES.h>
 #include "TileMapLayer.h"
 #include "HeaderFiles/DEFINITIONS.h"
-#include "HeaderFiles/TileGID.h"
+#include "TileMapObjects/TileGID.h"
 #include "SaveLoad/SaveLoad.h"
 
 bool TileMapLayer::init() {
@@ -58,9 +58,9 @@ std::vector <cocos2d::Vec2> TileMapLayer::getBeeHives() {
 			auto coordinate = Vec2(x, y);
 			auto gid = layer->getTileGIDAt(coordinate);
 
-			if (gid == beehiveSmall ||
-			    gid == beehiveMiddle ||
-			    gid == beehiveBig) {
+			if (gid == TileGID::beehiveSmall ||
+			    gid == TileGID::beehiveMiddle ||
+			    gid == TileGID::beehiveBig) {
 				beeHives.push_back(coordinate);
 			}
 		}
@@ -128,7 +128,7 @@ bool TileMapLayer::canSetTile(const Vec2 &position, int gid) {
 	auto layer = _tileMap->getLayer("obstructions");
 	auto pos = getTilePosition(position);
 
-	return layer->getTileGIDAt(pos) == no_obstruction;
+	return layer->getTileGIDAt(pos) == TileGID::no_obstruction;
 }
 
 void TileMapLayer::setTile(const Vec2& position, int gid) {
@@ -136,9 +136,9 @@ void TileMapLayer::setTile(const Vec2& position, int gid) {
 	auto pos = getTilePosition(position);
 	layer->setTileGID(gid, pos); //1 = flower; 2,3,4,5 = bush1,2,3,4; 6 = grass; 7 = road
 
-	if (gid == beehiveSmall ||
-		gid == beehiveMiddle ||
-		gid == beehiveBig) {
+	if (gid == TileGID::beehiveSmall ||
+		gid == TileGID::beehiveMiddle ||
+		gid == TileGID::beehiveBig) {
 
 		/*
 		 * FIXME: obstructions is always NULL, even though defined in the mapSD.tmx */
@@ -146,7 +146,7 @@ void TileMapLayer::setTile(const Vec2& position, int gid) {
 		auto obstructions = _tileMap->getLayer("obstructions");
 		assert(obstructions != nullptr);
 
-		obstructions->setTileGID(obstruction, pos);
+		obstructions->setTileGID(TileGID::obstruction, pos);
 
 		notifyObservers();
 	}
@@ -188,12 +188,12 @@ void TileMapLayer::initObstructionLayer() {
 			auto pos = Vec2(x, y);
 			auto gid = objects->getTileGIDAt(pos);
 
-			if (gid == beehiveSmall ||
-			    gid == beehiveMiddle ||
-			    gid == beehiveBig) {
-				obstructions->setTileGID(obstruction, pos);
+			if (gid == TileGID::beehiveSmall ||
+			    gid == TileGID::beehiveMiddle ||
+			    gid == TileGID::beehiveBig) {
+				obstructions->setTileGID(TileGID::obstruction, pos);
 			} else {
-				obstructions->setTileGID(no_obstruction, pos);
+				obstructions->setTileGID(TileGID::no_obstruction, pos);
 			}
 		}
 	}
