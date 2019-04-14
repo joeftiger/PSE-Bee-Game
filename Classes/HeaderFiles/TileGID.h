@@ -16,7 +16,7 @@
 	grass = 17,
 	road = 18
 */
-enum TileGID {
+enum TileGIDd {
 	beehiveBig = 1,
 	beehiveSmall = 2,
 	beehiveMiddle = 3,
