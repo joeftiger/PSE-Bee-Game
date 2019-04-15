@@ -11,7 +11,7 @@
 
 #define UPDATE_TIME 0.01f
 #define TEXT_SIZE_HUD 20
-#define FONT "fonts/OpenSans-Regular.ttf"
+#define FONT "fonts/ReemKufi-Regular.ttf"
 
 #define USE_SD true
 

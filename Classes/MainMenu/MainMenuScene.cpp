@@ -17,7 +17,7 @@ cocos2d::Scene *MainMenu::scene() {
 // on "init" you need to initialize your instance
 bool MainMenu::init() {
 
-	auto *background = cocos2d::Sprite::create("menu/main-menu-bg.png");
+	auto *background = cocos2d::Sprite::create("menu/menu-background.jpg");
 	background->setAnchorPoint(Vec2(0, 0));
 	this->addChild(background, -1000); // to ensure it's the lowest layer
 
@@ -26,7 +26,7 @@ bool MainMenu::init() {
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 	// Create a title to identify
-	auto title = Label::createWithTTF("So Bee It!", "fonts/OpenSans-ExtraBold.ttf", 48);
+	auto title = Label::createWithTTF("So Bee It!", "fonts/ReemKufi-Regular.ttf", 48);
 
 	// position the label on the top center of the screen
 	title->setPosition(Vec2(origin.x + visibleSize.width / 2,
@@ -43,21 +43,21 @@ bool MainMenu::init() {
 	auto playButton = MenuItemImage::create("menu/start.png", "menu/start.png",
 	                                        CC_CALLBACK_1(MainMenu::onPlayClick, this));
 	playButton->setPosition(Vec2(origin.x, origin.y).x,
-	                        Vec2(origin.x * 2 - visibleSize.width / 8, origin.y * 6 - visibleSize.height / 8).y);
-	playButton->setScale(2.0f);
+	                        Vec2(origin.x * 2 - visibleSize.width / 8, origin.y * 5 - visibleSize.height / 8).y);
+	playButton->setScale(1.5f);
 	auto optionsButton = MenuItemImage::create("menu/options.png", "menu/options.png",
 	                                           CC_CALLBACK_1(MainMenu::onOptionsClick, this));
-	optionsButton->setPosition(Vec2(origin.x - visibleSize.width / 7 , origin.y).x,
+	optionsButton->setPosition(Vec2(origin.x - 122, origin.y).x,
 	                           Vec2(origin.x * 2 - visibleSize.width / 8 * index,
-	                                origin.y  - visibleSize.height / 8 ).y);
-	++index;
-	optionsButton->setScale(2.0f);
+	                                origin.y  - 112).y);
+
+	optionsButton->setScale(1.5f);
 	auto aboutButton = MenuItemImage::create("menu/credits.png", "menu/credits.png",
 	                                         CC_CALLBACK_1(MainMenu::onAboutClick, this));
-	aboutButton->setPosition(Vec2(origin.x + visibleSize.width / 7 , origin.y).x,
+	aboutButton->setPosition(Vec2(origin.x + 122, origin.y).x,
 	                         Vec2(origin.x * 2 - visibleSize.width / 8 * index,
-	                              origin.y  - visibleSize.height / 8 ).y);
-	aboutButton->setScale(2.0f);
+	                              origin.y  - 112).y);
+	aboutButton->setScale(1.5f);
 	// vector of menu items
 	Vector < MenuItem * > MenuItems;
 
