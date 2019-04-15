@@ -31,12 +31,23 @@ public:
 	void getBeeHives(std::vector <BeeHive *> &beeHives);
 
 	/**
+	 * Returns the BeeHive object at given position.
+	 * @param pos position of beehive in tilemap
+	 * @return beehive object
+	 */
+	BeeHive *getBeeHiveAt(const Vec2& pos);
+
+	/**
 	 * Notifies this BeeHiveAtlas, that the observable has been changed.
 	 * The observable should be a TileMapLayer.
 	 * @param observable
 	 */
 	void notify(void *observable) override;
 
+	/**
+	 * Updates all beehives in the atlas.
+	 * @param dt 
+	 */
 	void updateBeeHives(float dt);
 
 	void toJSON(rapidjson::Document &doc) override;

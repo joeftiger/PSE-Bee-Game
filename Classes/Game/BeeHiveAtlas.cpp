@@ -25,6 +25,10 @@ void BeeHiveAtlas::getBeeHives(std::vector <BeeHive *> &beeHives) {
 	}
 }
 
+BeeHive *BeeHiveAtlas::getBeeHiveAt(const Vec2& pos) {
+	_beeHives[pos];
+}
+
 void BeeHiveAtlas::notify(void *observable) {
 	cocos2d::log("BeeHiveAtlas:\tBeing notified...");
 	bool notifyObservers = false;
@@ -86,4 +90,3 @@ void BeeHiveAtlas::fromJSON(rapidjson::Document &doc) {
 		_beeHives.emplace(b->position(), b);
 	}
 }
-
