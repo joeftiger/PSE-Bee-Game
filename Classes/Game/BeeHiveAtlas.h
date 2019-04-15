@@ -31,6 +31,12 @@ public:
 	void getBeeHives(std::vector <BeeHive *> &beeHives);
 
 	/**
+	 * Returns whether the atlas has a BeeHive obejct at given position.
+	 * @param pos position of beehive in tilemap
+	 * @return <code>true</code> if associated beehive object. <br><code>false</code> otherwise
+	 */
+	bool hasBeeHiveAt(const Vec2& pos);
+	/**
 	 * Returns the BeeHive object at given position.
 	 * @param pos position of beehive in tilemap
 	 * @return beehive object
@@ -46,9 +52,8 @@ public:
 
 	/**
 	 * Updates all beehives in the atlas.
-	 * @param dt 
 	 */
-	void updateBeeHives(float dt);
+	void updateBeeHives(float);
 
 	void toJSON(rapidjson::Document &doc) override;
 

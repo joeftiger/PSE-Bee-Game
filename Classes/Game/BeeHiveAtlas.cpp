@@ -25,8 +25,12 @@ void BeeHiveAtlas::getBeeHives(std::vector <BeeHive *> &beeHives) {
 	}
 }
 
+bool BeeHiveAtlas::hasBeeHiveAt(const Vec2 &pos) {
+	return _beeHives.count(pos) != 0;
+}
+
 BeeHive *BeeHiveAtlas::getBeeHiveAt(const Vec2& pos) {
-	_beeHives[pos];
+	return _beeHives.at(pos);
 }
 
 void BeeHiveAtlas::notify(void *observable) {
@@ -44,7 +48,7 @@ void BeeHiveAtlas::notify(void *observable) {
 	// add missing beehives
 	for (const auto &pos : positions) {
 		// more efficient direct call than count() > 0
-		if (_beeHives.find(pos) == _beeHives.end()) {
+		if (_beeHives.count(pos) == 0) {
 			auto hive = new BeeHive();
 			hive->setPosition(pos);
 			_beeHives.emplace(pos, hive);
@@ -60,7 +64,7 @@ void BeeHiveAtlas::notify(void *observable) {
 	}
 }
 
-void BeeHiveAtlas::updateBeeHives(float dt) {
+void BeeHiveAtlas::updateBeeHives(float) {
 	for (auto const& pair : _beeHives) {
 		pair.second->update();
 	}
