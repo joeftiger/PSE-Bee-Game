@@ -12,6 +12,7 @@ BeeHiveAtlas *BeeHiveAtlas::_instance = nullptr;
 
 BeeHiveAtlas *BeeHiveAtlas::getInstance() {
 	if (!_instance) {
+		cocos2d::log("BeeHiveAtlas:\tCreating instance");
 		_instance = new BeeHiveAtlas;
 	}
 	
@@ -35,7 +36,7 @@ BeeHive *BeeHiveAtlas::getBeeHiveAt(const Vec2& pos) {
 
 void BeeHiveAtlas::notify(void *observable) {
 	bool notifyObservers = false;
-	
+
 	auto layer = (TileMapLayer *) cocos2d::Director::getInstance()->getRunningScene()->getChildByName(
 			TILE_MAP_LAYER_NAME);
 	if (layer == nullptr) {
