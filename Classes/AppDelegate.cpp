@@ -24,7 +24,7 @@
 
 #include "AppDelegate.h"
 #include "Game/GameScene.h"
-#include "Shop/ShopScene.h"
+#include "MainMenu/MainMenuScene.h"
 
 USING_NS_CC;
 
@@ -96,7 +96,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	// create a scene. it's an autorelease object
 	//auto scene = GameScene::createScene();
-    auto scene = ShopScene::createScene();
+    auto scene = MainMenu::scene();
 
 	// run
 	director->runWithScene(scene);
