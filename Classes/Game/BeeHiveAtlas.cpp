@@ -34,9 +34,8 @@ BeeHive *BeeHiveAtlas::getBeeHiveAt(const Vec2& pos) {
 }
 
 void BeeHiveAtlas::notify(void *observable) {
-	cocos2d::log("BeeHiveAtlas:\tBeing notified...");
 	bool notifyObservers = false;
-
+	
 	auto layer = (TileMapLayer *) cocos2d::Director::getInstance()->getRunningScene()->getChildByName(
 			TILE_MAP_LAYER_NAME);
 	if (layer == nullptr) {
@@ -48,6 +47,7 @@ void BeeHiveAtlas::notify(void *observable) {
 	// add missing beehives
 	for (const auto &pos : positions) {
 		if (!hasBeeHiveAt(pos)) {
+			cocos2d::log("BeeHiveAtlas:\tCreating beehive at (%i, %i)", (int) pos.x, (int) pos.y);
 			auto hive = new BeeHive();
 			hive->setPosition(pos);
 			_beeHives.emplace(pos, hive);
@@ -56,9 +56,8 @@ void BeeHiveAtlas::notify(void *observable) {
 		}
 	}
 
-	cocos2d::log("BeeHiveAtlas:\tHaving %zu beehives.", _beeHives.size());
-
 	if (notifyObservers) {
+		cocos2d::log("BeeHiveAtlas:\tNotifying observers");
 		this->notifyObservers();
 	}
 }
