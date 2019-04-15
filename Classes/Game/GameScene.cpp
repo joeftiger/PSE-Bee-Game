@@ -5,6 +5,7 @@
 #include "SaveLoad/SaveLoad.h"
 #include "ItemPanel/ItemPanelLayer.h"
 #include "AppDelegate.h"
+#include "Player.h"
 
 
 using namespace cocos2d;
@@ -38,6 +39,12 @@ bool GameScene::init() {
 	// TileMapAtlas and observe TileMap
 	auto tileMapAtlas = BeeHiveAtlas::getInstance();
 	_tileMapLayer->subscribe(*tileMapAtlas);
+	//this->scheduleUpdate();
+	//this->getScheduler()->schedule(schedule_selector(BeeHiveAtlas::updateBeeHives), tileMapAtlas,1.0f, false, s);
+
+	// getInstance() subscribes to TileMapAtlas, if not called already
+	Player::getInstance();
+	tileMapAtlas->notify(_tileMapLayer);
 
 	//HUD Layer
 	_HUDLayer = HUDLayer::create();
@@ -51,10 +58,19 @@ bool GameScene::init() {
 	this->addChild(container);
 	container->addChild(_itemPanel);
 	container->addChild(_HUDLayer);
-
-	container->setPosition(Vec2(2000, 2000));
+	container->setPosition(Vec2(_tileMapLayer->getMap()->getBoundingBox().size.width/2 - visibleSize.width/2, _tileMapLayer->getMap()->getBoundingBox().size.height/2 - visibleSize.height/2));
 	cameraTravel -= container->getPosition();
+
+	this->schedule(schedule_selector(GameScene::saveGameState), 60.0f);
+	this->schedule(schedule_selector(GameScene::beeHiveAtlasUpdate), 1.0f);
 	return true;
+}
+
+/**
+	Calls BeeHiveUpdate every dt seconds
+*/
+void GameScene::beeHiveAtlasUpdate(float dt) {
+	BeeHiveAtlas::getInstance()->updateBeeHives(dt);
 }
 
 bool GameScene::onTouchBegan(Touch *touch, Event *event) {
@@ -80,11 +96,22 @@ void GameScene::onTouchMoved(Touch *touch, Event *event) {
 
 void GameScene::onTouchEnded(void *, void *) {
 	if (_itemPanel->isDrag()) {
-		_tileMapLayer->setTile(_touchPosition - cameraTravel, _itemPanel->getDrag()->getTag());
+		auto pos = _touchPosition - cameraTravel;
+		auto gid = _itemPanel->getDrag()->getTag();
+
+		if (_tileMapLayer->canSetTile(pos, gid)) {
+			_tileMapLayer->setTile(pos, gid);
+		}
+
 		_itemPanel->removeChild(_itemPanel->getDrag());
 		_itemPanel->setIsDrag(false);
 	}
 	_isTouched = false;
 }
 
+void GameScene::saveGameState(float dt) {
+	SaveLoad::saveMap();
+	SaveLoad::saveBeehives();
+	//TODO: Add beehives here or create general method in saveload
+}
 

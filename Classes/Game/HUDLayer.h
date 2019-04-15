@@ -15,6 +15,9 @@ private:
 	float timePassed;
 	Label *timeLabel;
 
+	float money;
+	Label *moneyLabel;
+
 	float onePofScreenH;
 	float onePofScreenW;
 
@@ -27,6 +30,8 @@ public:
 	virtual bool init();
 
 	void timer(float dt);
+
+	std::string stringShortener(std::string s);
 
 	CREATE_FUNC(HUDLayer);
 };

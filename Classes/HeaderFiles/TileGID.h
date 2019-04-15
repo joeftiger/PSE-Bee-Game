@@ -29,7 +29,9 @@ enum TileGID {
 	bush3 = 15,
 	bush4 = 16,
 	grass = 17,
-	road = 18
+	road = 18,
+	obstruction = 19,
+	no_obstruction = 20
 };
 
 #endif /* TILEGID_H */

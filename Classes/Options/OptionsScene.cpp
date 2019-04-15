@@ -5,7 +5,7 @@
 #include "OptionsScene.h"
 
 using namespace cocos2d;
-
+using namespace cocos2d::ui;
 
 Scene *OptionsScene::createScene() { return OptionsScene::create(); }
 
@@ -29,6 +29,46 @@ bool OptionsScene::init() {
 
 	// add the label as a child to this layer
 	this->addChild(title, 1);
+
+	// Create a title to identify
+    auto toggleGraphics= Label::createWithTTF("Use SD Textures? (Not implemented yet)", "fonts/OpenSans-ExtraBold.ttf", 24);
+
+    // position the label above the check box
+    toggleGraphics->setPosition(Vec2(origin.x + visibleSize.width / 2,
+                            origin.y + 40+ 0.5*visibleSize.height - title->getContentSize().height));
+
+    // add the label as a child to this layer
+    this->addChild(toggleGraphics, 1);
+
+    // checkbox
+    auto checkbox = CheckBox::create("menu/CheckBox_Normal.png",
+                                     "menu/CheckBox_Press.png",
+                                     "menu/CheckBoxNode_Normal.png",
+                                     "menu/CheckBox_Disable.png",
+                                     "menu/CheckBoxNode_Disable.png");
+
+	checkbox->setScale(1.5f);
+    checkbox->setPosition(Vec2(origin.x + visibleSize.width / 2,
+                               origin.y + 0.5*visibleSize.height - title->getContentSize().height));
+
+
+
+    checkbox->addTouchEventListener([&](Ref* sender, Widget::TouchEventType type){
+        switch (type)
+        {
+            case ui::Widget::TouchEventType::BEGAN:
+                break;
+            case ui::Widget::TouchEventType::ENDED:
+                std::cout << "checkbox 1 clicked" << std::endl;
+                //TileMapLayer.booleanInverter();
+                break;
+            default:
+                break;
+        }
+    });
+
+    this->addChild(checkbox, 3);
+
 
 	//add the menu item for back to main menu
 	auto label = Label::createWithTTF("Main Menu", "fonts/OpenSans-Regular.ttf", 20);

@@ -6,7 +6,7 @@
 #include "HUDLayer.h"
 #include "TileMapLayer.h"
 #include "cocos2d.h"
-#include "TouchUtil.h"
+#include "ItemPanel/TouchUtil.h"
 #include "ItemPanel/ItemPanelLayer.h"
 
 
@@ -31,11 +31,15 @@ public:
 
 	virtual bool init();
 
+	void beeHiveAtlasUpdate(float dt);
+
 	bool onTouchBegan(Touch *touch, Event *event);
 
 	void onTouchMoved(Touch *touch, Event *event);
 
 	void onTouchEnded(void *, void *);
+
+	void saveGameState(float dt);
 
 	void touchOnItemPanel();
 

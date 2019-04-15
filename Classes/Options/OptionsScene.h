@@ -6,8 +6,11 @@
 #define _OPTIONSSCENE_H
 
 #include "MainMenu/MainMenuScene.h"
+#include "Game/TileMapLayer.h"
 #include "cocos2d.h"
 #include "ui/UIWidget.h"
+#include "ui/CocosGUI.h"
+#include <iostream>
 
 using namespace cocos2d;
 

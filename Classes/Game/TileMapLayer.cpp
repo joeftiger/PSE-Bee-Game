@@ -1,20 +1,29 @@
-
 #include <HeaderFiles/CHILD_NAMES.h>
 #include "TileMapLayer.h"
 #include "HeaderFiles/DEFINITIONS.h"
 #include "HeaderFiles/TileGID.h"
+#include "SaveLoad/SaveLoad.h"
 
 bool TileMapLayer::init() {
-	if (!Layer::init()) return false;
+    if (!Layer::init()) return false;
+	useSD = true;
 
-	_tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
+#if (USE_SD == true)
+    cocos2d::log("Using SD");
+    _tileMap = TMXTiledMap::create("tilemaps/mapSD.tmx");
+    _tileMap->setScale(MAP_SCALE_SD);
+#else
+    cocos2d::log("Using HD");
+    _tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
+    _tileMap->setScale(MAP_SCALE_HD);
+#endif
 
-	this->addChild(_tileMap, -1);
-	_tileMap->setAnchorPoint(Point(0, 0));
-	_tileMap->setScale(MAP_SCALE);
+    this->addChild(_tileMap, -1);
+    _tileMap->setAnchorPoint(Point(0, 0));
 
 	this->setName(TILE_MAP_LAYER_NAME);
-
+	this->loadMap();
+	this->showObstructions(false);
 	return true;
 }
 
@@ -23,7 +32,7 @@ ssize_t TileMapLayer::getTreeCount() {
 }
 
 ssize_t TileMapLayer::getFlowerCount() {
-	auto layer = _tileMap->getLayer("background");
+	auto layer = _tileMap->getLayer("objects");
 	auto count = 0;
 
 	for (auto y = 0; y < layer->getLayerSize().height; y++) {
@@ -61,6 +70,10 @@ std::vector <cocos2d::Vec2> TileMapLayer::getBeeHives() {
 
 TMXTiledMap *TileMapLayer::getMap() {
 	return _tileMap;
+}
+
+TMXLayer *TileMapLayer::getLayer() {
+	return _tileMap->getLayer("objects");
 }
 
 Vec2 TileMapLayer::getTilePosition(Vec2 pos) {
@@ -111,8 +124,81 @@ Vec2 TileMapLayer::inTileMapBounds(const Vec2& pos) {
 	}
 }
 
+bool TileMapLayer::canSetTile(const Vec2 &position, int gid) {
+	auto layer = _tileMap->getLayer("obstructions");
+	auto pos = getTilePosition(position);
+
+	return layer->getTileGIDAt(pos) == no_obstruction;
+}
+
 void TileMapLayer::setTile(const Vec2& position, int gid) {
 	auto layer = _tileMap->getLayer("objects");
-	layer->setTileGID(gid, getTilePosition(position)); //1 = flower; 2,3,4,5 = bush1,2,3,4; 6 = grass; 7 = road
-	notifyObservers();
+	auto pos = getTilePosition(position);
+	layer->setTileGID(gid, pos); //1 = flower; 2,3,4,5 = bush1,2,3,4; 6 = grass; 7 = road
+
+	if (gid == beehiveSmall ||
+		gid == beehiveMiddle ||
+		gid == beehiveBig) {
+
+		/*
+		 * FIXME: obstructions is always NULL, even though defined in the mapSD.tmx */
+		assert(_tileMap->getLayerNum() == 3);
+		auto obstructions = _tileMap->getLayer("obstructions");
+		assert(obstructions != nullptr);
+
+		obstructions->setTileGID(obstruction, pos);
+
+		notifyObservers();
+	}
+}
+
+void TileMapLayer::showObstructions(bool visible) {
+	auto layer = _tileMap->getLayer("obstructions");
+	layer->setVisible(visible);
+}
+
+
+void TileMapLayer::loadMap() {
+	if (SaveLoad::tileMapSaveExists()) {
+		auto data = SaveLoad::loadMap();
+		auto layer = this->getLayer();
+
+
+		for (int x = 0; x < data.size(); x++) {
+			for (int y = 0; y < data[x].size(); y++) {
+				layer->setTileGID(data[x][y], Vec2(x, y));
+			}
+		}
+	}
+
+	if (SaveLoad::beeHiveSaveExists()) {
+		SaveLoad::loadBeehives();
+	}
+
+	initObstructionLayer();
+}
+
+void TileMapLayer::initObstructionLayer() {
+	auto objects = _tileMap->getLayer("objects");
+	auto obstructions = _tileMap->getLayer("obstructions");
+	auto size = objects->getLayerSize();
+
+	for (auto x = 0; x < size.width; x++) {
+		for (auto y = 0; y < size.height; y++) {
+			auto pos = Vec2(x, y);
+			auto gid = objects->getTileGIDAt(pos);
+
+			if (gid == beehiveSmall ||
+			    gid == beehiveMiddle ||
+			    gid == beehiveBig) {
+				obstructions->setTileGID(obstruction, pos);
+			} else {
+				obstructions->setTileGID(no_obstruction, pos);
+			}
+		}
+	}
+}
+
+void TileMapLayer::booleanInverter() {
+	useSD = !useSD;
 }

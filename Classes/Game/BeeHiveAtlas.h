@@ -10,10 +10,10 @@
 #include "Observer.h"
 #include "TileMapLayer.h"
 
-class BeeHiveAtlas : public cocos2d::Node, public Observable, public Observer {
+class BeeHiveAtlas : public cocos2d::Node, public Observable, public Observer, public Restorable {
 private:
 	static BeeHiveAtlas *_instance;
-	std::vector <BeeHive *> _beeHives;
+	std::map <cocos2d::Vec2, BeeHive *> _beeHives;
 
 	BeeHiveAtlas() = default;
 
@@ -37,7 +37,11 @@ public:
 	 */
 	void notify(void *observable) override;
 
-	void update(float dt);
+	void updateBeeHives(float dt);
+
+	void toJSON(rapidjson::Document &doc) override;
+
+	void fromJSON(rapidjson::Document &doc) override;
 };
 
 #endif //PSE_BEE_GAME_BEEHIVEATLAS_H

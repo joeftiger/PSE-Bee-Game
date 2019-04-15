@@ -5,11 +5,15 @@
 #define HUD_PRIORITY 10
 
 
-#define MAP_SCALE 0.4f
+
+#define MAP_SCALE_SD 0.5f
+#define MAP_SCALE_HD 0.5f
 
 #define UPDATE_TIME 0.01f
 #define TEXT_SIZE_HUD 20
+#define FONT "fonts/OpenSans-Regular.ttf"
 
+#define USE_SD true
 
 /* Time */
 #define LENGTH_MONTH 3 //in minutes
