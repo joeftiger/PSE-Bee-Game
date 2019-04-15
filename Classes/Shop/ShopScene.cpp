@@ -23,48 +23,41 @@ bool ShopScene::init(){
     shopView->setDirection(ui::ScrollView::Direction::VERTICAL);
     shopView->setContentSize( visibleRect.size);
     shopView->setInnerContainerSize( Size(400, 500));
-    shopView->setBackGroundImage("menu/menu-background.jpg");
+    shopView->setBackGroundImage("shop/shop-bg.png");
     shopView->setBounceEnabled( true );
     shopView->setAnchorPoint( Vec2(0.5, 0.5));
     shopView->setPosition( Vec2( visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
 
-    //initialize items
+    //initialize buttons
     auto *button1 = MenuItemImage::create("menu/play-button.png", "menu/play-button.png");
-    //button1->setPosition(Vec2(shopView->getContentSize().width / 2, 50));
     auto *button2 = MenuItemImage::create("menu/options-button.png", "menu/options-button.png");
-    //button2->setPosition(Vec2(shopView->getContentSize().width / 2, 200));
     auto *button3 = MenuItemImage::create("menu/about-button.png", "menu/about-button.png");
     button3->setPosition(Vec2(shopView->getContentSize().width / 2, 300));
 
+    //initialize sprites
     auto *sprite1 = MenuItemImage::create("sprites/honigglas_2d.png", "sprites/honigglas_2d.png");
     sprite1->setScale(0.1f);
-    //sprite1->setAnchorPoint(Vec2(0,0));
-    //sprite1->setPosition(Vec2(shopView->getContentSize().width / 4, 50));
     auto *sprite2 = MenuItemImage::create("sprites/honigglas_2d.png", "sprites/honigglas_2d.png");
     sprite2->setScale(0.1f);
     auto *sprite3 = MenuItemImage::create("sprites/honigglas_2d.png", "sprites/honigglas_2d.png");
     sprite3->setScale(0.1f);
 
-    //auto *count1 = MenuItemAtlasFont::create();
+    // adding item rows to the ScrollView
 
-    /*auto *itemLayout = ui::Layout::create(); //Layout for each row
-    itemLayout->setLayoutType(ui::Layout::Type::HORIZONTAL);
-    itemLayout->setPosition(Vec2(shopView->getContentSize().width / 2, 50));
-    itemLayout->addChild(sprite1);
-    itemLayout->addChild(button1);
-     */
+    Vector < MenuItem * > Honey;
+    auto *spriteHoney = MenuItemImage::create("sprites/honigglas_2d.png", "sprites/honigglas_2d.png");
+    spriteHoney->setScale(0.1f);
+    auto *buyHoney = MenuItemImage::create("shop/plus.png", "shop/plus.png");
+    auto *sellHoney = MenuItemImage::create("shop/minus.png", "shop/minus.png");
+    Honey.pushBack(spriteHoney);
+    Honey.pushBack(buyHoney);
+    Honey.pushBack(sellHoney);
 
-
-    // adding all items
-
-    Vector < MenuItem * > MenuItems1;
-    MenuItems1.pushBack(sprite1);
-    MenuItems1.pushBack(button1);
-    auto itemMenu1 = Menu::createWithArray(MenuItems1);
-    itemMenu1->alignItemsHorizontallyWithPadding(100);
-    itemMenu1->setPosition(Vec2(shopView->getContentSize().width / 2, 100));
-    itemMenu1->setContentSize(Size(visibleSize.width, 100));
-    shopView->addChild(itemMenu1);
+    auto itemHoney = Menu::createWithArray(Honey);
+    itemHoney->alignItemsHorizontallyWithPadding(100);
+    itemHoney->setPosition(Vec2(shopView->getContentSize().width / 2, 100));
+    itemHoney->setContentSize(Size(visibleSize.width, 100));
+    shopView->addChild(itemHoney);
 
     Vector < MenuItem * > MenuItems2;
     MenuItems2.pushBack(sprite2);
