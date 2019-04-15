@@ -44,6 +44,10 @@ public:
 	 */
 	void notify(void *observable) override;
 
+	/**
+	 * Updates all beehives in the atlas.
+	 * @param dt 
+	 */
 	void updateBeeHives(float dt);
 
 	void toJSON(rapidjson::Document &doc) override;
