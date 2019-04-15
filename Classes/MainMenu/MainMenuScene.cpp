@@ -45,21 +45,15 @@ bool MainMenu::init() {
 	// Adding the sprites for the main menu TODO: Add "selected" version (second entry)
 	auto playButton = MenuItemImage::create("menu/start.png", "menu/start.png",
 	                                        CC_CALLBACK_1(MainMenu::onPlayClick, this));
-	playButton->setPosition(Vec2(origin.x, origin.y).x,
-	                        Vec2(origin.x * 2 - visibleSize.width / 8, origin.y + 46 ).y);
+	playButton->setPosition(Vec2(origin.x, origin.y * 1.92));
 
 	auto optionsButton = MenuItemImage::create("menu/options.png", "menu/options.png",
 	                                           CC_CALLBACK_1(MainMenu::onOptionsClick, this));
-	optionsButton->setPosition(Vec2(origin.x - 88, origin.y).x,
-	                           Vec2(origin.x * 2 - visibleSize.width / 8 * index,
-	                                origin.y  - 108).y);
-
+	optionsButton->setPosition(Vec2(origin.x - 88, origin.y  - 108));
 
 	auto aboutButton = MenuItemImage::create("menu/credits.png", "menu/credits.png",
 	                                         CC_CALLBACK_1(MainMenu::onAboutClick, this));
-	aboutButton->setPosition(Vec2(origin.x + 88, origin.y).x,
-	                         Vec2(origin.x * 2 - visibleSize.width / 8 * index,
-	                              origin.y  - 108).y);
+	aboutButton->setPosition(Vec2(origin.x + 88, origin.y - 108));
 
 	// vector of menu items
 	Vector < MenuItem * > MenuItems;
