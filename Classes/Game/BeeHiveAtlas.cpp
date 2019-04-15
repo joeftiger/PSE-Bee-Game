@@ -47,8 +47,7 @@ void BeeHiveAtlas::notify(void *observable) {
 
 	// add missing beehives
 	for (const auto &pos : positions) {
-		// more efficient direct call than count() > 0
-		if (_beeHives.count(pos) == 0) {
+		if (!hasBeeHiveAt(pos)) {
 			auto hive = new BeeHive();
 			hive->setPosition(pos);
 			_beeHives.emplace(pos, hive);
