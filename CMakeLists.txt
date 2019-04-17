@@ -94,7 +94,7 @@ list(APPEND GAME_SOURCE
         Classes/SaveLoad/SaveLoad.cpp
         Classes/ItemPanel/TouchUtil.cpp
         Classes/TileMapObjects/PlaceableTile.cpp
-        Classes/TileMapObjects/Tree.cpp
+        Classes/TileMapObjects/PlaceableSprite.cpp
      )
 list(APPEND GAME_HEADER
         Classes/AppDelegate.h
@@ -114,7 +114,7 @@ list(APPEND GAME_HEADER
         Classes/SaveLoad/SaveLoad.h
         Classes/ItemPanel/TouchUtil.h
         Classes/TileMapObjects/PlaceableTile.h
-        Classes/TileMapObjects/Tree.h
+        Classes/TileMapObjects/PlaceableSprite.h
      )
 
 if(ANDROID)
