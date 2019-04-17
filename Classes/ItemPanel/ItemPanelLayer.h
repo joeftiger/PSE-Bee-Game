@@ -24,9 +24,9 @@ public:
 
 	LayerColor *getShowRec();
 
-	void showHideItemPanel(const Point& touchPos);
+	void showHideItemPanel(const Point &touchPos);
 
-	void touchOnItemPanel(const Point& touchPos);
+	void touchOnItemPanel(const Point &touchPos);
 
 	CREATE_FUNC(ItemPanelLayer);
 };

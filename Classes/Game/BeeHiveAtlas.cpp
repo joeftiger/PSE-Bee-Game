@@ -15,13 +15,13 @@ BeeHiveAtlas *BeeHiveAtlas::getInstance() {
 		cocos2d::log("BeeHiveAtlas:\tCreating instance");
 		_instance = new BeeHiveAtlas;
 	}
-	
+
 	return _instance;
 }
 
-void BeeHiveAtlas::getBeeHives(std::vector <BeeHive *> &beeHives) {
+void BeeHiveAtlas::getBeeHives(std::vector<BeeHive *> &beeHives) {
 	beeHives.clear();
-	for (auto const& pair : _beeHives) {
+	for (auto const &pair : _beeHives) {
 		beeHives.emplace_back(pair.second);
 	}
 }
@@ -30,7 +30,7 @@ bool BeeHiveAtlas::hasBeeHiveAt(const Vec2 &pos) {
 	return _beeHives.count(pos) != 0;
 }
 
-BeeHive *BeeHiveAtlas::getBeeHiveAt(const Vec2& pos) {
+BeeHive *BeeHiveAtlas::getBeeHiveAt(const Vec2 &pos) {
 	return _beeHives.at(pos);
 }
 
@@ -40,8 +40,8 @@ void BeeHiveAtlas::notify(void *observable) {
 	auto layer = (TileMapLayer *) cocos2d::Director::getInstance()->getRunningScene()->getChildByName(
 			TILE_MAP_LAYER_NAME);
 	if (layer == nullptr) {
-	    layer = (TileMapLayer *) observable;
-	    notifyObservers = true;
+		layer = (TileMapLayer *) observable;
+		notifyObservers = true;
 	}
 	auto positions = layer->getBeeHives();
 
@@ -64,13 +64,13 @@ void BeeHiveAtlas::notify(void *observable) {
 }
 
 void BeeHiveAtlas::updateBeeHives(float) {
-	for (auto const& pair : _beeHives) {
+	for (auto const &pair : _beeHives) {
 		pair.second->update();
 	}
 }
 
 void BeeHiveAtlas::toJSON(rapidjson::Document &doc) {
-	for (auto const& pair : _beeHives) {
+	for (auto const &pair : _beeHives) {
 		pair.second->toJSON(doc);
 	}
 }
@@ -85,7 +85,7 @@ void BeeHiveAtlas::fromJSON(rapidjson::Document &doc) {
 		subDoc.AddMember("beeHive", data, subDoc.GetAllocator());
 
 		rapidjson::StringBuffer buffer;
-		rapidjson::Writer <rapidjson::StringBuffer> writer(buffer);
+		rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
 		subDoc.Accept(writer);
 		auto b = new BeeHive();
 		b->fromJSON(subDoc);

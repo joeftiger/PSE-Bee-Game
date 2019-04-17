@@ -5,25 +5,28 @@
 #include "SaveLoad/SaveLoad.h"
 
 bool TileMapLayer::init() {
-    if (!Layer::init()) return false;
+	if (!Layer::init()) return false;
 	useSD = true;
 
 #if (USE_SD == true)
-    cocos2d::log("Using SD");
-    _tileMap = TMXTiledMap::create("tilemaps/mapSD.tmx");
-    _tileMap->setScale(MAP_SCALE_SD);
+	cocos2d::log("Using SD");
+	_tileMap = TMXTiledMap::create("tilemaps/mapSD.tmx");
+	_tileMap->setScale(MAP_SCALE_SD);
 #else
-    cocos2d::log("Using HD");
-    _tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
-    _tileMap->setScale(MAP_SCALE_HD);
+	cocos2d::log("Using HD");
+	_tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
+	_tileMap->setScale(MAP_SCALE_HD);
 #endif
+	_objectLayer = _tileMap->getLayer("objects");
+	_obstructionLayer = _tileMap->getLayer("obstructions");
 
-    this->addChild(_tileMap, -1);
-    _tileMap->setAnchorPoint(Point(0, 0));
+	this->addChild(_tileMap, -1);
+	_tileMap->setAnchorPoint(Point(0, 0));
 
 	this->setName(TILE_MAP_LAYER_NAME);
 	this->loadMap();
 	this->showObstructions(false);
+
 	return true;
 }
 
@@ -32,13 +35,13 @@ ssize_t TileMapLayer::getTreeCount() {
 }
 
 ssize_t TileMapLayer::getFlowerCount() {
-	auto layer = _tileMap->getLayer("objects");
+	auto size = _objectLayer->getLayerSize();
 	auto count = 0;
 
-	for (auto y = 0; y < layer->getLayerSize().height; y++) {
-		for (auto x = 0; x < layer->getLayerSize().width; x++) {
+	for (auto y = 0; y < size.height; y++) {
+		for (auto x = 0; x < size.width; x++) {
 			auto coordinate = Vec2(x, y);
-			auto gid = layer->getTileGIDAt(coordinate);
+			auto gid = _objectLayer->getTileGIDAt(coordinate);
 
 			if (gid == TileGID::flower1 || gid == TileGID::flower2 || gid == TileGID::flower3 ||
 			    gid == TileGID::flower4) {
@@ -49,14 +52,14 @@ ssize_t TileMapLayer::getFlowerCount() {
 	return count;
 }
 
-std::vector <cocos2d::Vec2> TileMapLayer::getBeeHives() {
-	auto layer = _tileMap->getLayer("objects");
-	std::vector <cocos2d::Vec2> beeHives;
+std::vector<cocos2d::Vec2> TileMapLayer::getBeeHives() {
+	auto size = _objectLayer->getLayerSize();
+	std::vector<cocos2d::Vec2> beeHives;
 
-	for (auto y = 0; y < layer->getLayerSize().height; y++) {
-		for (auto x = 0; x < layer->getLayerSize().width; x++) {
+	for (auto y = 0; y < size.height; y++) {
+		for (auto x = 0; x < size.width; x++) {
 			auto coordinate = Vec2(x, y);
-			auto gid = layer->getTileGIDAt(coordinate);
+			auto gid = _objectLayer->getTileGIDAt(coordinate);
 
 			if (gid == TileGID::beehiveSmall ||
 			    gid == TileGID::beehiveMiddle ||
@@ -105,7 +108,7 @@ Vec2 TileMapLayer::getTilePosition(Vec2 pos) {
 	return inTileMapBounds(pos);
 }
 
-Vec2 TileMapLayer::inTileMapBounds(const Vec2& pos) {
+Vec2 TileMapLayer::inTileMapBounds(const Vec2 &pos) {
 	auto height = _tileMap->getMapSize().height - 1;
 	auto width = _tileMap->getMapSize().width - 1;
 	if (pos.x <= width && pos.y <= height && pos.x >= 0 && pos.y >= 0) {
@@ -124,37 +127,46 @@ Vec2 TileMapLayer::inTileMapBounds(const Vec2& pos) {
 	}
 }
 
-bool TileMapLayer::canPlaceTile(const Vec2 &position, int gid) {
-	auto layer = _tileMap->getLayer("obstructions");
-	auto pos = getTilePosition(position);
-
-	return layer->getTileGIDAt(pos) == TileGID::no_obstruction;
+bool TileMapLayer::canPlace(Placeable &placeable, Vec2 &position) {
+	return placeable.canPlaceOn(this, position);
 }
 
-void TileMapLayer::placeTile(const Vec2 &position, int gid) {
-	auto layer = _tileMap->getLayer("objects");
+void TileMapLayer::place(Placeable &placeable, Vec2 &position) {
+	assert(canPlace(placeable, position));
+	placeable.placeOn(this, position);
+}
+
+bool TileMapLayer::canPlaceTile(const Vec2 &position, int gid) {
 	auto pos = getTilePosition(position);
-	layer->setTileGID(gid, pos); //1 = flower; 2,3,4,5 = bush1,2,3,4; 6 = grass; 7 = road
+
+	return _obstructionLayer->getTileGIDAt(pos) == TileGID::no_obstruction;
+}
+
+void TileMapLayer::placeTile(const Vec2 &position, const int gid) {
+	auto pos = getTilePosition(position);
+	_objectLayer->setTileGID(gid, pos); //1 = flower; 2,3,4,5 = bush1,2,3,4; 6 = grass; 7 = road
 
 	if (gid == TileGID::beehiveSmall ||
-		gid == TileGID::beehiveMiddle ||
-		gid == TileGID::beehiveBig) {
+	    gid == TileGID::beehiveMiddle ||
+	    gid == TileGID::beehiveBig) {
 
-		assert(_tileMap->getLayerNum() == 3);
-		auto obstructions = _tileMap->getLayer("obstructions");
-		assert(obstructions != nullptr);
-
-		obstructions->setTileGID(TileGID::obstruction, pos);
+		_obstructionLayer->setTileGID(TileGID::obstruction, pos);
 
 		notifyObservers();
 	}
 }
 
-void TileMapLayer::showObstructions(bool visible) {
-	auto layer = _tileMap->getLayer("obstructions");
-	layer->setVisible(visible);
+bool TileMapLayer::canPlaceSprite(const Vec2 &position, int id) {
+	return false;
 }
 
+void TileMapLayer::placeSprite(const Vec2 &position, int id) {
+	auto pos = _objectLayer->convertToNodeSpace(_objectLayer->getTileAt(position)->getPosition());
+}
+
+void TileMapLayer::showObstructions(bool visible) {
+	_obstructionLayer->setVisible(visible);
+}
 
 void TileMapLayer::loadMap() {
 	if (SaveLoad::tileMapSaveExists()) {
@@ -177,21 +189,19 @@ void TileMapLayer::loadMap() {
 }
 
 void TileMapLayer::initObstructionLayer() {
-	auto objects = _tileMap->getLayer("objects");
-	auto obstructions = _tileMap->getLayer("obstructions");
-	auto size = objects->getLayerSize();
+	auto size = _objectLayer->getLayerSize();
 
 	for (auto x = 0; x < size.width; x++) {
 		for (auto y = 0; y < size.height; y++) {
 			auto pos = Vec2(x, y);
-			auto gid = objects->getTileGIDAt(pos);
+			auto gid = _objectLayer->getTileGIDAt(pos);
 
 			if (gid == TileGID::beehiveSmall ||
 			    gid == TileGID::beehiveMiddle ||
 			    gid == TileGID::beehiveBig) {
-				obstructions->setTileGID(TileGID::obstruction, pos);
+				_obstructionLayer->setTileGID(TileGID::obstruction, pos);
 			} else {
-				obstructions->setTileGID(TileGID::no_obstruction, pos);
+				_obstructionLayer->setTileGID(TileGID::no_obstruction, pos);
 			}
 		}
 	}
@@ -199,16 +209,4 @@ void TileMapLayer::initObstructionLayer() {
 
 void TileMapLayer::booleanInverter() {
 	useSD = !useSD;
-}
-
-bool TileMapLayer::canPlace(const Placeable &placeable, const Vec2 &position) {
-	return false;
-}
-
-void TileMapLayer::place(const Placeable &placeable, const Vec2 &position) {
-
-}
-
-void TileMapLayer::placeTree(const Vec2 &position, int id) {
-
 }

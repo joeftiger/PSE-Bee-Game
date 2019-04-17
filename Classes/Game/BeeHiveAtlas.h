@@ -13,7 +13,7 @@
 class BeeHiveAtlas : public cocos2d::Node, public Observable, public Observer, public Restorable {
 private:
 	static BeeHiveAtlas *_instance;
-	std::map <cocos2d::Vec2, BeeHive *> _beeHives;
+	std::map<cocos2d::Vec2, BeeHive *> _beeHives;
 
 	BeeHiveAtlas() = default;
 
@@ -28,20 +28,21 @@ public:
 	 * Stores pointers to beehives in the specified vector.
 	 * @param beeHive container for beehive pointers
 	 */
-	void getBeeHives(std::vector <BeeHive *> &beeHives);
+	void getBeeHives(std::vector<BeeHive *> &beeHives);
 
 	/**
 	 * Returns whether the atlas has a BeeHive obejct at given position.
 	 * @param pos position of beehive in tilemap
 	 * @return <code>true</code> if associated beehive object. <br><code>false</code> otherwise
 	 */
-	bool hasBeeHiveAt(const Vec2& pos);
+	bool hasBeeHiveAt(const Vec2 &pos);
+
 	/**
 	 * Returns the BeeHive object at given position.
 	 * @param pos position of beehive in tilemap
 	 * @return beehive object
 	 */
-	BeeHive *getBeeHiveAt(const Vec2& pos);
+	BeeHive *getBeeHiveAt(const Vec2 &pos);
 
 	/**
 	 * Notifies this BeeHiveAtlas, that the observable has been changed.

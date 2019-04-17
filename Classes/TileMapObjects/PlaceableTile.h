@@ -18,13 +18,9 @@ public:
 
 	explicit PlaceableTile(TileGID gid);
 
-	cocos2d::Size size() override;
+	bool canPlaceOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) override;
 
-	bool canPlaceOn(TileMapLayer &tileMapLayer, cocos2d::Vec2 &position) override;
-
-	void placeOn(TileMapLayer &tileMapLayer, cocos2d::Vec2 &position) override;
-
-	cocos2d::Vec2 center() override;
+	void placeOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) override;
 };
 
 

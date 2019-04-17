@@ -14,8 +14,8 @@
 class Player : public Observer, public Observable {
 private:
 	static Player *_instance;
-	std::vector <BeeHive *> _beeHives;
-	std::unordered_map <Placeable, size_t> *_inventory;
+	std::vector<BeeHive *> _beeHives;
+	std::unordered_map<Placeable, size_t> *_inventory;
 
 	Player() = default;
 
@@ -37,7 +37,7 @@ public:
 	 * Returns the item inventory of the player.
 	 * @return the inventory
 	 */
-	std::unordered_map <Placeable, size_t> *getInventory();
+	std::unordered_map<Placeable, size_t> *getInventory();
 
 	/**
 	 * Notifies this player, that the beehives have changed.

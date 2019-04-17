@@ -16,22 +16,9 @@ class TileMapLayer;
  */
 class Placeable {
 public:
-    /**
-     * Returns the size of this placeable object (in tiles).
-     * Needed to check for obstructions
-     * @return size in tiles
-     */
-    virtual cocos2d::Size size() = 0;
+	virtual bool canPlaceOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) = 0;
 
-    /**
-     * Returns the center of this placeable object (in tiles).
-     * Needed to precisely place the
-     * @return center position
-     */
-    virtual cocos2d::Vec2 center() = 0;
-
-    virtual bool canPlaceOn(TileMapLayer &tileMapLayer, cocos2d::Vec2 &position) = 0;
-
-    virtual void placeOn(TileMapLayer &tileMapLayer, cocos2d::Vec2 &position) = 0;
+	virtual void placeOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) = 0;
 };
+
 #endif //PSE_BEE_GAME_PLACEABLE_H

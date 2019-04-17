@@ -17,6 +17,9 @@ class Placeable;
 class TileMapLayer : public cocos2d::Layer, public Observable {
 private:
 	TMXTiledMap *_tileMap;
+	TMXLayer *_objectLayer;
+	TMXLayer *_obstructionLayer;
+
 
 	void loadMap();
 
@@ -39,7 +42,7 @@ public:
 	 * Returns the positions of each beehive on the tile map.
 	 * @return a list of beehive-positions
 	 */
-	std::vector <Vec2> getBeeHives();
+	std::vector<Vec2> getBeeHives();
 
 	TMXTiledMap *getMap();
 
@@ -47,7 +50,23 @@ public:
 
 	Vec2 getTilePosition(Vec2 pos);
 
-	Vec2 inTileMapBounds(const Vec2& pos);
+	Vec2 inTileMapBounds(const Vec2 &pos);
+
+	/**
+	 * Checks whether the given placeable object can be placed at the specified position.
+	 * If the area around the position is obstructed, <code>false</code> will be returned.
+	 * @param placeable the object to place
+	 * @param position  the position to place (in tile coordinates)
+	 * @return <code>true</code> if not obstructed. <br><code>false</code> otherwise.
+	 */
+	bool canPlace(Placeable &placeable, Vec2 &position);
+
+	/**
+	 *
+	 * @param placeable
+	 * @param position
+	 */
+	void place(Placeable &placeable, Vec2 &position);
 
 	/**
 	 * Checks whether the tile at specified position can be replaced or not (e.g. beehive/tree on this tile)
@@ -59,18 +78,15 @@ public:
 	bool canPlaceTile(const Vec2 &position, int gid);
 
 	/**
-	 * TODO: Should the placing be forced?
 	 * Places the given tile (gid) at the given position (forced).
 	 * @param position tile position
 	 * @param gid tile gid
 	 */
-	void placeTile(const Vec2 &position, int gid);
+	void placeTile(const Vec2 &position, const int gid);
 
-	bool canPlace(const Placeable &placeable, const Vec2 &position);
+	bool canPlaceSprite(const Vec2 &position, int id);
 
-	void place(const Placeable &placeable, const Vec2 &position);
-
-	void placeTree(const Vec2 &position, int id);
+	void placeSprite(const Vec2 &position, int id);
 
 
 	/**

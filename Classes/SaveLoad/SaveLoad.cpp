@@ -15,12 +15,13 @@ using namespace rapidjson;
 	Saves the current tileMap in json-format into "tilemap.json"
 */
 void SaveLoad::saveMap() {
-	auto tileMapLayer = (TileMapLayer *)cocos2d::Director::getInstance()->getRunningScene()->getChildByName(TILE_MAP_LAYER_NAME);
+	auto tileMapLayer = (TileMapLayer *) cocos2d::Director::getInstance()->getRunningScene()->getChildByName(
+			TILE_MAP_LAYER_NAME);
 	auto layer = tileMapLayer->getLayer();
 
 	rapidjson::Document d;
 	rapidjson::StringBuffer s;
-	Writer <rapidjson::StringBuffer> writer(s);
+	Writer<rapidjson::StringBuffer> writer(s);
 	writer.StartObject();
 
 	for (int i = 0; i < layer->getLayerSize().width; i++) {
@@ -75,7 +76,7 @@ void SaveLoad::jsonToFile(std::string json, std::string fullPath) {
 */
 std::string SaveLoad::docToString(rapidjson::Document &jsonObj) {
 	rapidjson::StringBuffer buffer;
-	rapidjson::Writer <rapidjson::StringBuffer> jsonWriter(buffer);
+	rapidjson::Writer<rapidjson::StringBuffer> jsonWriter(buffer);
 	jsonObj.Accept(jsonWriter);
 	return std::string(buffer.GetString());
 }
@@ -101,11 +102,11 @@ std::vector<std::vector<int>> SaveLoad::loadMap() {
 	d.ParseStream(isw);
 
 	StringBuffer buffer;
-	Writer <StringBuffer> writer(buffer);
+	Writer<StringBuffer> writer(buffer);
 	d.Accept(writer);
 
 	if (d.HasParseError()) {
-		log("%u",d.GetParseError());
+		log("%u", d.GetParseError());
 		return vec;
 	}
 
@@ -113,13 +114,13 @@ std::vector<std::vector<int>> SaveLoad::loadMap() {
 	for (rapidjson::Value::ConstMemberIterator itr = d.MemberBegin(); itr != d.MemberEnd(); ++itr) {
 		assert(itr->value.IsArray());
 		std::vector<int> temp;
-		for (auto& m : itr->value.GetArray()) {
+		for (auto &m : itr->value.GetArray()) {
 			assert(m.IsInt());
 			temp.push_back(m.GetInt());
 		}
 		vec.push_back(temp);
 	}
-	
+
 	return vec;
 }
 
@@ -145,12 +146,12 @@ void SaveLoad::deleteBeeHivesSave() {
 	Saves all beeHives on the current tileMap into a json-array and writes them into "beehives.json"
 */
 void SaveLoad::saveBeehives() {
-	std::vector <BeeHive *> beeHives;
+	std::vector<BeeHive *> beeHives;
 	BeeHiveAtlas::getInstance()->getBeeHives(beeHives);
 
 	rapidjson::Document doc;
 	rapidjson::StringBuffer jsonBuffer;
-	rapidjson::PrettyWriter <rapidjson::StringBuffer> jsonWriter(jsonBuffer);
+	rapidjson::PrettyWriter<rapidjson::StringBuffer> jsonWriter(jsonBuffer);
 	doc.SetArray();
 	assert(doc.IsArray());
 	BeeHiveAtlas::getInstance()->toJSON(doc);
@@ -191,11 +192,11 @@ void SaveLoad::jsonToFile(rapidjson::Document &jsonObj, std::string fullPath) {
 	//	}
 	//	outputFile.close();
 
-	std::ofstream ofs{ R"(C:/Users/Tobias/AppData/Local/PSE-Bee-Game/tilemap.json)" };
+	std::ofstream ofs{R"(C:/Users/Tobias/AppData/Local/PSE-Bee-Game/tilemap.json)"};
 	if (!ofs.is_open()) {
 		log("%s", "Couldn't open file");
 	}
 	OStreamWrapper osw(ofs);
-	Writer <OStreamWrapper> out(osw);
+	Writer<OStreamWrapper> out(osw);
 	jsonObj.Accept(out);
 }

@@ -18,11 +18,11 @@ cocos2d::Scene *MainMenu::scene() {
 bool MainMenu::init() {
 
 	cocos2d::Rect visibleRect = Director::getInstance()->getOpenGLView()->getVisibleRect();
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 	auto *background = cocos2d::Sprite::create("menu/main-menu-background.png");
-	background->setPosition(visibleSize.width/2, visibleSize.height/2);
+	background->setPosition(visibleSize.width / 2, visibleSize.height / 2);
 	background->setAnchorPoint(Vec2(0.5, 0.5));
 	this->addChild(background, -1000); // to ensure it's the lowest layer
 
@@ -49,14 +49,14 @@ bool MainMenu::init() {
 
 	auto optionsButton = MenuItemImage::create("menu/options.png", "menu/options.png",
 	                                           CC_CALLBACK_1(MainMenu::onOptionsClick, this));
-	optionsButton->setPosition(Vec2(origin.x - 88, origin.y  - 108));
+	optionsButton->setPosition(Vec2(origin.x - 88, origin.y - 108));
 
 	auto aboutButton = MenuItemImage::create("menu/credits.png", "menu/credits.png",
 	                                         CC_CALLBACK_1(MainMenu::onAboutClick, this));
 	aboutButton->setPosition(Vec2(origin.x + 88, origin.y - 108));
 
 	// vector of menu items
-	Vector < MenuItem * > MenuItems;
+	Vector<MenuItem *> MenuItems;
 
 	// adding all items
 	MenuItems.pushBack(playButton);

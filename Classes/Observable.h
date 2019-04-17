@@ -11,7 +11,7 @@ class Observable {
 private:
 
 	/** observers having subscribed to this observable */
-	std::vector <std::reference_wrapper<Observer>> _observers;
+	std::vector<std::reference_wrapper<Observer>> _observers;
 
 protected:
 	/**
@@ -29,7 +29,7 @@ public:
 	 * Returns the vector of observers currently subscribed.
 	 * @return the observers
 	 */
-	std::vector <std::reference_wrapper<Observer>> &observers() {
+	std::vector<std::reference_wrapper<Observer>> &observers() {
 		return _observers;
 	}
 
