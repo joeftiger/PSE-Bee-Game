@@ -12,6 +12,7 @@ BeeHiveAtlas *BeeHiveAtlas::_instance = nullptr;
 
 BeeHiveAtlas *BeeHiveAtlas::getInstance() {
 	if (!_instance) {
+		cocos2d::log("BeeHiveAtlas:\tCreating instance");
 		_instance = new BeeHiveAtlas;
 	}
 	
@@ -25,8 +26,15 @@ void BeeHiveAtlas::getBeeHives(std::vector <BeeHive *> &beeHives) {
 	}
 }
 
+bool BeeHiveAtlas::hasBeeHiveAt(const Vec2 &pos) {
+	return _beeHives.count(pos) != 0;
+}
+
+BeeHive *BeeHiveAtlas::getBeeHiveAt(const Vec2& pos) {
+	return _beeHives.at(pos);
+}
+
 void BeeHiveAtlas::notify(void *observable) {
-	cocos2d::log("BeeHiveAtlas:\tBeing notified...");
 	bool notifyObservers = false;
 
 	auto layer = (TileMapLayer *) cocos2d::Director::getInstance()->getRunningScene()->getChildByName(
@@ -39,8 +47,8 @@ void BeeHiveAtlas::notify(void *observable) {
 
 	// add missing beehives
 	for (const auto &pos : positions) {
-		// more efficient direct call than count() > 0
-		if (_beeHives.find(pos) == _beeHives.end()) {
+		if (!hasBeeHiveAt(pos)) {
+			cocos2d::log("BeeHiveAtlas:\tCreating beehive at (%i, %i)", (int) pos.x, (int) pos.y);
 			auto hive = new BeeHive();
 			hive->setPosition(pos);
 			_beeHives.emplace(pos, hive);
@@ -49,14 +57,13 @@ void BeeHiveAtlas::notify(void *observable) {
 		}
 	}
 
-	cocos2d::log("BeeHiveAtlas:\tHaving %zu beehives.", _beeHives.size());
-
 	if (notifyObservers) {
+		cocos2d::log("BeeHiveAtlas:\tNotifying observers");
 		this->notifyObservers();
 	}
 }
 
-void BeeHiveAtlas::updateBeeHives(float dt) {
+void BeeHiveAtlas::updateBeeHives(float) {
 	for (auto const& pair : _beeHives) {
 		pair.second->update();
 	}
@@ -86,4 +93,3 @@ void BeeHiveAtlas::fromJSON(rapidjson::Document &doc) {
 		_beeHives.emplace(b->position(), b);
 	}
 }
-

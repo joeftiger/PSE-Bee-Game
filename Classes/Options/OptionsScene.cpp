@@ -21,7 +21,7 @@ bool OptionsScene::init() {
 	onePofScreenW = visibleSize.width / 100;
 
 	// Create a title to identify
-	auto title = Label::createWithTTF("Options", "fonts/OpenSans-ExtraBold.ttf", 48);
+	auto title = Label::createWithTTF("Options", "fonts/ReemKufi-Regular.ttf", 48);
 
 	// position the label on the top center of the screen
 	title->setPosition(Vec2(origin.x + visibleSize.width / 2,
@@ -31,7 +31,7 @@ bool OptionsScene::init() {
 	this->addChild(title, 1);
 
 	// Create a title to identify
-    auto toggleGraphics= Label::createWithTTF("Use SD Textures? (Not implemented yet)", "fonts/OpenSans-ExtraBold.ttf", 24);
+    auto toggleGraphics= Label::createWithTTF("Use SD Textures? (Not implemented yet)", "fonts/ReemKufi-Regular.ttf", 24);
 
     // position the label above the check box
     toggleGraphics->setPosition(Vec2(origin.x + visibleSize.width / 2,
@@ -71,7 +71,7 @@ bool OptionsScene::init() {
 
 
 	//add the menu item for back to main menu
-	auto label = Label::createWithTTF("Main Menu", "fonts/OpenSans-Regular.ttf", 20);
+	auto label = Label::createWithTTF("Main Menu", "fonts/ReemKufi-Regular.ttf", 20);
 	auto menuItem = MenuItemLabel::create(label);
 	menuItem->setCallback([&](cocos2d::Ref *sender) {
 		Director::getInstance()->replaceScene(MainMenu::scene());

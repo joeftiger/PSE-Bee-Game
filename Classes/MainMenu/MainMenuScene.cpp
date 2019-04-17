@@ -17,16 +17,19 @@ cocos2d::Scene *MainMenu::scene() {
 // on "init" you need to initialize your instance
 bool MainMenu::init() {
 
-	auto *background = cocos2d::Sprite::create("menu/main-menu-bg.png");
-	background->setAnchorPoint(Vec2(0, 0));
+	cocos2d::Rect visibleRect = Director::getInstance()->getOpenGLView()->getVisibleRect();
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+	auto *background = cocos2d::Sprite::create("menu/main-menu-background.png");
+	background->setPosition(visibleSize.width/2, visibleSize.height/2);
+	background->setAnchorPoint(Vec2(0.5, 0.5));
 	this->addChild(background, -1000); // to ensure it's the lowest layer
 
-	cocos2d::Rect visibleRect = Director::getInstance()->getOpenGLView()->getVisibleRect();
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
 
 	// Create a title to identify
-	auto title = Label::createWithTTF("So Bee It!", "fonts/OpenSans-ExtraBold.ttf", 48);
+	auto title = Label::createWithTTF("So Bee It!", "fonts/ReemKufi-Regular.ttf", 48);
 
 	// position the label on the top center of the screen
 	title->setPosition(Vec2(origin.x + visibleSize.width / 2,
@@ -42,22 +45,16 @@ bool MainMenu::init() {
 	// Adding the sprites for the main menu TODO: Add "selected" version (second entry)
 	auto playButton = MenuItemImage::create("menu/start.png", "menu/start.png",
 	                                        CC_CALLBACK_1(MainMenu::onPlayClick, this));
-	playButton->setPosition(Vec2(origin.x, origin.y).x,
-	                        Vec2(origin.x * 2 - visibleSize.width / 8, origin.y * 6 - visibleSize.height / 8).y);
-	playButton->setScale(2.0f);
+	playButton->setPosition(Vec2(origin.x, origin.y * 1.92));
+
 	auto optionsButton = MenuItemImage::create("menu/options.png", "menu/options.png",
 	                                           CC_CALLBACK_1(MainMenu::onOptionsClick, this));
-	optionsButton->setPosition(Vec2(origin.x - visibleSize.width / 7 , origin.y).x,
-	                           Vec2(origin.x * 2 - visibleSize.width / 8 * index,
-	                                origin.y  - visibleSize.height / 8 ).y);
-	++index;
-	optionsButton->setScale(2.0f);
+	optionsButton->setPosition(Vec2(origin.x - 88, origin.y  - 108));
+
 	auto aboutButton = MenuItemImage::create("menu/credits.png", "menu/credits.png",
 	                                         CC_CALLBACK_1(MainMenu::onAboutClick, this));
-	aboutButton->setPosition(Vec2(origin.x + visibleSize.width / 7 , origin.y).x,
-	                         Vec2(origin.x * 2 - visibleSize.width / 8 * index,
-	                              origin.y  - visibleSize.height / 8 ).y);
-	aboutButton->setScale(2.0f);
+	aboutButton->setPosition(Vec2(origin.x + 88, origin.y - 108));
+
 	// vector of menu items
 	Vector < MenuItem * > MenuItems;
 

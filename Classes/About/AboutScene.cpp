@@ -49,7 +49,7 @@ bool AboutScene::init() {
 
 
 	//add the menu item for back to main menu
-	auto label = Label::createWithTTF("Main Menu", "fonts/OpenSans-Regular.ttf", 20);
+	auto label = Label::createWithTTF("Main Menu", "fonts/ReemKufi-Regular.ttf", 20);
 	auto menuItem = MenuItemLabel::create(label);
 	menuItem->setCallback([&](cocos2d::Ref *sender) {
 		Director::getInstance()->replaceScene(MainMenu::scene());
