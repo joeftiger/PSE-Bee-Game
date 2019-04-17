@@ -1,7 +1,7 @@
 #include <HeaderFiles/CHILD_NAMES.h>
 #include "TileMapLayer.h"
 #include "HeaderFiles/DEFINITIONS.h"
-#include "TileMapObjects/TileGID.h"
+#include "HeaderFiles/TileGID.h"
 #include "SaveLoad/SaveLoad.h"
 
 bool TileMapLayer::init() {
@@ -124,14 +124,14 @@ Vec2 TileMapLayer::inTileMapBounds(const Vec2& pos) {
 	}
 }
 
-bool TileMapLayer::canSetTile(const Vec2 &position, int gid) {
+bool TileMapLayer::canPlaceTile(const Vec2 &position, int gid) {
 	auto layer = _tileMap->getLayer("obstructions");
 	auto pos = getTilePosition(position);
 
 	return layer->getTileGIDAt(pos) == TileGID::no_obstruction;
 }
 
-void TileMapLayer::setTile(const Vec2& position, int gid) {
+void TileMapLayer::placeTile(const Vec2 &position, int gid) {
 	auto layer = _tileMap->getLayer("objects");
 	auto pos = getTilePosition(position);
 	layer->setTileGID(gid, pos); //1 = flower; 2,3,4,5 = bush1,2,3,4; 6 = grass; 7 = road
@@ -140,8 +140,6 @@ void TileMapLayer::setTile(const Vec2& position, int gid) {
 		gid == TileGID::beehiveMiddle ||
 		gid == TileGID::beehiveBig) {
 
-		/*
-		 * FIXME: obstructions is always NULL, even though defined in the mapSD.tmx */
 		assert(_tileMap->getLayerNum() == 3);
 		auto obstructions = _tileMap->getLayer("obstructions");
 		assert(obstructions != nullptr);
@@ -201,4 +199,16 @@ void TileMapLayer::initObstructionLayer() {
 
 void TileMapLayer::booleanInverter() {
 	useSD = !useSD;
+}
+
+bool TileMapLayer::canPlace(const Placeable &placeable, const Vec2 &position) {
+	return false;
+}
+
+void TileMapLayer::place(const Placeable &placeable, const Vec2 &position) {
+
+}
+
+void TileMapLayer::placeTree(const Vec2 &position, int id) {
+
 }

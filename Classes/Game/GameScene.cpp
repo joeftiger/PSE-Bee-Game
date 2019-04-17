@@ -1,7 +1,6 @@
 
 #include "GameScene.h"
 #include "BeeHiveAtlas.h"
-#include "TileMapObjects/TileGID.h"
 #include "SaveLoad/SaveLoad.h"
 #include "ItemPanel/ItemPanelLayer.h"
 #include "AppDelegate.h"
@@ -99,8 +98,8 @@ void GameScene::onTouchEnded(void *, void *) {
 		auto pos = _touchPosition - cameraTravel;
 		auto gid = _itemPanel->getDrag()->getTag();
 
-		if (_tileMapLayer->canSetTile(pos, gid)) {
-			_tileMapLayer->setTile(pos, gid);
+		if (_tileMapLayer->canPlaceTile(pos, gid)) {
+			_tileMapLayer->placeTile(pos, gid);
 		}
 
 		_itemPanel->removeChild(_itemPanel->getDrag());

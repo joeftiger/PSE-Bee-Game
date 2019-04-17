@@ -2,7 +2,7 @@
 // Created by Uro on 3/30/2019.
 //
 
-#include <TileMapObjects/TileGID.h>
+#include <HeaderFiles/TileGID.h>
 #include <HeaderFiles/CHILD_NAMES.h>
 #include "ItemPanelLayer.h"
 #include "TouchUtil.h"
@@ -60,9 +60,9 @@ void ItemPanelLayer::initializeItemPanel() {
 
 	this->addToSpriteList("tilemaps/Tiles/bienenstock1_gross.png", Vec2(0, box.height * 4 / 6), TileGID::beehiveBig, box);
 	this->addToSpriteList("tilemaps/Tiles/bienenstock1_mittel.png", Vec2(box.width / 3, box.height * 4 / 6),
-						  TileGID::beehiveMiddle, box);
+	                      TileGID::beehiveMiddle, box);
 	this->addToSpriteList("tilemaps/Tiles/bienenstock1_klein.png", Vec2(box.width * 2 / 3, box.height * 4 / 6),
-						  TileGID::beehiveSmall, box);
+	                      TileGID::beehiveSmall, box);
 
 	addListTo(this);
 }
@@ -71,7 +71,7 @@ LayerColor *ItemPanelLayer::getShowRec() {
 	return _showRec;
 }
 
-void ItemPanelLayer::showHideItemPanel(Point touchPos) {
+void ItemPanelLayer::showHideItemPanel(const Point& touchPos) {
 	if (this->getShowRec()->getBoundingBox().containsPoint(touchPos - this->getPosition())) {
 		if (_isItemShow) {
 			MoveBy *hide = MoveBy::create(0.2, Vec2(this->getBoundingBox().size.width, 0));
@@ -97,7 +97,7 @@ void ItemPanelLayer::showHideItemPanel(Point touchPos) {
 	}
 }
 
-void ItemPanelLayer::touchOnItemPanel(Point touchPos) {
+void ItemPanelLayer::touchOnItemPanel(const Point& touchPos) {
 	if (this->getBoundingBox().containsPoint(touchPos)) {
 		this->setDrag(touchPos, this->getPosition());
 		if (this->isDrag()) {

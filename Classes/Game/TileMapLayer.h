@@ -5,10 +5,14 @@
 #ifndef PSE_BEE_GAME_TILEMAPLAYER_H
 #define PSE_BEE_GAME_TILEMAPLAYER_H
 
+#include <TileMapObjects/Placeable.h>
 #include "cocos2d.h"
 #include "Observable.h"
 
 USING_NS_CC;
+
+// pre-declare to <fix> "Placeable has no type."
+class Placeable;
 
 class TileMapLayer : public cocos2d::Layer, public Observable {
 private:
@@ -31,7 +35,6 @@ public:
 
 	ssize_t getFlowerCount();
 
-
 	/**
 	 * Returns the positions of each beehive on the tile map.
 	 * @return a list of beehive-positions
@@ -53,9 +56,22 @@ public:
 	 * @return <code>true</code> if tile may be placed. <br>
 	 * 		   <code>false</code> if the position is obstructed.
 	 */
-	bool canSetTile(const Vec2 &position, int gid);
+	bool canPlaceTile(const Vec2 &position, int gid);
 
-	void setTile(const Vec2& position, int gid);
+	/**
+	 * TODO: Should the placing be forced?
+	 * Places the given tile (gid) at the given position (forced).
+	 * @param position tile position
+	 * @param gid tile gid
+	 */
+	void placeTile(const Vec2 &position, int gid);
+
+	bool canPlace(const Placeable &placeable, const Vec2 &position);
+
+	void place(const Placeable &placeable, const Vec2 &position);
+
+	void placeTree(const Vec2 &position, int id);
+
 
 	/**
 	 * Shows / hides the obstruction layer

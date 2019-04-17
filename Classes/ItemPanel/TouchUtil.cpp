@@ -7,7 +7,7 @@
 #include <iterator>
 #include <iostream>
 #include "HeaderFiles/DEFINITIONS.h"
-#include "TileMapObjects/TileGID.h"
+#include "HeaderFiles/TileGID.h"
 
 using namespace cocos2d;
 using namespace std;
