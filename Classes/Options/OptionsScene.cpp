@@ -13,6 +13,7 @@ Scene *OptionsScene::createScene() { return OptionsScene::create(); }
 bool OptionsScene::init() {
 	if (!Scene::init()) return false;
 
+	// standard size related functions
 	cocos2d::Rect visibleRect = Director::getInstance()->getOpenGLView()->getVisibleRect();
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -20,28 +21,21 @@ bool OptionsScene::init() {
 	onePofScreenH = visibleSize.height / 100;
 	onePofScreenW = visibleSize.width / 100;
 
-	// Create a title to identify
+	// create a title and set it at the top of the screen
 	auto title = Label::createWithTTF("Options", "fonts/ReemKufi-Regular.ttf", 48);
-
-	// position the label on the top center of the screen
 	title->setPosition(Vec2(origin.x + visibleSize.width / 2,
 	                        origin.y + visibleSize.height - title->getContentSize().height));
-
-	// add the label as a child to this layer
 	this->addChild(title, 1);
 
-	// Create a title to identify
-	auto optionsText = Label::createWithTTF("Use SD Textures? (Not implemented yet)", "fonts/ReemKufi-Regular.ttf",
-	                                           24);
-
-	// position the label above the check box
+	// text to ask for use of SD Textures
+	// TODO Add switch function for textures (Brian 18.4)
+	auto optionsText = Label::createWithTTF("Use SD Textures? (Not implemented yet)", "fonts/ReemKufi-Regular.ttf", 24);
 	optionsText->setPosition(Vec2(origin.x + visibleSize.width / 2,
 	                                 origin.y + 40 + 0.5 * visibleSize.height - title->getContentSize().height));
-
-	// add the label as a child to this layer
 	this->addChild(optionsText, 1);
 
-	//add the menu item for delete savemenu
+	// add button to delete the save
+	// TODO Implement a button by Olivier (Brian 18.4)
     auto labelDelete = Label::createWithTTF("Click to Delete Save", "fonts/ReemKufi-Regular.ttf", 28);
     auto menuItem = MenuItemLabel::create(labelDelete);
     menuItem ->setCallback([&](cocos2d::Ref *sender) {
@@ -52,19 +46,13 @@ bool OptionsScene::init() {
     playButton->setPosition(Vec2(origin.x, origin.y * 2.6));
     playButton->setScale(1.18f);
 
-    // vector of menu items
+	// create menu from a vector of menu items, adding it and then displaying it
     Vector<MenuItem *> MenuItems;
-
-    // adding all items
     MenuItems.pushBack(playButton);
-
     auto menu = Menu::createWithArray(MenuItems);
-    	this->addChild(menu, 2);
+    this->addChild(menu, 2);
 
-
-
-
-	//add the menu item for back to main menu
+	// add the menu item for back to main menu and position it in the bottom right corner of the screen
 	auto label = Label::createWithTTF("Main Menu", "fonts/ReemKufi-Regular.ttf", 20);
 	auto menuItemBack = MenuItemLabel::create(label);
 	menuItemBack->setCallback([&](cocos2d::Ref *sender) {
@@ -80,6 +68,8 @@ bool OptionsScene::init() {
 	return true;
 }
 
+// upon presseing the rest button, delete the save and go back to main menu
+// TODO Add confirmation / warning (Brian 18.4)
 void OptionsScene::onDeleteSaveClick(cocos2d::Ref *sender) {
 	SaveLoad::deleteEverything();
 	cocos2d::log("deleteEverything() called");

@@ -25,6 +25,7 @@ public:
 
 	virtual bool init();
 
+	// reset button click handler
 	void onDeleteSaveClick(cocos2d::Ref *sender);
 
 	// implement the "static create()" method manually

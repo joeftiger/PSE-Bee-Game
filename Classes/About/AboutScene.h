@@ -1,7 +1,3 @@
-//
-// Created by brian on 25/03/2019.
-//
-
 #ifndef _ABOUTSCENE_H
 #define _ABOUTSCENE_H
 
@@ -26,6 +22,5 @@ public:
 	// implement the "static create()" method manually
 	CREATE_FUNC(AboutScene);
 };
-
 
 #endif //_ABOUTSCENE_H
