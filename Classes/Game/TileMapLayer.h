@@ -14,7 +14,7 @@ USING_NS_CC;
 // pre-declare to <fix> "Placeable has no type."
 class Placeable;
 
-class TileMapLayer : public cocos2d::Layer, public Observable {
+class TileMapLayer : public cocos2d::Node, public Observable {
 private:
 	TMXTiledMap *_tileMap;
 	TMXLayer *_objectLayer;
