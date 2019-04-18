@@ -118,6 +118,7 @@ list(APPEND GAME_HEADER
         Classes/TileMapObjects/PlaceableSprite.h
 		Classes/Game/Time.h
 		Classes/HeaderFiles/TimeStruct.h
+		Classes/HeaderFiles/Seasons.h
      )
 
 if(ANDROID)

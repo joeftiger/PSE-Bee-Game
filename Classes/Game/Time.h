@@ -6,6 +6,7 @@
 #include "HeaderFiles/Restorable.h"
 #include "HeaderFiles/TimeStruct.h"
 #include "json/rapidjson.h"
+#include "HeaderFiles/Seasons.h"
 
 using namespace cocos2d;
 
@@ -29,11 +30,15 @@ public:
 
 	static Time * getInstance();
 
+	bool invariant();
+
 	void time(float dt);
 
 	int getMonth();
 
 	std::string convertToMonth(int i);
+
+	Season getSeason();
 
 	void toJSON(rapidjson::Document &doc);
 
@@ -44,3 +49,5 @@ public:
 
 
 #endif //TIME_H
+
+

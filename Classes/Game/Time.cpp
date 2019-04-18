@@ -11,7 +11,7 @@ bool Time::init() {
 }
 
 /**
-*	Creates a new Time-Instance
+*	Creates a new Time-Instance, only call this once
 *	This is already called in GameScene, use getInstance() to get Time 
 */
 Time *Time::createInstance() {
@@ -25,6 +25,13 @@ Time *Time::getInstance() {
 	return _instance;
 }
 
+bool Time::invariant() {
+	assert(times.seconds >= 0 && times.months <= 60);
+	assert(times.months >= 0 && times.months <= 12);
+	assert(times.years >= 0);
+	return true;
+}
+
 void Time::time(float dt) {
 	times.timePassed += dt;
 
@@ -33,7 +40,7 @@ void Time::time(float dt) {
 		times.seconds++;
 	}
 
-	if (times.seconds / 60 >= 1) {
+	if (times.seconds / 60 >= LENGTH_MONTH) {
 		times.seconds = 0;
 		times.months++;
 	}
@@ -50,7 +57,7 @@ int Time::getMonth() {
 
 std::string Time::convertToMonth(int i)
 {
-	assert(i > 0 && i <= 12);
+	assert(i >= 1 && i <= 12);
 
 	switch (i) {
 	case 1: return "Januar";
@@ -66,6 +73,32 @@ std::string Time::convertToMonth(int i)
 	case 11: return "November";
 	case 12: return "Dezember";
 	default: return "not possible";
+	}
+}
+
+/**
+	
+*/
+Season Time::getSeason() {
+	assert(times.months >= 0 && times.months <= 12);
+	switch (times.months) {
+	
+	case 3: 
+	case 4:
+	case 5: return Season::Frühling;
+
+	case 6:
+	case 7:
+	case 8: return Season::Sommer;
+
+	case 9:
+	case 10:
+	case 11: return Season::Herbst;
+
+	case 12:
+	case 1:
+	case 2: return Season::Winter;
+
 	}
 }
 
