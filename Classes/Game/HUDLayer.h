@@ -13,7 +13,6 @@ private:
 	unsigned int honey;
 	Label *honeyLabel;
 
-	float timePassed;
 	Label *timeLabel;
 
 	float money;
@@ -21,9 +20,6 @@ private:
 
 	float onePofScreenH;
 	float onePofScreenW;
-
-	int years;
-	int months;
 
 public:
 	static cocos2d::Layer *createLayer();

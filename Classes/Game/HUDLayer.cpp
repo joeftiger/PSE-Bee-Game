@@ -72,15 +72,13 @@ bool HUDLayer::init() {
 	moneyLabel->addChild(moneySprite);
 
 	//Timer
-	timePassed = 0;
-	months = 0;
-	years = 0;
-	timeLabel = Label::createWithTTF(labelConfig, std::to_string(timePassed));
+
+	timeLabel = Label::createWithTTF(labelConfig, std::to_string(Time::getInstance()->getMonth()));
 	timeLabel->enableOutline(Color4B::BLACK, 1);
 	this->addChild(timeLabel, HUD_PRIORITY);
 	timeLabel->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - onePofScreenW * 5,
 	                            visibleRect.origin.y + visibleRect.size.height - onePofScreenH * 5));
-	this->schedule(schedule_selector(HUDLayer::timer), UPDATE_TIME);
+	this->schedule(schedule_selector(HUDLayer::timer), 0.1f);
 
 	return true;
 }

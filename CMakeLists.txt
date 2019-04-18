@@ -95,6 +95,7 @@ list(APPEND GAME_SOURCE
         Classes/ItemPanel/TouchUtil.cpp
         Classes/TileMapObjects/PlaceableTile.cpp
         Classes/TileMapObjects/PlaceableSprite.cpp
+		Classes/Game/Time.cpp
      )
 list(APPEND GAME_HEADER
         Classes/AppDelegate.h
@@ -115,6 +116,8 @@ list(APPEND GAME_HEADER
         Classes/ItemPanel/TouchUtil.h
         Classes/TileMapObjects/PlaceableTile.h
         Classes/TileMapObjects/PlaceableSprite.h
+		Classes/Game/Time.h
+		Classes/HeaderFiles/TimeStruct.h
      )
 
 if(ANDROID)
