@@ -36,12 +36,12 @@ bool ShopScene::init() {
 	spriteHoney->setScale(0.2f);
 	auto *fontHoney = MenuItemFont::create("Honey");
 	fontHoney->setFontName("Arial");
-	fontHoney->setColor(ccBLACK);
+	fontHoney->setColor(Color3B::BLACK);
 	auto *spriteCoin = MenuItemImage::create("shop/münze_einzeln.png", "shop/münze_einzeln.png");
 	spriteCoin->setScale(0.2f);
 	auto *fontCost = MenuItemFont::create("100");
 	fontCost->setFontName("Arial");
-	fontCost->setColor(ccBLACK);
+	fontCost->setColor(Color3B::BLACK);
 	auto *buyHoney = MenuItemImage::create("shop/plus.png", "shop/plus.png");
 	buyHoney->setScale(0.2f);
 	// add to Layout

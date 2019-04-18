@@ -3,6 +3,7 @@
 #define __HUDLAYER_H
 
 #include "cocos2d.h"
+#include "Time.h"
 
 using namespace cocos2d;
 

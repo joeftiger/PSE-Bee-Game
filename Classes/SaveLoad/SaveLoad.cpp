@@ -179,6 +179,37 @@ void SaveLoad::loadBeehives() {
 
 }
 
+void SaveLoad::saveTime() {
+	rapidjson::Document doc;
+	rapidjson::StringBuffer buffer;
+	rapidjson::Writer <rapidjson::StringBuffer> jsonWriter(buffer);
+	doc.SetArray();
+	Time::getInstance()->toJSON(doc);
+
+	doc.Accept(jsonWriter);
+	jsonToFile(docToString(doc), getPath("times.json"));
+}
+
+void SaveLoad::loadTime() {
+	std::ifstream ifs(getPath("times.json"));
+
+	if (!ifs.is_open()) {
+		log("Couldn't load times");
+		return;
+	}
+
+	IStreamWrapper isw(ifs);
+	rapidjson::Document doc;
+	doc.ParseStream(isw);
+
+	Time::getInstance()->fromJSON(doc);
+}
+
+bool SaveLoad::timesSaveExists()
+{
+	return FileUtils::getInstance()->isFileExist(getPath("times.json"));
+}
+
 /**
 	Test-Method, currently unused
 */

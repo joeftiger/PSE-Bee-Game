@@ -36,6 +36,7 @@ bool HUDLayer::init() {
 	menuItem->setCallback([&](cocos2d::Ref *sender) {
 		SaveLoad::saveMap();
 		SaveLoad::saveBeehives();
+		SaveLoad::saveTime();
 		Director::getInstance()->replaceScene(MainMenu::scene());
 	});
 	auto backMenu = Menu::create(menuItem, nullptr);
@@ -88,22 +89,11 @@ bool HUDLayer::init() {
 
 */
 void HUDLayer::timer(float dt) {
-	timePassed += dt;
-
-	if (timePassed / 60 >= LENGTH_MONTH) {
-		timePassed = 0;
-		months++;
-	}
-
-	if (months >= LENGTH_YEAR) {
-		months = 0;
-		years++;
-	}
 
 	auto h = std::to_string((int) Player::getInstance()->totalRawHoney());
 	honeyLabel->setString(stringShortener(h));
 
-	__String *timeToDisplay = __String::createWithFormat("%i", months);
+	__String *timeToDisplay = __String::createWithFormat("%i", Time::getInstance()->getMonth());
 	timeLabel->setString(timeToDisplay->getCString());
 }
 

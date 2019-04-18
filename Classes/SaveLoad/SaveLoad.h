@@ -8,6 +8,7 @@
 #include "json/rapidjson.h"
 #include "json/document.h"
 #include "Game/BeeHiveAtlas.h"
+#include "Game/Time.h"
 #include "HeaderFiles/CHILD_NAMES.h"
 
 using namespace cocos2d;
@@ -41,6 +42,11 @@ public:
 
 	static void loadBeehives();
 
+	static void saveTime();
+
+	static void loadTime();
+
+	static bool timesSaveExists();
 };
 
 #endif //SAVELOAD_H

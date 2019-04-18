@@ -8,6 +8,7 @@
 #include "cocos2d.h"
 #include "ItemPanel/TouchUtil.h"
 #include "ItemPanel/ItemPanelLayer.h"
+#include "Time.h"
 
 
 using namespace cocos2d;
@@ -25,6 +26,8 @@ private:
 	Point cameraTravel = Vec2(0, 0);
 
 	ItemPanelLayer *_itemPanel;
+
+	Time *time;
 
 public:
 	static cocos2d::Scene *createScene();

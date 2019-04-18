@@ -45,6 +45,12 @@ bool GameScene::init() {
 	Player::getInstance();
 	tileMapAtlas->notify(_tileMapLayer);
 
+	time = Time::createInstance();
+	this->addChild(time);
+	if (SaveLoad::timesSaveExists()) {
+		SaveLoad::loadTime();
+	}
+
 	//HUD Layer
 	_HUDLayer = HUDLayer::create();
 
