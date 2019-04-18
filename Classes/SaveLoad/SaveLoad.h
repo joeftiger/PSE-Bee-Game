@@ -47,6 +47,10 @@ public:
 	static void loadTime();
 
 	static bool timesSaveExists();
+
+	static void deleteTimeSave();
+
+	static void deleteEverything();
 };
 
 #endif //SAVELOAD_H

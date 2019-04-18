@@ -31,48 +31,43 @@ bool OptionsScene::init() {
 	this->addChild(title, 1);
 
 	// Create a title to identify
-	auto toggleGraphics = Label::createWithTTF("Use SD Textures? (Not implemented yet)", "fonts/ReemKufi-Regular.ttf",
+	auto optionsText = Label::createWithTTF("Use SD Textures? (Not implemented yet)", "fonts/ReemKufi-Regular.ttf",
 	                                           24);
 
 	// position the label above the check box
-	toggleGraphics->setPosition(Vec2(origin.x + visibleSize.width / 2,
+	optionsText->setPosition(Vec2(origin.x + visibleSize.width / 2,
 	                                 origin.y + 40 + 0.5 * visibleSize.height - title->getContentSize().height));
 
 	// add the label as a child to this layer
-	this->addChild(toggleGraphics, 1);
+	this->addChild(optionsText, 1);
 
-	// checkbox
-	auto checkbox = CheckBox::create("menu/CheckBox_Normal.png",
-	                                 "menu/CheckBox_Press.png",
-	                                 "menu/CheckBoxNode_Normal.png",
-	                                 "menu/CheckBox_Disable.png",
-	                                 "menu/CheckBoxNode_Disable.png");
+	//add the menu item for delete savemenu
+    auto labelDelete = Label::createWithTTF("Click to Delete Save", "fonts/ReemKufi-Regular.ttf", 28);
+    auto menuItem = MenuItemLabel::create(labelDelete);
+    menuItem ->setCallback([&](cocos2d::Ref *sender) {
+        Director::getInstance()->replaceScene(MainMenu::scene());
+    });
+    auto playButton = MenuItemImage::create("menu/reset-button.png", "menu/reset-button.png",
+    	                                        CC_CALLBACK_1(OptionsScene::onDeleteSaveClick, this));
+    playButton->setPosition(Vec2(origin.x, origin.y * 2.6));
+    playButton->setScale(1.18f);
 
-	checkbox->setScale(1.5f);
-	checkbox->setPosition(Vec2(origin.x + visibleSize.width / 2,
-	                           origin.y + 0.5 * visibleSize.height - title->getContentSize().height));
+    // vector of menu items
+    Vector<MenuItem *> MenuItems;
+
+    // adding all items
+    MenuItems.pushBack(playButton);
+
+    auto menu = Menu::createWithArray(MenuItems);
+    	this->addChild(menu, 2);
 
 
-	checkbox->addTouchEventListener([&](Ref *sender, Widget::TouchEventType type) {
-		switch (type) {
-			case ui::Widget::TouchEventType::BEGAN:
-				break;
-			case ui::Widget::TouchEventType::ENDED:
-				std::cout << "checkbox 1 clicked" << std::endl;
-				//TileMapLayer.booleanInverter();
-				break;
-			default:
-				break;
-		}
-	});
-
-	this->addChild(checkbox, 3);
 
 
 	//add the menu item for back to main menu
 	auto label = Label::createWithTTF("Main Menu", "fonts/ReemKufi-Regular.ttf", 20);
-	auto menuItem = MenuItemLabel::create(label);
-	menuItem->setCallback([&](cocos2d::Ref *sender) {
+	auto menuItemBack = MenuItemLabel::create(label);
+	menuItemBack->setCallback([&](cocos2d::Ref *sender) {
 		Director::getInstance()->replaceScene(MainMenu::scene());
 	});
 	auto backMenu = Menu::create(menuItem, nullptr);
@@ -83,4 +78,11 @@ bool OptionsScene::init() {
 
 
 	return true;
+}
+
+void OptionsScene::onDeleteSaveClick(cocos2d::Ref *sender) {
+	SaveLoad::deleteEverything();
+	cocos2d::log("deleteEverything() called");
+	Director::getInstance()->replaceScene(
+			TransitionFade::create(0.4f, MainMenu::scene(), Color3B(255, 255, 255)));
 }

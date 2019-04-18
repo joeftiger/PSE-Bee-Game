@@ -124,23 +124,7 @@ std::vector<std::vector<int>> SaveLoad::loadMap() {
 	return vec;
 }
 
-bool SaveLoad::tileMapSaveExists() {
-	return FileUtils::getInstance()->isFileExist(getPath("tilemap.json"));
-}
 
-bool SaveLoad::beeHiveSaveExists() {
-	return FileUtils::getInstance()->isFileExist(getPath("beehives.json"));
-}
-
-void SaveLoad::deleteTileMapSave() {
-	FileUtils::getInstance()->removeFile(getPath("tilemap.json"));
-	assert(!tileMapSaveExists());
-}
-
-void SaveLoad::deleteBeeHivesSave() {
-	FileUtils::getInstance()->removeFile(getPath("beehives.json"));
-	assert(!beeHiveSaveExists());
-}
 
 /**
 	Saves all beeHives on the current tileMap into a json-array and writes them into "beehives.json"
@@ -205,10 +189,7 @@ void SaveLoad::loadTime() {
 	Time::getInstance()->fromJSON(doc);
 }
 
-bool SaveLoad::timesSaveExists()
-{
-	return FileUtils::getInstance()->isFileExist(getPath("times.json"));
-}
+
 
 /**
 	Test-Method, currently unused
@@ -230,4 +211,39 @@ void SaveLoad::jsonToFile(rapidjson::Document &jsonObj, std::string fullPath) {
 	OStreamWrapper osw(ofs);
 	Writer<OStreamWrapper> out(osw);
 	jsonObj.Accept(out);
+}
+
+bool SaveLoad::tileMapSaveExists() {
+	return FileUtils::getInstance()->isFileExist(getPath("tilemap.json"));
+}
+
+bool SaveLoad::beeHiveSaveExists() {
+	return FileUtils::getInstance()->isFileExist(getPath("beehives.json"));
+}
+
+bool SaveLoad::timesSaveExists()
+{
+	return FileUtils::getInstance()->isFileExist(getPath("times.json"));
+}
+
+void SaveLoad::deleteTileMapSave() {
+	FileUtils::getInstance()->removeFile(getPath("tilemap.json"));
+	assert(!tileMapSaveExists());
+}
+
+void SaveLoad::deleteBeeHivesSave() {
+	FileUtils::getInstance()->removeFile(getPath("beehives.json"));
+	assert(!beeHiveSaveExists());
+}
+
+void SaveLoad::deleteTimeSave() {
+	FileUtils::getInstance()->removeFile(getPath("times.json"));
+    assert(!timesSaveExists());
+}
+
+// to call all the seperate delete methods
+void SaveLoad::deleteEverything() {
+	deleteBeeHivesSave();
+	deleteTileMapSave();
+	deleteTimeSave();
 }
