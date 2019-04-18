@@ -17,28 +17,25 @@ cocos2d::Scene *MainMenu::scene() {
 // on "init" you need to initialize your instance
 bool MainMenu::init() {
 
+	// standard size related functions
 	cocos2d::Rect visibleRect = Director::getInstance()->getOpenGLView()->getVisibleRect();
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
+	// adding a background, setting the middle as the anchor point and putting as far back as possible
 	auto *background = cocos2d::Sprite::create("menu/main-menu-background.png");
 	background->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-	background->setAnchorPoint(Vec2(0.5, 0.5)); // middle of the background sprite
-	this->addChild(background, -1000); // to ensure it's the lowest layer
+	background->setAnchorPoint(Vec2(0.5, 0.5));
+	this->addChild(background, -1000);
 
-
-	// Create a title to identify
+	// Create a title and center it at the top of the screen
 	auto title = Label::createWithTTF("So Bee It!", "fonts/ReemKufi-Regular.ttf", 48);
-
-	// position the label on the top center of the screen
 	title->setPosition(Vec2(origin.x + visibleSize.width / 2,
 	                        origin.y + visibleSize.height - title->getContentSize().height));
-
-	// add the label as a child to this layer
 	this->addChild(title, 3);
 
-
-	// Adding the sprites for the main menu with location and size
+	// Adding the sprites for the main menu with location and size adjustment
+	// all scaling and position through trial-and-error
 	auto playButton = MenuItemImage::create("menu/start.png", "menu/start.png",
 	                                        CC_CALLBACK_1(MainMenu::onPlayClick, this));
 	playButton->setPosition(Vec2(origin.x, origin.y * 2.6));
@@ -59,10 +56,9 @@ bool MainMenu::init() {
     exitButton->setPosition(Vec2(origin.x, - origin.y * 4.95));
     exitButton->setScale(1.18f);
 
-	// vector of menu items
+	// vector of menu items and then adding all the menu items and creating them
 	Vector<MenuItem *> MenuItems;
 
-	// adding all items
 	MenuItems.pushBack(playButton);
 	MenuItems.pushBack(optionsButton);
 	MenuItems.pushBack(aboutButton);
@@ -71,23 +67,31 @@ bool MainMenu::init() {
 	auto menu = Menu::createWithArray(MenuItems);
 	this->addChild(menu, 2);
 
+
 	return true;
 }
 
+// when clicking on play - replace scene with game scene
+// Delay: 0.6 seconds       Transition Colour: Orange
 void MainMenu::onPlayClick(cocos2d::Ref *sender) {
 	Director::getInstance()->replaceScene(TransitionFade::create(0.6f, GameScene::create(), Color3B(255, 165, 0)));
 }
-
+// when clicking on options - replace scene with options scene
+// Delay: 0.4 seconds       Transition Colour: White
 void MainMenu::onOptionsClick(cocos2d::Ref *sender) {
 	Director::getInstance()->replaceScene(
 			TransitionFade::create(0.4f, OptionsScene::createScene(), Color3B(255, 255, 255)));
 }
 
+// when clicking on about - replace scene with about scene
+// Delay: 0.4 seconds       Colour: White
 void MainMenu::onAboutClick(cocos2d::Ref *sender) {
 	Director::getInstance()->replaceScene(
 			TransitionFade::create(0.4f, AboutScene::createScene(), Color3B(255, 255, 255)));
 }
 
+// when clicking on exit - exit the current scene and the game
+// no transition or anything similiar to make it as quick as possible
 void MainMenu::onExitClick(cocos2d::Ref *sender){
     //Close the cocos2d-x game scene and quit the application
     Director::getInstance()->end();
