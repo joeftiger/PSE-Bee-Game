@@ -1,5 +1,5 @@
 #ifndef TIMESTRUCT_H
-#define TIMESTURCT_H
+#define TIMESTRUCT_H
 
 
 struct timeStruct {

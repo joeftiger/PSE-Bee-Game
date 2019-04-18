@@ -18,11 +18,14 @@ public:
 	// Play Click Handler
 	void onPlayClick(cocos2d::Ref *sender);
 
-	// About Click Handler
+	// Options Click Handler
 	void onOptionsClick(cocos2d::Ref *sender);
 
 	// About Click Handler
 	void onAboutClick(cocos2d::Ref *sender);
+
+	// Exit Click Handler
+	void onExitClick(cocos2d::Ref *sender);
 
 	// implement the "static create()" method manually
 	CREATE_FUNC(MainMenu);

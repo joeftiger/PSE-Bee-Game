@@ -62,7 +62,7 @@ std::string Time::convertToMonth(int i)
 	switch (i) {
 	case 1: return "Januar";
 	case 2: return "Februar";
-	case 3: return "März";
+	case 3: return "Maerz";
 	case 4: return "April";
 	case 5: return "Mai";
 	case 6: return "Juni";
@@ -85,7 +85,7 @@ Season Time::getSeason() {
 	
 	case 3: 
 	case 4:
-	case 5: return Season::Frühling;
+	case 5: return Season::Fruehling;
 
 	case 6:
 	case 7:

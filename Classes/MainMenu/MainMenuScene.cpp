@@ -23,9 +23,8 @@ bool MainMenu::init() {
 
 	auto *background = cocos2d::Sprite::create("menu/main-menu-background.png");
 	background->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-	background->setAnchorPoint(Vec2(0.5, 0.5));
+	background->setAnchorPoint(Vec2(0.5, 0.5)); // middle of the background sprite
 	this->addChild(background, -1000); // to ensure it's the lowest layer
-
 
 
 	// Create a title to identify
@@ -39,10 +38,7 @@ bool MainMenu::init() {
 	this->addChild(title, 3);
 
 
-	int index = 2;
-
-
-	// Adding the sprites for the main menu
+	// Adding the sprites for the main menu with location and size
 	auto playButton = MenuItemImage::create("menu/start.png", "menu/start.png",
 	                                        CC_CALLBACK_1(MainMenu::onPlayClick, this));
 	playButton->setPosition(Vec2(origin.x, origin.y * 2.6));
@@ -59,7 +55,7 @@ bool MainMenu::init() {
 	aboutButton->setScale(1.18f);
 
 	auto exitButton = MenuItemImage::create("menu/exit.png", "menu/exit.png",
-    	                                        CC_CALLBACK_1(MainMenu::onPlayClick, this));
+    	                                        CC_CALLBACK_1(MainMenu::onExitClick, this));
     exitButton->setPosition(Vec2(origin.x, - origin.y * 4.95));
     exitButton->setScale(1.18f);
 
@@ -90,4 +86,18 @@ void MainMenu::onOptionsClick(cocos2d::Ref *sender) {
 void MainMenu::onAboutClick(cocos2d::Ref *sender) {
 	Director::getInstance()->replaceScene(
 			TransitionFade::create(0.4f, AboutScene::createScene(), Color3B(255, 255, 255)));
+}
+
+void MainMenu::onExitClick(cocos2d::Ref *sender){
+    //Close the cocos2d-x game scene and quit the application
+    Director::getInstance()->end();
+
+    #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    exit(0);
+	#endif
+
+    /*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() and exit(0) as given above,instead trigger a custom event created in RootViewController.mm as below*/
+    //EventCustom customEndEvent("game_scene_close_event");
+    //_eventDispatcher->dispatchEvent(&customEndEvent);
+
 }
