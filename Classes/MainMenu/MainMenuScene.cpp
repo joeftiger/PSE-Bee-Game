@@ -1,18 +1,7 @@
 
 #include "MainMenuScene.h"
 
-cocos2d::Scene *MainMenu::scene() {
-	cocos2d::Scene *scene = nullptr;
-
-	// create a scene
-	scene = cocos2d::Scene::create();
-	// 'layer' is an autorelease object
-	auto *layer = MainMenu::create();
-	// add layer as a child to scene
-	scene->addChild(layer);
-	// return the scene
-	return scene;
-}
+Scene *MainMenu::scene() { return MainMenu::create(); }
 
 // on "init" you need to initialize your instance
 bool MainMenu::init() {

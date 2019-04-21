@@ -7,6 +7,7 @@
 using namespace cocos2d;
 using namespace cocos2d::ui;
 
+
 Scene *OptionsScene::createScene() { return OptionsScene::create(); }
 
 // on "init" you need to initialize your instance
@@ -34,13 +35,15 @@ bool OptionsScene::init() {
 	                                 origin.y + 40 + 0.5 * visibleSize.height - title->getContentSize().height));
 	this->addChild(optionsText, 1);
 
-	// add button to delete the save
-	// TODO Implement a button by Olivier (Brian 18.4)
-    auto labelDelete = Label::createWithTTF("Click to Delete Save", "fonts/ReemKufi-Regular.ttf", 28);
+
+    auto labelDelete = Label::createWithTTF("Back to Menu", "fonts/ReemKufi-Regular.ttf", 28);
     auto menuItem = MenuItemLabel::create(labelDelete);
     menuItem ->setCallback([&](cocos2d::Ref *sender) {
         Director::getInstance()->replaceScene(MainMenu::scene());
     });
+
+    // add button to delete the save
+    // TODO Implement a button by Olivier (Brian 18.4)
     auto playButton = MenuItemImage::create("menu/reset-button.png", "menu/reset-button.png",
     	                                        CC_CALLBACK_1(OptionsScene::onDeleteSaveClick, this));
     playButton->setPosition(Vec2(origin.x, origin.y * 2.6));
@@ -58,7 +61,7 @@ bool OptionsScene::init() {
 	menuItemBack->setCallback([&](cocos2d::Ref *sender) {
 		Director::getInstance()->replaceScene(MainMenu::scene());
 	});
-	auto backMenu = Menu::create(menuItem, nullptr);
+	auto backMenu = Menu::create(menuItemBack, nullptr);
 	backMenu->setPosition(Vec2::ZERO);
 	backMenu->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - onePofScreenW * 8,
 	                           visibleRect.origin.y + onePofScreenH * 5));

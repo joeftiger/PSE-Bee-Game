@@ -7,9 +7,7 @@
 
 using namespace cocos2d;
 
-cocos2d::Layer *HUDLayer::createLayer() {
-	return HUDLayer::create();
-}
+Layer *HUDLayer::createLayer() { 	return HUDLayer::create(); }
 
 bool HUDLayer::init() {
 

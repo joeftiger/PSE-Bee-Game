@@ -11,9 +11,7 @@
 
 using namespace cocos2d;
 
-LayerColor *ItemPanelLayer::createLayer() {
-	return ItemPanelLayer::create();
-}
+LayerColor *ItemPanelLayer::createLayer() { return ItemPanelLayer::create(); }
 
 bool ItemPanelLayer::init() {
 

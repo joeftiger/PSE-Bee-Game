@@ -3,9 +3,7 @@
 #include "StoryScene.h"
 
 
-Scene *StoryScene::createScene() {
-	return StoryScene::create();
-}
+Scene *StoryScene::createScene() { 	return StoryScene::create(); }
 
 bool StoryScene::init() {
 
