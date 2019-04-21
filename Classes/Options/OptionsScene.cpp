@@ -36,17 +36,20 @@ bool OptionsScene::init() {
 	this->addChild(optionsText, 1);
 
 
-    auto labelDelete = Label::createWithTTF("Back to Menu", "fonts/ReemKufi-Regular.ttf", 28);
+    auto labelDelete = Label::createWithTTF("Press below to reset your save", "fonts/ReemKufi-Regular.ttf", 28);
     auto menuItem = MenuItemLabel::create(labelDelete);
     menuItem ->setCallback([&](cocos2d::Ref *sender) {
         Director::getInstance()->replaceScene(MainMenu::scene());
     });
+    menuItem->setPosition(Vec2(origin.x + visibleSize.width / 2,
+                                origin.y + visibleSize.height - 2.2 * title->getContentSize().height));
+    this->addChild(menuItem, 1);
 
     // add button to delete the save
     // TODO Implement a button by Olivier (Brian 18.4)
     auto playButton = MenuItemImage::create("menu/reset-button.png", "menu/reset-button.png",
     	                                        CC_CALLBACK_1(OptionsScene::onDeleteSaveClick, this));
-    playButton->setPosition(Vec2(origin.x, origin.y * 2.6));
+    playButton->setPosition(Vec2(origin.x, origin.y * 2.5));
     playButton->setScale(1.18f);
 
 	// create menu from a vector of menu items, adding it and then displaying it
