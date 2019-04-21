@@ -25,6 +25,10 @@ bool GameScene::init() {
 	listener->onTouchEnded = CC_CALLBACK_2(GameScene::onTouchEnded, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
+	//camera
+	camera = this->getDefaultCamera();
+	this->removeChild(camera);
+
 	// Background TileMap
 	_tileMapLayer = TileMapLayer::create();
 	this->addChild(_tileMapLayer, -1);
@@ -45,14 +49,21 @@ bool GameScene::init() {
 		SaveLoad::loadTime();
 	}
 
-	//HUD + ItemPanel Layer
+	//HUD Layer
 	_HUDLayer = HUDLayer::create();
-	this->addChild(_HUDLayer, HUD_PRIORITY);
-	_itemPanel = ItemPanelLayer::create();
-	_HUDLayer->addChild(_itemPanel);
 
-	// camera
-	_camera = this->getDefaultCamera();
+	//Item Panel
+	_itemPanel = ItemPanelLayer::create();
+
+	//camera and huds container
+	container = Node::create();
+	container->addChild(camera);
+	this->addChild(container);
+	container->addChild(_itemPanel);
+	container->addChild(_HUDLayer);
+	container->setPosition(Vec2(_tileMapLayer->getMap()->getBoundingBox().size.width / 2 - visibleSize.width / 2,
+	                            _tileMapLayer->getMap()->getBoundingBox().size.height / 2 - visibleSize.height / 2));
+	cameraTravel -= container->getPosition();
 
 	this->schedule(schedule_selector(GameScene::saveGameState), 60.0f);
 	this->schedule(schedule_selector(GameScene::beeHiveAtlasUpdate), 1.0f);
@@ -68,27 +79,28 @@ void GameScene::beeHiveAtlasUpdate(float dt) {
 
 bool GameScene::onTouchBegan(Touch *touch, Event *event) {
 	_isTouched = true;
-	_itemPanel->showHideItemPanel(touch->getLocation());
+	_touchPosition = touch->getLocation();
+	_itemPanel->showHideItemPanel(_touchPosition);
 	return true;
 }
 
 void GameScene::onTouchMoved(Touch *touch, Event *event) {
-	auto movement = touch->getPreviousLocation() - touch->getLocation();
+	auto touchPos = touch->getLocation();
+	auto movement = touchPos - _touchPosition;
+	_touchPosition = touchPos;
+
 
 	if (_itemPanel->isDrag()) {
-		_itemPanel->getDrag()->setPosition(_itemPanel->getPosition() + movement);
+		_itemPanel->getDrag()->setPosition(touchPos - _itemPanel->getPosition());
 	} else {
-		auto cameraPos = _camera->getPosition();
-		_camera->setPosition(cameraPos + movement);
-
-		auto hudPos = _HUDLayer->getPosition();
-		_HUDLayer->setPosition(hudPos + movement);
+		cameraTravel += movement;
+		container->setPosition(container->getPosition() - movement);
 	}
 }
 
-void GameScene::onTouchEnded(Touch *touch, Event *event) {
+void GameScene::onTouchEnded(void *, void *) {
 	if (_itemPanel->isDrag()) {
-		auto pos = touch->getLocation();
+		auto pos = _touchPosition - cameraTravel;
 		auto gid = _itemPanel->getDrag()->getTag();
 
 		if (_tileMapLayer->canPlaceTile(pos, gid)) {

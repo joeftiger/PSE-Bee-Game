@@ -15,11 +15,15 @@ using namespace cocos2d;
 
 class GameScene : public cocos2d::Scene {
 private:
-	Camera *_camera;
+	Size visibleSize;
+	Camera *camera;
 	TileMapLayer *_tileMapLayer;
 	HUDLayer *_HUDLayer;
 
 	bool _isTouched;
+	Node *container;
+	Point _touchPosition;
+	Point cameraTravel = Vec2(0, 0);
 
 	ItemPanelLayer *_itemPanel;
 
@@ -36,7 +40,7 @@ public:
 
 	void onTouchMoved(Touch *touch, Event *event);
 
-	void onTouchEnded(Touch *touch, Event *event);
+	void onTouchEnded(void *, void *);
 
 	void saveGameState(float dt);
 
