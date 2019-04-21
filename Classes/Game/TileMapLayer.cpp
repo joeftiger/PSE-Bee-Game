@@ -5,7 +5,7 @@
 #include "SaveLoad/SaveLoad.h"
 
 bool TileMapLayer::init() {
-	if (!Node::init()) return false;
+	if (!Layer::init()) return false;
 	useSD = true;
 
 #if (USE_SD == true)
