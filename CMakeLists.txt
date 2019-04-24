@@ -97,6 +97,7 @@ list(APPEND GAME_SOURCE
         Classes/TileMapObjects/PlaceableTile.cpp
         Classes/TileMapObjects/PlaceableSprite.cpp
 		Classes/Game/Time.cpp
+        Classes/Story/Popup.cpp
      )
 list(APPEND GAME_HEADER
         Classes/AppDelegate.h
@@ -121,6 +122,7 @@ list(APPEND GAME_HEADER
 		Classes/Game/Time.h
 		Classes/HeaderFiles/TimeStruct.h
 		Classes/HeaderFiles/Seasons.h
+        Classes/Story/Popup.h
      )
 
 if(ANDROID)
