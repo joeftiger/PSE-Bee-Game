@@ -5,6 +5,7 @@
 #ifndef _OPTIONSSCENE_H
 #define _OPTIONSSCENE_H
 
+#include "SaveDeleteConfirmation.h"
 #include "MainMenu/MainMenuScene.h"
 #include "Game/TileMapLayer.h"
 #include "SaveLoad/SaveLoad.h"

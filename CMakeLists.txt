@@ -90,6 +90,7 @@ list(APPEND GAME_SOURCE
         Classes/Game/BeeHiveAtlas.cpp
         Classes/About/AboutScene.cpp
         Classes/Options/OptionsScene.cpp
+        Classes/Options/SaveDeleteConfirmation.cpp
         Classes/Shop/ShopScene.cpp
         Classes/SaveLoad/SaveLoad.cpp
         Classes/ItemPanel/TouchUtil.cpp
@@ -111,6 +112,7 @@ list(APPEND GAME_HEADER
         Classes/Game/BeeHiveAtlas.h
         Classes/About/AboutScene.h
         Classes/Options/OptionsScene.h
+		Classes/Options/SaveDeleteConfirmation.h
         Classes/Shop/ShopScene.h
         Classes/SaveLoad/SaveLoad.h
         Classes/ItemPanel/TouchUtil.h

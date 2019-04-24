@@ -38,9 +38,7 @@ bool OptionsScene::init() {
 
     auto labelDelete = Label::createWithTTF("Press below to reset your save", "fonts/ReemKufi-Regular.ttf", 28);
     auto menuItem = MenuItemLabel::create(labelDelete);
-    menuItem ->setCallback([&](cocos2d::Ref *sender) {
-        Director::getInstance()->replaceScene(MainMenu::scene());
-    });
+
     menuItem->setPosition(Vec2(origin.x + visibleSize.width / 2,
                                 origin.y + visibleSize.height - 2.2 * title->getContentSize().height));
     this->addChild(menuItem, 1);
@@ -77,8 +75,6 @@ bool OptionsScene::init() {
 // upon presseing the rest button, delete the save and go back to main menu
 // TODO Add confirmation / warning (Brian 18.4)
 void OptionsScene::onDeleteSaveClick(cocos2d::Ref *sender) {
-	SaveLoad::deleteEverything();
-	cocos2d::log("deleteEverything() called");
 	Director::getInstance()->replaceScene(
-			TransitionFade::create(0.4f, MainMenu::scene(), Color3B(255, 255, 255)));
+			TransitionFade::create(0.4f, SaveDeleteConfirmation::create(), Color3B(255, 255, 255)));
 }
