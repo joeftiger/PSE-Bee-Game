@@ -56,6 +56,11 @@ public:
 	 */
 	void updateBeeHives(float);
 
+	/**
+	 * Clears all beehives and resets this beehive atlas to its original state.
+	 */
+	void clear();
+
 	void toJSON(rapidjson::Document &doc) override;
 
 	void fromJSON(rapidjson::Document &doc) override;

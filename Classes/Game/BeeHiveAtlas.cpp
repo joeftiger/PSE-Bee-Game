@@ -69,6 +69,10 @@ void BeeHiveAtlas::updateBeeHives(float) {
 	}
 }
 
+void BeeHiveAtlas::clear() {
+	_beeHives.clear();
+}
+
 void BeeHiveAtlas::toJSON(rapidjson::Document &doc) {
 	for (auto const &pair : _beeHives) {
 		pair.second->toJSON(doc);
