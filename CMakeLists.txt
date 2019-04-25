@@ -86,8 +86,10 @@ list(APPEND GAME_SOURCE
         Classes/MainMenu/MainMenuScene.cpp
         Classes/Game/TileMapLayer.cpp
         Classes/Game/BeeHive.cpp
+        Classes/Game/HoneyExtractor.cpp
         Classes/Game/Player.cpp
         Classes/Atlas/BeeHiveAtlas.cpp
+        Classes/Atlas/HoneyExtractorAtlas.cpp
         Classes/About/AboutScene.cpp
         Classes/Options/OptionsScene.cpp
         Classes/Options/SaveDeleteConfirmation.cpp
@@ -106,10 +108,12 @@ list(APPEND GAME_HEADER
         Classes/MainMenu/MainMenuScene.h
         Classes/Game/TileMapLayer.h
         Classes/Game/BeeHive.h
+        Classes/Game/HoneyExtractor.h
         Classes/Game/Player.h
         Classes/Observer.h
         Classes/Observable.h
         Classes/Atlas/BeeHiveAtlas.h
+        Classes/Atlas/HoneyExtractorAtlas.h
         Classes/About/AboutScene.h
         Classes/Options/OptionsScene.h
 		Classes/Options/SaveDeleteConfirmation.h
