@@ -243,6 +243,7 @@ void SaveLoad::deleteTimeSave() {
 
 // to call all the seperate delete methods
 void SaveLoad::deleteEverything() {
+	BeeHiveAtlas::getInstance()->clear();
 	deleteBeeHivesSave();
 	deleteTileMapSave();
 	deleteTimeSave();
