@@ -9,15 +9,16 @@
 #include "cocos2d.h"
 #include "../HeaderFiles/Restorable.h"
 
-static const float MAX_RAW_HONEY_TO_CONVERT = 2000.0f;
+static const float MAX__HONEY_IN_EXTRACTOR = 100.0f;
 
 class HoneyExtractor : Restorable {
 private:
+	int _honeyInExtractor;
 	float _rawHoney;
-	int _honey;
 	int _convertedMoney;
+
+
 	int _money;
-	float _rawHoneyToConvert;
 
 	cocos2d::Vec2 _position;
 
@@ -25,42 +26,34 @@ private:
 
 public:
 	/**
-	 * Creates a new healthy beehive with 100 bees.
+	 * Creates a new honey extractor with 0 raw honey as input.
 	 */
 	explicit HoneyExtractor();
 
 	/**
-	 * Creates a new healthy beehive.
-	 * @param bees the initial number of bees
-	 */
-	explicit HoneyExtractor(int honey);
+     * Creates a new honey extractor with 0 raw honey as input.
+     */
+    explicit HoneyExtractor(int _honeyInExtractor);
 
 	/**
-	 * Creates a new infected beehive
-	 * @param bees  the initial number of bees
-	 * @param varoa  the initial number of varoa
-	 */
-	explicit HoneyExtractor(int honey, int money);
-
-	/**
-	 * Returns whether this beehive is empty and has no bees in it.
-	 * @return <code>true</code> if no bees in this hive.
+	 * Returns whether this honey extractor is empty
+	 * @return <code>true</code> if no _honeyInExtractor in this hive.
 	 */
 	bool isEmpty();
 
 	/**
-	 * Returns whether this beehive has maxed out its bee population.
-	 * @return <code>true</true> if beehive is full.
+	 * Returns whether this honey extractor is full with honey
+	 * @return <code>true</true> if honey extractor is full.
 	 */
 	bool isFull();
 
 	/**
-	 * @return total raw honey
+	 * @return total converted money
 	 */
-	float rawHoney();
+	float convertedMoney();
 
 	/**
-	 * Takes and removes the total raw honey currently in the beehive.
+	 * Takes and removes the total honey currently in the extractor.
 	 * @return the total raw honey
 	 */
 	float takeRawHoney();

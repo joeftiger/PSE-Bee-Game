@@ -1,8 +1,9 @@
 
+#include "BeeHive.h"
 #include <cassert>
 #include <string>
 #include <stdexcept>
-#include "BeeHive.h"
+
 
 bool BeeHive::invariant() {
 	assert(_beesAlive >= 0);

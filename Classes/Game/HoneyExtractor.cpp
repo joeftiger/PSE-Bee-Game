@@ -1,38 +1,34 @@
-//
-// Created by brian on 25/04/2019.
-//
 
 #include "HoneyExtractor.h"
-
 #include <cassert>
 #include <string>
 #include <stdexcept>
 
 bool HoneyExtractor::invariant() {
-	assert(_money >= 0); //TODO Variable money
+	assert(_money >= 0);
 	assert(_rawHoney >= 0.0f);
+	assert(_honeyInExtractor >= 0);
 	return true;
 }
 
-HoneyExtractor::HoneyExtractor() : HoneyExtractor(100) {}
+HoneyExtractor::HoneyExtractor() : HoneyExtractor(0) {}
 
-HoneyExtractor::HoneyExtractor(int honey) : HoneyExtractor(honey, 0) {}
-
-HoneyExtractor::HoneyExtractor(int honey, int money) {
-	_honey = 0;
+//TODO Fix this or rather think about the actual implementation
+HoneyExtractor::HoneyExtractor(int honeyInExtractor) {
+	_rawHoney = 0;
 	assert(invariant());
-}
+	}
 
 bool HoneyExtractor::isEmpty() {
-	return _honey == 0;
+	return _honeyInExtractor == 0;
 }
 
 bool HoneyExtractor::isFull() {
-	return _honey == MAX_RAW_HONEY_TO_CONVERT;
+	return _honeyInExtractor == MAX__HONEY_IN_EXTRACTOR;
 }
 
-float HoneyExtractor::rawHoney() {
-	return _rawHoney;
+float HoneyExtractor::convertedMoney() {
+	return _convertedMoney;
 }
 
 float HoneyExtractor::takeRawHoney() {
@@ -55,7 +51,7 @@ void HoneyExtractor::update() {
 	if (!isFull()) {
 		float modifier = std::min(999 / 100.0f, 100.0f); //TODO input the correct value instead of 999
 		float resultingHoney = _rawHoney + modifier;
-		_rawHoney = std::min(MAX_RAW_HONEY_TO_CONVERT, resultingHoney);
+		_rawHoney = std::min(MAX__HONEY_IN_EXTRACTOR, resultingHoney);
 	}
 	assert(invariant());
 }
