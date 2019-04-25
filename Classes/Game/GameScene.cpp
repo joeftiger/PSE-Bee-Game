@@ -1,6 +1,6 @@
 
 #include "GameScene.h"
-#include "BeeHiveAtlas.h"
+#include "Atlas/BeeHiveAtlas.h"
 #include "SaveLoad/SaveLoad.h"
 #include "ItemPanel/ItemPanelLayer.h"
 #include "AppDelegate.h"

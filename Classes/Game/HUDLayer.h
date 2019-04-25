@@ -2,6 +2,7 @@
 #ifndef __HUDLAYER_H
 #define __HUDLAYER_H
 
+
 #include "cocos2d.h"
 #include "Time.h"
 

@@ -7,7 +7,7 @@
 #include "Game/BeeHive.h"
 #include "json/rapidjson.h"
 #include "json/document.h"
-#include "Game/BeeHiveAtlas.h"
+#include "Atlas/BeeHiveAtlas.h"
 #include "Game/Time.h"
 #include "HeaderFiles/CHILD_NAMES.h"
 

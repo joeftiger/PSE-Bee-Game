@@ -4,7 +4,7 @@
 
 #include <cassert>
 #include "Player.h"
-#include "BeeHiveAtlas.h"
+
 
 Player *Player::_instance = nullptr;
 

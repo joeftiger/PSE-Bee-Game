@@ -6,9 +6,13 @@
 #define PSE_BEE_GAME_BEEHIVEATLAS_H
 
 #include "cocos2d.h"
-#include "BeeHive.h"
+#include "Game/BeeHive.h"
 #include "Observer.h"
-#include "TileMapLayer.h"
+#include "Game/TileMapLayer.h"
+#include <HeaderFiles/CHILD_NAMES.h>
+#include "Game/TileMapLayer.h"
+#include <json/stringbuffer.h>
+#include <json/writer.h>
 
 class BeeHiveAtlas : public cocos2d::Node, public Observable, public Observer, public Restorable {
 private:

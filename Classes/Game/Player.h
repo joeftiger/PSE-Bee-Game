@@ -8,6 +8,7 @@
 #include <vector>
 #include <TileMapObjects/Placeable.h>
 #include "BeeHive.h"
+#include "Atlas/BeeHiveAtlas.h"
 #include "Observer.h"
 #include "Observable.h"
 

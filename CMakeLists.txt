@@ -87,7 +87,7 @@ list(APPEND GAME_SOURCE
         Classes/Game/TileMapLayer.cpp
         Classes/Game/BeeHive.cpp
         Classes/Game/Player.cpp
-        Classes/Game/BeeHiveAtlas.cpp
+        Classes/Atlas/BeeHiveAtlas.cpp
         Classes/About/AboutScene.cpp
         Classes/Options/OptionsScene.cpp
         Classes/Options/SaveDeleteConfirmation.cpp
@@ -109,7 +109,7 @@ list(APPEND GAME_HEADER
         Classes/Game/Player.h
         Classes/Observer.h
         Classes/Observable.h
-        Classes/Game/BeeHiveAtlas.h
+        Classes/Atlas/BeeHiveAtlas.h
         Classes/About/AboutScene.h
         Classes/Options/OptionsScene.h
 		Classes/Options/SaveDeleteConfirmation.h
