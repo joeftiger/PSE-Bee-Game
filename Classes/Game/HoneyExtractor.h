@@ -15,7 +15,9 @@ class HoneyExtractor : Restorable {
 private:
 	int _honeyInExtractor;
 	float _rawHoney;
+	float _amountAdded;
 	int _convertedMoney;
+	int modifier;
 
 
 	int _money;
@@ -53,18 +55,18 @@ public:
 	float convertedMoney();
 
 	/**
-	 * Takes and removes the total honey currently in the extractor.
-	 * @return the total raw honey
+	 * TODO write actual Doc for this; do I even need this function?
 	 */
-	float takeRawHoney();
+	float inputHoneyInExtractor();
 
 	/**
-	 * Takes and removes the specified amount from the raw honey currently in the beehive.
+	 * adds the specified amount to the extractor
+	 * subtracts the specified amount from the total raw honey
 	 * @param amount the amount to take (must be in between <code>[0, rawHoney()]</code>)
 	 * @return the amount taken
 	 * @throws std::out_of_range() if amount is an invalid value
 	 */
-	float takeRawHoney(float amount);
+	float inputHoneyInExtractor(float amount);
 
 	/**
 	 * @return position in the tilemap

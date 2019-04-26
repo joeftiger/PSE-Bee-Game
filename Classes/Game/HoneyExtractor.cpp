@@ -8,6 +8,7 @@ bool HoneyExtractor::invariant() {
 	assert(_money >= 0);
 	assert(_rawHoney >= 0.0f);
 	assert(_honeyInExtractor >= 0);
+	assert(_amountAdded >= 0);
 	return true;
 }
 
@@ -31,27 +32,31 @@ float HoneyExtractor::convertedMoney() {
 	return _convertedMoney;
 }
 
-float HoneyExtractor::takeRawHoney() {
-	return takeRawHoney(_rawHoney);
+float HoneyExtractor::inputHoneyInExtractor() {
+	return inputHoneyInExtractor(_amountAdded);
 }
 
-float HoneyExtractor::takeRawHoney(float amount) {
-	if (amount < 0 || amount > _rawHoney) {
+float HoneyExtractor::inputHoneyInExtractor(float _amountAdded) {
+	if (_amountAdded < 0 || _amountAdded > _rawHoney) {
 		throw std::out_of_range(
-				"[" + std::to_string(amount) + "] is out of range for [_rawHoney = " + std::to_string(_rawHoney) + "]");
+				"[" + std::to_string(_amountAdded) + "] is out of range for [_rawHoney = " + std::to_string(_rawHoney) + "]");
 	}
-	_rawHoney -= amount;
+	_rawHoney -= _amountAdded;
+	_honeyInExtractor += _amountAdded;
+	_amountAdded = 0.0f;
 
 	assert(invariant());
-	return amount;
+	return _amountAdded;
 }
 
-//TODO Think about the rate of honey to money
+//TODO Think about the rate of honey to money -> currently 10 per tick
+//TODO also missing rounding to account for unfitting conversion rate ("left-over")
 void HoneyExtractor::update() {
 
 	if (!isEmpty()) {
-		float modifier = 10;
-		float _honeyInExtractor = _honeyInExtractor - modifier;
+		float conversionRate = 10;
+
+		_honeyInExtractor -= modifier;
 		//TODO add money conversion
 		//_honeyInExtractor = std::min(_honeyInExtractor, 0.0f);
 	}
