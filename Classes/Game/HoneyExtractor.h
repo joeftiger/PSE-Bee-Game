@@ -18,7 +18,7 @@ private:
 	float _amountAdded;
 	int _convertedMoney;
 	int modifier;
-	float _totalMoney;
+	int _totalMoney;
 
 
 	int _money;
@@ -29,12 +29,14 @@ private:
 
 public:
 	/**
-	 * Creates a new honey extractor with 0 raw honey as input.
+	 * TODO Set to 0 honey when done testing
+	 * Creates a new honey extractor with 50 raw honey as input.
 	 */
 	explicit HoneyExtractor();
 
 	/**
-     * Creates a new honey extractor with 0 raw honey as input.
+	 * TODO Set to 0 honey when done testing
+	 * Creates a new honey extractor with 50 raw honey as input.
      */
     explicit HoneyExtractor(int _honeyInExtractor);
 
@@ -53,12 +55,12 @@ public:
 	/**
 	 * @return total money
 	 */
-	float totalMoney();
+	int totalMoney();
 
 	/**
 	 * TODO write actual Doc for this; do I even need this function?
 	 */
-	float inputHoneyInExtractor();
+	int honeyInExtractor();
 
 	/**
 	 * adds the specified amount to the extractor
@@ -67,7 +69,7 @@ public:
 	 * @return the amount taken
 	 * @throws std::out_of_range() if amount is an invalid value
 	 */
-	float inputHoneyInExtractor(float amount);
+	int honeyInExtractor(float amountAdded);
 
 	/**
 	 * @return position in the tilemap

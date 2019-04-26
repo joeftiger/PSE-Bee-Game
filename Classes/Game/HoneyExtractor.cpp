@@ -12,11 +12,11 @@ bool HoneyExtractor::invariant() {
 	return true;
 }
 
-HoneyExtractor::HoneyExtractor() : HoneyExtractor(0) {}
+HoneyExtractor::HoneyExtractor() : HoneyExtractor(50) {}
 
 //TODO Fix this or rather think about the actual implementation
-HoneyExtractor::HoneyExtractor(int honeyInExtractor) {
-	_rawHoney = 0;
+HoneyExtractor::HoneyExtractor(int _honeyInExtractor) {
+	_honeyInExtractor = 50;
 	assert(invariant());
 	}
 
@@ -28,15 +28,15 @@ bool HoneyExtractor::isFull() {
 	return _honeyInExtractor == MAX__HONEY_IN_EXTRACTOR;
 }
 
-float HoneyExtractor::totalMoney() {
+int HoneyExtractor::totalMoney() {
 	return _totalMoney;
 }
 
-float HoneyExtractor::inputHoneyInExtractor() {
-	return inputHoneyInExtractor(_amountAdded);
+int HoneyExtractor::honeyInExtractor() {
+	return _honeyInExtractor;
 }
 
-float HoneyExtractor::inputHoneyInExtractor(float _amountAdded) {
+int HoneyExtractor::honeyInExtractor(float _amountAdded) {
 	if (_amountAdded < 0 || _amountAdded > _rawHoney) {
 		throw std::out_of_range(
 				"[" + std::to_string(_amountAdded) + "] is out of range for [_rawHoney = " + std::to_string(_rawHoney) + "]");
@@ -46,7 +46,7 @@ float HoneyExtractor::inputHoneyInExtractor(float _amountAdded) {
 	_amountAdded = 0.0f;
 
 	assert(invariant());
-	return _amountAdded;
+	return _honeyInExtractor;
 }
 
 //TODO Think about the rate of honey to money -> currently 10 per tick
@@ -55,7 +55,7 @@ void HoneyExtractor::update() {
 
 	if (!isEmpty()) {
 		float conversionRate = 10;
-
+		_totalMoney += conversionRate;
 		_honeyInExtractor -= modifier;
 		//TODO add money conversion
 		//_honeyInExtractor = std::min(_honeyInExtractor, 0.0f);
