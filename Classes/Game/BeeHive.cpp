@@ -7,7 +7,7 @@
 
 bool BeeHive::invariant() {
 	assert(_beesAlive >= 0);
-	assert(_varroaAlive >= 0);
+	assert(_varoaAlive >= 0);
 	assert(_rawHoney >= 0.0f);
 	return true;
 }
@@ -16,9 +16,9 @@ BeeHive::BeeHive() : BeeHive(100) {}
 
 BeeHive::BeeHive(int bees) : BeeHive(bees, 0) {}
 
-BeeHive::BeeHive(int bees, int varroa) {
+BeeHive::BeeHive(int bees, int varoa) {
 	_beesAlive = bees;
-	_varroaAlive = varroa;
+	_varoaAlive = varoa;
 	_rawHoney = 0;
 	assert(invariant());
 }
@@ -35,8 +35,8 @@ int BeeHive::beesAlive() {
 	return _beesAlive;
 }
 
-int BeeHive::varroaAlive() {
-	return _varroaAlive;
+int BeeHive::varoaAlive() {
+	return _varoaAlive;
 }
 
 float BeeHive::rawHoney() {
@@ -89,7 +89,7 @@ void BeeHive::setPosition(const cocos2d::Vec2 &pos) {
 void BeeHive::toJSON(rapidjson::Document &doc) {
 	rapidjson::Value obj(rapidjson::kObjectType);
 	obj.AddMember("_beesAlive", _beesAlive, doc.GetAllocator());
-	obj.AddMember("_varroaAlive", _varroaAlive, doc.GetAllocator());
+	obj.AddMember("_varoaAlive", _varoaAlive, doc.GetAllocator());
 	obj.AddMember("_rawHoney", _rawHoney, doc.GetAllocator());
 	obj.AddMember("_posX", int(_position.x), doc.GetAllocator());
 	obj.AddMember("_posY", int(_position.y), doc.GetAllocator());
@@ -104,8 +104,8 @@ void BeeHive::fromJSON(rapidjson::Document &doc) {
 	assert(beeHive["_beesAlive"].IsInt());
 	_beesAlive = beeHive["_beesAlive"].GetInt();
 
-	assert(beeHive["_varroaAlive"].IsInt());
-	_varroaAlive = beeHive["_varroaAlive"].GetInt();
+	assert(beeHive["_varoaAlive"].IsInt());
+	_varoaAlive = beeHive["_varoaAlive"].GetInt();
 
 	assert(beeHive["_rawHoney"].IsFloat());
 	_rawHoney = beeHive["_rawHoney"].GetFloat();

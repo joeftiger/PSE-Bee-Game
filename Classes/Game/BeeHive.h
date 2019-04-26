@@ -14,7 +14,7 @@ static const float MAX_RAW_HONEY = 2000.0f;
 class BeeHive : Restorable {
 private:
 	int _beesAlive;
-	int _varroaAlive;
+	int _varoaAlive;
 	float _rawHoney;
 
 	cocos2d::Vec2 _position;
@@ -36,9 +36,9 @@ public:
 	/**
 	 * Creates a new infected beehive
 	 * @param bees  the initial number of bees
-	 * @param varroa  the initial number of varroa
+	 * @param varoa  the initial number of varoa
 	 */
-	explicit BeeHive(int bees, int varroa);
+	explicit BeeHive(int bees, int varoa);
 
 	/**
 	 * Returns whether this beehive is empty and has no bees in it.
@@ -58,9 +58,9 @@ public:
 	int beesAlive();
 
 	/**
-	 * @return number of varroa
+	 * @return number of varoa
 	 */
-	int varroaAlive();
+	int varoaAlive();
 
 	/**
 	 * @return total raw honey
