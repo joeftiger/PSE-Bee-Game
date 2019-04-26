@@ -41,7 +41,7 @@ void HoneyExtractorAtlas::notify(void *observable) {
     }
     auto positions = layer->getHoneyExtractors();
 
-    // add missing honey extractors
+   // add missing honey extractors
    for (const auto &pos : positions) {
         if (!hasHoneyExtractorAt(pos)) {
             cocos2d::log("HoneyExtractorAtlas:\tCreating honey extractor at (%i, %i)", (int) pos.x, (int) pos.y);
@@ -70,7 +70,6 @@ void HoneyExtractorAtlas::clear() {
 }
 
 void HoneyExtractorAtlas::toJSON(rapidjson::Document &doc) {
-    // TODO Fix following line
     for (auto const &pair : _honeyExtractors) {
         pair.second->toJSON(doc);
     }
