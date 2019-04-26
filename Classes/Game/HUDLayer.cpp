@@ -89,17 +89,15 @@ void HUDLayer::timer(float dt) {
 	auto h = std::to_string((int) Player::getInstance()->totalRawHoney());
 	honeyLabel->setString(stringShortener(h));
 
-	//TODO get total money instead of honey
 	auto m = std::to_string((int) Player::getInstance()->totalMoney());
 	moneyLabel->setString(stringShortener(m));
-
 
 	__String *timeToDisplay = __String::createWithFormat("%i", Time::getInstance()->getMonth());
 	timeLabel->setString(timeToDisplay->getCString());
 }
 
 /**
-	Abbriviates string if longer than 4 Digits
+	Abbreviates string if it is longer than 4 Digits
 	@param s string to be shortened
 	@return shortened string
 */

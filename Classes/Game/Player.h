@@ -50,7 +50,7 @@ public:
 	std::unordered_map<Placeable, size_t> *getInventory();
 
 	/**
-	 * Notifies this player, that the beehives have changed.
+	 * Notifies this player, that the beehives or honey extractors have changed.
 	 * @param pVoid
 	 */
 	void notify(void *pVoid) override;

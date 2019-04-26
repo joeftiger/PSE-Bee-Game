@@ -38,6 +38,7 @@ float Player::totalMoney() {
 
 void Player::notify(void *pVoid) {
 	BeeHiveAtlas::getInstance()->getBeeHives(_beeHives);
+	HoneyExtractorAtlas::getInstance()->getHoneyExtractors(_honeyExtractors);
 }
 
 std::unordered_map<Placeable, size_t> *Player::getInventory() {
