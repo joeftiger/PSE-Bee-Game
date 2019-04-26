@@ -46,13 +46,14 @@ float HoneyExtractor::takeRawHoney(float amount) {
 	return amount;
 }
 
-//TODO Fix this function
+//TODO Think about the rate of honey to money
 void HoneyExtractor::update() {
 
-	if (!isFull()) {
-		float modifier = std::min(999 / 100.0f, 100.0f); //TODO input the correct value instead of 999
-		float resultingHoney = _rawHoney - modifier;
-		_rawHoney = std::min(MAX__HONEY_IN_EXTRACTOR, resultingHoney);
+	if (!isEmpty()) {
+		float modifier = 10;
+		float _honeyInExtractor = _honeyInExtractor - modifier;
+		//TODO add money conversion
+		//_honeyInExtractor = std::min(_honeyInExtractor, 0.0f);
 	}
 	assert(invariant());
 }

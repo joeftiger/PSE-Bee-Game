@@ -70,7 +70,6 @@ void HoneyExtractorAtlas::clear() {
 }
 
 void HoneyExtractorAtlas::toJSON(rapidjson::Document &doc) {
-    // TODO Fix following line
     for (auto const &pair : _honeyExtractors) {
         pair.second->toJSON(doc);
     }
