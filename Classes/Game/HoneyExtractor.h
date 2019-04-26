@@ -18,6 +18,7 @@ private:
 	float _amountAdded;
 	int _convertedMoney;
 	int modifier;
+	float _totalMoney;
 
 
 	int _money;
@@ -50,9 +51,9 @@ public:
 	bool isFull();
 
 	/**
-	 * @return total converted money
+	 * @return total money
 	 */
-	float convertedMoney();
+	float totalMoney();
 
 	/**
 	 * TODO write actual Doc for this; do I even need this function?

@@ -9,6 +9,8 @@
 #include <TileMapObjects/Placeable.h>
 #include "BeeHive.h"
 #include "Atlas/BeeHiveAtlas.h"
+#include "HoneyExtractor.h"
+#include "Atlas/HoneyExtractorAtlas.h"
 #include "Observer.h"
 #include "Observable.h"
 
@@ -16,6 +18,7 @@ class Player : public Observer, public Observable {
 private:
 	static Player *_instance;
 	std::vector<BeeHive *> _beeHives;
+	std::vector<HoneyExtractor *> _honeyExtractors;
 	std::unordered_map<Placeable, size_t> *_inventory;
 
 	Player() = default;
@@ -33,6 +36,12 @@ public:
 	 * @return the total raw honey currently in the BeeHiveAtlas
 	 */
 	float totalRawHoney();
+
+	/**
+     * @return the total money (in the HoneyExtractor Atlas!)
+     * TODO: Put money somewhere else to make it more sensible???
+     */
+    float totalMoney();
 
 	/**
 	 * Returns the item inventory of the player.

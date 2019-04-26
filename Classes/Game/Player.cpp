@@ -21,11 +21,19 @@ Player *Player::getInstance() {
 }
 
 float Player::totalRawHoney() {
-	float total = 0.0f;
+	float totalRawHoney = 0.0f;
 	for (auto bh : _beeHives) {
-		total += bh->rawHoney();
+		totalRawHoney += bh->rawHoney();
 	}
-	return total;
+	return totalRawHoney;
+}
+
+float Player::totalMoney() {
+	float totalMoney = 0.0f;
+	for (auto he : _honeyExtractors) {
+		totalMoney += he->totalMoney();
+	}
+	return totalMoney;
 }
 
 void Player::notify(void *pVoid) {

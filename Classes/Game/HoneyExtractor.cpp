@@ -28,8 +28,8 @@ bool HoneyExtractor::isFull() {
 	return _honeyInExtractor == MAX__HONEY_IN_EXTRACTOR;
 }
 
-float HoneyExtractor::convertedMoney() {
-	return _convertedMoney;
+float HoneyExtractor::totalMoney() {
+	return _totalMoney;
 }
 
 float HoneyExtractor::inputHoneyInExtractor() {
