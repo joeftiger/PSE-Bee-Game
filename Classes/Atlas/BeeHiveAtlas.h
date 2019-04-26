@@ -6,8 +6,8 @@
 #define PSE_BEE_GAME_BEEHIVEATLAS_H
 
 #include "cocos2d.h"
-#include "Game/BeeHive.h"
 #include "Observer.h"
+#include "Game/BeeHive.h"
 #include "Game/TileMapLayer.h"
 #include <HeaderFiles/CHILD_NAMES.h>
 #include <json/stringbuffer.h>

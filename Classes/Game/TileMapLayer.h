@@ -43,6 +43,7 @@ public:
 	 * @return a list of beehive-positions
 	 */
 	std::vector<Vec2> getBeeHives();
+	std::vector<Vec2> getHoneyExtractors();
 
 	TMXTiledMap *getMap();
 
@@ -96,7 +97,6 @@ public:
 	 */
 	void showObstructions(bool visible);
 
-	void booleanInverter();
 
 	// implement the "static create()" method manually
 	CREATE_FUNC(TileMapLayer)

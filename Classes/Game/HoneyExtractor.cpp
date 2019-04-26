@@ -46,11 +46,12 @@ float HoneyExtractor::takeRawHoney(float amount) {
 	return amount;
 }
 
+//TODO Fix this function
 void HoneyExtractor::update() {
 
 	if (!isFull()) {
 		float modifier = std::min(999 / 100.0f, 100.0f); //TODO input the correct value instead of 999
-		float resultingHoney = _rawHoney + modifier;
+		float resultingHoney = _rawHoney - modifier;
 		_rawHoney = std::min(MAX__HONEY_IN_EXTRACTOR, resultingHoney);
 	}
 	assert(invariant());

@@ -15,20 +15,20 @@ HoneyExtractorAtlas *HoneyExtractorAtlas::getInstance() {
     return _instance;
 }
 
-/*void HoneyExtractorAtlas::getBeeHives(std::vector<BeeHive *> &beeHives) {
-    beeHives.clear();
-    for (auto const &pair : _beeHives) {
-        beeHives.emplace_back(pair.second);
+void HoneyExtractorAtlas::getHoneyExtractors(std::vector<HoneyExtractor *> &honeyExtractors) {
+    honeyExtractors.clear();
+    for (auto const &pair : _honeyExtractors) {
+        honeyExtractors.emplace_back(pair.second);
     }
-}*/
+}
 
-/*bool HoneyExtractorAtlas::hasBeeHiveAt(const Vec2 &pos) {
-    return _beeHives.count(pos) != 0;
-}*/
+bool HoneyExtractorAtlas::hasHoneyExtractorAt(const Vec2 &pos) {
+    return _honeyExtractors.count(pos) != 0;
+}
 
-/*BeeHive *HoneyExtractorAtlas::getBeeHiveAt(const Vec2 &pos) {
-    return _beeHives.at(pos);
-}*/
+HoneyExtractor *HoneyExtractorAtlas::getHoneyExtractorAt(const Vec2 &pos) {
+    return _honeyExtractors.at(pos);
+}
 
 void HoneyExtractorAtlas::notify(void *observable) {
     bool notifyObservers = false;
@@ -39,19 +39,19 @@ void HoneyExtractorAtlas::notify(void *observable) {
         layer = (TileMapLayer *) observable;
         notifyObservers = true;
     }
-    //auto positions = layer->getBeeHives();
+    auto positions = layer->getHoneyExtractors();
 
-    // add missing beehives
-/*    for (const auto &pos : positions) {
-        if (!hasBeeHiveAt(pos)) {
-            cocos2d::log("HoneyExtractorAtlas:\tCreating beehive at (%i, %i)", (int) pos.x, (int) pos.y);
-            auto hive = new BeeHive();
-            hive->setPosition(pos);
-            _beeHives.emplace(pos, hive);
+    // add missing honey extractors
+   for (const auto &pos : positions) {
+        if (!hasHoneyExtractorAt(pos)) {
+            cocos2d::log("HoneyExtractorAtlas:\tCreating honey extractor at (%i, %i)", (int) pos.x, (int) pos.y);
+            auto extractor = new HoneyExtractor();
+            extractor->setPosition(pos);
+            _honeyExtractors.emplace(pos, extractor);
 
             notifyObservers = true;
         }
-    }*/
+    }
 
     if (notifyObservers) {
         cocos2d::log("HoneyExtractorAtlas:\tNotifying observers");
@@ -59,25 +59,25 @@ void HoneyExtractorAtlas::notify(void *observable) {
     }
 }
 
-/*void HoneyExtractorAtlas::updateBeeHives(float) {
-    for (auto const &pair : _beeHives) {
+void HoneyExtractorAtlas::updateHoneyExtractors(float) {
+    for (auto const &pair : _honeyExtractors) {
         pair.second->update();
     }
-}*/
+}
 
 void HoneyExtractorAtlas::clear() {
-    _honeyExtractor.clear();
+    _honeyExtractors.clear();
 }
 
 void HoneyExtractorAtlas::toJSON(rapidjson::Document &doc) {
     // TODO Fix following line
-    for (auto const &pair : _honeyExtractor) {
+    for (auto const &pair : _honeyExtractors) {
         pair.second->toJSON(doc);
     }
 }
 
 void HoneyExtractorAtlas::fromJSON(rapidjson::Document &doc) {
-   // _beeHives.clear();
+    _honeyExtractors.clear();
 
     for (int i = 0; i < doc.Size(); i++) {
         rapidjson::Document subDoc;
@@ -91,6 +91,6 @@ void HoneyExtractorAtlas::fromJSON(rapidjson::Document &doc) {
         auto h = new HoneyExtractor();
         h->fromJSON(subDoc);
 
-        _honeyExtractor.emplace(h->position(), h);
+        _honeyExtractors.emplace(h->position(), h);
     }
 }

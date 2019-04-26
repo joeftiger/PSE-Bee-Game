@@ -71,6 +71,23 @@ std::vector<cocos2d::Vec2> TileMapLayer::getBeeHives() {
 	return beeHives;
 }
 
+std::vector<cocos2d::Vec2> TileMapLayer::getHoneyExtractors() {
+	auto size = _objectLayer->getLayerSize();
+	std::vector<cocos2d::Vec2> honeyExtractors;
+
+	for (auto y = 0; y < size.height; y++) {
+		for (auto x = 0; x < size.width; x++) {
+			auto coordinate = Vec2(x, y);
+			auto gid = _objectLayer->getTileGIDAt(coordinate);
+	//TODO Change this to the honey extractor tile / sprite
+			if (gid == TileGID::flower4) {
+				honeyExtractors.push_back(coordinate);
+			}
+		}
+	}
+	return honeyExtractors;
+}
+
 TMXTiledMap *TileMapLayer::getMap() {
 	return _tileMap;
 }
@@ -207,6 +224,3 @@ void TileMapLayer::initObstructionLayer() {
 	}
 }
 
-void TileMapLayer::booleanInverter() {
-	useSD = !useSD;
-}

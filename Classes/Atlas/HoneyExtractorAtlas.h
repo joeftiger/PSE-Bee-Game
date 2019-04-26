@@ -17,11 +17,11 @@
 class HoneyExtractorAtlas : public cocos2d::Node, public Observable, public Observer, public Restorable {
 private:
     static HoneyExtractorAtlas*_instance;
-    std::map<cocos2d::Vec2, HoneyExtractor *> _honeyExtractor;
+    std::map<cocos2d::Vec2, HoneyExtractor *> _honeyExtractors;
 
     HoneyExtractorAtlas() = default;
 
-    //BeeHiveAtlas(const BeeHiveAtlas &);
+    HoneyExtractorAtlas(const HoneyExtractorAtlas &);
 
     ~HoneyExtractorAtlas() = default;
 
@@ -29,39 +29,39 @@ public:
     static HoneyExtractorAtlas *getInstance();
 
     /**
-     * Stores pointers to beehives in the specified vector.
-     * @param beeHive container for beehive pointers
+     * Stores pointers to honey extractors in the specified vector.
+     * @param honeyExtractor container for honey extractor pointers
      */
-    //void getBeeHives(std::vector<BeeHive *> &beeHives);
+    void getHoneyExtractors(std::vector<HoneyExtractor*> &honeyExtractors);
 
     /**
-     * Returns whether the atlas has a BeeHive obejct at given position.
-     * @param pos position of beehive in tilemap
-     * @return <code>true</code> if associated beehive object. <br><code>false</code> otherwise
+     * Returns whether the atlas has a honey extractor  at given position.
+     * @param pos position of honey extractor in tilemap
+     * @return <code>true</code> if associated honey extractor object. <br><code>false</code> otherwise
      */
-    //bool hasBeeHiveAt(const Vec2 &pos);
+    bool hasHoneyExtractorAt(const Vec2 &pos);
 
     /**
-     * Returns the BeeHive object at given position.
-     * @param pos position of beehive in tilemap
-     * @return beehive object
+     * Returns the honey extractor object at given position.
+     * @param pos position of honey extractor in tilemap
+     * @return honey extractor object
      */
-    //BeeHive *getBeeHiveAt(const Vec2 &pos);
+    HoneyExtractor *getHoneyExtractorAt(const Vec2 &pos);
 
     /**
-     * Notifies this BeeHiveAtlas, that the observable has been changed.
+     * Notifies this Atlas, that the observable has been changed.
      * The observable should be a TileMapLayer.
      * @param observable
      */
     void notify(void *observable) override;
 
     /**
-     * Updates all beehives in the atlas.
+     * Updates all honey extractors in the atlas.
      */
-    //void updateBeeHives(float);
+    void updateHoneyExtractors (float);
 
     /**
-     * Clears all beehives and resets this beehive atlas to its original state.
+     * Clears all honey extractors and resets the atlas to its original state.
      */
     void clear();
 
