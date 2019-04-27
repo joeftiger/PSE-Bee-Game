@@ -124,7 +124,7 @@ void GameScene::onTouchEnded(void *, void *) {
 		_itemPanel->setIsDrag(false);
 	}
 
-    //if(!_isMoved) {
+    //if(!_isMoved) { //TODO: Add more wiggleroom before _isMoved is true
         interactAt(pos);
     //}
 	_isMoved = false;
