@@ -21,6 +21,7 @@ private:
 	HUDLayer *_HUDLayer;
 
 	bool _isTouched;
+	bool _isMoved;
 	Node *container;
 	Point _touchPosition;
 	Point cameraTravel = Vec2(0, 0);
@@ -44,9 +45,7 @@ public:
 
 	void saveGameState(float dt);
 
-	void touchOnItemPanel();
-
-	void ShowHideItemPanel();
+	void interactAt(Vec2 pos);
 
 	// implement the "static create()" method manually
 	CREATE_FUNC(GameScene);

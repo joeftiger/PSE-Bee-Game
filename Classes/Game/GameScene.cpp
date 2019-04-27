@@ -85,6 +85,7 @@ bool GameScene::onTouchBegan(Touch *touch, Event *event) {
 }
 
 void GameScene::onTouchMoved(Touch *touch, Event *event) {
+    _isMoved = true;
 	auto touchPos = touch->getLocation();
 	auto movement = touchPos - _touchPosition;
 	_touchPosition = touchPos;
@@ -99,8 +100,8 @@ void GameScene::onTouchMoved(Touch *touch, Event *event) {
 }
 
 void GameScene::onTouchEnded(void *, void *) {
+    auto pos = _touchPosition - cameraTravel;
 	if (_itemPanel->isDrag()) {
-		auto pos = _touchPosition - cameraTravel;
 		auto gid = _itemPanel->getDrag()->getTag();
 
 		if (_tileMapLayer->canPlaceTile(pos, gid)) {
@@ -110,12 +111,24 @@ void GameScene::onTouchEnded(void *, void *) {
 		_itemPanel->removeChild(_itemPanel->getDrag());
 		_itemPanel->setIsDrag(false);
 	}
+	if(!_isMoved) {
+        interactAt(pos);
+	}
 	_isTouched = false;
+	_isMoved = false;
 }
 
 void GameScene::saveGameState(float dt) {
 	SaveLoad::saveMap();
 	SaveLoad::saveBeehives();
 	//TODO: Add beehives here or create general method in saveload
+}
+
+void GameScene::interactAt(Vec2 pos) {
+    auto selectTilePos = _tileMapLayer->getTilePosition(pos);
+    auto beeHive = BeeHiveAtlas::getInstance()->getBeeHiveAt(selectTilePos);
+    string s = to_string(beeHive->rawHoney());
+
+    CCLOG(s.c_str());
 }
 
