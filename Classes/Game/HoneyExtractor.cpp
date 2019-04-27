@@ -8,7 +8,6 @@ bool HoneyExtractor::invariant() {
 	assert(_money >= 0);
 	assert(_rawHoney >= 0.0f);
 	assert(_honeyInExtractor >= 0);
-	assert(_amountAdded >= 0);
 	return true;
 }
 
@@ -36,14 +35,16 @@ int HoneyExtractor::honeyInExtractor() {
 	return _honeyInExtractor;
 }
 
-int HoneyExtractor::honeyInExtractor(float _amountAdded) {
-	if (_amountAdded < 0 || _amountAdded > _rawHoney) {
+// TODO Origin of honey from a specific beehive
+int HoneyExtractor::honeyInExtractor(float amountAdded) {
+	if (amountAdded < 0 || amountAdded > _rawHoney) {
 		throw std::out_of_range(
-				"[" + std::to_string(_amountAdded) + "] is out of range for [_rawHoney = " + std::to_string(_rawHoney) + "]");
+				"[" + std::to_string(amountAdded) + "] is out of range for [_rawHoney = " + std::to_string(_rawHoney) + "]");
 	}
-	_rawHoney -= _amountAdded;
-	_honeyInExtractor += _amountAdded;
-	_amountAdded = 0.0f;
+	// TODO Change function name and use takeHoney method that takes from a (specific) beehive
+	_rawHoney -= amountAdded;
+	_honeyInExtractor += amountAdded;
+	amountAdded = 0.0f;
 
 	assert(invariant());
 	return _honeyInExtractor;
@@ -56,7 +57,7 @@ void HoneyExtractor::update() {
 	if (!isEmpty()) {
 		int conversionRate = 10;
 		_totalMoney += conversionRate;
-		_honeyInExtractor -= modifier;
+		_honeyInExtractor -= conversionRate;
 		//TODO add money conversion
 		//_honeyInExtractor = std::min(_honeyInExtractor, 0.0f);
 	}
@@ -71,7 +72,7 @@ void HoneyExtractor::setPosition(const cocos2d::Vec2 &pos) {
 	_position.x = pos.x;
 	_position.y = pos.y;
 }
-
+// TODO instead of raw honey, should be amount in honey extractor
 void HoneyExtractor::toJSON(rapidjson::Document &doc) {
 	rapidjson::Value obj(rapidjson::kObjectType);
 	obj.AddMember("_rawHoney", _rawHoney, doc.GetAllocator());

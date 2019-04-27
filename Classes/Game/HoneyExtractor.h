@@ -15,9 +15,9 @@ class HoneyExtractor : Restorable {
 private:
 	int _honeyInExtractor;
 	float _rawHoney;
-	float _amountAdded;
+
 	int _convertedMoney;
-	int modifier;
+	int _modifier;
 	int _totalMoney;
 
 
@@ -28,6 +28,9 @@ private:
 	bool invariant();
 
 public:
+
+	float amountAdded;
+
 	/**
 	 * TODO Set to 0 honey when done testing
 	 * Creates a new honey extractor with 50 raw honey as input.

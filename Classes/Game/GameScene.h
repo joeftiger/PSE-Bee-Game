@@ -36,6 +36,8 @@ public:
 
 	void beeHiveAtlasUpdate(float dt);
 
+	void honeyExtractorAtlasUpdate(float dt);
+
 	bool onTouchBegan(Touch *touch, Event *event);
 
 	void onTouchMoved(Touch *touch, Event *event);

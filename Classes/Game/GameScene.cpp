@@ -1,6 +1,7 @@
 
 #include "GameScene.h"
 #include "Atlas/BeeHiveAtlas.h"
+#include "Atlas/HoneyExtractorAtlas.h"
 #include "SaveLoad/SaveLoad.h"
 #include "ItemPanel/ItemPanelLayer.h"
 #include "AppDelegate.h"
@@ -75,10 +76,17 @@ bool GameScene::init() {
 }
 
 /**
-	Calls BeeHiveUpdate every dt seconds
-*/
+ *	Calls BeeHiveUpdate every dt seconds
+ */
 void GameScene::beeHiveAtlasUpdate(float dt) {
 	BeeHiveAtlas::getInstance()->updateBeeHives(dt);
+}
+
+/**
+ *	Calls HoneyExtractorUpdate every dt seconds
+ */
+void GameScene::honeyExtractorAtlasUpdate(float dt) {
+	HoneyExtractorAtlas::getInstance()->updateHoneyExtractors(dt);
 }
 
 bool GameScene::onTouchBegan(Touch *touch, Event *event) {

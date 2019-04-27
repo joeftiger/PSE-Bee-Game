@@ -42,7 +42,7 @@ void HoneyExtractorAtlas::notify(void *observable) {
     auto positions = layer->getHoneyExtractors();
 
     // add missing honey extractors
-   for (const auto &pos : positions) {
+    for (const auto &pos : positions) {
         if (!hasHoneyExtractorAt(pos)) {
             cocos2d::log("HoneyExtractorAtlas:\tCreating honey extractor at (%i, %i)", (int) pos.x, (int) pos.y);
             auto extractor = new HoneyExtractor();
@@ -85,7 +85,7 @@ void HoneyExtractorAtlas::fromJSON(rapidjson::Document &doc) {
         subDoc.AddMember("honeyExtractor", data, subDoc.GetAllocator());
 
         rapidjson::StringBuffer buffer;
-        rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+        rapidjson::Writer <rapidjson::StringBuffer> writer(buffer);
         subDoc.Accept(writer);
         auto h = new HoneyExtractor();
         h->fromJSON(subDoc);

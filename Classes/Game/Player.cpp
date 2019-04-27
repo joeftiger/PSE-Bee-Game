@@ -27,7 +27,7 @@ float Player::totalRawHoney() {
 	}
 	return totalRawHoney;
 }
-
+// TODO Refactor money to its own class / object / part of player
 float Player::totalMoney() {
 	float totalMoney = 0.0f;
 	for (auto he : _honeyExtractors) {
