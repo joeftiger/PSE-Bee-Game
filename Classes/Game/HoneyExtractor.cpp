@@ -54,7 +54,7 @@ int HoneyExtractor::honeyInExtractor(float _amountAdded) {
 void HoneyExtractor::update() {
 
 	if (!isEmpty()) {
-		float conversionRate = 10;
+		int conversionRate = 10;
 		_totalMoney += conversionRate;
 		_honeyInExtractor -= modifier;
 		//TODO add money conversion
