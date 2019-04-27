@@ -36,6 +36,10 @@ bool GameScene::init() {
 	// TileMapAtlas and observe TileMap
 	auto tileMapAtlas = BeeHiveAtlas::getInstance();
 	_tileMapLayer->subscribe(*tileMapAtlas);
+
+	auto honeyExtractorAtlas = HoneyExtractorAtlas::getInstance();
+    _tileMapLayer->subscribe(*honeyExtractorAtlas);
+
 	//this->scheduleUpdate();
 	//this->getScheduler()->schedule(schedule_selector(BeeHiveAtlas::updateBeeHives), tileMapAtlas,1.0f, false, s);
 
