@@ -85,7 +85,6 @@ bool GameScene::onTouchBegan(Touch *touch, Event *event) {
 }
 
 void GameScene::onTouchMoved(Touch *touch, Event *event) {
-    _isMoved = true;
 	auto touchPos = touch->getLocation();
 	auto movement = touchPos - _touchPosition;
 	_touchPosition = touchPos;
@@ -95,6 +94,7 @@ void GameScene::onTouchMoved(Touch *touch, Event *event) {
 		_itemPanel->getDrag()->setPosition(touchPos - _itemPanel->getPosition());
 	} else {
 		cameraTravel += movement;
+        _isMoved = true;
 		container->setPosition(container->getPosition() - movement);
 	}
 }
@@ -126,9 +126,13 @@ void GameScene::saveGameState(float dt) {
 
 void GameScene::interactAt(Vec2 pos) {
     auto selectTilePos = _tileMapLayer->getTilePosition(pos);
-    auto beeHive = BeeHiveAtlas::getInstance()->getBeeHiveAt(selectTilePos);
-    string s = to_string(beeHive->rawHoney());
+    if(BeeHiveAtlas::getInstance()->hasBeeHiveAt(selectTilePos)) {
+        auto beeHive = BeeHiveAtlas::getInstance()->getBeeHiveAt(selectTilePos);
+        string s = "raw honey: " + to_string(beeHive->rawHoney());
+        s += "\t bees alive: " + to_string(beeHive->beesAlive());
+        s += "\t varroa alive: " + to_string(beeHive->varoaAlive());
 
-    CCLOG(s.c_str());
+        CCLOG(s.c_str());
+    }
 }
 
