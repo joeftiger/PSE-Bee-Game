@@ -88,6 +88,7 @@ list(APPEND GAME_SOURCE
         Classes/Game/BeeHive.cpp
         Classes/Game/HoneyExtractor.cpp
         Classes/Game/Player.cpp
+		Classes/Game/Interacter.cpp
         Classes/Atlas/BeeHiveAtlas.cpp
         Classes/Atlas/HoneyExtractorAtlas.cpp
         Classes/About/AboutScene.cpp
@@ -110,6 +111,7 @@ list(APPEND GAME_HEADER
         Classes/Game/BeeHive.h
         Classes/Game/HoneyExtractor.h
         Classes/Game/Player.h
+		Classes/Game/Interacter.h
         Classes/Observer.h
         Classes/Observable.h
         Classes/Atlas/BeeHiveAtlas.h
@@ -125,6 +127,7 @@ list(APPEND GAME_HEADER
 		Classes/Game/Time.h
 		Classes/HeaderFiles/TimeStruct.h
 		Classes/HeaderFiles/Seasons.h
+		Classes/HeaderFiles/Interactable.h
      )
 
 if(ANDROID)

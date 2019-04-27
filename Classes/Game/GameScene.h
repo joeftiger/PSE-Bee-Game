@@ -9,6 +9,7 @@
 #include "ItemPanel/TouchUtil.h"
 #include "ItemPanel/ItemPanelLayer.h"
 #include "Time.h"
+#include "Interacter.h"
 
 
 using namespace cocos2d;
@@ -20,6 +21,7 @@ private:
 	TileMapLayer *_tileMapLayer;
 	HUDLayer *_HUDLayer;
 
+	bool _isMoved;
 	bool _isTouched;
 	Node *container;
 	Point _touchPosition;
@@ -45,6 +47,8 @@ public:
 	void onTouchEnded(void *, void *);
 
 	void saveGameState(float dt);
+
+	void interactAt(Vec2 pos);
 
 	void touchOnItemPanel();
 

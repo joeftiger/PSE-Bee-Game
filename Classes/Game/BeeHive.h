@@ -7,11 +7,12 @@
 
 #include "cocos2d.h"
 #include "../HeaderFiles/Restorable.h"
+#include "../HeaderFiles/Interactable.h"
 
 static const int MAX_BEES = 20000;
 static const float MAX_RAW_HONEY = 2000.0f;
 
-class BeeHive : Restorable {
+class BeeHive : Restorable, public Interactable {
 private:
 	int _beesAlive;
 	int _varoaAlive;
@@ -106,6 +107,10 @@ public:
 	void toJSON(rapidjson::Document &doc) override;
 
 	void fromJSON(rapidjson::Document &doc) override;
+
+	bool isInteractable() override;
+
+	void doTask() override;
 };
 
 #endif //PSE_BEE_GAME_BEEHIVE_H

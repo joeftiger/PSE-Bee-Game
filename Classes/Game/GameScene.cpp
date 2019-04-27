@@ -97,6 +97,7 @@ bool GameScene::onTouchBegan(Touch *touch, Event *event) {
 }
 
 void GameScene::onTouchMoved(Touch *touch, Event *event) {
+    _isMoved = true;
 	auto touchPos = touch->getLocation();
 	auto movement = touchPos - _touchPosition;
 	_touchPosition = touchPos;
@@ -111,8 +112,8 @@ void GameScene::onTouchMoved(Touch *touch, Event *event) {
 }
 
 void GameScene::onTouchEnded(void *, void *) {
+    auto pos = _touchPosition - cameraTravel;
 	if (_itemPanel->isDrag()) {
-		auto pos = _touchPosition - cameraTravel;
 		auto gid = _itemPanel->getDrag()->getTag();
 
 		if (_tileMapLayer->canPlaceTile(pos, gid)) {
@@ -122,12 +123,32 @@ void GameScene::onTouchEnded(void *, void *) {
 		_itemPanel->removeChild(_itemPanel->getDrag());
 		_itemPanel->setIsDrag(false);
 	}
+
+    //if(!_isMoved) {
+        interactAt(pos);
+    //}
+	_isMoved = false;
 	_isTouched = false;
+}
+
+void GameScene::interactAt(Vec2 pos) {
+    auto selectTilePos = _tileMapLayer->getTilePosition(pos);
+
+    if(BeeHiveAtlas::getInstance()->hasBeeHiveAt(selectTilePos)) {
+        auto beeHive = BeeHiveAtlas::getInstance()->getBeeHiveAt(selectTilePos);
+        Interacter *i = Interacter::create();
+        this->addChild(i, 100);
+        i->runWith(beeHive);
+        i->interact(); //TODO: Replace
+        this->removeChild(i);
+    } else if(HoneyExtractorAtlas::getInstance()->hasHoneyExtractorAt(selectTilePos)) {
+        //TODO: add implementation for honeyExtractors
+    }
 }
 
 void GameScene::saveGameState(float dt) {
 	SaveLoad::saveMap();
 	SaveLoad::saveBeehives();
-	//TODO: Add beehives here or create general method in saveload
+	SaveLoad::saveTime();
 }
 

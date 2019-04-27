@@ -117,3 +117,11 @@ void BeeHive::fromJSON(rapidjson::Document &doc) {
 	_position.y = beeHive["_posY"].GetInt();
 }
 
+bool BeeHive::isInteractable() {
+	return _interactable;
+}
+
+void BeeHive::doTask() {
+    //TODO: add actual implementation
+    cocos2d::log("%s", "Interacted with beehive");
+}
