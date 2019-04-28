@@ -32,14 +32,9 @@ public:
         obstruction = 19,
         no_obstruction = 20
     };
-private:
-	static std::map<TileGID &, cocos2d::Sprite *> _tileSprites;
 
-	static void addSprites();
-
-public:
 	/**
-	 * Returns the sprite corresponding to the given gid.
+	 * Returns the sprite corresponding to the given tile gid.
 	 * @param gid gid of tile
 	 * @return sprite of tile
 	 */
