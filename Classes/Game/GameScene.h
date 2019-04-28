@@ -50,10 +50,6 @@ public:
 
 	void interactAt(Vec2 pos);
 
-	void touchOnItemPanel();
-
-	void ShowHideItemPanel();
-
 	// implement the "static create()" method manually
 	CREATE_FUNC(GameScene);
 };

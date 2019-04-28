@@ -46,7 +46,7 @@ void BeeHiveAtlas::notify(void *observable) {
 	for (const auto &pos : positions) {
 		if (!hasBeeHiveAt(pos)) {
 			cocos2d::log("BeeHiveAtlas:\tCreating beehive at (%i, %i)", (int) pos.x, (int) pos.y);
-			auto hive = new BeeHive();
+			auto hive = new BeeHive(20000, 10);
 			hive->setPosition(pos);
 			_beeHives.emplace(pos, hive);
 
