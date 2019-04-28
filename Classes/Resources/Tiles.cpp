@@ -5,6 +5,6 @@
 #include "Tiles.h"
 #include "SpriteContainer.h"
 
-cocos2d::Sprite *Tiles::getSpriteOf(Tiles::TileGID &gid) {
+cocos2d::Sprite *Tiles::getSpriteOf(Tiles::TileGID gid) {
     return SpriteContainer::getInstance()->getSpriteOf(gid);
 }

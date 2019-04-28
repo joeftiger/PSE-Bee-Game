@@ -53,10 +53,10 @@ SpriteContainer::SpriteContainer() {
     _IDsprites.emplace(Sprites::coin_pile     , Sprite::create(path + "münze_haufen.png"));
 }
 
-Sprite *SpriteContainer::getSpriteOf(Tiles::TileGID &gid) {
-    return _GIDsprites[gid];
+Sprite *SpriteContainer::getSpriteOf(Tiles::TileGID gid) {
+    return _GIDsprites.at(gid);
 }
 
-Sprite *SpriteContainer::getSpriteOf(Sprites::SpriteID &id) {
-    return _IDsprites[id];
+Sprite *SpriteContainer::getSpriteOf(Sprites::SpriteID id) {
+    return _IDsprites.at(id);
 }

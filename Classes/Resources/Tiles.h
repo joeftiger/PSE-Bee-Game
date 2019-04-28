@@ -38,7 +38,7 @@ public:
 	 * @param gid gid of tile
 	 * @return sprite of tile
 	 */
-	static cocos2d::Sprite *getSpriteOf(TileGID &gid);
+	static cocos2d::Sprite *getSpriteOf(TileGID gid);
 };
 
 #endif /* TILES_H */

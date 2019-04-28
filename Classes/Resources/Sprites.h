@@ -39,7 +39,7 @@ public:
 	 * @param id id of sprite
 	 * @return sprite
 	 */
-    static cocos2d::Sprite *getSpriteOf(SpriteID &id);
+    static cocos2d::Sprite *getSpriteOf(SpriteID id);
 };
 
 

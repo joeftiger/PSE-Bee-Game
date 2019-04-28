@@ -28,14 +28,14 @@ public:
 	 * @param gid gid of tile
 	 * @return sprite of tile
 	 */
-    Sprite *getSpriteOf(Tiles::TileGID &gid);
+    Sprite *getSpriteOf(Tiles::TileGID gid);
 
     /**
 	 * Returns the sprite corresponding to the given sprite id.
 	 * @param id id of sprite
 	 * @return sprite
 	 */
-    Sprite *getSpriteOf(Sprites::SpriteID &id);
+    Sprite *getSpriteOf(Sprites::SpriteID id);
 };
 
 

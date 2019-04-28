@@ -5,6 +5,6 @@
 #include "Sprites.h"
 #include "SpriteContainer.h"
 
-cocos2d::Sprite *Sprites::getSpriteOf(Sprites::SpriteID &gid) {
+cocos2d::Sprite *Sprites::getSpriteOf(Sprites::SpriteID gid) {
     return SpriteContainer::getInstance()->getSpriteOf(gid);
 }
