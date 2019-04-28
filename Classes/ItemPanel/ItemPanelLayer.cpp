@@ -2,7 +2,7 @@
 // Created by Uro on 3/30/2019.
 //
 
-#include <Resources/TileGID.h>
+#include <Resources/Tiles.h>
 #include <HeaderFiles/CHILD_NAMES.h>
 #include "ItemPanelLayer.h"
 #include "TouchUtil.h"

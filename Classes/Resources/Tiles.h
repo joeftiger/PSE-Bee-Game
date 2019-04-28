@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 
 class Tiles {
+
 public:
 	enum TileGID {
 		beehiveBig = 1,
@@ -22,6 +23,13 @@ public:
 		obstruction = 19,
 		no_obstruction = 20
 	};
+
+	/**
+	 * Returns the sprite corresponding to the given gid.
+	 * @param gid gid of tile
+	 * @return sprite of tile
+	 */
+	static cocos2d::Sprite *getSpriteOf(TileGID &gid);
 };
 
 #endif /* TILES_H */
