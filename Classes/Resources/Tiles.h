@@ -20,7 +20,7 @@ public:
 		beehiveSmall2 = 6,
 		// open beehiveMiddle1
 		beehiveMiddle2 = 7,
-		// overflowing beehieBig1
+		// overflowing beehiveBig1
 		beehiveBig3 = 8,
 		// overflowing beehiveMiddle1
 		beehiveMiddle3 = 9,
