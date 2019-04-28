@@ -35,9 +35,9 @@ public:
 
 	static bool beeHiveSaveExists();
 
-	static void deleteTileMapSave();
+	static bool honeyExtractorSaveExists();
 
-	static void deleteBeeHivesSave();
+	static bool timesSaveExists();
 
 	static void saveBeehives();
 
@@ -51,7 +51,11 @@ public:
 
 	static void loadTime();
 
-	static bool timesSaveExists();
+	static void deleteTileMapSave();
+
+	static void deleteBeeHivesSave();
+
+	static void deleteHoneyExtractorsSave();
 
 	static void deleteTimeSave();
 

@@ -258,8 +258,11 @@ bool SaveLoad::beeHiveSaveExists() {
 	return FileUtils::getInstance()->isFileExist(getPath("beehives.json"));
 }
 
-bool SaveLoad::timesSaveExists()
-{
+bool SaveLoad::honeyExtractorSaveExists() {
+	return FileUtils::getInstance()->isFileExist(getPath("honeyextractors.json"));
+}
+
+bool SaveLoad::timesSaveExists() {
 	return FileUtils::getInstance()->isFileExist(getPath("times.json"));
 }
 
@@ -273,6 +276,11 @@ void SaveLoad::deleteBeeHivesSave() {
 	assert(!beeHiveSaveExists());
 }
 
+void SaveLoad::deleteHoneyExtractorsSave() {
+	FileUtils::getInstance()->removeFile(getPath("honeyextractors.json"));
+	assert(!honeyExtractorSaveExists());
+}
+
 void SaveLoad::deleteTimeSave() {
 	FileUtils::getInstance()->removeFile(getPath("times.json"));
     assert(!timesSaveExists());
@@ -282,6 +290,7 @@ void SaveLoad::deleteTimeSave() {
 void SaveLoad::deleteEverything() {
 	BeeHiveAtlas::getInstance()->clear();
 	deleteBeeHivesSave();
+	deleteHoneyExtractorsSave();
 	deleteTileMapSave();
 	deleteTimeSave();
 }
