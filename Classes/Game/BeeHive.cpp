@@ -6,9 +6,9 @@
 #include "BeeHive.h"
 
 bool BeeHive::invariant() {
-	assert(_beesAlive >= 0);
-	assert(_varoaAlive >= 0);
-	assert(_rawHoney >= 0.0f);
+	//assert(_beesAlive >= 0);
+	//assert(_varoaAlive >= 0);
+	//assert(_rawHoney >= 0.0f);
 	return true;
 }
 
