@@ -4,12 +4,26 @@
 #include "cocos2d.h"
 
 class Tiles {
+private:
+	static std::map<int, cocos2d::Sprite *> _tileSprites;
+
+	static void addSprites();
 
 public:
 	enum TileGID {
-		beehiveBig = 1,
-		beehiveSmall = 2,
-		beehiveMiddle = 3,
+		beehiveBig1 = 1,
+		beehiveSmall1 = 2,
+		beehiveMiddle1 = 3,
+		// open beehiveBig1
+		beehiveBig2 = 4,
+		// open beehiveSmall1
+		beehiveSmall2 = 6,
+		// open beehiveMiddle1
+		beehiveMiddle2 = 7,
+		// overflowing beehieBig1
+		beehiveBig3 = 8,
+		// overflowing beehiveMiddle1
+		beehiveMiddle3 = 9,
 		flower1 = 11,
 		flower2 = 12,
 		flower3 = 13,
