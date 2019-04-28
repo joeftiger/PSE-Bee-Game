@@ -18,7 +18,7 @@ private:
     SpriteContainer();
 
 public:
-    const static SpriteContainer *getInstance() {
+    static SpriteContainer *getInstance() {
         static auto instance = new SpriteContainer();
         return instance;
     }
