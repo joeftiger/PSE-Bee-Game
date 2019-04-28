@@ -13,8 +13,8 @@ USING_NS_CC;
 
 class SpriteContainer {
 private:
-    std::map<Sprites::SpriteID &, Sprite *> _IDsprites;
-    std::map<Tiles::TileGID &, Sprite *> _GIDsprites;
+    std::map<Sprites::SpriteID, Sprite *> _IDsprites;
+    std::map<Tiles::TileGID, Sprite *> _GIDsprites;
     SpriteContainer();
 
 public:
