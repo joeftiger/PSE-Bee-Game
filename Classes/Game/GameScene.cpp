@@ -59,6 +59,7 @@ bool GameScene::init() {
 
 	//Item Panel
 	_itemPanel = ItemPanelLayer::create();
+	_itemPanel->setTileMap(_tileMapLayer);
 
 	//camera and huds container
 	container = Node::create();
