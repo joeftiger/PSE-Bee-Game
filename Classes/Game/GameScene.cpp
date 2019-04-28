@@ -141,6 +141,10 @@ void GameScene::saveGameState(float dt) {
 	SaveLoad::saveTime();
 }
 
+Node* GameScene::getCameraContainer() {
+    return container;
+}
+
 
 /**
 void GameScene::interactAt(Vec2 pos) {

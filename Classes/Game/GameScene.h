@@ -50,6 +50,8 @@ public:
 
 	void interactAt(Vec2 pos);
 
+	Node* getCameraContainer();
+
 	// implement the "static create()" method manually
 	CREATE_FUNC(GameScene);
 };
