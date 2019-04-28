@@ -7,15 +7,18 @@
 
 
 #include "cocos2d.h"
+#include "BeeHive.h"
 #include "../HeaderFiles/Restorable.h"
+#include <cassert>
+#include <string>
+#include <stdexcept>
 
 static const float MAX__HONEY_IN_EXTRACTOR = 100.0f;
 
 class HoneyExtractor : Restorable {
 private:
 	int _honeyInExtractor;
-	float _rawHoney;
-
+    float _rawHoney;
 	int _convertedMoney;
 	int _modifier;
 	int _totalMoney;

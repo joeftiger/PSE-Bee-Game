@@ -1,14 +1,10 @@
 
 #include "HoneyExtractor.h"
-#include <cassert>
-#include <string>
-#include <stdexcept>
+
 
 bool HoneyExtractor::invariant() {
 	// TODO: Uncomment these if it works without throwing assertion errors all the time.
-//	assert(_money >= 0);
-//	assert(_rawHoney >= 0.0f);
-//	assert(_honeyInExtractor >= 0);
+	//	assert(_honeyInExtractor >= 0);
 	return true;
 }
 
@@ -40,7 +36,7 @@ int HoneyExtractor::honeyInExtractor() {
 int HoneyExtractor::honeyInExtractor(float amountAdded) {
 	if (amountAdded < 0 || amountAdded > _rawHoney) {
 		throw std::out_of_range(
-				"[" + std::to_string(amountAdded) + "] is out of range for [_rawHoney = " + std::to_string(_rawHoney) + "]");
+			"[" + std::to_string(amountAdded) + "] is out of range for [_rawHoney = " + std::to_string(_rawHoney) + "]");
 	}
 	// TODO Change function name and use takeHoney method that takes from a (specific) beehive
 	_rawHoney -= amountAdded;
@@ -76,7 +72,7 @@ void HoneyExtractor::setPosition(const cocos2d::Vec2 &pos) {
 // TODO instead of raw honey, should be amount in honey extractor
 void HoneyExtractor::toJSON(rapidjson::Document &doc) {
 	rapidjson::Value obj(rapidjson::kObjectType);
-	obj.AddMember("_rawHoney", _rawHoney, doc.GetAllocator());
+	obj.AddMember("_honeyInExtractor", _rawHoney, doc.GetAllocator());
 	obj.AddMember("_posX", int(_position.x), doc.GetAllocator());
 	obj.AddMember("_posY", int(_position.y), doc.GetAllocator());
 	doc.PushBack(obj, doc.GetAllocator());
@@ -86,8 +82,8 @@ void HoneyExtractor::fromJSON(rapidjson::Document &doc) {
 	assert(doc.HasMember("honeyExtractor"));
 	const rapidjson::Value &beeHive = doc["honeyExtractor"];
 
-	assert(beeHive["_rawHoney"].IsFloat());
-	_rawHoney = beeHive["_rawHoney"].GetFloat();
+	assert(beeHive["_honeyInExtractor"].IsFloat());
+	_rawHoney = beeHive["_honeyInExtractor"].GetFloat();
 
 	assert(beeHive["_posX"].IsInt());
 	_position.x = beeHive["_posX"].GetInt();

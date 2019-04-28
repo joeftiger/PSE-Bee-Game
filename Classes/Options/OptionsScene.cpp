@@ -29,11 +29,11 @@ bool OptionsScene::init() {
 	this->addChild(title, 1);
 
 	// text to ask for use of SD Textures
-	// TODO Add switch function for textures (Brian 18.4)
+	// TODO Add switch function for textures (Brian 18.4) and then make it visible again via addChild
 	auto optionsText = Label::createWithTTF("Use SD Textures? (Not implemented yet)", "fonts/ReemKufi-Regular.ttf", 24);
 	optionsText->setPosition(Vec2(origin.x + visibleSize.width / 2,
 	                                 origin.y + 40 + 0.5 * visibleSize.height - title->getContentSize().height));
-	this->addChild(optionsText, 1);
+	// this->addChild(optionsText, 1);
 
 
     auto labelDelete = Label::createWithTTF("Press below to reset your save", "fonts/ReemKufi-Regular.ttf", 28);
