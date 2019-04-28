@@ -89,7 +89,7 @@ void HUDLayer::timer(float dt) {
 	auto h = std::to_string((int) Player::getInstance()->totalRawHoney());
 	honeyLabel->setString(stringShortener(h));
 
-	auto m = std::to_string((int) Player::getInstance()->totalMoney());
+	auto m = std::to_string((int) Player::getInstance()->returnTotalMoney());
 	moneyLabel->setString(stringShortener(m));
 
 	__String *timeToDisplay = __String::createWithFormat("%i", Time::getInstance()->getMonth());
