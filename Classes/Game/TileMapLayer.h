@@ -89,7 +89,6 @@ public:
 
 	void placeSprite(const Vec2 &position, int id);
 
-
 	/**
 	 * Shows / hides the obstruction layer
 	 * @param visible <code>true</code> if the obstruction layer is visible. <br>

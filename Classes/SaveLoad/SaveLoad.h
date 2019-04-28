@@ -9,7 +9,6 @@
 #include "json/document.h"
 #include "Atlas/BeeHiveAtlas.h"
 #include "Game/Time.h"
-#include "HeaderFiles/CHILD_NAMES.h"
 
 using namespace cocos2d;
 

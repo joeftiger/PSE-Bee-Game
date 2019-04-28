@@ -9,7 +9,7 @@
 #include "Observer.h"
 #include "Game/BeeHive.h"
 #include "Game/TileMapLayer.h"
-#include <HeaderFiles/CHILD_NAMES.h>
+#include <HeaderFiles/DEFINITIONS.h>
 #include <json/stringbuffer.h>
 #include <json/writer.h>
 

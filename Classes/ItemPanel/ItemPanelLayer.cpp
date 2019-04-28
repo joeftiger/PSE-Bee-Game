@@ -3,7 +3,6 @@
 //
 
 #include <Resources/Tiles.h>
-#include <HeaderFiles/CHILD_NAMES.h>
 #include "ItemPanelLayer.h"
 #include "TouchUtil.h"
 #include "HeaderFiles/DEFINITIONS.h"
@@ -63,12 +62,12 @@ void ItemPanelLayer::initializeItemPanel() {
 	                      Tiles::bush4,
 	                      box);
 
-	this->addToSpriteList("tilemaps/Tiles/bienenstock1_gross.png", Vec2(0, box.height * 4 / 6), Tiles::beehiveBig,
+	this->addToSpriteList("tilemaps/Tiles/bienenstock1_gross.png", Vec2(0, box.height * 4 / 6), Tiles::beehiveBig1,
 	                      box);
 	this->addToSpriteList("tilemaps/Tiles/bienenstock1_mittel.png", Vec2(box.width / 3, box.height * 4 / 6),
-	                      Tiles::beehiveMiddle, box);
+	                      Tiles::beehiveMiddle1, box);
 	this->addToSpriteList("tilemaps/Tiles/bienenstock1_klein.png", Vec2(box.width * 2 / 3, box.height * 4 / 6),
-	                      Tiles::beehiveSmall, box);
+	                      Tiles::beehiveSmall1, box);
 
 	addListTo(this);
 }

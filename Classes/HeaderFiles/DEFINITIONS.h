@@ -4,6 +4,7 @@
 /* Priorities */
 #define HUD_PRIORITY 10
 
+#define TILE_MAP_LAYER_NAME "TileMapLayer"
 
 #define MAP_SCALE_SD 0.5f
 #define MAP_SCALE_HD 0.5f
