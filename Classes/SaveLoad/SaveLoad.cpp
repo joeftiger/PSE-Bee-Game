@@ -163,6 +163,43 @@ void SaveLoad::loadBeehives() {
 
 }
 
+/**
+	Saves all honeyExtractors on current tileMap into a json-array and writes them into "beehives.json"
+*/
+void SaveLoad::saveHoneyExtractors() {
+	std::vector<HoneyExtractor*> honeyExtractors;
+	HoneyExtractorAtlas::getInstance()->getHoneyExtractors(honeyExtractors);
+
+	rapidjson::Document doc;
+	rapidjson::StringBuffer jsonBuffer;
+	rapidjson::PrettyWriter<rapidjson::StringBuffer> jsonWriter(jsonBuffer);
+	doc.SetArray();
+	assert(doc.IsArray());
+	BeeHiveAtlas::getInstance()->toJSON(doc);
+
+	doc.Accept(jsonWriter);
+	jsonToFile(docToString(doc), getPath("honeyextractors.json"));
+}
+
+/**
+	reads all honeyExtractors from "honeyextractors.json" and returns them
+*/
+void SaveLoad::loadHoneyExtractors() {
+	std::ifstream ifs(getPath("honeyextractors.json"));
+
+	if (!ifs.is_open()) {
+		log("Couldn't load honeyextractors");
+		return;
+	}
+
+	IStreamWrapper isw(ifs);
+	rapidjson::Document doc;
+	doc.ParseStream(isw);
+
+	HoneyExtractorAtlas::getInstance()->fromJSON(doc);
+
+}
+
 void SaveLoad::saveTime() {
 	rapidjson::Document doc;
 	rapidjson::StringBuffer buffer;

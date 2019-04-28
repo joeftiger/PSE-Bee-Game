@@ -8,6 +8,7 @@
 #include "json/rapidjson.h"
 #include "json/document.h"
 #include "Atlas/BeeHiveAtlas.h"
+#include "Atlas/HoneyExtractorAtlas.h"
 #include "Game/Time.h"
 #include "HeaderFiles/CHILD_NAMES.h"
 
@@ -41,6 +42,10 @@ public:
 	static void saveBeehives();
 
 	static void loadBeehives();
+
+	static void saveHoneyExtractors();
+
+    static void loadHoneyExtractors();
 
 	static void saveTime();
 
