@@ -27,3 +27,7 @@ proj.win32/.vs/PSE-Bee-Game/v15/.suo
 
 # IDE folder
 .idea/
+
+# arch fmod lib different from deb
+
+cocos2d/external/linux-specific
