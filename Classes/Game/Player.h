@@ -31,6 +31,8 @@ private:
 
 public:
 	static Player *getInstance();
+	int amount;
+	int totalMoney;
 
 	/**
 	 * @return the total raw honey currently in the BeeHiveAtlas
@@ -38,11 +40,20 @@ public:
 	float totalRawHoney();
 
 	/**
-     * @return the total money (in the HoneyExtractor Atlas!)
+     * @return current total money
      * TODO: Put money somewhere else to make it more sensible???
      */
-    float totalMoney();
+    int returnTotalMoney();
 
+	/**
+     * @return the total money after adding a specified amount
+     */
+	int addMoney(int amount);
+
+	/**
+     * @return the total money after subtracting a specified amount
+     */
+	int subtractMoney(int amount);
 	/**
 	 * Returns the item inventory of the player.
 	 * @return the inventory
