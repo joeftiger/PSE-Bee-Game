@@ -21,6 +21,8 @@ public:
 	bool canPlaceOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) override;
 
 	void placeOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) override;
+
+	Sprite *getSprite() override;
 };
 
 
