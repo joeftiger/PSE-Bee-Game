@@ -1,4 +1,5 @@
 
+#include <Interaction/InteractionNode.h>
 #include "GameScene.h"
 #include "Atlas/BeeHiveAtlas.h"
 #include "SaveLoad/SaveLoad.h"
@@ -128,6 +129,15 @@ void GameScene::interactAt(Vec2 pos) {
     auto selectTilePos = _tileMapLayer->getTilePosition(pos);
     if(BeeHiveAtlas::getInstance()->hasBeeHiveAt(selectTilePos)) {
         auto beeHive = BeeHiveAtlas::getInstance()->getBeeHiveAt(selectTilePos);
+
+        InteractionNode* node = InteractionNode::create();
+
+        //InteractionNode *inter = InteractionNode::create();
+        //inter->initializeInteractionItem("tilemaps/Tiles/bienenstock1_klein.png");
+
+
+        container->addChild(node, 10);
+
         string s = "raw honey: " + to_string(beeHive->rawHoney());
         s += "\t bees alive: " + to_string(beeHive->beesAlive());
         s += "\t varroa alive: " + to_string(beeHive->varoaAlive());

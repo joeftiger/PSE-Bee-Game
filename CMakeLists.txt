@@ -179,7 +179,7 @@ endif()
 set(all_code_files
     ${GAME_HEADER}
     ${GAME_SOURCE}
-        Classes/ItemPanel/ItemPanelLayer.cpp Classes/ItemPanel/ItemPanelLayer.h Classes/HeaderFiles/Restorable.h Classes/Algorithm/GameAlgorithm.cpp Classes/Algorithm/GameAlgorithm.h)
+        Classes/ItemPanel/ItemPanelLayer.cpp Classes/ItemPanel/ItemPanelLayer.h Classes/HeaderFiles/Restorable.h Classes/Algorithm/GameAlgorithm.cpp Classes/Algorithm/GameAlgorithm.h Classes/Interaction/InteractionNode.cpp Classes/Interaction/InteractionNode.h)
 if(NOT ANDROID)
     add_executable(${APP_NAME} ${all_code_files})
 else()
