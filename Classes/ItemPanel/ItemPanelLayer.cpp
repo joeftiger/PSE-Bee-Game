@@ -2,7 +2,7 @@
 // Created by Uro on 3/30/2019.
 //
 
-#include <HeaderFiles/TileGID.h>
+#include <Resources/TileGID.h>
 #include <HeaderFiles/CHILD_NAMES.h>
 #include "ItemPanelLayer.h"
 #include "TouchUtil.h"
@@ -40,35 +40,35 @@ bool ItemPanelLayer::init() {
 void ItemPanelLayer::initializeItemPanel() {
 	auto box = this->getBoundingBox().size;
 
-	this->addToSpriteList("tilemaps/Tiles/blumen1_spring_summer.png", Vec2(0, box.height / 6), TileGID::flower1, box);
+	this->addToSpriteList("tilemaps/Tiles/blumen1_spring_summer.png", Vec2(0, box.height / 6), Tiles::flower1, box);
 	this->addToSpriteList("tilemaps/Tiles/blumen2_spring_summer.png", Vec2(box.width / 3, box.height / 6),
-	                      TileGID::flower2,
+	                      Tiles::flower2,
 	                      box);
 	this->addToSpriteList("tilemaps/Tiles/blumen3_spring_summer.png", Vec2(box.width * 2 / 3, box.height / 6),
-	                      TileGID::flower3,
+	                      Tiles::flower3,
 	                      box);
-	this->addToSpriteList("tilemaps/Tiles/blumen4_spring_summer.png", Vec2(0, box.height * 2 / 6), TileGID::flower4,
+	this->addToSpriteList("tilemaps/Tiles/blumen4_spring_summer.png", Vec2(0, box.height * 2 / 6), Tiles::flower4,
 	                      box);
 
 	this->addToSpriteList("tilemaps/Tiles/steinplattenboden.png", Vec2(box.width / 3, box.height * 2 / 6),
-	                      TileGID::road, box);
+	                      Tiles::road, box);
 	this->addToSpriteList("tilemaps/Tiles/busch1_spring_summer.png", Vec2(box.width * 2 / 3, box.height * 2 / 6),
-	                      TileGID::bush1,
+	                      Tiles::bush1,
 	                      box);
-	this->addToSpriteList("tilemaps/Tiles/busch2_spring_summer.png", Vec2(0, box.height * 3 / 6), TileGID::bush2, box);
+	this->addToSpriteList("tilemaps/Tiles/busch2_spring_summer.png", Vec2(0, box.height * 3 / 6), Tiles::bush2, box);
 	this->addToSpriteList("tilemaps/Tiles/busch3_spring_summer.png", Vec2(box.width / 3, box.height * 3 / 6),
-	                      TileGID::bush3,
+	                      Tiles::bush3,
 	                      box);
 	this->addToSpriteList("tilemaps/Tiles/busch4_spring_summer.png", Vec2(box.width * 2 / 3, box.height * 3 / 6),
-	                      TileGID::bush4,
+	                      Tiles::bush4,
 	                      box);
 
-	this->addToSpriteList("tilemaps/Tiles/bienenstock1_gross.png", Vec2(0, box.height * 4 / 6), TileGID::beehiveBig,
+	this->addToSpriteList("tilemaps/Tiles/bienenstock1_gross.png", Vec2(0, box.height * 4 / 6), Tiles::beehiveBig,
 	                      box);
 	this->addToSpriteList("tilemaps/Tiles/bienenstock1_mittel.png", Vec2(box.width / 3, box.height * 4 / 6),
-	                      TileGID::beehiveMiddle, box);
+	                      Tiles::beehiveMiddle, box);
 	this->addToSpriteList("tilemaps/Tiles/bienenstock1_klein.png", Vec2(box.width * 2 / 3, box.height * 4 / 6),
-	                      TileGID::beehiveSmall, box);
+	                      Tiles::beehiveSmall, box);
 
 	addListTo(this);
 }

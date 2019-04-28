@@ -6,7 +6,7 @@
 #define PSE_BEE_GAME_PLACEABLE_H
 
 #include <Game/TileMapLayer.h>
-#include <HeaderFiles/TileGID.h>
+#include <Resources/TileGID.h>
 #include "cocos2d.h"
 
 class TileMapLayer;

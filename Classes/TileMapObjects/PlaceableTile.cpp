@@ -4,7 +4,7 @@
 
 #include "PlaceableTile.h"
 
-PlaceableTile::PlaceableTile(TileGID gid) {
+PlaceableTile::PlaceableTile(Tiles::TileGID gid) {
     _gid = gid;
 }
 
