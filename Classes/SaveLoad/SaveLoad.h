@@ -5,10 +5,19 @@
 #include "cocos2d.h"
 #include "Game/TileMapLayer.h"
 #include "Game/BeeHive.h"
-#include "json/rapidjson.h"
-#include "json/document.h"
 #include "Atlas/BeeHiveAtlas.h"
+#include "Atlas/HoneyExtractorAtlas.h"
 #include "Game/Time.h"
+#include "json/rapidjson.h"
+#include "json/istreamwrapper.h"
+#include "json/ostreamwrapper.h"
+#include "json/prettywriter.h"
+#include "json/document.h"
+#include <json/document.h>
+#include <json/stringbuffer.h>
+#include <json/writer.h>
+#include <iostream>
+#include <fstream>
 
 using namespace cocos2d;
 
@@ -33,19 +42,27 @@ public:
 
 	static bool beeHiveSaveExists();
 
-	static void deleteTileMapSave();
+	static bool honeyExtractorSaveExists();
 
-	static void deleteBeeHivesSave();
+	static bool timesSaveExists();
 
 	static void saveBeehives();
 
 	static void loadBeehives();
 
+	static void saveHoneyExtractors();
+
+    static void loadHoneyExtractors();
+
 	static void saveTime();
 
 	static void loadTime();
 
-	static bool timesSaveExists();
+	static void deleteTileMapSave();
+
+	static void deleteBeeHivesSave();
+
+	static void deleteHoneyExtractorsSave();
 
 	static void deleteTimeSave();
 
