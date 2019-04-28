@@ -55,6 +55,7 @@ bool GameScene::init() {
 
 	//Item Panel
 	_itemPanel = ItemPanelLayer::create();
+	_itemPanel->setTileMap((_tileMapLayer));
 
 	//camera and huds container
 	container = Node::create();
@@ -81,7 +82,6 @@ void GameScene::beeHiveAtlasUpdate(float dt) {
 bool GameScene::onTouchBegan(Touch *touch, Event *event) {
 	_isTouched = true;
 	_touchPosition = touch->getLocation();
-	_itemPanel->showHideItemPanel(_touchPosition);
 	return true;
 }
 
@@ -91,9 +91,7 @@ void GameScene::onTouchMoved(Touch *touch, Event *event) {
 	_touchPosition = touchPos;
 
 
-	if (_itemPanel->isDrag()) {
-		_itemPanel->getDrag()->setPosition(touchPos - _itemPanel->getPosition());
-	} else {
+	if (!_itemPanel->isDrag()) {
 		cameraTravel += movement;
         _isMoved = true;
 		container->setPosition(container->getPosition() - movement);
@@ -102,16 +100,6 @@ void GameScene::onTouchMoved(Touch *touch, Event *event) {
 
 void GameScene::onTouchEnded(void *, void *) {
     auto pos = _touchPosition - cameraTravel;
-	if (_itemPanel->isDrag()) {
-		auto gid = _itemPanel->getDrag()->getTag();
-
-		if (_tileMapLayer->canPlaceTile(pos, gid)) {
-			_tileMapLayer->placeTile(pos, gid);
-		}
-
-		_itemPanel->removeChild(_itemPanel->getDrag());
-		_itemPanel->setIsDrag(false);
-	}
 	if(!_isMoved) {
         interactAt(pos);
 	}
@@ -131,12 +119,10 @@ void GameScene::interactAt(Vec2 pos) {
         auto beeHive = BeeHiveAtlas::getInstance()->getBeeHiveAt(selectTilePos);
 
         InteractionNode* node = InteractionNode::create();
-
-        //InteractionNode *inter = InteractionNode::create();
-        //inter->initializeInteractionItem("tilemaps/Tiles/bienenstock1_klein.png");
-
-
+        node->setFiles("tilemaps/Tiles/bienenstock1_klein.png", "menu/main-menu-background.png");
         container->addChild(node, 10);
+        node->runAnimation();
+
 
         string s = "raw honey: " + to_string(beeHive->rawHoney());
         s += "\t bees alive: " + to_string(beeHive->beesAlive());
