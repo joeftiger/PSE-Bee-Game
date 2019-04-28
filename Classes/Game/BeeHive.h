@@ -9,14 +9,14 @@
 #include "../HeaderFiles/Restorable.h"
 #include "../HeaderFiles/Interactable.h"
 
-static const int MAX_BEES = 20000;
-static const float MAX_RAW_HONEY = 2000.0f;
+static const int MAX_BEES = 50000;
+static const float MAX_RAW_HONEY = 15000;
 
 class BeeHive : Restorable, public Interactable {
 private:
 	int _beesAlive;
 	int _varoaAlive;
-	float _rawHoney;
+	double _rawHoney;
 
 	cocos2d::Vec2 _position;
 

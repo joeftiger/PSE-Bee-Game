@@ -7,6 +7,7 @@
 #include "TouchUtil.h"
 #include "HeaderFiles/DEFINITIONS.h"
 #include "MainMenu/MainMenuScene.h"
+#include "Game/TileMapLayer.h"
 
 using namespace cocos2d;
 
@@ -19,6 +20,13 @@ bool ItemPanelLayer::init() {
 	}
 
 	Size visibleSize = Director::getInstance()->getWinSize();
+
+    auto listener = EventListenerTouchOneByOne::create();
+    listener->setSwallowTouches(true);
+    listener->onTouchBegan = CC_CALLBACK_2(ItemPanelLayer::onTouchBegan, this);
+    listener->onTouchMoved = CC_CALLBACK_2(ItemPanelLayer::onTouchMoved, this);
+    listener->onTouchEnded = CC_CALLBACK_2(ItemPanelLayer::onTouchEnded, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	//Item Panel
 	this->setColor(Color3B::WHITE);
@@ -76,26 +84,25 @@ LayerColor *ItemPanelLayer::getShowRec() {
 	return _showRec;
 }
 
+void ItemPanelLayer::setTileMap(TileMapLayer* tileMap) {
+    _tileMapLayer = tileMap;
+}
+
 void ItemPanelLayer::showHideItemPanel(const Point &touchPos) {
-	if (this->getShowRec()->getBoundingBox().containsPoint(touchPos - this->getPosition())) {
+	if (_showRec->getBoundingBox().containsPoint(touchPos - this->getPosition())) {
 		if (_isItemShow) {
 			MoveBy *hide = MoveBy::create(0.2, Vec2(this->getBoundingBox().size.width, 0));
 			this->runAction(hide);
 			_isItemShow = false;
 
-			auto tileMapLayer = (TileMapLayer *) Director::getInstance()->getRunningScene()->getChildByName(
-					TILE_MAP_LAYER_NAME);
-			tileMapLayer->showObstructions(false);
+			_tileMapLayer->showObstructions(false);
 		} else {
 			MoveBy *show = MoveBy::create(0.2, Vec2(-this->getBoundingBox().size.width, 0));
 			this->runAction(show);
 			_isItemShow = true;
-
-			auto tileMapLayer = (TileMapLayer *) Director::getInstance()->getRunningScene()->getChildByName(
-					TILE_MAP_LAYER_NAME);
-			assert(tileMapLayer != nullptr);
-			tileMapLayer->showObstructions(true);
+			_tileMapLayer->showObstructions(true);
 		}
+		_isTouch = true;
 	}
 	if (_isItemShow) {
 		touchOnItemPanel(touchPos);
@@ -108,5 +115,36 @@ void ItemPanelLayer::touchOnItemPanel(const Point &touchPos) {
 		if (this->isDrag()) {
 			this->addChild(this->getDrag());
 		}
+		_isTouch = true;
 	}
+}
+
+bool ItemPanelLayer::onTouchBegan(Touch *touch, Event *event) {
+    _touchPosition = touch->getLocation();
+    this->showHideItemPanel(_touchPosition);
+    return _isTouch;
+}
+
+void ItemPanelLayer::onTouchMoved(Touch *touch, Event *event) {
+    _touchPosition = touch->getLocation();
+
+
+    if (isDrag()) {
+        drag->setPosition(_touchPosition - this->getPosition());
+    }
+}
+
+void ItemPanelLayer::onTouchEnded(void *, void *) {
+    auto pos = _touchPosition + this->getParent()->getPosition();
+    if (this->isDrag()) {
+        auto gid = drag->getTag();
+
+        if (_tileMapLayer->canPlaceTile(pos, gid)) {
+            _tileMapLayer->placeTile(pos, gid);
+        }
+
+        this->removeChild(this->getDrag());
+        this->setIsDrag(false);
+    }
+    _isTouch = false;
 }

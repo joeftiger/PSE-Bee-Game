@@ -1,18 +1,20 @@
 
-#include "BeeHive.h"
 #include <cassert>
 #include <string>
 #include <stdexcept>
-
+#include <Algorithm/GameAlgorithm.h>
+#include <Interaction/InteractionNode.h>
+#include "BeeHive.h"
+#include "GameScene.h"
 
 bool BeeHive::invariant() {
-	assert(_beesAlive >= 0);
-	assert(_varoaAlive >= 0);
-	assert(_rawHoney >= 0.0f);
+	//assert(_beesAlive >= 0);
+	//assert(_varoaAlive >= 0);
+	//assert(_rawHoney >= 0.0f);
 	return true;
 }
 
-BeeHive::BeeHive() : BeeHive(100) {}
+BeeHive::BeeHive() : BeeHive(20000) {}
 
 BeeHive::BeeHive(int bees) : BeeHive(bees, 0) {}
 
@@ -28,7 +30,7 @@ bool BeeHive::isEmpty() {
 }
 
 bool BeeHive::isFull() {
-	return _beesAlive == MAX_BEES;
+	return _beesAlive >= MAX_BEES;
 }
 
 int BeeHive::beesAlive() {
@@ -44,7 +46,7 @@ float BeeHive::rawHoney() {
 }
 
 bool BeeHive::hasFullStorage() {
-	return _rawHoney == MAX_RAW_HONEY;
+	return _rawHoney >= MAX_RAW_HONEY;
 }
 
 float BeeHive::takeRawHoney() {
@@ -64,15 +66,15 @@ float BeeHive::takeRawHoney(float amount) {
 
 void BeeHive::update() {
 	if (!isFull()) {
-		int modifier = std::min(_beesAlive / 30, 100);
-		int resultingBees = _beesAlive + modifier;
-		_beesAlive = std::min(MAX_BEES, resultingBees);
+		_beesAlive += GameAlgorithm::getInstance()->nextBees(_beesAlive, _varoaAlive);
 	}
 
 	if (!hasFullStorage()) {
-		float modifier = std::min(_beesAlive / 100.0f, 100.0f);
-		float resultingHoney = _rawHoney + modifier;
-		_rawHoney = std::min(MAX_RAW_HONEY, resultingHoney);
+		_rawHoney += GameAlgorithm::getInstance()->honeyProduction(_beesAlive);
+	}
+
+	if (_varoaAlive >= 0) {
+	    _varoaAlive += GameAlgorithm::getInstance()->nextVarroa(_varoaAlive);
 	}
 	assert(invariant());
 }
@@ -124,4 +126,16 @@ bool BeeHive::isInteractable() {
 void BeeHive::doTask() {
     //TODO: add actual implementation
     cocos2d::log("%s", "Interacted with beehive");
+    InteractionNode* node = InteractionNode::create();
+    node->setFiles("tilemaps/Tiles/bienenstock1_klein.png", "menu/main-menu-background.png");
+    GameScene* scene = (GameScene*) Director::getInstance()->getRunningScene();
+    scene->getCameraContainer()->addChild(node);
+    node->runAnimation();
+
+
+    std::string s = "raw honey: " + std::to_string(_rawHoney);
+    s += "\t bees alive: " + std::to_string(_beesAlive);
+    s += "\t varroa alive: " + std::to_string(_varoaAlive);
+
+    CCLOG(s.c_str());
 }

@@ -103,6 +103,9 @@ list(APPEND GAME_SOURCE
         Classes/Resources/Tiles.cpp
         Classes/Resources/Sprites.cpp
         Classes/Resources/SpriteContainer.cpp
+        Classes/Interaction/InteractionNode.cpp
+        Classes/Algorithm/GameAlgorithm.cpp
+        Classes/ItemPanel/ItemPanelLayer.cpp
         )
 list(APPEND GAME_HEADER
         Classes/AppDelegate.h
@@ -131,9 +134,13 @@ list(APPEND GAME_HEADER
         Classes/HeaderFiles/TimeStruct.h
         Classes/HeaderFiles/Seasons.h
         Classes/HeaderFiles/Interactable.h
+        Classes/HeaderFiles/Restorable.h
         Classes/Resources/Tiles.h
         Classes/Resources/Sprites.h
         Classes/Resources/SpriteContainer.h
+        Classes/Interaction/InteractionNode.h
+        Classes/Algorithm/GameAlgorithm.h
+        Classes/ItemPanel/ItemPanelLayer.h
         )
 
 if (ANDROID)
@@ -192,7 +199,7 @@ endif ()
 set(all_code_files
         ${GAME_HEADER}
         ${GAME_SOURCE}
-        Classes/ItemPanel/ItemPanelLayer.cpp Classes/ItemPanel/ItemPanelLayer.h Classes/HeaderFiles/Restorable.h)
+        )
 if (NOT ANDROID)
     add_executable(${APP_NAME} ${all_code_files})
 else ()

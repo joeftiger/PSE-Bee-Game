@@ -50,9 +50,7 @@ public:
 
 	void interactAt(Vec2 pos);
 
-	void touchOnItemPanel();
-
-	void ShowHideItemPanel();
+	Node* getCameraContainer();
 
 	// implement the "static create()" method manually
 	CREATE_FUNC(GameScene);
