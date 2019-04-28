@@ -1,4 +1,3 @@
-#include <HeaderFiles/CHILD_NAMES.h>
 #include "TileMapLayer.h"
 #include "HeaderFiles/DEFINITIONS.h"
 #include "Resources/Tiles.h"
@@ -61,9 +60,9 @@ std::vector<cocos2d::Vec2> TileMapLayer::getBeeHives() {
 			auto coordinate = Vec2(x, y);
 			auto gid = _objectLayer->getTileGIDAt(coordinate);
 
-			if (gid == Tiles::beehiveSmall ||
-			    gid == Tiles::beehiveMiddle ||
-			    gid == Tiles::beehiveBig) {
+			if (gid == Tiles::beehiveSmall1 ||
+			    gid == Tiles::beehiveMiddle1 ||
+			    gid == Tiles::beehiveBig1) {
 				beeHives.push_back(coordinate);
 			}
 		}
@@ -163,9 +162,9 @@ void TileMapLayer::placeTile(const Vec2 &position, const int gid) {
 	auto pos = getTilePosition(position);
 	_objectLayer->setTileGID(gid, pos); //1 = flower; 2,3,4,5 = bush1,2,3,4; 6 = grass; 7 = road
 
-	if (gid == Tiles::beehiveSmall ||
-	    gid == Tiles::beehiveMiddle ||
-	    gid == Tiles::beehiveBig) {
+	if (gid == Tiles::beehiveSmall1 ||
+	    gid == Tiles::beehiveMiddle1 ||
+	    gid == Tiles::beehiveBig1) {
 
 		_obstructionLayer->setTileGID(Tiles::obstruction, pos);
 
@@ -213,9 +212,9 @@ void TileMapLayer::initObstructionLayer() {
 			auto pos = Vec2(x, y);
 			auto gid = _objectLayer->getTileGIDAt(pos);
 
-			if (gid == Tiles::beehiveSmall ||
-			    gid == Tiles::beehiveMiddle ||
-			    gid == Tiles::beehiveBig) {
+			if (gid == Tiles::beehiveSmall1 ||
+			    gid == Tiles::beehiveMiddle1 ||
+			    gid == Tiles::beehiveBig1) {
 				_obstructionLayer->setTileGID(Tiles::obstruction, pos);
 			} else {
 				_obstructionLayer->setTileGID(Tiles::no_obstruction, pos);
@@ -223,4 +222,3 @@ void TileMapLayer::initObstructionLayer() {
 		}
 	}
 }
-

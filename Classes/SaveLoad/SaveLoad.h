@@ -8,7 +8,6 @@
 #include "Atlas/BeeHiveAtlas.h"
 #include "Atlas/HoneyExtractorAtlas.h"
 #include "Game/Time.h"
-#include "HeaderFiles/CHILD_NAMES.h"
 #include "json/rapidjson.h"
 #include "json/istreamwrapper.h"
 #include "json/ostreamwrapper.h"
