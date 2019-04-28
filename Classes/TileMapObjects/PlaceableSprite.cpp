@@ -4,6 +4,11 @@
 
 #include "PlaceableSprite.h"
 
+
+PlaceableSprite::PlaceableSprite(Sprites::SpriteID id) {
+	_id = id;
+}
+
 bool PlaceableSprite::canPlaceOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) {
 	return tileMapLayer->canPlaceSprite(position, 0);
 }
@@ -13,5 +18,5 @@ void PlaceableSprite::placeOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &positio
 }
 
 Sprite *PlaceableSprite::getSprite() {
-	return nullptr;
+	return Sprites::getSpriteOf(_id);
 }

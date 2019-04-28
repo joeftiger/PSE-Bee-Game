@@ -14,8 +14,8 @@
 class PlaceableTile : public Placeable {
 private:
 	Tiles::TileGID _gid;
-public:
 
+public:
 	explicit PlaceableTile(Tiles::TileGID gid);
 
 	bool canPlaceOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) override;

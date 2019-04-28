@@ -17,5 +17,5 @@ void PlaceableTile::placeOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position)
 }
 
 Sprite *PlaceableTile::getSprite() {
-    return nullptr;
+    return Tiles::getSpriteOf(_gid);
 }
