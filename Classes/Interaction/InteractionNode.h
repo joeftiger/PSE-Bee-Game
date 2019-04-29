@@ -28,6 +28,8 @@ public:
     void setFiles(std::string itemName, std::string backgroundName);
     void runAnimation();
 
+	void setUpTouches();
+
     CREATE_FUNC(InteractionNode);
 };
 

@@ -15,6 +15,8 @@ bool InteractionNode::init() {
         return false;
     }
 
+	this->setUpTouches();
+
     return true;
 }
 
@@ -44,4 +46,22 @@ void InteractionNode::runAnimation() {
     this->addChild(_item);
     _item->runAction(scale);
 
+}
+
+void InteractionNode::setUpTouches() {
+	auto listener = EventListenerTouchOneByOne::create();
+
+	listener->setSwallowTouches(true);
+	listener->onTouchBegan = [=](Touch* touch, Event* event) {
+		if (_background) {
+			if (!_background->getBoundingBox().containsPoint(this->convertToNodeSpace(touch->getLocation()))) {
+				this->removeFromParentAndCleanup(true);
+			}
+		}
+		else {
+			this->removeFromParentAndCleanup(true);
+		}
+		return true;
+	};
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
