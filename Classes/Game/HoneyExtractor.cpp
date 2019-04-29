@@ -38,7 +38,6 @@ int HoneyExtractor::newHoneyInExtractor(float amountAdded) {
 		throw std::out_of_range(
 			"[" + std::to_string(amountAdded) + "] is out of range for [_rawHoney = " + std::to_string(_rawHoney) + "]");
 	}
-	// TODO Change function name and use takeHoney method that takes from a (specific) beehive
 
 	_rawHoney -= amountAdded;
 	_honeyInExtractor += amountAdded;
@@ -57,8 +56,6 @@ void HoneyExtractor::update() {
 		int multiplier = 3;
 		Wallet::getInstance()->addMoney(conversionRate * multiplier);
 		_honeyInExtractor -= conversionRate;
-		//TODO add money conversion
-		//_honeyInExtractor = std::min(_honeyInExtractor, 0.0f);
 	}
 	assert(invariant());
 }

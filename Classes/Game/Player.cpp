@@ -27,21 +27,9 @@ float Player::totalRawHoney() {
 	}
 	return totalRawHoney;
 }
-// TODO Refactor money to its own class / object / part of player
+
 int Player::returnTotalMoney() {
-//	for (auto he : _honeyExtractors) {
-//		totalMoney += he->totalMoney();
-//	}
-	return totalMoney;
-}
-
-int Player::addMoney(int amount) {
-	totalMoney += amount;
-	return totalMoney;
-}
-
-int Player::subtractMoney(int amount) {
-	totalMoney -= amount;
+	totalMoney= Wallet::getInstance()->returnTotalMoney();
 	return totalMoney;
 }
 

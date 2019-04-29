@@ -25,8 +25,5 @@ int Wallet::subtractMoney(int amount) {
 }
 
 int Wallet::returnTotalMoney() {
-//	for (auto he : _honeyExtractors) {
-//		totalMoney += he->totalMoney();
-//	}
 	return _totalMoney;
 }

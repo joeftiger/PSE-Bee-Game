@@ -24,7 +24,6 @@ public:
 
 	/**
      * @return current total money
-     * TODO: Put money somewhere else to make it more sensible???
      */
     int returnTotalMoney();
 
