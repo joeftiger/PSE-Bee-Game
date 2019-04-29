@@ -14,6 +14,24 @@ private:
 
 	bool invariant();
 
+	int _totalMoney;
 public:
+
+
+	/**
+     * @return current total money
+     * TODO: Put money somewhere else to make it more sensible???
+     */
+    int returnTotalMoney();
+
+	/**
+     * @return the total money after adding a specified amount
+     */
+    int addMoney(int amount);
+
+    /**
+    * @return the total money after subtracting a specified amount
+    */
+    int subtractMoney(int amount);
 
 };
