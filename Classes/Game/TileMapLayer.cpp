@@ -201,6 +201,10 @@ void TileMapLayer::loadMap() {
 		SaveLoad::loadBeehives();
 	}
 
+	if (SaveLoad::honeyExtractorSaveExists()) {
+        SaveLoad::loadHoneyExtractors();
+    }
+
 	initObstructionLayer();
 }
 
