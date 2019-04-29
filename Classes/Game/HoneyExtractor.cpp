@@ -50,7 +50,6 @@ int HoneyExtractor::newHoneyInExtractor(float amountAdded) {
 //  10*3 money per tick, reducing 10 honey in the extractor
 //TODO also missing rounding to account for unfitting conversion rate ("left-over")
 void HoneyExtractor::update() {
-
 	if (!isEmpty()) {
 		Wallet::getInstance()->addMoney(conversionRate * multiplier);
 		_honeyInExtractor -= conversionRate;

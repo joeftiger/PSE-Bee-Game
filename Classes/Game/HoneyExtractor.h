@@ -35,7 +35,7 @@ private:
 
 public:
 
-	float amountAdded;
+	float _amountAdded;
 	int conversionRate = 10;
     int multiplier = 3;
 

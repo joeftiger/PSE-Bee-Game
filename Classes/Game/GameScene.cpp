@@ -90,6 +90,7 @@ void GameScene::beeHiveAtlasUpdate(float dt) {
  *	Calls HoneyExtractorUpdate every dt seconds
  */
 void GameScene::honeyExtractorAtlasUpdate(float dt) {
+	cocos2d::log("GameScene:\thoneyExtractorAtlasUpdate()");
 	HoneyExtractorAtlas::getInstance()->updateHoneyExtractors(dt);
 }
 

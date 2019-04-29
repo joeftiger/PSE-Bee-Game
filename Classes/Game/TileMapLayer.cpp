@@ -79,7 +79,7 @@ std::vector<cocos2d::Vec2> TileMapLayer::getHoneyExtractors() {
 			auto coordinate = Vec2(x, y);
 			auto gid = _objectLayer->getTileGIDAt(coordinate);
 	//TODO Change this to the honey extractor tile / sprite
-			if (gid == Tiles::flower4) {
+			if (gid == Tiles::flower3) {
 				honeyExtractors.push_back(coordinate);
 			}
 		}
@@ -168,6 +168,10 @@ void TileMapLayer::placeTile(const Vec2 &position, const int gid) {
 
 		_obstructionLayer->setTileGID(Tiles::obstruction, pos);
 
+		notifyObservers();
+	}
+	// TODO: Implement correct honey extractor gid
+	else if (gid == Tiles::flower3) {
 		notifyObservers();
 	}
 }
