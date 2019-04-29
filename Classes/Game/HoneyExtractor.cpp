@@ -55,7 +55,7 @@ void HoneyExtractor::update() {
 	if (!isEmpty()) {
 		int conversionRate = 10;
 		int multiplier = 3;
-		_totalMoney += conversionRate * multiplier;
+		Wallet::getInstance()->addMoney(conversionRate * multiplier);
 		_honeyInExtractor -= conversionRate;
 		//TODO add money conversion
 		//_honeyInExtractor = std::min(_honeyInExtractor, 0.0f);

@@ -5,7 +5,7 @@
 #include "Wallet.h"
 
 
-Wallet  *Wallet::_instance = nullptr;
+
 
 bool Wallet::invariant() {
 	return true;

@@ -13,6 +13,7 @@
 #include "Atlas/HoneyExtractorAtlas.h"
 #include "Observer.h"
 #include "Observable.h"
+#include "Wallet.h"
 
 class Player : public Observer, public Observable {
 private:

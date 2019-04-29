@@ -8,6 +8,7 @@
 
 #include "cocos2d.h"
 #include "BeeHive.h"
+#include "Wallet.h"
 #include "../HeaderFiles/Restorable.h"
 #include <cassert>
 #include <string>
