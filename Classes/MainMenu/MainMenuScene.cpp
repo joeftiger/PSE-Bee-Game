@@ -18,9 +18,6 @@ bool MainMenu::init() {
 	background->setScale(0.9f);
 	this->addChild(background, -1000);
 
-	onePofScreenH = visibleSize.height / 100;
-    onePofScreenW = visibleSize.width / 100;
-
 	// Create a title and center it at the top of the screen
 	auto title = Label::createWithTTF("So Bee It!", "fonts/ReemKufi-Regular.ttf", 48);
 	title->setPosition(Vec2(origin.x + visibleSize.width / 2,
@@ -31,7 +28,7 @@ bool MainMenu::init() {
 	// all scaling and position through trial-and-error
 	auto playButton = MenuItemImage::create("menu/start.png", "menu/start.png",
 	                                        CC_CALLBACK_1(MainMenu::onPlayClick, this));
-	playButton->setPosition(Vec2(origin.x, origin.y * 2.6));
+	playButton->setPosition(Vec2(origin.x, origin.y + 63));
 	playButton->setScale(1.04f);
 
 	auto optionsButton = MenuItemImage::create("menu/options.png", "menu/options.png",
@@ -46,7 +43,7 @@ bool MainMenu::init() {
 
 	auto exitButton = MenuItemImage::create("menu/exit.png", "menu/exit.png",
     	                                        CC_CALLBACK_1(MainMenu::onExitClick, this));
-    exitButton->setPosition(Vec2(origin.x, - origin.y * 4.95));
+    exitButton->setPosition(Vec2(origin.x, origin.y - 273));
     exitButton->setScale(1.04f);
 
 	// vector of menu items and then adding all the menu items and creating them
