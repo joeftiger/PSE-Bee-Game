@@ -137,5 +137,6 @@ void BeeHive::doTask() {
     s += "\t bees alive: " + std::to_string(_beesAlive);
     s += "\t varroa alive: " + std::to_string(_varoaAlive);
 
-    CCLOG(s.c_str());
+	// TODO comment in line below once it's running again
+    // CCLOG(s.c_str());
 }
