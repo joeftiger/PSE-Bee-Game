@@ -7,6 +7,8 @@
 
 #include "cocos2d.h"
 #include "../HeaderFiles/Interactable.h"
+#include "Interaction/InteractionNode.h"
+#include "GameScene.h"
 
 using namespace cocos2d;
 

@@ -56,7 +56,7 @@ bool SaveDeleteConfirmation::init() {
 // Delay: 0.2 seconds       Transition Colour: White
 void SaveDeleteConfirmation::onNoClick(cocos2d::Ref *sender) {
 	Director::getInstance()->replaceScene(
-			TransitionFade::create(0.2f, OptionsScene::createScene(), Color3B(255, 255, 255)));
+			TransitionFade::create(0.1f, OptionsScene::createScene(), Color3B(255, 255, 255)));
 }
 
 // when clicking on  yes, delete save and go back to options scene
@@ -65,5 +65,5 @@ void SaveDeleteConfirmation::onYesClick(cocos2d::Ref *sender) {
 	SaveLoad::deleteEverything();
 	cocos2d::log("deleteEverything() called");
 	Director::getInstance()->replaceScene(
-			TransitionFade::create(0.2f, MainMenu::scene(), Color3B(255, 255, 255)));
+			TransitionFade::create(0.1f, MainMenu::scene(), Color3B(255, 255, 255)));
 }

@@ -89,6 +89,7 @@ list(APPEND GAME_SOURCE
         Classes/Game/HoneyExtractor.cpp
         Classes/Game/Player.cpp
         Classes/Game/Interacter.cpp
+		Classes/Game/Wallet.cpp
         Classes/Atlas/BeeHiveAtlas.cpp
         Classes/Atlas/HoneyExtractorAtlas.cpp
         Classes/About/AboutScene.cpp
@@ -118,6 +119,7 @@ list(APPEND GAME_HEADER
         Classes/Game/HoneyExtractor.h
         Classes/Game/Player.h
         Classes/Game/Interacter.h
+		Classes/Game/Wallet.h
         Classes/Observer.h
         Classes/Observable.h
         Classes/Atlas/BeeHiveAtlas.h

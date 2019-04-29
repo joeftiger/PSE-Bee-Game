@@ -5,6 +5,7 @@
 #ifndef PSE_BEE_GAME_PLAYER_H
 #define PSE_BEE_GAME_PLAYER_H
 
+#include <cassert>
 #include <vector>
 #include <TileMapObjects/Placeable.h>
 #include "BeeHive.h"
@@ -13,6 +14,7 @@
 #include "Atlas/HoneyExtractorAtlas.h"
 #include "Observer.h"
 #include "Observable.h"
+#include "Wallet.h"
 
 class Player : public Observer, public Observable {
 private:
@@ -41,19 +43,9 @@ public:
 
 	/**
      * @return current total money
-     * TODO: Put money somewhere else to make it more sensible???
      */
     int returnTotalMoney();
 
-	/**
-     * @return the total money after adding a specified amount
-     */
-	int addMoney(int amount);
-
-	/**
-     * @return the total money after subtracting a specified amount
-     */
-	int subtractMoney(int amount);
 	/**
 	 * Returns the item inventory of the player.
 	 * @return the inventory

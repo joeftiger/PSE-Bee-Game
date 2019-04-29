@@ -53,6 +53,9 @@ bool GameScene::init() {
 	if (SaveLoad::timesSaveExists()) {
 		SaveLoad::loadTime();
 	}
+	else {
+		time->setStartingMonth();
+	}
 
 	//HUD Layer
 	_HUDLayer = HUDLayer::create();
@@ -72,6 +75,7 @@ bool GameScene::init() {
 
 	this->schedule(schedule_selector(GameScene::saveGameState), 60.0f);
 	this->schedule(schedule_selector(GameScene::beeHiveAtlasUpdate), 1.0f);
+	this->schedule(schedule_selector(GameScene::honeyExtractorAtlasUpdate), 1.0f);
 	return true;
 }
 
@@ -86,6 +90,7 @@ void GameScene::beeHiveAtlasUpdate(float dt) {
  *	Calls HoneyExtractorUpdate every dt seconds
  */
 void GameScene::honeyExtractorAtlasUpdate(float dt) {
+	cocos2d::log("GameScene:\thoneyExtractorAtlasUpdate()");
 	HoneyExtractorAtlas::getInstance()->updateHoneyExtractors(dt);
 }
 

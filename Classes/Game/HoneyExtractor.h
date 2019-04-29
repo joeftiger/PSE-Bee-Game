@@ -8,6 +8,7 @@
 
 #include "cocos2d.h"
 #include "BeeHive.h"
+#include "Wallet.h"
 #include "../HeaderFiles/Restorable.h"
 #include <cassert>
 #include <string>
@@ -30,9 +31,13 @@ private:
 
 	bool invariant();
 
+
+
 public:
 
-	float amountAdded;
+	float _amountAdded;
+	int conversionRate = 10;
+    int multiplier = 3;
 
 	/**
 	 * TODO Set to 0 honey when done testing

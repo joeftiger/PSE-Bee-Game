@@ -76,5 +76,5 @@ bool OptionsScene::init() {
 // TODO Add confirmation / warning (Brian 18.4)
 void OptionsScene::onDeleteSaveClick(cocos2d::Ref *sender) {
 	Director::getInstance()->replaceScene(
-			TransitionFade::create(0.4f, SaveDeleteConfirmation::create(), Color3B(255, 255, 255)));
+			TransitionFade::create(0.2f, SaveDeleteConfirmation::create(), Color3B(255, 255, 255)));
 }
