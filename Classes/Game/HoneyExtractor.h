@@ -75,7 +75,7 @@ public:
 	 * @return the amount taken
 	 * @throws std::out_of_range() if amount is an invalid value
 	 */
-	int honeyInExtractor(float amountAdded);
+	int newHoneyInExtractor(float amountAdded);
 
 	/**
 	 * @return position in the tilemap

@@ -33,12 +33,13 @@ int HoneyExtractor::honeyInExtractor() {
 }
 
 // TODO Origin of honey from a specific beehive
-int HoneyExtractor::honeyInExtractor(float amountAdded) {
+int HoneyExtractor::newHoneyInExtractor(float amountAdded) {
 	if (amountAdded < 0 || amountAdded > _rawHoney) {
 		throw std::out_of_range(
 			"[" + std::to_string(amountAdded) + "] is out of range for [_rawHoney = " + std::to_string(_rawHoney) + "]");
 	}
 	// TODO Change function name and use takeHoney method that takes from a (specific) beehive
+
 	_rawHoney -= amountAdded;
 	_honeyInExtractor += amountAdded;
 	amountAdded = 0.0f;
@@ -47,13 +48,14 @@ int HoneyExtractor::honeyInExtractor(float amountAdded) {
 	return _honeyInExtractor;
 }
 
-//TODO Think about the rate of honey to money -> currently 10 per tick
+//  10*3 money per tick, reducing 10 honey in the extractor
 //TODO also missing rounding to account for unfitting conversion rate ("left-over")
 void HoneyExtractor::update() {
 
 	if (!isEmpty()) {
 		int conversionRate = 10;
-		_totalMoney += conversionRate;
+		int multiplier = 3;
+		_totalMoney += conversionRate * multiplier;
 		_honeyInExtractor -= conversionRate;
 		//TODO add money conversion
 		//_honeyInExtractor = std::min(_honeyInExtractor, 0.0f);
@@ -69,7 +71,8 @@ void HoneyExtractor::setPosition(const cocos2d::Vec2 &pos) {
 	_position.x = pos.x;
 	_position.y = pos.y;
 }
-// TODO instead of raw honey, should be amount in honey extractor
+
+// TODO add any other things that should be saved
 void HoneyExtractor::toJSON(rapidjson::Document &doc) {
 	rapidjson::Value obj(rapidjson::kObjectType);
 	obj.AddMember("_honeyInExtractor", _rawHoney, doc.GetAllocator());
