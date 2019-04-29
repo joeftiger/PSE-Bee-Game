@@ -30,10 +30,13 @@ bool SaveDeleteConfirmation::init() {
     // all scaling and position through trial-and-error
     auto yesButton = MenuItemImage::create("menu/yes.png", "menu/yes.png",
                                             CC_CALLBACK_1(SaveDeleteConfirmation::onYesClick, this));
+    yesButton->setScale(0.5f);
     yesButton->setPosition(Vec2(origin.x - 220, origin.y - 108));
+
 
     auto noButton = MenuItemImage::create("menu/no.png", "menu/no.png",
                                                 CC_CALLBACK_1(SaveDeleteConfirmation::onNoClick, this));
+    noButton->setScale(0.5f);
     noButton->setPosition(Vec2(origin.x + 220, origin.y - 108));
 
 
