@@ -52,8 +52,6 @@ int HoneyExtractor::newHoneyInExtractor(float amountAdded) {
 void HoneyExtractor::update() {
 
 	if (!isEmpty()) {
-		int conversionRate = 10;
-		int multiplier = 3;
 		Wallet::getInstance()->addMoney(conversionRate * multiplier);
 		_honeyInExtractor -= conversionRate;
 	}

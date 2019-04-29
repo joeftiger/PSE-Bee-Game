@@ -75,6 +75,7 @@ bool GameScene::init() {
 
 	this->schedule(schedule_selector(GameScene::saveGameState), 60.0f);
 	this->schedule(schedule_selector(GameScene::beeHiveAtlasUpdate), 1.0f);
+	this->schedule(schedule_selector(GameScene::honeyExtractorAtlasUpdate), 1.0f);
 	return true;
 }
 

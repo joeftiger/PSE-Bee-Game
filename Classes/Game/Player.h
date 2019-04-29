@@ -5,6 +5,7 @@
 #ifndef PSE_BEE_GAME_PLAYER_H
 #define PSE_BEE_GAME_PLAYER_H
 
+#include <cassert>
 #include <vector>
 #include <TileMapObjects/Placeable.h>
 #include "BeeHive.h"

@@ -31,9 +31,13 @@ private:
 
 	bool invariant();
 
+
+
 public:
 
 	float amountAdded;
+	int conversionRate = 10;
+    int multiplier = 3;
 
 	/**
 	 * TODO Set to 0 honey when done testing
