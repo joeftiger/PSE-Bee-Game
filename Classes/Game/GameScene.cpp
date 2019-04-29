@@ -136,9 +136,7 @@ void GameScene::interactAt(Vec2 pos) {
 }
 
 void GameScene::saveGameState(float dt) {
-	SaveLoad::saveMap();
-	SaveLoad::saveBeehives();
-	SaveLoad::saveTime();
+	SaveLoad::saveEverything();
 }
 
 Node* GameScene::getCameraContainer() {

@@ -32,9 +32,7 @@ bool HUDLayer::init() {
 	label->enableOutline(Color4B::BLACK, 1);
 	auto menuItem = MenuItemLabel::create(label);
 	menuItem->setCallback([&](cocos2d::Ref *sender) {
-		SaveLoad::saveMap();
-		SaveLoad::saveBeehives();
-		SaveLoad::saveTime();
+		SaveLoad::saveEverything();
 		Director::getInstance()->replaceScene(MainMenu::scene());
 	});
 	auto backMenu = Menu::create(menuItem, nullptr);
@@ -92,8 +90,7 @@ void HUDLayer::timer(float dt) {
 	auto m = std::to_string((int) Player::getInstance()->returnTotalMoney());
 	moneyLabel->setString(stringShortener(m));
 
-	__String *timeToDisplay = __String::createWithFormat("%i", Time::getInstance()->getMonth());
-	timeLabel->setString(timeToDisplay->getCString());
+	timeLabel->setString(Time::getInstance()->getMonthAsString());
 }
 
 /**

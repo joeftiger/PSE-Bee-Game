@@ -16,6 +16,6 @@
 #define USE_SD true
 
 /* Time */
-#define LENGTH_MONTH 3 //in minutes
+#define LENGTH_MONTH 1 //in minutes
 #define LENGTH_YEAR 12 //in months
 #endif // __DEFINITIONS_H__

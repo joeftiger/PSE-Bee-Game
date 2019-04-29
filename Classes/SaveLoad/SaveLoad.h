@@ -54,6 +54,8 @@ public:
 
     static void loadHoneyExtractors();
 
+	static void saveEverything();
+
 	static void saveTime();
 
 	static void loadTime();

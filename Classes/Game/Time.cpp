@@ -26,8 +26,8 @@ Time *Time::getInstance() {
 }
 
 bool Time::invariant() {
-	assert(times.seconds >= 0 && times.months <= 60);
-	assert(times.months >= 0 && times.months <= 12);
+	assert(times.seconds >= 0 && times.seconds <= 60);
+	assert(times.months >= 0 && times.months <= 11);
 	assert(times.years >= 0);
 	return true;
 }
@@ -45,7 +45,7 @@ void Time::time(float dt) {
 		times.months++;
 	}
 
-	if (times.months >= LENGTH_YEAR) {
+	if (times.months >= LENGTH_YEAR - 1) {
 		times.months = 0;
 		times.years++;
 	}
@@ -55,8 +55,17 @@ int Time::getMonth() {
 	return times.months;
 }
 
+std::string Time::getMonthAsString() {
+	return this->convertToMonth(times.months);
+}
+
+/**
+	Converts integer to Month
+
+*/
 std::string Time::convertToMonth(int i)
-{
+{	
+	i++;
 	assert(i >= 1 && i <= 12);
 
 	switch (i) {

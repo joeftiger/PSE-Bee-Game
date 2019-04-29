@@ -117,15 +117,10 @@ std::vector<std::vector<int>> SaveLoad::loadMap() {
 	return vec;
 }
 
-
-
 /**
  *	Saves all beeHives on the current tileMap into a json-array and writes them into "beehives.json"
  */
 void SaveLoad::saveBeehives() {
-	std::vector<BeeHive *> beeHives;
-	BeeHiveAtlas::getInstance()->getBeeHives(beeHives);
-
 	rapidjson::Document doc;
 	rapidjson::StringBuffer jsonBuffer;
 	rapidjson::PrettyWriter<rapidjson::StringBuffer> jsonWriter(jsonBuffer);
@@ -160,15 +155,12 @@ void SaveLoad::loadBeehives() {
  *	Saves all honeyExtractors on current tileMap into a json-array and writes them into "beehives.json"
  */
 void SaveLoad::saveHoneyExtractors() {
-	std::vector<HoneyExtractor*> honeyExtractors;
-	HoneyExtractorAtlas::getInstance()->getHoneyExtractors(honeyExtractors);
-
 	rapidjson::Document doc;
 	rapidjson::StringBuffer jsonBuffer;
 	rapidjson::PrettyWriter<rapidjson::StringBuffer> jsonWriter(jsonBuffer);
 	doc.SetArray();
 	assert(doc.IsArray());
-	BeeHiveAtlas::getInstance()->toJSON(doc);
+	HoneyExtractorAtlas::getInstance()->toJSON(doc);
 
 	doc.Accept(jsonWriter);
 	jsonToFile(docToString(doc), getPath("honeyextractors.json"));
@@ -191,6 +183,13 @@ void SaveLoad::loadHoneyExtractors() {
 
 	HoneyExtractorAtlas::getInstance()->fromJSON(doc);
 
+}
+
+void SaveLoad::saveEverything() {
+	SaveLoad::saveBeehives();
+	SaveLoad::saveHoneyExtractors();
+	SaveLoad::saveMap();
+	SaveLoad::saveTime();
 }
 
 void SaveLoad::saveTime() {
@@ -218,8 +217,6 @@ void SaveLoad::loadTime() {
 
 	Time::getInstance()->fromJSON(doc);
 }
-
-
 
 /**
  *	Test-Method, currently unused

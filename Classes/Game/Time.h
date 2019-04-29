@@ -22,6 +22,10 @@ private:
 
 	timeStruct times;
 
+	std::string convertToMonth(int i);
+
+	void time(float dt);
+
 public:
 
 	virtual bool init();
@@ -32,11 +36,9 @@ public:
 
 	bool invariant();
 
-	void time(float dt);
-
 	int getMonth();
 
-	std::string convertToMonth(int i);
+	std::string getMonthAsString();
 
 	Season getSeason();
 
