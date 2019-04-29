@@ -5,6 +5,7 @@
 #ifndef PROJ_ANDROID_WALLET_H
 #define PROJ_ANDROID_WALLET_H
 
+#include "cocos2d.h"
 
 
 

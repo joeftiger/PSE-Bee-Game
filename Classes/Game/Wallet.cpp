@@ -14,11 +14,13 @@ bool Wallet::invariant() {
 
 int Wallet::addMoney(int amount) {
 	_totalMoney += amount;
+	cocos2d::log("Added", amount, "to Wallet");
 	return _totalMoney;
 }
 
 int Wallet::subtractMoney(int amount) {
 	_totalMoney -= amount;
+	cocos2d::log("Subtracted", amount, "to Wallet");
 	return _totalMoney;
 }
 
