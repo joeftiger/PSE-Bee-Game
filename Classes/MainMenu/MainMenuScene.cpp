@@ -15,7 +15,11 @@ bool MainMenu::init() {
 	auto *background = cocos2d::Sprite::create("menu/main-menu-background.png");
 	background->setPosition(visibleSize.width / 2, visibleSize.height / 2);
 	background->setAnchorPoint(Vec2(0.5, 0.5));
+	background->setScale(0.9f);
 	this->addChild(background, -1000);
+
+	onePofScreenH = visibleSize.height / 100;
+    onePofScreenW = visibleSize.width / 100;
 
 	// Create a title and center it at the top of the screen
 	auto title = Label::createWithTTF("So Bee It!", "fonts/ReemKufi-Regular.ttf", 48);
@@ -28,22 +32,22 @@ bool MainMenu::init() {
 	auto playButton = MenuItemImage::create("menu/start.png", "menu/start.png",
 	                                        CC_CALLBACK_1(MainMenu::onPlayClick, this));
 	playButton->setPosition(Vec2(origin.x, origin.y * 2.6));
-	playButton->setScale(1.18f);
+	playButton->setScale(1.04f);
 
 	auto optionsButton = MenuItemImage::create("menu/options.png", "menu/options.png",
 	                                           CC_CALLBACK_1(MainMenu::onOptionsClick, this));
 	optionsButton->setPosition(Vec2(origin.x - 104, origin.y - 108));
-	optionsButton->setScale(1.18f);
+	optionsButton->setScale(1.04f);
 
 	auto aboutButton = MenuItemImage::create("menu/credits.png", "menu/credits.png",
 	                                         CC_CALLBACK_1(MainMenu::onAboutClick, this));
 	aboutButton->setPosition(Vec2(origin.x + 104, origin.y - 108));
-	aboutButton->setScale(1.18f);
+	aboutButton->setScale(1.04f);
 
 	auto exitButton = MenuItemImage::create("menu/exit.png", "menu/exit.png",
     	                                        CC_CALLBACK_1(MainMenu::onExitClick, this));
     exitButton->setPosition(Vec2(origin.x, - origin.y * 4.95));
-    exitButton->setScale(1.18f);
+    exitButton->setScale(1.04f);
 
 	// vector of menu items and then adding all the menu items and creating them
 	Vector<MenuItem *> MenuItems;
