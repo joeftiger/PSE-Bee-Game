@@ -17,8 +17,8 @@ GameAlgorithm *GameAlgorithm::getInstance() {
 }
 
 
-double GameAlgorithm::honeyProduction(int bees) {
-    double honey;
+float GameAlgorithm::honeyProduction(int bees) {
+    float honey;
     if(Time::getInstance()->getMonth() <= 8 && Time::getInstance()->getMonth() > 2) {
         honey = bees * HONEY_PER_BEE;
     }

@@ -16,7 +16,7 @@ class BeeHive : Restorable, public Interactable {
 private:
 	int _beesAlive;
 	int _varoaAlive;
-	double _rawHoney;
+	float _rawHoney;
 
 	cocos2d::Vec2 _position;
 	std::string sprite = "tilemaps/Tiles/bienenstock1_klein.png";
