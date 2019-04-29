@@ -112,7 +112,7 @@ void ItemPanelLayer::showHideItemPanel(const Point &touchPos) {
 void ItemPanelLayer::touchOnItemPanel(const Point &touchPos) {
 	if (this->getBoundingBox().containsPoint(touchPos)) {
 		this->setDrag(touchPos, this->getPosition());
-		if (this->isDrag()) {
+		if (isDrag()) {
 			this->addChild(this->getDrag());
 		}
 		_isTouch = true;
@@ -136,7 +136,7 @@ void ItemPanelLayer::onTouchMoved(Touch *touch, Event *event) {
 
 void ItemPanelLayer::onTouchEnded(void *, void *) {
     auto pos = _touchPosition + this->getParent()->getPosition();
-    if (this->isDrag()) {
+    if (isDrag()) {
         auto gid = drag->getTag();
 
         if (_tileMapLayer->canPlaceTile(pos, gid)) {
