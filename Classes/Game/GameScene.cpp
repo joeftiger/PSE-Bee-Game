@@ -113,9 +113,9 @@ void GameScene::onTouchMoved(Touch *touch, Event *event) {
 
 void GameScene::onTouchEnded(void *, void *) {
     auto pos = _touchPosition - cameraTravel;
-	if(!_isMoved) {
+	//if(!_isMoved) {
         interactAt(pos);
-	}
+	//}
 	_isTouched = false;
 	_isMoved = false;
 }

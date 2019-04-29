@@ -138,5 +138,5 @@ void BeeHive::doTask() {
     s += "\t varroa alive: " + std::to_string(_varoaAlive);
 
 	// TODO comment in line below once it's running again
-    // CCLOG(s.c_str());
+    cocos2d::log("%s", s.c_str());
 }
