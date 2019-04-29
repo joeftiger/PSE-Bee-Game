@@ -132,25 +132,3 @@ Node* GameScene::getCameraContainer() {
     return container;
 }
 
-
-/**
-void GameScene::interactAt(Vec2 pos) {
-    auto selectTilePos = _tileMapLayer->getTilePosition(pos);
-    if(BeeHiveAtlas::getInstance()->hasBeeHiveAt(selectTilePos)) {
-        auto beeHive = BeeHiveAtlas::getInstance()->getBeeHiveAt(selectTilePos);
-
-        InteractionNode* node = InteractionNode::create();
-        node->setFiles("tilemaps/Tiles/bienenstock1_klein.png", "menu/main-menu-background.png");
-        container->addChild(node, 10);
-        node->runAnimation();
-
-
-        string s = "raw honey: " + to_string(beeHive->rawHoney());
-        s += "\t bees alive: " + to_string(beeHive->beesAlive());
-        s += "\t varroa alive: " + to_string(beeHive->varoaAlive());
-
-        CCLOG(s.c_str());
-    }
-}
- */
-

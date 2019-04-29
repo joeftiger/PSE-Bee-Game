@@ -19,12 +19,12 @@ GameAlgorithm *GameAlgorithm::getInstance() {
 
 double GameAlgorithm::honeyProduction(int bees) {
     double honey;
-    if(Time::getInstance()->getMonth() <= 9 && Time::getInstance()->getMonth() > 3) {
+    if(Time::getInstance()->getMonth() <= 8 && Time::getInstance()->getMonth() > 2) {
         honey = bees * HONEY_PER_BEE;
     }
 
 
-    //TODO add other variables like flowers and seasons.
+    //TODO add other variables like flowers.
 
     return honey;
 }
@@ -42,7 +42,7 @@ int GameAlgorithm::nextBees(int bees, int varroa) {
 
 int GameAlgorithm::nextVarroa(int varroa) {
     _varroaCounter++;
-    if(_varroaCounter >= 59) {
+    if(_varroaCounter >= 19) {
         _varroaCounter = 0;
         return varroa;
     } else {return 0;}
