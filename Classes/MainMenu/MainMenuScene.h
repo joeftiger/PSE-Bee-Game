@@ -10,6 +10,8 @@
 
 class MainMenu : public cocos2d::Scene {
 private:
+	float onePofScreenH;
+	float onePofScreenW;
 public:
 	static cocos2d::Scene *scene();
 
