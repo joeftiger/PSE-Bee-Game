@@ -16,16 +16,11 @@ using namespace cocos2d;
 
 class GameScene : public cocos2d::Scene {
 private:
-	Size visibleSize;
 	Camera *camera;
 	TileMapLayer *_tileMapLayer;
 	HUDLayer *_HUDLayer;
 
-	bool _isMoved;
-	bool _isTouched;
 	Node *container;
-	Point _touchPosition;
-	Point cameraTravel = Vec2(0, 0);
 
 	ItemPanelLayer *_itemPanel;
 
@@ -34,7 +29,7 @@ private:
 public:
 	static cocos2d::Scene *createScene();
 
-	virtual bool init();
+	virtual bool init() override;
 
 	void beeHiveAtlasUpdate(float dt);
 
@@ -44,7 +39,7 @@ public:
 
 	void onTouchMoved(Touch *touch, Event *event);
 
-	void onTouchEnded(void *, void *);
+	void onTouchEnded(Touch *touch, Event *event);
 
 	void saveGameState(float dt);
 

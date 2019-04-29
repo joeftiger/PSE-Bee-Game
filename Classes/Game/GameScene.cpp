@@ -69,7 +69,6 @@ bool GameScene::init() {
 	container->addChild(_HUDLayer);
 	container->setPosition(Vec2(_tileMapLayer->getMap()->getBoundingBox().size.width / 2 - visibleSize.width / 2,
 	                            _tileMapLayer->getMap()->getBoundingBox().size.height / 2 - visibleSize.height / 2));
-	cameraTravel -= container->getPosition();
 
 	this->schedule(schedule_selector(GameScene::saveGameState), 60.0f);
 	this->schedule(schedule_selector(GameScene::beeHiveAtlasUpdate), 1.0f);
@@ -91,33 +90,23 @@ void GameScene::honeyExtractorAtlasUpdate(float dt) {
 }
 
 bool GameScene::onTouchBegan(Touch *touch, Event *event) {
-	_isTouched = true;
-	_touchPosition = touch->getLocation();
-	_itemPanel->showHideItemPanel(_touchPosition);
+	_itemPanel->showHideItemPanel(touch->getLocation() - container->getPosition());
 	return true;
 }
 
 void GameScene::onTouchMoved(Touch *touch, Event *event) {
-    _isMoved = true;
-	auto touchPos = touch->getLocation();
-	auto movement = touchPos - _touchPosition;
-	_touchPosition = touchPos;
-
+	auto movement = touch->getLocation() - touch->getPreviousLocation();
 
 	if (!_itemPanel->isDrag()) {
-		cameraTravel += movement;
-        _isMoved = true;
 		container->setPosition(container->getPosition() - movement);
 	}
 }
 
-void GameScene::onTouchEnded(void *, void *) {
-    auto pos = _touchPosition - cameraTravel;
+void GameScene::onTouchEnded(Touch *touch, Event *event) {
+    auto pos = touch->getLocation() + container->getPosition();	// note it's (+) now
 	//if(!_isMoved) {
         interactAt(pos);
 	//}
-	_isTouched = false;
-	_isMoved = false;
 }
 
 void GameScene::interactAt(Vec2 pos) {
