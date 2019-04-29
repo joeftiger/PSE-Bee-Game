@@ -12,7 +12,6 @@ using namespace cocos2d;
 class InteractionNode : public Node {
 private:
     std::string _itemName;
-    std::string _backgroundName;
     Sprite *_background;
     Sprite *_item;
 
@@ -25,7 +24,8 @@ public:
      * initialization of the item (e.g. BeeHive) to interact with.
      * @param name
      */
-    void setFiles(std::string itemName, std::string backgroundName);
+    void setFiles(std::string itemName);
+
     void runAnimation();
 
 	void setUpTouches();

@@ -8,13 +8,15 @@
 class Interactable {
 private:
 
-
+	std::string sprite;
 public:
     bool _interactable = true;
 
     virtual bool isInteractable() = 0;
 
     virtual void doTask() = 0;
+	
+	virtual std::string getSprite() = 0;
 };
 
 #endif //PROJ_ANDROID_INTERACTABLE_H

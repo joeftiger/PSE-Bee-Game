@@ -19,7 +19,7 @@ private:
 	double _rawHoney;
 
 	cocos2d::Vec2 _position;
-
+	std::string sprite = "tilemaps/Tiles/bienenstock1_klein.png";
 	bool invariant();
 
 public:
@@ -111,6 +111,8 @@ public:
 	bool isInteractable() override;
 
 	void doTask() override;
+
+	std::string getSprite() override;
 };
 
 #endif //PSE_BEE_GAME_BEEHIVE_H

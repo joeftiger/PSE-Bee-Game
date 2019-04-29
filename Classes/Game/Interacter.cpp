@@ -6,8 +6,6 @@
 bool Interacter::init() {
     if(!Node::init()) return false;
 
-    //TODO: add Interface with buttons
-
     return true;
 }
 
@@ -15,7 +13,17 @@ void Interacter::runWith(Interactable *interactingObj) {
     this->interactingObj = interactingObj;
 }
 
+/**
+	Interact with the initialized object
+*/
 void Interacter::interact() {
+
+	InteractionNode* node = InteractionNode::create();
+	node->setFiles(interactingObj->getSprite());
+	GameScene* scene = (GameScene*)Director::getInstance()->getRunningScene();
+	scene->getCameraContainer()->addChild(node);
+	node->runAnimation();
+
     interactingObj->doTask();
 }
 

@@ -7,6 +7,10 @@
 
 using namespace cocos2d;
 
+namespace IMAGEPATH {
+	const char *BACKGROUND_IMAGE = "menu/main-menu-background.png";
+}
+
 Node *InteractionNode::createNode() { return InteractionNode::create(); }
 
 bool InteractionNode::init() {
@@ -20,15 +24,14 @@ bool InteractionNode::init() {
     return true;
 }
 
-void InteractionNode::setFiles(std::string itemName, std::string backgroundName) {
+void InteractionNode::setFiles(std::string itemName) {
     _itemName = itemName;
-    _backgroundName = backgroundName;
 }
 
 void InteractionNode::runAnimation() {
 
     Size winSize = Director::getInstance()->getWinSize();
-    _background = Sprite::create("menu/main-menu-background.png"); //background sprite
+    _background = Sprite::create(IMAGEPATH::BACKGROUND_IMAGE); //background sprite
     _background->setOpacity(0);
     _background->setAnchorPoint(Vec2(0.5,0.5));
     _background->setPosition(Vec2(winSize.width/2, winSize.height/2));
@@ -37,7 +40,7 @@ void InteractionNode::runAnimation() {
     this->addChild(_background, -1);
     _background->runAction(fade);
 
-    _item = Sprite::create("tilemaps/Tiles/bienenstock1_klein.png");
+    _item = Sprite::create(_itemName);
     _item->setAnchorPoint(Vec2(0.5, 0.5));
     _item->setPosition(Vec2(winSize.width/2, winSize.height/2));
     _item->setScale(0.1);
