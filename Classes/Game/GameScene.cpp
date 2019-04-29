@@ -53,6 +53,9 @@ bool GameScene::init() {
 	if (SaveLoad::timesSaveExists()) {
 		SaveLoad::loadTime();
 	}
+	else {
+		time->setStartingMonth();
+	}
 
 	//HUD Layer
 	_HUDLayer = HUDLayer::create();
