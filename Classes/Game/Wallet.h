@@ -6,7 +6,12 @@
 #define PROJ_ANDROID_WALLET_H
 
 #include "cocos2d.h"
-
+#include <json/stringbuffer.h>
+#include <json/writer.h>
+#include <HeaderFiles/DEFINITIONS.h>
+#include <cassert>
+#include <string>
+#include <stdexcept>
 
 
 class Wallet {
@@ -36,6 +41,8 @@ public:
     * @return the total money after subtracting a specified amount
     */
     int subtractMoney(int amount);
+
+   //TODO Add saving / loading of money
 
 };
 

@@ -25,3 +25,20 @@ int Wallet::subtractMoney(int amount) {
 int Wallet::returnTotalMoney() {
 	return _totalMoney;
 }
+
+/**
+void Wallet::toJSON(rapidjson::Document &doc) {
+
+	rapidjson::Value obj(rapidjson::kObjectType);
+	obj.AddMember("_totalMoney", _totalMoney, doc.GetAllocator());
+	doc.PushBack(obj, doc.GetAllocator());
+
+}
+
+void Wallet::fromJSON(rapidjson::Document &doc) {
+
+	assert(doc.HasMember("totalMoney"));
+	const rapidjson::Value &totalMoney = doc["totalMoney"];
+
+}
+*/

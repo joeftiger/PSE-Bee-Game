@@ -41,7 +41,6 @@ int HoneyExtractor::newHoneyInExtractor(float amountAdded) {
 
 	_rawHoney -= amountAdded;
 	_honeyInExtractor += amountAdded;
-	amountAdded = 0.0f;
 
 	assert(invariant());
 	return _honeyInExtractor;
