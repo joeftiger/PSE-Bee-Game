@@ -43,7 +43,7 @@ public:
 
 	void saveGameState(float dt);
 
-	void interactAt(Vec2 pos);
+	void interactAt(const Vec2& pos);
 
 	Node* getCameraContainer();
 

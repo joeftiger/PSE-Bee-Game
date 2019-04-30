@@ -113,7 +113,7 @@ void GameScene::onTouchEnded(Touch *touch, Event *event) {
 	//}
 }
 
-void GameScene::interactAt(Vec2 pos) {
+void GameScene::interactAt(const Vec2& pos) {
     auto selectTilePos = _tileMapLayer->getTilePosition(pos);
 
     if(BeeHiveAtlas::getInstance()->hasBeeHiveAt(selectTilePos)) {
