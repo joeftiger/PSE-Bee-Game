@@ -107,6 +107,7 @@ list(APPEND GAME_SOURCE
         Classes/Interaction/InteractionNode.cpp
         Classes/Algorithm/GameAlgorithm.cpp
         Classes/ItemPanel/ItemPanelLayer.cpp
+        Classes/Interaction/BeeHivePopup.cpp
         )
 list(APPEND GAME_HEADER
         Classes/AppDelegate.h
@@ -141,6 +142,7 @@ list(APPEND GAME_HEADER
         Classes/Resources/Sprites.h
         Classes/Resources/SpriteContainer.h
         Classes/Interaction/InteractionNode.h
+        Classes/Interaction/BeeHivePopup.h
         Classes/Algorithm/GameAlgorithm.h
         Classes/ItemPanel/ItemPanelLayer.h
         )
