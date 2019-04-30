@@ -1,4 +1,5 @@
 
+#include <Interaction/BeeHivePopup.h>
 #include "GameScene.h"
 #include "Atlas/BeeHiveAtlas.h"
 #include "Atlas/HoneyExtractorAtlas.h"
@@ -117,11 +118,15 @@ void GameScene::interactAt(const Vec2& pos) {
     auto selectTilePos = _tileMapLayer->getTilePosition(pos);
 
     if(BeeHiveAtlas::getInstance()->hasBeeHiveAt(selectTilePos)) {
-        auto beeHive = BeeHiveAtlas::getInstance()->getBeeHiveAt(selectTilePos);
-        Interacter *i = Interacter::create();
-        this->addChild(i, 100);
-        i->runWith(beeHive);
-        i->interact();
+		auto beeHive = BeeHiveAtlas::getInstance()->getBeeHiveAt(selectTilePos);
+		auto popup = BeeHivePopup::createWith(beeHive);
+		container->addChild(popup, 100);
+
+//        auto beeHive = BeeHiveAtlas::getInstance()->getBeeHiveAt(selectTilePos);
+//        Interacter *i = Interacter::create();
+//        this->addChild(i, 100);
+//        i->runWith(beeHive);
+//        i->interact();
 
     } else if(HoneyExtractorAtlas::getInstance()->hasHoneyExtractorAt(selectTilePos)) {
 		auto honeyExtractor = HoneyExtractorAtlas::getInstance()->getHoneyExtractorAt(selectTilePos);
