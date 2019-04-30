@@ -79,9 +79,7 @@ void HoneyExtractor::fromJSON(rapidjson::Document &doc) {
 	const rapidjson::Value &honeyExtractor = doc["honeyExtractor"];
 
 	assert(honeyExtractor["_honeyInExtractor"].IsFloat());
-	cocos2d::log("%f", honeyExtractor["_honeyInExtractor"].GetFloat());
 	_rawHoney = honeyExtractor["_honeyInExtractor"].GetFloat();
-	cocos2d::log("%f", _rawHoney);
 
 	assert(honeyExtractor["_posX"].IsInt());
 	_position.x = honeyExtractor["_posX"].GetInt();
