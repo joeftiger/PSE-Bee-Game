@@ -80,16 +80,11 @@ bool GameScene::init() {
 	return true;
 }
 
-/**
- *	Calls BeeHiveUpdate every dt seconds
- */
+
 void GameScene::beeHiveAtlasUpdate(float dt) {
 	BeeHiveAtlas::getInstance()->updateBeeHives(dt);
 }
 
-/**
- *	Calls HoneyExtractorUpdate every dt seconds
- */
 void GameScene::honeyExtractorAtlasUpdate(float dt) {
 	HoneyExtractorAtlas::getInstance()->updateHoneyExtractors(dt);
 }

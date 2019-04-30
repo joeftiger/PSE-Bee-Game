@@ -45,7 +45,7 @@ void HoneyExtractorAtlas::notify(void *observable) {
     for (const auto &pos : positions) {
         if (!hasHoneyExtractorAt(pos)) {
             cocos2d::log("HoneyExtractorAtlas:\tCreating honey extractor at (%i, %i)", (int) pos.x, (int) pos.y);
-            auto extractor = new HoneyExtractor();
+            auto extractor = new HoneyExtractor(0);
             extractor->setPosition(pos);
             _honeyExtractors.emplace(pos, extractor);
 
