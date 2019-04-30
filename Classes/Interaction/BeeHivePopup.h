@@ -34,6 +34,11 @@ private:
      */
     void initButtons();
 
+    /**
+     * Initializes the touches on this layer.
+     */
+    void initTouch();
+
 public:
     /**
      * Creates the beehive popup with given beehive to extract information from.
@@ -43,6 +48,8 @@ public:
     static BeeHivePopup *createWith(BeeHive *beeHive);
 
     bool init() override;
+
+    bool onTouchBegan(Touch *touch, Event *event);
 
     // implement the "static create()" method manually
     CREATE_FUNC(BeeHivePopup);

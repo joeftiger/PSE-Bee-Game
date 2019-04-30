@@ -20,11 +20,12 @@ void BeeHivePopup::initBackground() {
 
 void BeeHivePopup::initImage() {
     auto image = SpriteContainer::getInstance()->getSpriteOf(Tiles::TileGID::beehiveSmall2);
-    auto box = this->getChildByName("background")->getContentSize();
+    auto background = this->getChildByName("background");
+    auto box = background->getContentSize();
 
     image->setAnchorPoint(Vec2(0, 0.5));
     image->setPosition(box.width / 10, box.height / 2);
-    this->addChild(image, 1, "image");
+    background->addChild(image, 1, "image");
 }
 
 void BeeHivePopup::initInfoPanel() {
@@ -37,6 +38,14 @@ void BeeHivePopup::initButtons() {
      * - giveSugarWater();
      * - giveMedicine();
      */
+}
+
+void BeeHivePopup::initTouch() {
+    auto listener = EventListenerTouchOneByOne::create();
+
+    listener->setSwallowTouches(true);
+    listener->onTouchBegan = CC_CALLBACK_2(BeeHivePopup::onTouchBegan, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
 
 BeeHivePopup *BeeHivePopup::createWith(BeeHive *beeHive) {
@@ -56,6 +65,14 @@ bool BeeHivePopup::init() {
     initImage();
     initInfoPanel();
     initButtons();
+    initTouch();
 
+    return true;
+}
+
+bool BeeHivePopup::onTouchBegan(Touch *touch, Event *event) {
+    if (!getChildByName("background")->getBoundingBox().containsPoint(touch->getLocation())) {
+        this->removeFromParentAndCleanup(true);
+    }
     return true;
 }
