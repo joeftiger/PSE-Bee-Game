@@ -64,10 +64,14 @@ float BeeHive::takeRawHoney(float amount) {
 	return amount;
 }
 
+void BeeHive::killVarroa() {
+    _varoaAlive = 0;
+    _beesAlive -= 1000;
+
+}
+
 void BeeHive::update() {
-	if (!isFull()) {
-		_beesAlive += GameAlgorithm::getInstance()->nextBees(_beesAlive, _varoaAlive);
-	}
+	_beesAlive += GameAlgorithm::getInstance()->nextBees(_beesAlive, _varoaAlive, isFull());
 
 	if (!hasFullStorage()) {
 		_rawHoney += GameAlgorithm::getInstance()->honeyProduction(_beesAlive);
@@ -76,6 +80,8 @@ void BeeHive::update() {
 	if (_varoaAlive >= 0) {
 	    _varoaAlive += GameAlgorithm::getInstance()->nextVarroa(_varoaAlive);
 	}
+
+	varroaRandomizer();
 	assert(invariant());
 }
 
@@ -140,4 +146,10 @@ void BeeHive::doTask() {
 std::string BeeHive::getSprite()
 {
 	return sprite;
+}
+
+void BeeHive::varroaRandomizer() {
+    if(random(0, 10000) < 10) {
+        _varoaAlive = (int) random(1, 10);
+    }
 }

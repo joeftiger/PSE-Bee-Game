@@ -29,14 +29,17 @@ float GameAlgorithm::honeyProduction(int bees) {
     return honey;
 }
 
-int GameAlgorithm::nextBees(int bees, int varroa) {
+int GameAlgorithm::nextBees(int bees, int varroa, int full) {
     int newBees;
-    if(Time::getInstance()->getMonth() <= 7 && Time::getInstance()->getMonth() > 4) {
+
+    if(Time::getInstance()->getMonth() <= 7 && Time::getInstance()->getMonth() > 4 && !full) {
         newBees += BEES_PER_UPDATE;
     }
-    newBees -= varroa * VARROA_KILL_RATE;
 
     newBees -= BEES_DEAD_PER_UPDATE;
+
+    newBees -= varroa * VARROA_KILL_RATE;
+
     return newBees;
 }
 

@@ -40,7 +40,7 @@ void BeeHivePopup::initInfoPanel() {
 
 
     //honey
-    _honeyLabel = Label::createWithTTF(labelConfig, "");
+    _honeyLabel = Label::createWithTTF(labelConfig, "0");
     _honeyLabel->enableOutline(Color4B::BLACK, 1);
     _honeyLabel->setAnchorPoint(Vec2(0, 0.5));
     _honeyLabel->setPosition(Vec2(box.width*5/8, box.height*2/3));
@@ -52,7 +52,7 @@ void BeeHivePopup::initInfoPanel() {
 
 
     //bees
-    _beesLabel = Label::createWithTTF(labelConfig, "");
+    _beesLabel = Label::createWithTTF(labelConfig, "0");
     _beesLabel->enableOutline(Color4B::BLACK, 1);
     _beesLabel->setAnchorPoint(Vec2(0, 0.5));
     _beesLabel->setPosition(Vec2(box.width*5/8, box.height/2));
@@ -63,7 +63,7 @@ void BeeHivePopup::initInfoPanel() {
     beeSprite->setPosition(Vec2(-30, 15));
 
     //varroa
-    _varroaLabel = Label::createWithTTF(labelConfig, "");
+    _varroaLabel = Label::createWithTTF(labelConfig, "0");
     _varroaLabel->enableOutline(Color4B::BLACK, 1);
     _varroaLabel->setAnchorPoint(Vec2(0, 0.5));
     _varroaLabel->setPosition(Vec2(box.width*5/8, box.height*1/3));
@@ -102,6 +102,7 @@ void BeeHivePopup::initButtons() {
 
 	MenuItemImage *giveMedicine = MenuItemImage::create("menu/yes.png", "menu/yes.png", [=](Ref *sender) {
 		cocos2d::log("%s", "give medicine");
+		_beeHive->killVarroa();
 		});
 
 	Vector<MenuItem*> buttons;

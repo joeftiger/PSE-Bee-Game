@@ -21,6 +21,7 @@ private:
 	cocos2d::Vec2 _position;
 	std::string sprite = "tilemaps/Tiles/bienenstock1_klein.png";
 	bool invariant();
+	void varroaRandomizer();
 
 public:
 	/**
@@ -87,6 +88,11 @@ public:
 	 * @throws std::out_of_range() if amount is an invalid value
 	 */
 	float takeRawHoney(float amount);
+
+	/**
+	 * Removes varroas, but also kills 1000 bees.
+	 */
+	void killVarroa();
 
 	/**
 	 * @return position in the tilemap
