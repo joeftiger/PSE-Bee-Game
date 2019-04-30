@@ -5,6 +5,7 @@
 #include <Resources/Tiles.h>
 #include <Resources/SpriteContainer.h>
 #include "BeeHivePopup.h"
+#include "HeaderFiles/DEFINITIONS.h"
 
 void BeeHivePopup::initBackground() {
     auto visibleSize = Director::getInstance()->getOpenGLView()->getVisibleSize();
@@ -30,6 +31,55 @@ void BeeHivePopup::initImage() {
 
 void BeeHivePopup::initInfoPanel() {
     // TODO: Show labels of beehive information
+    auto visibleSize = Director::getInstance()->getOpenGLView()->getVisibleSize();
+    TTFConfig labelConfig;
+    labelConfig.fontFilePath = FONT;
+    labelConfig.fontSize = TEXT_SIZE_HUD;
+    auto background = this->getChildByName("background");
+    auto box = background->getContentSize();
+
+
+    //honey
+    _honeyLabel = Label::createWithTTF(labelConfig, "");
+    _honeyLabel->enableOutline(Color4B::BLACK, 1);
+    _honeyLabel->setAnchorPoint(Vec2(0, 0.5));
+    _honeyLabel->setPosition(Vec2(box.width*5/8, box.height*2/3));
+    _honeyLabel->setScale(2);
+    auto honeySprite = SpriteContainer::getInstance()->getSpriteOf(Sprites::SpriteID::honey_glass_2d);
+    honeySprite->setScale(0.1f);
+    honeySprite->setAnchorPoint(Vec2(1, 0.5f));
+    honeySprite->setPosition(Vec2(-30, 15));
+
+
+    //bees
+    _beesLabel = Label::createWithTTF(labelConfig, "");
+    _beesLabel->enableOutline(Color4B::BLACK, 1);
+    _beesLabel->setAnchorPoint(Vec2(0, 0.5));
+    _beesLabel->setPosition(Vec2(box.width*5/8, box.height/2));
+    _beesLabel->setScale(2);
+    auto beeSprite = SpriteContainer::getInstance()->getSpriteOf(Sprites::SpriteID::erlenmeyer); //to change with a bee sprite
+    beeSprite->setScale(0.1f);
+    beeSprite->setAnchorPoint(Vec2(1, 0.5f));
+    beeSprite->setPosition(Vec2(-30, 15));
+
+    //varroa
+    _varroaLabel = Label::createWithTTF(labelConfig, "");
+    _varroaLabel->enableOutline(Color4B::BLACK, 1);
+    _varroaLabel->setAnchorPoint(Vec2(0, 0.5));
+    _varroaLabel->setPosition(Vec2(box.width*5/8, box.height*1/3));
+    _varroaLabel->setScale(2);
+    auto varroaSprite = SpriteContainer::getInstance()->getSpriteOf(Sprites::SpriteID::honey_glass_3d);
+    varroaSprite->setScale(0.1f);
+    varroaSprite->setAnchorPoint(Vec2(1, 0.5f));
+    varroaSprite->setPosition(Vec2(-30, 15));
+
+
+    background->addChild(_honeyLabel);
+    _honeyLabel->addChild(honeySprite);
+    background->addChild(_beesLabel);
+    _beesLabel->addChild(beeSprite);
+    background->addChild(_varroaLabel);
+    _varroaLabel->addChild(varroaSprite);
 }
 
 void BeeHivePopup::initButtons() {
@@ -90,6 +140,7 @@ void BeeHivePopup::initTouch() {
 BeeHivePopup *BeeHivePopup::createWith(BeeHive *beeHive) {
     auto popup = BeeHivePopup::create();
     popup->_beeHive = beeHive;
+    popup->schedule(schedule_selector(BeeHivePopup::timer), 0.1f);
     return popup;
 }
 
@@ -102,9 +153,9 @@ bool BeeHivePopup::init() {
 
     initBackground();
     initImage();
-    initInfoPanel();
     initButtons();
     initTouch();
+    initInfoPanel();
 
     return true;
 }
@@ -115,4 +166,63 @@ bool BeeHivePopup::onTouchBegan(Touch *touch, Event *event) {
     }
 
     return true;
+}
+
+void BeeHivePopup::timer(float dt) {
+    _honeyLabel->setString(stringShortener(std::to_string((int) _beeHive->rawHoney())) + "g");
+
+    _beesLabel->setString(stringShortener(std::to_string((int) _beeHive->beesAlive())));
+
+    _varroaLabel->setString(stringShortener(std::to_string((int) _beeHive->varoaAlive())));
+}
+
+std::string BeeHivePopup::stringShortener(std::string s) {
+    std::string temp;
+
+    switch (s.length()) {
+        case 4:
+            temp = s.substr(0, 1);
+            temp += '.';
+            temp += s.substr(1, 1);
+            temp += 'k';
+            return temp;
+
+        case 5:
+            temp = s.substr(0, 2);
+            temp += '.';
+            temp += s.substr(2, 1);
+            temp += 'k';
+            return temp;
+
+        case 6:
+            temp = s.substr(0, 3);
+            temp += 'k';
+            return temp;
+
+        case 7:
+            temp = s.substr(0, 1);
+            temp += '.';
+            temp += s.substr(1, 1);
+            temp += 'm';
+            return temp;
+
+        case 8:
+            temp = s.substr(0, 2);
+            temp += '.';
+            temp += s.substr(2, 1);
+            temp += 'm';
+            return temp;
+
+        case 9:
+            temp = s.substr(0, 3);
+            temp += 'm';
+            return temp;
+
+        case 10:
+            temp = "stop playing already";
+            return temp;
+
+        default:
+            return s;
+    }
 }

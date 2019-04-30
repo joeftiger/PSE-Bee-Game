@@ -85,7 +85,7 @@ bool HUDLayer::init() {
 void HUDLayer::timer(float dt) {
 
 	auto h = std::to_string((int) Player::getInstance()->totalRawHoney());
-	honeyLabel->setString(stringShortener(h));
+	honeyLabel->setString(stringShortener(h) + "g");
 
 	auto m = std::to_string((int) Player::getInstance()->returnTotalMoney());
 	moneyLabel->setString(stringShortener(m));

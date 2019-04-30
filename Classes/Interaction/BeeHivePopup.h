@@ -13,6 +13,9 @@ USING_NS_CC;
 class BeeHivePopup : public Node {
 private:
     BeeHive *_beeHive;
+    Label * _honeyLabel;
+    Label * _beesLabel;
+    Label * _varroaLabel;
 
     /**
      * Initializes the background image.
@@ -39,6 +42,16 @@ private:
      */
     void initTouch();
 
+    /**
+     * update Labels.
+     */
+    void timer(float dt);
+
+    /**
+     * For better readability of labels.
+     */
+     std::string stringShortener(std::string s);
+
 public:
     /**
      * Creates the beehive popup with given beehive to extract information from.
@@ -50,6 +63,11 @@ public:
     bool init() override;
 
     bool onTouchBegan(Touch *touch, Event *event);
+
+    /**
+     * Lable for pop up, honey, bees, varroa.
+     * @param string
+     */
 
     // implement the "static create()" method manually
     CREATE_FUNC(BeeHivePopup);

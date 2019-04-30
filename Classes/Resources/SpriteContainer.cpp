@@ -48,7 +48,7 @@ Sprite *SpriteContainer::getSpriteOf(Sprites::SpriteID id) {
         case Sprites::tree_4_apple_1:   return Sprite::create(path + "baum4_apfel1.png");
         case Sprites::tree_4_apple_2:   return Sprite::create(path + "baum4_apfel2.png");
         case Sprites::tree_4_apple_3:   return Sprite::create(path + "baum4_apfel3.png");
-        case Sprites::erlenmeyer:       return Sprite::create(path + "erlenmeyerkolben.ng");
+        case Sprites::erlenmeyer:       return Sprite::create(path + "erlenmeyerkolben.png");
         case Sprites::honey_glass_2d:   return Sprite::create(path + "honigglas_2d.png");
         case Sprites::honey_glass_3d:   return Sprite::create(path + "honigglas_3d.png");
         case Sprites::honey_bucket:     return Sprite::create(path + "honigkessel.png");
