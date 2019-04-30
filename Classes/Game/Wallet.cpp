@@ -26,7 +26,7 @@ int Wallet::returnTotalMoney() {
 	return _totalMoney;
 }
 
-/**
+/** TODO toJSON and fromJSON for loading adn saving of money
 void Wallet::toJSON(rapidjson::Document &doc) {
 
 	rapidjson::Value obj(rapidjson::kObjectType);

@@ -73,7 +73,6 @@ bool OptionsScene::init() {
 }
 
 // upon presseing the rest button, delete the save and go back to main menu
-// TODO Add confirmation / warning (Brian 18.4)
 void OptionsScene::onDeleteSaveClick(cocos2d::Ref *sender) {
 	Director::getInstance()->replaceScene(
 			TransitionFade::create(0.2f, SaveDeleteConfirmation::create(), Color3B(255, 255, 255)));

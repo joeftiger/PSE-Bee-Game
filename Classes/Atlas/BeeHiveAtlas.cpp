@@ -4,7 +4,6 @@
 
 #include "BeeHiveAtlas.h"
 
-
 BeeHiveAtlas *BeeHiveAtlas::_instance = nullptr;
 
 BeeHiveAtlas *BeeHiveAtlas::getInstance() {

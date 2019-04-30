@@ -10,37 +10,29 @@
 #include "BeeHive.h"
 #include "Wallet.h"
 #include "../HeaderFiles/Restorable.h"
+#include "HeaderFiles/Interactable.h"
 #include <cassert>
 #include <string>
 #include <stdexcept>
-#include "HeaderFiles/Interactable.h"
+
 
 static const float MAX__HONEY_IN_EXTRACTOR = 100.0f;
+static const int CONVERSION_RATE = 3;
+static const int MULTIPLIER = 2;
 
 class HoneyExtractor : Restorable, public Interactable {
 private:
 	int _honeyInExtractor;
     float _rawHoney;
-	int _convertedMoney;
-	int _modifier;
-	int _totalMoney;
-
-
-	int _money;
-
 	cocos2d::Vec2 _position;
 
 	std::string sprite = "sprites/honigschleuder.png";
 
 	bool invariant();
 
-
-
 public:
 
-	float _amountAdded;
-	int conversionRate = 10;
-    int multiplier = 3;
+	float amountAdded;
 
 	/**
 	 * TODO Set to 0 honey when done testing
@@ -67,23 +59,17 @@ public:
 	bool isFull();
 
 	/**
-	 * @return total money
-	 */
-	int totalMoney();
-
-	/**
-	 * TODO write actual Doc for this; do I even need this function?
+	 * @return amount of honey in this extractor
 	 */
 	int honeyInExtractor();
 
 	/**
 	 * adds the specified amount to the extractor
 	 * subtracts the specified amount from the total raw honey
-	 * @param amount the amount to take (must be in between <code>[0, rawHoney()]</code>)
-	 * @return the amount taken
+	 * @param amountAdded: must be in between <code>[0, rawHoney()]</code>
 	 * @throws std::out_of_range() if amount is an invalid value
 	 */
-	int newHoneyInExtractor(float amountAdded);
+	void addHoneyToExtractor(float amountAdded);
 
 	/**
 	 * @return position in the tilemap

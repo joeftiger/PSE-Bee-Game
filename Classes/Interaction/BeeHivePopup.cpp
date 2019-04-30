@@ -39,7 +39,7 @@ void BeeHivePopup::initInfoPanel() {
     auto box = background->getContentSize();
 
     //honey
-    _honeyLabel = Label::createWithTTF(labelConfig, "");
+    _honeyLabel = Label::createWithTTF(labelConfig, "0");
     _honeyLabel->enableOutline(Color4B::BLACK, 1);
     _honeyLabel->setAnchorPoint(Vec2(0, 0.5));
     _honeyLabel->setPosition(Vec2(box.width * 5 / 8, box.height * 2 / 3));
@@ -53,7 +53,7 @@ void BeeHivePopup::initInfoPanel() {
     _honeyLabel->addChild(honeySprite);
 
     //bees
-    _beesLabel = Label::createWithTTF(labelConfig, "");
+    _beesLabel = Label::createWithTTF(labelConfig, "0");
     _beesLabel->enableOutline(Color4B::BLACK, 1);
     _beesLabel->setAnchorPoint(Vec2(0, 0.5));
     _beesLabel->setPosition(Vec2(box.width * 5 / 8, box.height / 2));
@@ -68,7 +68,7 @@ void BeeHivePopup::initInfoPanel() {
     _beesLabel->addChild(beeSprite);
 
     //varroa
-    _varroaLabel = Label::createWithTTF(labelConfig, "");
+    _varroaLabel = Label::createWithTTF(labelConfig, "0");
     _varroaLabel->enableOutline(Color4B::BLACK, 1);
     _varroaLabel->setAnchorPoint(Vec2(0, 0.5));
     _varroaLabel->setPosition(Vec2(box.width * 5 / 8, box.height * 1 / 3));
@@ -88,45 +88,45 @@ void BeeHivePopup::initButtons() {
      * - giveSugarWater();
      * - giveMedicine();
      */
+	auto box = this->getChildByName("background")->getContentSize();
 
-    auto box = this->getChildByName("background")->getContentSize();
+	auto takeHoney = MenuItemImage::create("menu/yes.png", "menu/yes.png", [=](Ref *sender) {
+		cocos2d::log("%s", "take honey");
+		_beeHive->takeRawHoney();
+		});
 
-    MenuItemImage *takeHoney = MenuItemImage::create("menu/yes.png", "menu/yes.png", [=](Ref *sender) {
-        cocos2d::log("%s", "take honey");
-        _beeHive->takeRawHoney();
-    });
+	auto giveSugarWater = MenuItemImage::create("menu/yes.png", "menu/yes.png", [=](Ref *sender) {
+		cocos2d::log("%s", "give sugar");
+		});
 
-    MenuItemImage *giveSugarWater = MenuItemImage::create("menu/yes.png", "menu/yes.png", [=](Ref *sender) {
-        cocos2d::log("%s", "give sugar");
-    });
+	auto giveMedicine = MenuItemImage::create("menu/yes.png", "menu/yes.png", [=](Ref *sender) {
+		cocos2d::log("%s", "give medicine");
+		_beeHive->killVarroa();
+		});
 
-    MenuItemImage *giveMedicine = MenuItemImage::create("menu/yes.png", "menu/yes.png", [=](Ref *sender) {
-        cocos2d::log("%s", "give medicine");
-    });
+	Vector<MenuItem *> buttons;
 
-    Vector<MenuItem *> buttons;
+	buttons.pushBack(takeHoney);
+	buttons.pushBack(giveSugarWater);
+	buttons.pushBack(giveMedicine);
+	auto menu = Menu::createWithArray(buttons);
+	this->addChild(menu, 10, "buttonMenu");
+	menu->alignItemsHorizontally();
+	menu->setScale(0.3f);
+	menu->setPosition(Vec2(-box.width * 5 / 7, -box.height* 4/5));
 
-    buttons.pushBack(takeHoney);
-    buttons.pushBack(giveSugarWater);
-    buttons.pushBack(giveMedicine);
-    Menu *menu = Menu::createWithArray(buttons);
-    this->addChild(menu, 10, "buttonMenu");
-    menu->alignItemsHorizontally();
-    menu->setScale(0.3f);
-    menu->setPosition(Vec2(-box.width * 5 / 7, -box.height * 4 / 5));
+	MenuItemImage *closeButton = MenuItemImage::create("menu/no.png", "menu/no.png", [=](Ref *sender) {
+		cocos2d::log("%s", "exit");		
+		this->removeFromParentAndCleanup(true);
+	});
 
-    MenuItemImage *closeButton = MenuItemImage::create("menu/no.png", "menu/no.png", [=](Ref *sender) {
-        cocos2d::log("%s", "exit");
-        this->removeFromParentAndCleanup(true);
-    });
-
-    Vector<MenuItem *> exitButton;
-    exitButton.pushBack(closeButton);
-    Menu *exitMenu = Menu::createWithArray(exitButton);
-    exitMenu->setAnchorPoint(Vec2(1.0f, 1.0f));
-    exitMenu->setPosition(Vec2(-box.width * 5 / 7, -box.height * 4 / 5));
-    exitMenu->setScale(0.2f);
-    this->addChild(exitMenu, 10, "exitMenu");
+	Vector<MenuItem*> exitButton;
+	exitButton.pushBack(closeButton);
+	auto exitMenu = Menu::createWithArray(exitButton);
+	exitMenu->setAnchorPoint(Vec2(1.0f, 1.0f));
+	exitMenu->setPosition(Vec2(-box.width * 5 / 7, -box.height* 4/5));
+	exitMenu->setScale(0.2f);
+	this->addChild(exitMenu, 10, "exitMenu");
 }
 
 void BeeHivePopup::initTouch() {

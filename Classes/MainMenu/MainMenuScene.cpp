@@ -11,6 +11,9 @@ bool MainMenu::init() {
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
+	onePofScreenH = visibleSize.height / 100;
+    onePofScreenW = visibleSize.width / 100;
+
 	// adding a background, setting the middle as the anchor point and putting as far back as possible
 	auto *background = cocos2d::Sprite::create("menu/main-menu-background.png");
 	background->setPosition(visibleSize.width / 2, visibleSize.height / 2);
@@ -21,29 +24,33 @@ bool MainMenu::init() {
 	// Create a title and center it at the top of the screen
 	auto title = Label::createWithTTF("So Bee It!", "fonts/ReemKufi-Regular.ttf", 48);
 	title->setPosition(Vec2(origin.x + visibleSize.width / 2,
-	                        origin.y + visibleSize.height - title->getContentSize().height));
+    	                        origin.y + visibleSize.height - title->getContentSize().height));
 	this->addChild(title, 3);
 
 	// Adding the sprites for the main menu with location and size adjustment
 	// all scaling and position through trial-and-error
 	auto playButton = MenuItemImage::create("menu/start.png", "menu/start.png",
 	                                        CC_CALLBACK_1(MainMenu::onPlayClick, this));
-	playButton->setPosition(Vec2(origin.x, origin.y + 63));
+	playButton->setPosition(Vec2(visibleRect.origin.x + onePofScreenW * 0.8,
+									visibleRect.origin.y + onePofScreenH * 8.3));
 	playButton->setScale(1.04f);
 
 	auto optionsButton = MenuItemImage::create("menu/options.png", "menu/options.png",
 	                                           CC_CALLBACK_1(MainMenu::onOptionsClick, this));
-	optionsButton->setPosition(Vec2(origin.x - 104, origin.y - 108));
+	optionsButton->setPosition(Vec2(visibleRect.origin.x - onePofScreenW * 5.5,
+									visibleRect.origin.y - onePofScreenH * 13.3 ));
 	optionsButton->setScale(1.04f);
 
 	auto aboutButton = MenuItemImage::create("menu/credits.png", "menu/credits.png",
 	                                         CC_CALLBACK_1(MainMenu::onAboutClick, this));
-	aboutButton->setPosition(Vec2(origin.x + 104, origin.y - 108));
+	aboutButton->setPosition(Vec2(visibleRect.origin.x + onePofScreenW * 7.3,
+									visibleRect.origin.y  - onePofScreenH * 13.3));
 	aboutButton->setScale(1.04f);
 
 	auto exitButton = MenuItemImage::create("menu/exit.png", "menu/exit.png",
     	                                        CC_CALLBACK_1(MainMenu::onExitClick, this));
-    exitButton->setPosition(Vec2(origin.x, origin.y - 273));
+    exitButton->setPosition(Vec2(visibleRect.origin.x + onePofScreenW  * 0.8,
+                                    visibleRect.origin.y - onePofScreenH * 34.5));
     exitButton->setScale(1.04f);
 
 	// vector of menu items and then adding all the menu items and creating them

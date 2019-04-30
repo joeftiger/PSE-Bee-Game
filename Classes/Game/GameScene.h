@@ -31,8 +31,14 @@ public:
 
 	virtual bool init() override;
 
+	/**
+     *	Calls BeeHiveUpdate every dt seconds
+     */
 	void beeHiveAtlasUpdate(float dt);
 
+	/**
+     *	Calls HoneyExtractorUpdate every dt seconds
+     */
 	void honeyExtractorAtlasUpdate(float dt);
 
 	bool onTouchBegan(Touch *touch, Event *event);
