@@ -1,31 +1,25 @@
 
 #include "HoneyExtractor.h"
 
-
 bool HoneyExtractor::invariant() {
-	// TODO: Uncomment these if it works without throwing assertion errors all the time.
 	//	assert(_honeyInExtractor >= 0);
 	return true;
 }
 
 HoneyExtractor::HoneyExtractor() : HoneyExtractor(50) {}
 
-//TODO Fix this or rather think about the actual implementation
+//TODO Discuss if this is sufficient?
 HoneyExtractor::HoneyExtractor(int _honeyInExtractor) {
 	_honeyInExtractor = 50;
 	assert(invariant());
 	}
 
 bool HoneyExtractor::isEmpty() {
-	return _honeyInExtractor == 0;
+	return _honeyInExtractor <= 0;
 }
 
 bool HoneyExtractor::isFull() {
 	return _honeyInExtractor == MAX__HONEY_IN_EXTRACTOR;
-}
-
-int HoneyExtractor::totalMoney() {
-	return _totalMoney;
 }
 
 int HoneyExtractor::honeyInExtractor() {
@@ -33,7 +27,7 @@ int HoneyExtractor::honeyInExtractor() {
 }
 
 // TODO Origin of honey from a specific beehive
-int HoneyExtractor::newHoneyInExtractor(float amountAdded) {
+void HoneyExtractor::addHoneyToExtractor(float amountAdded) {
 	if (amountAdded < 0 || amountAdded > _rawHoney) {
 		throw std::out_of_range(
 			"[" + std::to_string(amountAdded) + "] is out of range for [_rawHoney = " + std::to_string(_rawHoney) + "]");
@@ -41,17 +35,14 @@ int HoneyExtractor::newHoneyInExtractor(float amountAdded) {
 
 	_rawHoney -= amountAdded;
 	_honeyInExtractor += amountAdded;
-
 	assert(invariant());
-	return _honeyInExtractor;
 }
 
-//  10*3 money per tick, reducing 10 honey in the extractor
-//TODO also missing rounding to account for unfitting conversion rate ("left-over")
+//TODO account for rounding erors and not receiving an int!
 void HoneyExtractor::update() {
 	if (!isEmpty()) {
-		Wallet::getInstance()->addMoney(conversionRate * multiplier);
-		_honeyInExtractor -= conversionRate;
+		Wallet::getInstance()->addMoney(CONVERSION_RATE * MULTIPLIER);
+		_honeyInExtractor -= CONVERSION_RATE;
 	}
 	assert(invariant());
 }
@@ -65,10 +56,10 @@ void HoneyExtractor::setPosition(const cocos2d::Vec2 &pos) {
 	_position.y = pos.y;
 }
 
-// TODO add any other things that should be saved
+
 void HoneyExtractor::toJSON(rapidjson::Document &doc) {
 	rapidjson::Value obj(rapidjson::kObjectType);
-	obj.AddMember("_honeyInExtractor", _rawHoney, doc.GetAllocator());
+	obj.AddMember("_honeyInExtractor", _honeyInExtractor, doc.GetAllocator());
 	obj.AddMember("_posX", int(_position.x), doc.GetAllocator());
 	obj.AddMember("_posY", int(_position.y), doc.GetAllocator());
 	doc.PushBack(obj, doc.GetAllocator());
@@ -79,7 +70,7 @@ void HoneyExtractor::fromJSON(rapidjson::Document &doc) {
 	const rapidjson::Value &honeyExtractor = doc["honeyExtractor"];
 
 	assert(honeyExtractor["_honeyInExtractor"].IsFloat());
-	_rawHoney = honeyExtractor["_honeyInExtractor"].GetFloat();
+	_honeyInExtractor = honeyExtractor["_honeyInExtractor"].GetFloat();
 
 	assert(honeyExtractor["_posX"].IsInt());
 	_position.x = honeyExtractor["_posX"].GetInt();
