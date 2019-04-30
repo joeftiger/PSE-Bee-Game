@@ -12,7 +12,7 @@ void BeeHivePopup::initBackground() {
 
     auto background = Sprite::create();
     background->setTextureRect(Rect(0, 0, size.width, size.height));    // background size
-    background->setColor(Color3B(lround(87.5), lround(65.9), 49));      // orange on beehive's front left.
+    background->setColor(Color3B(255, 243, 190));
     background->setAnchorPoint(Vec2(0.5, 0.5));
 
     this->addChild(background, -1, "background");
@@ -24,7 +24,7 @@ void BeeHivePopup::initImage() {
     auto box = background->getContentSize();
 
     image->setAnchorPoint(Vec2(0, 0.5));
-    image->setPosition(box.width / 10, box.height / 2);
+    image->setPosition(box.width / 10, box.height * 2 / 3);
     background->addChild(image, 1, "image");
 }
 
