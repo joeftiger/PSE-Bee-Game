@@ -140,7 +140,6 @@ void BeeHivePopup::initTouch() {
 BeeHivePopup *BeeHivePopup::createWith(BeeHive *beeHive) {
     auto popup = BeeHivePopup::create();
     popup->_beeHive = beeHive;
-    popup->schedule(schedule_selector(BeeHivePopup::timer), 0.1f);
     return popup;
 }
 
@@ -157,6 +156,8 @@ bool BeeHivePopup::init() {
     initTouch();
     initInfoPanel();
 
+    this->schedule(schedule_selector(BeeHivePopup::update), 1);
+
     return true;
 }
 
@@ -168,7 +169,7 @@ bool BeeHivePopup::onTouchBegan(Touch *touch, Event *event) {
     return true;
 }
 
-void BeeHivePopup::timer(float dt) {
+void BeeHivePopup::update(float dt) {
     _honeyLabel->setString(stringShortener(std::to_string((int) _beeHive->rawHoney())) + "g");
 
     _beesLabel->setString(stringShortener(std::to_string((int) _beeHive->beesAlive())));

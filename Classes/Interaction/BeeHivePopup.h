@@ -45,7 +45,7 @@ private:
     /**
      * update Labels.
      */
-    void timer(float dt);
+    void update(float dt);
 
     /**
      * For better readability of labels.
