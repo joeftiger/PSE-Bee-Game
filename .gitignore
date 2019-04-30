@@ -14,6 +14,8 @@ proj.android/.idea/
 proj.android/app/PSE-Bee-Game.iml
 cocos2d/cocos/platform/android/libcocos2dx/libcocos2dx.iml
 proj.android/proj.android.iml
+proj.android/build.gradle
+proj.android/gradle/
 *.obj
 *.dll
 *.tlog
