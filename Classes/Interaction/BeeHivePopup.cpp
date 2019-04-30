@@ -38,6 +38,45 @@ void BeeHivePopup::initButtons() {
      * - giveSugarWater();
      * - giveMedicine();
      */
+
+	auto box = this->getChildByName("background")->getContentSize();
+
+	MenuItemImage *takeHoney = MenuItemImage::create("menu/yes.png", "menu/yes.png", [=](Ref *sender) {
+		cocos2d::log("%s", "take honey");
+		_beeHive->takeRawHoney();
+		});
+
+	MenuItemImage *giveSugarWater = MenuItemImage::create("menu/yes.png", "menu/yes.png", [=](Ref *sender) {
+		cocos2d::log("%s", "give sugar");
+		});
+
+	MenuItemImage *giveMedicine = MenuItemImage::create("menu/yes.png", "menu/yes.png", [=](Ref *sender) {
+		cocos2d::log("%s", "give medicine");
+		});
+
+	Vector<MenuItem*> buttons;
+
+	buttons.pushBack(takeHoney);
+	buttons.pushBack(giveSugarWater);
+	buttons.pushBack(giveMedicine);
+	Menu *menu = Menu::createWithArray(buttons);
+	this->addChild(menu, 10, "buttonMenu");
+	menu->alignItemsHorizontally();
+	menu->setScale(0.3f);
+	menu->setPosition(Vec2(-box.width * 5 / 7, -box.height* 4/5));
+
+	MenuItemImage *closeButton = MenuItemImage::create("menu/no.png", "menu/no.png", [=](Ref *sender) {
+		cocos2d::log("%s", "exit");		
+		this->removeFromParentAndCleanup(true);
+	});
+
+	Vector<MenuItem*> exitButton;
+	exitButton.pushBack(closeButton);
+	Menu *exitMenu = Menu::createWithArray(exitButton);
+	exitMenu->setAnchorPoint(Vec2(1.0f, 1.0f));
+	exitMenu->setPosition(Vec2(-box.width * 5 / 7, -box.height* 4/5));
+	exitMenu->setScale(0.2f);
+	this->addChild(exitMenu, 10, "exitMenu");
 }
 
 void BeeHivePopup::initTouch() {
@@ -72,7 +111,8 @@ bool BeeHivePopup::init() {
 
 bool BeeHivePopup::onTouchBegan(Touch *touch, Event *event) {
     if (!getChildByName("background")->getBoundingBox().containsPoint(touch->getLocation())) {
-        this->removeFromParentAndCleanup(true);
+        //this->removeFromParentAndCleanup(true);
     }
+
     return true;
 }
