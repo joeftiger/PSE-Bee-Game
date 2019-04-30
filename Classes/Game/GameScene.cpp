@@ -100,9 +100,8 @@ bool GameScene::onTouchBegan(Touch *touch, Event *event) {
 }
 
 void GameScene::onTouchMoved(Touch *touch, Event *event) {
-	auto movement = touch->getLocation() - touch->getPreviousLocation();
-
 	if (!_itemPanel->isDrag()) {
+		auto movement = touch->getLocation() - touch->getPreviousLocation();
 		container->setPosition(container->getPosition() - movement);
 	}
 }
