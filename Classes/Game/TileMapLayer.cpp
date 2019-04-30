@@ -176,11 +176,11 @@ void TileMapLayer::placeTile(const Vec2 &position, const int gid) {
 	}
 }
 
-bool TileMapLayer::canPlaceSprite(const Vec2 &position, int id) {
+bool TileMapLayer::canPlaceSprite(const Vec2 &position, const Size &size, int id) {
 	return false;
 }
 
-void TileMapLayer::placeSprite(const Vec2 &position, int id) {
+void TileMapLayer::placeSprite(const Vec2 &position, const Size &size, int id) {
 	auto pos = _objectLayer->convertToNodeSpace(_objectLayer->getTileAt(position)->getPosition());
 }
 

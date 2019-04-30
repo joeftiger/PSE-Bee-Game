@@ -70,8 +70,8 @@ public:
 	void place(Placeable &placeable, Vec2 &position);
 
 	/**
-	 * Checks whether the tile at specified position can be replaced or not (e.g. beehive/tree on this tile)
-	 * @param position the position of the tile
+	 * Returns whether the tile at specified position can be replaced or not (e.g. beehive/tree on this tile)
+	 * @param position position in tile coordinates
 	 * @param gid the gid of the new tile
 	 * @return <code>true</code> if tile may be placed. <br>
 	 * 		   <code>false</code> if the position is obstructed.
@@ -80,14 +80,28 @@ public:
 
 	/**
 	 * Places the given tile (gid) at the given position (forced).
-	 * @param position tile position
+	 * @param position position in tile coordinates
 	 * @param gid tile gid
 	 */
 	void placeTile(const Vec2 &position, const int gid);
 
-	bool canPlaceSprite(const Vec2 &position, int id);
+	/**
+	 * Returns whether a sprite with given size and ID can be placed at the specified position.
+	 * @param position position in tile coordinates
+	 * @param size size of sprite (will be counted backwards from position)
+	 * @param id sprite id
+	 * @return <code>true</code> if sprite can be placed. <br>
+	 * 		   <code>false</code> if not.
+	 */
+	bool canPlaceSprite(const Vec2 &position, const Size &size, int id);
 
-	void placeSprite(const Vec2 &position, int id);
+	/**
+	 * Places the sprite with given size and ID to the specified position.
+	 * @param position position in tile coordinates
+	 * @param size size of sprite (will be counted backwards from position);
+	 * @param id sprite id
+	 */
+	void placeSprite(const Vec2 &position, const Size &size, int id);
 
 	/**
 	 * Shows / hides the obstruction layer
