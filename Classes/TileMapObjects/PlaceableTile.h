@@ -15,14 +15,20 @@ class PlaceableTile : public Placeable {
 private:
 	Tiles::TileGID _gid;
 
+	PlaceableTile() = default;
+
 public:
-	explicit PlaceableTile(Tiles::TileGID gid);
+	static PlaceableTile *createWith(Tiles::TileGID gid);
+
+	bool init() override;
 
 	bool canPlaceOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) override;
 
 	void placeOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) override;
 
 	Sprite *getSprite() const override;
+
+	CREATE_FUNC(PlaceableTile);
 };
 
 

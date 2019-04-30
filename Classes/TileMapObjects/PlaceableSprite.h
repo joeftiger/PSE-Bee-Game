@@ -15,7 +15,9 @@ private:
 	Size _size;
 
 public:
-	explicit PlaceableSprite(Sprites::SpriteID id);
+	static PlaceableSprite *createWith(Sprites::SpriteID id);
+
+	bool init() override;
 
 	const Size &getSize() const;
 
@@ -23,7 +25,10 @@ public:
 
 	void placeOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) override;
 
+
 	Sprite *getSprite() const override;
+
+	CREATE_FUNC(PlaceableSprite);
 };
 
 #endif //PSE_BEE_GAME_PLACEABLESPRITE_H

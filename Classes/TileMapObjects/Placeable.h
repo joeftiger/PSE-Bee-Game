@@ -14,8 +14,12 @@ class TileMapLayer;
 /**
  * A placeable object is handled by the TileMapLayer to place tile/trees/houses etc.
  */
-class Placeable {
+class Placeable : public cocos2d::Node {
 public:
+	bool init() override {
+		return Node::init();
+	}
+
 	virtual bool canPlaceOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) = 0;
 
 	virtual void placeOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) = 0;
