@@ -6,12 +6,17 @@
 #include <list>
 #include <iterator>
 #include <iostream>
+#include <TileMapObjects/PlaceableTile.h>
 #include "HeaderFiles/DEFINITIONS.h"
 #include "Resources/Tiles.h"
 
 using namespace cocos2d;
 using namespace std;
 
+
+void TouchUtil::addToPlaceables(Placeable *placeable) {
+	_placeables.emplace_back(placeable);
+}
 
 void TouchUtil::setDrag(Point screenTouch, Point layerTouch) {
 	for (auto sprite : spriteList) {
