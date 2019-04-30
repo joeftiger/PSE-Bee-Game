@@ -60,14 +60,14 @@ public:
 	 * @param position  the position to place (in tile coordinates)
 	 * @return <code>true</code> if not obstructed. <br><code>false</code> otherwise.
 	 */
-	bool canPlace(Placeable &placeable, Vec2 &position);
+	bool canPlace(Placeable *placeable, Vec2 &position);
 
 	/**
 	 *
 	 * @param placeable
 	 * @param position
 	 */
-	void place(Placeable &placeable, Vec2 &position);
+	void place(Placeable *placeable, Vec2 &position);
 
 	/**
 	 * Returns whether the tile at specified position can be replaced or not (e.g. beehive/tree on this tile)
@@ -83,7 +83,7 @@ public:
 	 * @param position position in tile coordinates
 	 * @param gid tile gid
 	 */
-	void placeTile(const Vec2 &position, const int gid);
+	void placeTile(const Vec2 &position, const int &gid);
 
 	/**
 	 * Returns whether a sprite with given size and ID can be placed at the specified position.

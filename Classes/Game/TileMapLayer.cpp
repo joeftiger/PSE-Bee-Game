@@ -143,13 +143,13 @@ Vec2 TileMapLayer::inTileMapBounds(const Vec2 &pos) {
 	}
 }
 
-bool TileMapLayer::canPlace(Placeable &placeable, Vec2 &position) {
-	return placeable.canPlaceOn(this, position);
+bool TileMapLayer::canPlace(Placeable *placeable, Vec2 &position) {
+	return placeable->canPlaceOn(this, position);
 }
 
-void TileMapLayer::place(Placeable &placeable, Vec2 &position) {
+void TileMapLayer::place(Placeable *placeable, Vec2 &position) {
 	assert(canPlace(placeable, position));
-	placeable.placeOn(this, position);
+	placeable->placeOn(this, position);
 }
 
 bool TileMapLayer::canPlaceTile(const Vec2 &position, int gid) {
@@ -158,7 +158,7 @@ bool TileMapLayer::canPlaceTile(const Vec2 &position, int gid) {
 	return _obstructionLayer->getTileGIDAt(pos) == Tiles::no_obstruction;
 }
 
-void TileMapLayer::placeTile(const Vec2 &position, const int gid) {
+void TileMapLayer::placeTile(const Vec2 &position, const int &gid) {
 	auto pos = getTilePosition(position);
 	_objectLayer->setTileGID(gid, pos); //1 = flower; 2,3,4,5 = bush1,2,3,4; 6 = grass; 7 = road
 
