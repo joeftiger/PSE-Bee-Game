@@ -76,16 +76,18 @@ void HoneyExtractor::toJSON(rapidjson::Document &doc) {
 
 void HoneyExtractor::fromJSON(rapidjson::Document &doc) {
 	assert(doc.HasMember("honeyExtractor"));
-	const rapidjson::Value &beeHive = doc["honeyExtractor"];
+	const rapidjson::Value &honeyExtractor = doc["honeyExtractor"];
 
-	assert(beeHive["_honeyInExtractor"].IsFloat());
-	_rawHoney = beeHive["_honeyInExtractor"].GetFloat();
+	assert(honeyExtractor["_honeyInExtractor"].IsFloat());
+	cocos2d::log("%f", honeyExtractor["_honeyInExtractor"].GetFloat());
+	_rawHoney = honeyExtractor["_honeyInExtractor"].GetFloat();
+	cocos2d::log("%f", _rawHoney);
 
-	assert(beeHive["_posX"].IsInt());
-	_position.x = beeHive["_posX"].GetInt();
+	assert(honeyExtractor["_posX"].IsInt());
+	_position.x = honeyExtractor["_posX"].GetInt();
 
-	assert(beeHive["_posY"].IsInt());
-	_position.y = beeHive["_posY"].GetInt();
+	assert(honeyExtractor["_posY"].IsInt());
+	_position.y = honeyExtractor["_posY"].GetInt();
 }
 
 bool HoneyExtractor::isInteractable() {
