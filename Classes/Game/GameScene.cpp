@@ -122,10 +122,14 @@ void GameScene::interactAt(Vec2 pos) {
         Interacter *i = Interacter::create();
         this->addChild(i, 100);
         i->runWith(beeHive);
-        i->interact(); //TODO: Replace
-        this->removeChild(i);
+        i->interact();
+
     } else if(HoneyExtractorAtlas::getInstance()->hasHoneyExtractorAt(selectTilePos)) {
-        //TODO: add implementation for honeyExtractors
+		auto honeyExtractor = HoneyExtractorAtlas::getInstance()->getHoneyExtractorAt(selectTilePos);
+		Interacter *i = Interacter::create();
+		this->addChild(i, 100);
+		i->runWith(honeyExtractor);
+		i->interact();
     }
 }
 

@@ -13,10 +13,11 @@
 #include <cassert>
 #include <string>
 #include <stdexcept>
+#include "HeaderFiles/Interactable.h"
 
 static const float MAX__HONEY_IN_EXTRACTOR = 100.0f;
 
-class HoneyExtractor : Restorable {
+class HoneyExtractor : Restorable, public Interactable {
 private:
 	int _honeyInExtractor;
     float _rawHoney;
@@ -28,6 +29,8 @@ private:
 	int _money;
 
 	cocos2d::Vec2 _position;
+
+	std::string sprite = "sprites/honigschleuder.png";
 
 	bool invariant();
 
@@ -101,6 +104,12 @@ public:
 	void toJSON(rapidjson::Document &doc) override;
 
 	void fromJSON(rapidjson::Document &doc) override;
+
+	bool isInteractable() override;
+
+	void doTask() override;
+
+	std::string getSprite() override;
 };
 
 #endif //PROJ_ANDROID_HONEYEXTRACTOR_H

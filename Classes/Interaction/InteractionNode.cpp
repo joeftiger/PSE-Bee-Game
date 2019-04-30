@@ -43,7 +43,7 @@ void InteractionNode::runAnimation() {
     _item = Sprite::create(_itemName);
     _item->setAnchorPoint(Vec2(0.5, 0.5));
     _item->setPosition(Vec2(winSize.width/2, winSize.height/2));
-    _item->setScale(0.1);
+    _item->setScale(0.05f);
 
     ScaleBy *scale = ScaleBy::create(0.2, 10);
     this->addChild(_item);

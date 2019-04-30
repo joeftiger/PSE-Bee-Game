@@ -152,7 +152,7 @@ void SaveLoad::loadBeehives() {
 }
 
 /**
- *	Saves all honeyExtractors on current tileMap into a json-array and writes them into "beehives.json"
+ *	Saves all honeyExtractors on current tileMap into a json-array and writes them into "honeyextractors.json"
  */
 void SaveLoad::saveHoneyExtractors() {
 	rapidjson::Document doc;

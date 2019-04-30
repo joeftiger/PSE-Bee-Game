@@ -17,7 +17,7 @@ void Interacter::runWith(Interactable *interactingObj) {
 	Interact with the initialized object
 */
 void Interacter::interact() {
-
+	assert(interactingObj);
 	InteractionNode* node = InteractionNode::create();
 	node->setFiles(interactingObj->getSprite());
 	GameScene* scene = (GameScene*)Director::getInstance()->getRunningScene();
