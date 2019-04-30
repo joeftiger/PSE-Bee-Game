@@ -63,39 +63,24 @@ void ItemPanelLayer::initializeItemPanel() {
 	_placeables.emplace_back(new PlaceableSprite(Sprites::tree_2));
 	_placeables.emplace_back(new PlaceableSprite(Sprites::tree_4));
 
+	auto i = 0;
+	auto k = 0;
+	for (auto p : _placeables) {
+		auto x = (i % 3) * box.width / 3;
+		auto y = (4 - (k % 4)) * box.height / 6;
+		auto pos = Vec2(x, y);
 
+		auto sprite = p->getSprite();
+		sprite->setPosition(pos);
+		sprite->setAnchorPoint(Vec2(0, 0));
+		sprite->setScale(box.width / (sprite->getBoundingBox().size.width * 3));
+		this->addChild(sprite);
 
-	this->addToSpriteList("tilemaps/Tiles/blumen1_spring_summer.png", Vec2(0, box.height / 6), Tiles::flower1, box);
-	this->addToSpriteList("tilemaps/Tiles/blumen2_spring_summer.png", Vec2(box.width / 3, box.height / 6),
-	                      Tiles::flower2,
-	                      box);
-	this->addToSpriteList("tilemaps/Tiles/blumen3_spring_summer.png", Vec2(box.width * 2 / 3, box.height / 6),
-	                      Tiles::flower3,
-	                      box);
-	this->addToSpriteList("tilemaps/Tiles/blumen4_spring_summer.png", Vec2(0, box.height * 2 / 6), Tiles::flower4,
-	                      box);
+		_spritesToPlaceables.emplace(sprite, p);
 
-	this->addToSpriteList("tilemaps/Tiles/steinplattenboden.png", Vec2(box.width / 3, box.height * 2 / 6),
-	                      Tiles::road, box);
-	this->addToSpriteList("tilemaps/Tiles/busch1_spring_summer.png", Vec2(box.width * 2 / 3, box.height * 2 / 6),
-	                      Tiles::bush1,
-	                      box);
-	this->addToSpriteList("tilemaps/Tiles/busch2_spring_summer.png", Vec2(0, box.height * 3 / 6), Tiles::bush2, box);
-	this->addToSpriteList("tilemaps/Tiles/busch3_spring_summer.png", Vec2(box.width / 3, box.height * 3 / 6),
-	                      Tiles::bush3,
-	                      box);
-	this->addToSpriteList("tilemaps/Tiles/busch4_spring_summer.png", Vec2(box.width * 2 / 3, box.height * 3 / 6),
-	                      Tiles::bush4,
-	                      box);
-
-	this->addToSpriteList("tilemaps/Tiles/bienenstock1_gross.png", Vec2(0, box.height * 4 / 6), Tiles::beehiveBig1,
-	                      box);
-	this->addToSpriteList("tilemaps/Tiles/bienenstock1_mittel.png", Vec2(box.width / 3, box.height * 4 / 6),
-	                      Tiles::beehiveMiddle1, box);
-	this->addToSpriteList("tilemaps/Tiles/bienenstock1_klein.png", Vec2(box.width * 2 / 3, box.height * 4 / 6),
-	                      Tiles::beehiveSmall1, box);
-
-	addListTo(this);
+		if (i != 0 && i % 3 == 0) k++;
+		i++;
+	}
 }
 
 LayerColor *ItemPanelLayer::getShowRec() {
@@ -106,7 +91,7 @@ void ItemPanelLayer::setTileMap(TileMapLayer* tileMap) {
     _tileMapLayer = tileMap;
 }
 
-void ItemPanelLayer::showHideItemPanel(const Point &touchPos) {
+void ItemPanelLayer::showHideItemPanel(const Vec2 &touchPos) {
 	if (_showRec->getBoundingBox().containsPoint(touchPos - this->getPosition())) {
 		if (_isItemShow) {
 			MoveBy *hide = MoveBy::create(0.2, Vec2(this->getBoundingBox().size.width, 0));
@@ -127,11 +112,11 @@ void ItemPanelLayer::showHideItemPanel(const Point &touchPos) {
 	}
 }
 
-void ItemPanelLayer::touchOnItemPanel(const Point &touchPos) {
+void ItemPanelLayer::touchOnItemPanel(const Vec2 &touchPos) {
 	if (this->getBoundingBox().containsPoint(touchPos)) {
-		this->setDrag(touchPos, this->getPosition());
+		this->setDrag(touchPos - this->getPosition());
 		if (isDrag()) {
-			this->addChild(this->getDrag());
+			this->addChild(this->getDraggedPlaceable()->getSprite());
 		}
 		_isTouch = true;
 	}
@@ -144,24 +129,19 @@ bool ItemPanelLayer::onTouchBegan(Touch *touch, Event *event) {
 }
 
 void ItemPanelLayer::onTouchMoved(Touch *touch, Event *event) {
-    _touchPosition = touch->getLocation();
-
-
     if (isDrag()) {
-        drag->setPosition(_touchPosition - this->getPosition());
+        _draggedSprite->setPosition(touch->getLocation() - this->getPosition());
     }
 }
 
 void ItemPanelLayer::onTouchEnded(void *, void *) {
     auto pos = _touchPosition + this->getParent()->getPosition();
     if (isDrag()) {
-        auto gid = drag->getTag();
+    	if (_tileMapLayer->canPlace(_draggedPlaceable, pos)) {
+    		_tileMapLayer->place(_draggedPlaceable, pos);
+    	}
 
-        if (_tileMapLayer->canPlaceTile(pos, gid)) {
-            _tileMapLayer->placeTile(pos, gid);
-        }
-
-        this->removeChild(this->getDrag());
+        this->removeChild(this->getDraggedSprite());
         this->setIsDrag(false);
     }
     _isTouch = false;

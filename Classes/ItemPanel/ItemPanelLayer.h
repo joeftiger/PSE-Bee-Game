@@ -30,9 +30,9 @@ public:
 
 	void setTileMap(TileMapLayer *tileMap);
 
-	void showHideItemPanel(const Point &touchPos);
+	void showHideItemPanel(const Vec2 &touchPos);
 
-	void touchOnItemPanel(const Point &touchPos);
+	void touchOnItemPanel(const Vec2 &touchPos);
 
     bool onTouchBegan(Touch *touch, Event *event);
 
