@@ -4,15 +4,10 @@
 
 #include "PlaceableSprite.h"
 
-PlaceableSprite *PlaceableSprite::createWith(Sprites::SpriteID id) {
-	auto node = PlaceableSprite::create();
-	node->_id = id;
-	node->_size = Size(2, 2);
-	return nullptr;
-}
 
-bool PlaceableSprite::init() {
-	return Placeable::init();
+PlaceableSprite::PlaceableSprite(Sprites::SpriteID id) {
+	_id = id;
+	_size = Size(2, 2);
 }
 
 const Size &PlaceableSprite::getSize() const {

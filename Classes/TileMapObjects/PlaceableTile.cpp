@@ -4,15 +4,8 @@
 
 #include "PlaceableTile.h"
 
-PlaceableTile *PlaceableTile::createWith(Tiles::TileGID gid) {
-    auto node = PlaceableTile::create();
-    node->_gid = gid;
-    node->addChild(node->getSprite());
-    return node;
-}
-
-bool PlaceableTile::init() {
-    return Placeable::init();
+PlaceableTile::PlaceableTile(Tiles::TileGID gid) {
+    _gid = gid;
 }
 
 bool PlaceableTile::canPlaceOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) {
