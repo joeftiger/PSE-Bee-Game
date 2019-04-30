@@ -10,11 +10,11 @@ PlaceableSprite::PlaceableSprite(Sprites::SpriteID id) {
 }
 
 bool PlaceableSprite::canPlaceOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) {
-	return tileMapLayer->canPlaceSprite(position, 0);
+	return tileMapLayer->canPlaceSprite(position, _id);
 }
 
 void PlaceableSprite::placeOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) {
-	tileMapLayer->placeSprite(position, 0);
+	tileMapLayer->placeSprite(position, _id);
 }
 
 Sprite *PlaceableSprite::getSprite() {
