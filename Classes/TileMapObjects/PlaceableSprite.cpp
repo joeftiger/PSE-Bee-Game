@@ -7,16 +7,21 @@
 
 PlaceableSprite::PlaceableSprite(Sprites::SpriteID id) {
 	_id = id;
+	_size = Size(2, 2);
+}
+
+const Size &PlaceableSprite::getSize() const {
+    return _size;
 }
 
 bool PlaceableSprite::canPlaceOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) {
-	return tileMapLayer->canPlaceSprite(position, _id);
+	return tileMapLayer->canPlaceSprite(position, _size, _id);
 }
 
 void PlaceableSprite::placeOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) {
-	tileMapLayer->placeSprite(position, _id);
+	tileMapLayer->placeSprite(position, _size, _id);
 }
 
-Sprite *PlaceableSprite::getSprite() {
+Sprite *PlaceableSprite::getSprite() const {
 	return Sprites::getSpriteOf(_id);
 }
