@@ -5,12 +5,9 @@
 #ifndef PROJ_ANDROID_SAVEDELETECONFIRMATION_H
 #define PROJ_ANDROID_SAVEDELETECONFIRMATION_H
 
-#include "MainMenu/MainMenuScene.h"
-#include "OptionsScene.h"
-#include "SaveLoad/SaveLoad.h"
+
 #include "cocos2d.h"
-#include "ui/UIWidget.h"
-#include "ui/CocosGUI.h"
+
 
 
 using namespace cocos2d;

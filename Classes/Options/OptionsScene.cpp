@@ -3,6 +3,10 @@
 //
 
 #include "OptionsScene.h"
+#include "SaveDeleteConfirmation.h"
+#include "MainMenu/MainMenuScene.h"
+#include "ui/UIWidget.h"
+#include "ui/CocosGUI.h"
 
 using namespace cocos2d;
 using namespace cocos2d::ui;

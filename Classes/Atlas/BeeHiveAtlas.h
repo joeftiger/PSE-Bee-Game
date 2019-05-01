@@ -8,10 +8,9 @@
 #include "cocos2d.h"
 #include "Observer.h"
 #include "Game/BeeHive.h"
-#include "Game/TileMapLayer.h"
 #include <HeaderFiles/DEFINITIONS.h>
-#include <json/stringbuffer.h>
-#include <json/writer.h>
+#include "Game/TileMapLayer.h"
+
 
 class BeeHiveAtlas : public cocos2d::Node, public Observable, public Observer, public Restorable {
 private:

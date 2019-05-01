@@ -3,6 +3,8 @@
 //
 
 #include "BeeHiveAtlas.h"
+#include <json/stringbuffer.h>
+#include <json/writer.h>
 
 BeeHiveAtlas *BeeHiveAtlas::_instance = nullptr;
 

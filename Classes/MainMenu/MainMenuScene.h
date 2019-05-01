@@ -2,9 +2,7 @@
 #ifndef __MAINMENU_SCENE_H__
 #define __MAINMENU_SCENE_H__
 
-#include "Game/GameScene.h"
-#include "About/AboutScene.h"
-#include "Options/OptionsScene.h"
+
 #include "cocos2d.h"
 #include "ui/UIWidget.h"
 

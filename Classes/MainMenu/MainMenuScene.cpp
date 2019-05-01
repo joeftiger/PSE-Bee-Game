@@ -1,5 +1,8 @@
 
 #include "MainMenuScene.h"
+#include "Game/GameScene.h"
+#include "About/AboutScene.h"
+#include "Options/OptionsScene.h"
 
 Scene *MainMenu::scene() { return MainMenu::create(); }
 
