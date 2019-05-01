@@ -14,7 +14,7 @@ bool BeeHive::invariant() {
 	return true;
 }
 
-BeeHive::BeeHive() : BeeHive(20000) {}
+BeeHive::BeeHive() : BeeHive(5000) {}
 
 BeeHive::BeeHive(int bees) : BeeHive(bees, 0) {}
 
@@ -65,8 +65,8 @@ float BeeHive::takeRawHoney(float amount) {
 }
 
 void BeeHive::killVarroa() {
-    _varoaAlive = 0;
-    _beesAlive -= 1000;
+	_varoaAlive = (int) max(0.0f, _varoaAlive / 20.0f);
+    _beesAlive = (int) max(0.0f, _beesAlive * 0.9f);
 
 }
 
