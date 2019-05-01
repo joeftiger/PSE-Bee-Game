@@ -116,15 +116,14 @@ void ItemPanelLayer::touchOnItemPanel(const Vec2 &touchPos) {
 	if (this->getBoundingBox().containsPoint(touchPos)) {
 		this->setDrag(touchPos - this->getPosition());
 		if (isDrag()) {
-			this->addChild(this->getDraggedPlaceable()->getSprite());
+			this->addChild(_draggedSprite);
 		}
 		_isTouch = true;
 	}
 }
 
 bool ItemPanelLayer::onTouchBegan(Touch *touch, Event *event) {
-    _touchPosition = touch->getLocation();
-    this->showHideItemPanel(_touchPosition);
+    this->showHideItemPanel(touch->getLocation());
     return _isTouch;
 }
 
@@ -134,8 +133,8 @@ void ItemPanelLayer::onTouchMoved(Touch *touch, Event *event) {
     }
 }
 
-void ItemPanelLayer::onTouchEnded(void *, void *) {
-    auto pos = _touchPosition + this->getParent()->getPosition();
+void ItemPanelLayer::onTouchEnded(Touch *touch, void *) {
+    auto pos = touch->getLocation() + this->getParent()->getPosition();
     if (isDrag()) {
     	if (_tileMapLayer->canPlace(_draggedPlaceable, pos)) {
     		_tileMapLayer->place(_draggedPlaceable, pos);

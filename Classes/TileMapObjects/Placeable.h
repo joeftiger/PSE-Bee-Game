@@ -20,7 +20,7 @@ public:
 
 	virtual void placeOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) = 0;
 
-	virtual cocos2d::Sprite *getSprite() const = 0;
+	virtual cocos2d::Sprite *getSprite() = 0;
 };
 
 #endif //PSE_BEE_GAME_PLACEABLE_H

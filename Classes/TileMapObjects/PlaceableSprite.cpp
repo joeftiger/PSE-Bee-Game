@@ -22,6 +22,6 @@ void PlaceableSprite::placeOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &positio
 	tileMapLayer->placeSprite(position, _size, _id);
 }
 
-Sprite *PlaceableSprite::getSprite() const {
+Sprite *PlaceableSprite::getSprite() {
 	return Sprites::getSpriteOf(_id);
 }

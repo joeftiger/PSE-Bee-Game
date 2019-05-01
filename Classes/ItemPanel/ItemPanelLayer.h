@@ -38,7 +38,7 @@ public:
 
     void onTouchMoved(Touch *touch, Event *event);
 
-    void onTouchEnded(void *, void *);
+    void onTouchEnded(Touch *touch, void *);
 
 	CREATE_FUNC(ItemPanelLayer);
 };

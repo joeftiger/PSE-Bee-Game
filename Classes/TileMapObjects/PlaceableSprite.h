@@ -23,7 +23,7 @@ public:
 
 	void placeOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) override;
 
-	Sprite *getSprite() const override;
+	Sprite *getSprite() override;
 };
 
 #endif //PSE_BEE_GAME_PLACEABLESPRITE_H
