@@ -140,6 +140,7 @@ void BeeHivePopup::initTouch() {
 BeeHivePopup *BeeHivePopup::createWith(BeeHive *beeHive) {
     auto popup = BeeHivePopup::create();
     popup->_beeHive = beeHive;
+    popup->update(0);       // loads information. Must be here.
     return popup;
 }
 
