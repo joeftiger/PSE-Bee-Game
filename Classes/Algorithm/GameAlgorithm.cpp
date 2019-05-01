@@ -29,10 +29,10 @@ float GameAlgorithm::honeyProduction(int bees) {
     return honey;
 }
 
-int GameAlgorithm::nextBees(int bees, int varroa, int full) {
+int GameAlgorithm::nextBees(int bees, int varroa) {
     int newBees;
 
-    if(Time::getInstance()->getMonth() <= 7 && Time::getInstance()->getMonth() > 4 && !full) {
+    if(Time::getInstance()->getMonth() <= 7 && Time::getInstance()->getMonth() > 4) {
         newBees += BEES_PER_UPDATE;
     }
 

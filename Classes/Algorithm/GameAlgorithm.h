@@ -31,7 +31,7 @@ public:
      */
     float honeyProduction(int bees);
 
-    int nextBees(int bees, int varroa, int full);
+    int nextBees(int bees, int varroa);
     int nextVarroa(int varroa);
 
     void setBeeHives();
