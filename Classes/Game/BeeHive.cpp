@@ -26,7 +26,7 @@ BeeHive::BeeHive(int bees, int varoa) {
 }
 
 bool BeeHive::isEmpty() {
-	return _beesAlive == 0;
+	return _beesAlive <= 0;
 }
 
 bool BeeHive::isFull() {
