@@ -59,23 +59,28 @@ bool HoneyMover::onTouchBegan(Touch *touch, Event *event) {
 }
 
 void HoneyMover::onTouchMoved(Touch *touch, Event *event) {
-    this->getChildByName("sprite")->setPosition(Vec2(touch->getLocation()));
+    if(this->getChildByName("sprite")) {
+        this->getChildByName("sprite")->setPosition(Vec2(touch->getLocation()));
+    }
 
 }
 
 void HoneyMover::onTouchEnded(Touch *touch, void *) {
     auto extractorAtlas = HoneyExtractorAtlas::getInstance();
+    auto beeAtlas = BeeHiveAtlas::getInstance();
     auto pos = _tileMapLayer->getTilePosition(touch->getLocation() + this->getParent()->getPosition());
     if(extractorAtlas->hasHoneyExtractorAt(pos)) {
 
         _extractor = extractorAtlas->getHoneyExtractorAt(pos);
         _extractor->addHoneyToExtractor(_beeHive->takeRawHoney());
+        interactAt(pos);
+    } else if (beeAtlas->hasBeeHiveAt(pos)) {
+        interactAt(pos);
     }
     if(this->getChildByName("sprite")) {
         this->removeChildByName("sprite");
     }
 
-    interactAt(pos);
 }
 
 void HoneyMover::interactAt(const Vec2& pos) {
