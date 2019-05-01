@@ -7,6 +7,7 @@
 #include "ItemPanel/ItemPanelLayer.h"
 #include "AppDelegate.h"
 #include "Player.h"
+#include "Interaction/HoneyExtractorPopup.h"
 
 
 using namespace cocos2d;
@@ -124,11 +125,18 @@ void GameScene::interactAt(const Vec2& pos) {
 //        i->interact();
 
     } else if(HoneyExtractorAtlas::getInstance()->hasHoneyExtractorAt(selectTilePos)) {
+		
+		auto honeyExtractor = HoneyExtractorAtlas::getInstance()->getHoneyExtractorAt(selectTilePos);
+		auto popup = HoneyExtractorPopup::createWith(honeyExtractor);
+		container->addChild(popup, 100);
+
+		/*
 		auto honeyExtractor = HoneyExtractorAtlas::getInstance()->getHoneyExtractorAt(selectTilePos);
 		Interacter *i = Interacter::create();
 		this->addChild(i, 100);
 		i->runWith(honeyExtractor);
 		i->interact();
+		*/
     }
 }
 

@@ -1,0 +1,110 @@
+#include "HoneyExtractorPopup.h"
+#include "HeaderFiles/DEFINITIONS.h"
+#include <Resources/Tiles.h>
+#include <Resources/SpriteContainer.h>
+#include "ui/CocosGUI.h"
+#include "Game/Player.h"
+
+void HoneyExtractorPopup::initBackground() {
+	auto visibleSize = Director::getInstance()->getOpenGLView()->getVisibleSize();
+	auto size = visibleSize * 0.75;
+
+	auto background = Sprite::create();
+	background->setTextureRect(Rect(0, 0, size.width, size.height));    // background size
+	background->setColor(Color3B(255, 243, 190));
+	background->setAnchorPoint(Vec2(0.5, 0.5));
+
+	this->addChild(background, -1, "background");
+}
+
+void HoneyExtractorPopup::initImage() {
+	auto image = SpriteContainer::getInstance()->getSpriteOf(Sprites::SpriteID::honey_extractor);
+	auto background = this->getChildByName("background");
+	auto box = background->getContentSize();
+
+	image->setAnchorPoint(Vec2(0, 0.5));
+	image->setPosition(box.width / 10, box.height * 2 / 3);
+	image->setScale(0.3f);
+	background->addChild(image, 1, "image");
+}
+
+void HoneyExtractorPopup::initInfoPanel() {
+}
+
+void HoneyExtractorPopup::initButtons() {
+	auto background = this->getChildByName("background");
+	auto box = background->getContentSize();
+
+	auto closeButton = ui::Button::create("menu/no.png");
+
+	closeButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
+		switch (type) {
+		case ui::Widget::TouchEventType::BEGAN:
+			break;
+		case ui::Widget::TouchEventType::ENDED:
+			this->removeFromParentAndCleanup(true);
+			break;
+		}
+	});
+	closeButton->setScale(0.2f);
+	closeButton->setPosition(Vec2(box.width * 0.9f, box.height * 0.9f));
+
+	background->addChild(closeButton);
+
+	auto addHoneyButton = ui::Button::create("menu/yes.png");
+
+	addHoneyButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
+		switch (type) {
+		case ui::Widget::TouchEventType::BEGAN:
+			break;
+		case ui::Widget::TouchEventType::ENDED:
+			//TODO: Add honey
+			break;
+		}
+	});
+
+	addHoneyButton->setScale(0.2f);
+	addHoneyButton->setPosition(Vec2(box.width * 0.1f, box.height * 0.1f));
+	background->addChild(addHoneyButton);
+}
+
+void HoneyExtractorPopup::initTouch() {
+	auto listener = EventListenerTouchOneByOne::create();
+
+	listener->setSwallowTouches(true);
+	listener->onTouchBegan = CC_CALLBACK_2(HoneyExtractorPopup::onTouchBegan, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this->getChildByName("background"));
+}
+
+void HoneyExtractorPopup::update(float dt)
+{
+}
+
+HoneyExtractorPopup * HoneyExtractorPopup::createWith(HoneyExtractor * honeyExtractor) {
+	auto popup = HoneyExtractorPopup::create();
+	popup->_honeyExtractor = honeyExtractor;
+	popup->update(0);
+	return popup;
+}
+
+bool HoneyExtractorPopup::init() {
+	if (!Node::init()) return false;
+
+	auto visibleSize = Director::getInstance()->getOpenGLView()->getVisibleSize();
+	this->setAnchorPoint(Vec2(0.5, 0.5));
+	this->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+
+	initBackground();
+	initImage();
+	initButtons();
+	initTouch();
+	initInfoPanel();
+
+	this->schedule(schedule_selector(HoneyExtractorPopup::update), 1);
+
+	return true;
+}
+
+bool HoneyExtractorPopup::onTouchBegan(Touch * touch, Event * event) {
+	return true;
+}
