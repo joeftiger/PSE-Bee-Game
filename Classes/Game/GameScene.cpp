@@ -48,6 +48,7 @@ bool GameScene::init() {
 	// getInstance() subscribes to TileMapAtlas, if not called already
 	Player::getInstance();
 	tileMapAtlas->notify(_tileMapLayer);
+	honeyExtractorAtlas->notify(_tileMapLayer);
 
 	time = Time::createInstance();
 	this->addChild(time);
