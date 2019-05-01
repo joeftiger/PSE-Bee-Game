@@ -3,6 +3,11 @@
 //
 
 #include "SaveDeleteConfirmation.h"
+#include "MainMenu/MainMenuScene.h"
+#include "OptionsScene.h"
+#include "SaveLoad/SaveLoad.h"
+#include "ui/UIWidget.h"
+#include "ui/CocosGUI.h"
 
 using namespace cocos2d;
 using namespace cocos2d::ui;
@@ -30,10 +35,13 @@ bool SaveDeleteConfirmation::init() {
     // all scaling and position through trial-and-error
     auto yesButton = MenuItemImage::create("menu/yes.png", "menu/yes.png",
                                             CC_CALLBACK_1(SaveDeleteConfirmation::onYesClick, this));
+    yesButton->setScale(0.5f);
     yesButton->setPosition(Vec2(origin.x - 220, origin.y - 108));
+
 
     auto noButton = MenuItemImage::create("menu/no.png", "menu/no.png",
                                                 CC_CALLBACK_1(SaveDeleteConfirmation::onNoClick, this));
+    noButton->setScale(0.5f);
     noButton->setPosition(Vec2(origin.x + 220, origin.y - 108));
 
 
@@ -49,18 +57,14 @@ bool SaveDeleteConfirmation::init() {
 	return true;
 }
 
-// when clicking on no - replace scene with options scene
-// Delay: 0.2 seconds       Transition Colour: White
 void SaveDeleteConfirmation::onNoClick(cocos2d::Ref *sender) {
-	SaveLoad::deleteEverything();
-    cocos2d::log("deleteEverything() called");
 	Director::getInstance()->replaceScene(
-			TransitionFade::create(0.2f, OptionsScene::createScene(), Color3B(255, 255, 255)));
+			TransitionFade::create(0.1f, OptionsScene::createScene(), Color3B(255, 255, 255)));
 }
 
-// when clicking on  yes, delete save and go back to options scene
-// Delay: 0.2 seconds       Colour: White
 void SaveDeleteConfirmation::onYesClick(cocos2d::Ref *sender) {
+	SaveLoad::deleteEverything();
+	cocos2d::log("deleteEverything() called");
 	Director::getInstance()->replaceScene(
-			TransitionFade::create(0.2f, MainMenu::scene(), Color3B(255, 255, 255)));
+			TransitionFade::create(0.1f, MainMenu::scene(), Color3B(255, 255, 255)));
 }

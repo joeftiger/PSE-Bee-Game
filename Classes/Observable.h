@@ -18,8 +18,8 @@ protected:
 	 * Should notify all observers of a change in this observable.
 	 */
 	const void notifyObservers() {
-		for (Observer &o : _observers) {
-			o.notify(this);
+		for (const auto o : _observers) {
+			o.get().notify(this);
 		}
 	}
 

@@ -2,9 +2,9 @@
 // Created by julius on 22.03.19.
 //
 
-#include <cassert>
+
 #include "Player.h"
-#include "BeeHiveAtlas.h"
+
 
 Player *Player::_instance = nullptr;
 
@@ -21,15 +21,21 @@ Player *Player::getInstance() {
 }
 
 float Player::totalRawHoney() {
-	float total = 0.0f;
+	float totalRawHoney = 0.0f;
 	for (auto bh : _beeHives) {
-		total += bh->rawHoney();
+		totalRawHoney += bh->rawHoney();
 	}
-	return total;
+	return totalRawHoney;
+}
+
+int Player::returnTotalMoney() {
+	totalMoney= Wallet::getInstance()->returnTotalMoney();
+	return totalMoney;
 }
 
 void Player::notify(void *pVoid) {
 	BeeHiveAtlas::getInstance()->getBeeHives(_beeHives);
+	HoneyExtractorAtlas::getInstance()->getHoneyExtractors(_honeyExtractors);
 }
 
 std::unordered_map<Placeable, size_t> *Player::getInventory() {

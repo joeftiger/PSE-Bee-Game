@@ -2,12 +2,15 @@
 // Created by Uro on 3/30/2019.
 //
 
-#include <HeaderFiles/TileGID.h>
-#include <HeaderFiles/CHILD_NAMES.h>
+#include <Resources/Tiles.h>
+#include <TileMapObjects/PlaceableTile.h>
+#include <Resources/Sprites.h>
+#include <TileMapObjects/PlaceableSprite.h>
 #include "ItemPanelLayer.h"
 #include "TouchUtil.h"
 #include "HeaderFiles/DEFINITIONS.h"
 #include "MainMenu/MainMenuScene.h"
+#include "Game/TileMapLayer.h"
 
 using namespace cocos2d;
 
@@ -20,6 +23,13 @@ bool ItemPanelLayer::init() {
 	}
 
 	Size visibleSize = Director::getInstance()->getWinSize();
+
+    auto listener = EventListenerTouchOneByOne::create();
+    listener->setSwallowTouches(true);
+    listener->onTouchBegan = CC_CALLBACK_2(ItemPanelLayer::onTouchBegan, this);
+    listener->onTouchMoved = CC_CALLBACK_2(ItemPanelLayer::onTouchMoved, this);
+    listener->onTouchEnded = CC_CALLBACK_2(ItemPanelLayer::onTouchEnded, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	//Item Panel
 	this->setColor(Color3B::WHITE);
@@ -40,74 +50,98 @@ bool ItemPanelLayer::init() {
 void ItemPanelLayer::initializeItemPanel() {
 	auto box = this->getBoundingBox().size;
 
-	this->addToSpriteList("tilemaps/Tiles/blumen1_spring_summer.png", Vec2(0, box.height / 6), TileGID::flower1, box);
-	this->addToSpriteList("tilemaps/Tiles/blumen2_spring_summer.png", Vec2(box.width / 3, box.height / 6),
-	                      TileGID::flower2,
-	                      box);
-	this->addToSpriteList("tilemaps/Tiles/blumen3_spring_summer.png", Vec2(box.width * 2 / 3, box.height / 6),
-	                      TileGID::flower3,
-	                      box);
-	this->addToSpriteList("tilemaps/Tiles/blumen4_spring_summer.png", Vec2(0, box.height * 2 / 6), TileGID::flower4,
-	                      box);
+    _placeables.emplace_back(new PlaceableTile(Tiles::beehiveSmall1));
+	_placeables.emplace_back(new PlaceableTile(Tiles::beehiveMiddle1));
+	_placeables.emplace_back(new PlaceableTile(Tiles::beehiveBig1));
+	_placeables.emplace_back(new PlaceableTile(Tiles::flower1));
+	_placeables.emplace_back(new PlaceableTile(Tiles::flower2));
+	_placeables.emplace_back(new PlaceableTile(Tiles::flower3));
+	_placeables.emplace_back(new PlaceableTile(Tiles::flower4));
+	_placeables.emplace_back(new PlaceableTile(Tiles::bush1));
+	_placeables.emplace_back(new PlaceableTile(Tiles::road));
+	_placeables.emplace_back(new PlaceableSprite(Sprites::tree_1));
+	_placeables.emplace_back(new PlaceableSprite(Sprites::tree_2));
+	_placeables.emplace_back(new PlaceableSprite(Sprites::tree_4));
 
-	this->addToSpriteList("tilemaps/Tiles/steinplattenboden.png", Vec2(box.width / 3, box.height * 2 / 6),
-	                      TileGID::road, box);
-	this->addToSpriteList("tilemaps/Tiles/busch1_spring_summer.png", Vec2(box.width * 2 / 3, box.height * 2 / 6),
-	                      TileGID::bush1,
-	                      box);
-	this->addToSpriteList("tilemaps/Tiles/busch2_spring_summer.png", Vec2(0, box.height * 3 / 6), TileGID::bush2, box);
-	this->addToSpriteList("tilemaps/Tiles/busch3_spring_summer.png", Vec2(box.width / 3, box.height * 3 / 6),
-	                      TileGID::bush3,
-	                      box);
-	this->addToSpriteList("tilemaps/Tiles/busch4_spring_summer.png", Vec2(box.width * 2 / 3, box.height * 3 / 6),
-	                      TileGID::bush4,
-	                      box);
+	auto width = 0;
+	auto height = 0;
+	for (auto p : _placeables) {
+		auto x = (width % 3) * box.width / 3;
+		auto y = (4 - (height % 4)) * box.height / 6;
+		auto pos = Vec2(x, y);
 
-	this->addToSpriteList("tilemaps/Tiles/bienenstock1_gross.png", Vec2(0, box.height * 4 / 6), TileGID::beehiveBig,
-	                      box);
-	this->addToSpriteList("tilemaps/Tiles/bienenstock1_mittel.png", Vec2(box.width / 3, box.height * 4 / 6),
-	                      TileGID::beehiveMiddle, box);
-	this->addToSpriteList("tilemaps/Tiles/bienenstock1_klein.png", Vec2(box.width * 2 / 3, box.height * 4 / 6),
-	                      TileGID::beehiveSmall, box);
+		auto sprite = p->getSprite();
+		sprite->setPosition(pos);
+		sprite->setAnchorPoint(Vec2(0, 0));
+		sprite->setScale(box.width / (sprite->getBoundingBox().size.width * 3));
+		this->addChild(sprite);
 
-	addListTo(this);
+		_spritesToPlaceables.emplace(sprite, p);
+
+		width++;
+		if (width % 3 == 0) height++;
+	}
 }
 
 LayerColor *ItemPanelLayer::getShowRec() {
 	return _showRec;
 }
 
-void ItemPanelLayer::showHideItemPanel(const Point &touchPos) {
-	if (this->getShowRec()->getBoundingBox().containsPoint(touchPos - this->getPosition())) {
+void ItemPanelLayer::setTileMap(TileMapLayer* tileMap) {
+    _tileMapLayer = tileMap;
+}
+
+void ItemPanelLayer::showHideItemPanel(const Vec2 &touchPos) {
+	if (_showRec->getBoundingBox().containsPoint(touchPos - this->getPosition())) {
 		if (_isItemShow) {
 			MoveBy *hide = MoveBy::create(0.2, Vec2(this->getBoundingBox().size.width, 0));
 			this->runAction(hide);
 			_isItemShow = false;
 
-			auto tileMapLayer = (TileMapLayer *) Director::getInstance()->getRunningScene()->getChildByName(
-					TILE_MAP_LAYER_NAME);
-			tileMapLayer->showObstructions(false);
+			_tileMapLayer->showObstructions(false);
 		} else {
 			MoveBy *show = MoveBy::create(0.2, Vec2(-this->getBoundingBox().size.width, 0));
 			this->runAction(show);
 			_isItemShow = true;
-
-			auto tileMapLayer = (TileMapLayer *) Director::getInstance()->getRunningScene()->getChildByName(
-					TILE_MAP_LAYER_NAME);
-			assert(tileMapLayer != nullptr);
-			tileMapLayer->showObstructions(true);
+			_tileMapLayer->showObstructions(true);
 		}
+		_isTouch = true;
 	}
 	if (_isItemShow) {
 		touchOnItemPanel(touchPos);
 	}
 }
 
-void ItemPanelLayer::touchOnItemPanel(const Point &touchPos) {
+void ItemPanelLayer::touchOnItemPanel(const Vec2 &touchPos) {
 	if (this->getBoundingBox().containsPoint(touchPos)) {
-		this->setDrag(touchPos, this->getPosition());
-		if (this->isDrag()) {
-			this->addChild(this->getDrag());
+		this->setDrag(touchPos - this->getPosition());
+		if (isDrag()) {
+			this->addChild(_draggedSprite);
 		}
+		_isTouch = true;
 	}
+}
+
+bool ItemPanelLayer::onTouchBegan(Touch *touch, Event *event) {
+    this->showHideItemPanel(touch->getLocation());
+    return _isTouch;
+}
+
+void ItemPanelLayer::onTouchMoved(Touch *touch, Event *event) {
+    if (isDrag()) {
+        _draggedSprite->setPosition(touch->getLocation() - this->getPosition());
+    }
+}
+
+void ItemPanelLayer::onTouchEnded(Touch *touch, void *) {
+    auto pos = touch->getLocation() + this->getParent()->getPosition();
+    if (isDrag()) {
+    	if (_tileMapLayer->canPlace(_draggedPlaceable, pos)) {
+    		_tileMapLayer->place(_draggedPlaceable, pos);
+    	}
+
+        this->removeChild(this->getDraggedSprite());
+        this->setIsDrag(false);
+    }
+    _isTouch = false;
 }

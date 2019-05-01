@@ -4,7 +4,7 @@
 
 #include "PlaceableTile.h"
 
-PlaceableTile::PlaceableTile(TileGID gid) {
+PlaceableTile::PlaceableTile(Tiles::TileGID gid) {
     _gid = gid;
 }
 
@@ -14,4 +14,8 @@ bool PlaceableTile::canPlaceOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &positi
 
 void PlaceableTile::placeOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) {
     tileMapLayer->placeTile(position, _gid);
+}
+
+Sprite *PlaceableTile::getSprite() {
+    return Tiles::getSpriteOf(_gid);
 }

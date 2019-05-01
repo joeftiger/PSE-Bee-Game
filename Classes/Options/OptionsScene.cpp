@@ -3,6 +3,10 @@
 //
 
 #include "OptionsScene.h"
+#include "SaveDeleteConfirmation.h"
+#include "MainMenu/MainMenuScene.h"
+#include "ui/UIWidget.h"
+#include "ui/CocosGUI.h"
 
 using namespace cocos2d;
 using namespace cocos2d::ui;
@@ -29,11 +33,11 @@ bool OptionsScene::init() {
 	this->addChild(title, 1);
 
 	// text to ask for use of SD Textures
-	// TODO Add switch function for textures (Brian 18.4)
+	// TODO Add switch function for textures (Brian 18.4) and then make it visible again via addChild
 	auto optionsText = Label::createWithTTF("Use SD Textures? (Not implemented yet)", "fonts/ReemKufi-Regular.ttf", 24);
 	optionsText->setPosition(Vec2(origin.x + visibleSize.width / 2,
 	                                 origin.y + 40 + 0.5 * visibleSize.height - title->getContentSize().height));
-	this->addChild(optionsText, 1);
+	// this->addChild(optionsText, 1);
 
 
     auto labelDelete = Label::createWithTTF("Press below to reset your save", "fonts/ReemKufi-Regular.ttf", 28);
@@ -73,8 +77,7 @@ bool OptionsScene::init() {
 }
 
 // upon presseing the rest button, delete the save and go back to main menu
-// TODO Add confirmation / warning (Brian 18.4)
 void OptionsScene::onDeleteSaveClick(cocos2d::Ref *sender) {
 	Director::getInstance()->replaceScene(
-			TransitionFade::create(0.4f, SaveDeleteConfirmation::create(), Color3B(255, 255, 255)));
+			TransitionFade::create(0.2f, SaveDeleteConfirmation::create(), Color3B(255, 255, 255)));
 }

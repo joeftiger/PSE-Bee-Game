@@ -2,9 +2,7 @@
 // Created by julius on 25.03.19.
 //
 
-#include <HeaderFiles/CHILD_NAMES.h>
 #include "BeeHiveAtlas.h"
-#include "TileMapLayer.h"
 #include <json/stringbuffer.h>
 #include <json/writer.h>
 
@@ -49,7 +47,7 @@ void BeeHiveAtlas::notify(void *observable) {
 	for (const auto &pos : positions) {
 		if (!hasBeeHiveAt(pos)) {
 			cocos2d::log("BeeHiveAtlas:\tCreating beehive at (%i, %i)", (int) pos.x, (int) pos.y);
-			auto hive = new BeeHive();
+			auto hive = new BeeHive(20000);
 			hive->setPosition(pos);
 			_beeHives.emplace(pos, hive);
 
@@ -67,6 +65,10 @@ void BeeHiveAtlas::updateBeeHives(float) {
 	for (auto const &pair : _beeHives) {
 		pair.second->update();
 	}
+}
+
+void BeeHiveAtlas::clear() {
+	_beeHives.clear();
 }
 
 void BeeHiveAtlas::toJSON(rapidjson::Document &doc) {

@@ -1,7 +1,7 @@
-#include <HeaderFiles/CHILD_NAMES.h>
 #include "TileMapLayer.h"
 #include "HeaderFiles/DEFINITIONS.h"
-#include "HeaderFiles/TileGID.h"
+#include "Resources/Tiles.h"
+#include "Resources/Sprites.h"
 #include "SaveLoad/SaveLoad.h"
 
 bool TileMapLayer::init() {
@@ -43,8 +43,8 @@ ssize_t TileMapLayer::getFlowerCount() {
 			auto coordinate = Vec2(x, y);
 			auto gid = _objectLayer->getTileGIDAt(coordinate);
 
-			if (gid == TileGID::flower1 || gid == TileGID::flower2 || gid == TileGID::flower3 ||
-			    gid == TileGID::flower4) {
+			if (gid == Tiles::flower1 || gid == Tiles::flower2 || gid == Tiles::flower3 ||
+			    gid == Tiles::flower4) {
 				count++;
 			}
 		}
@@ -61,14 +61,31 @@ std::vector<cocos2d::Vec2> TileMapLayer::getBeeHives() {
 			auto coordinate = Vec2(x, y);
 			auto gid = _objectLayer->getTileGIDAt(coordinate);
 
-			if (gid == TileGID::beehiveSmall ||
-			    gid == TileGID::beehiveMiddle ||
-			    gid == TileGID::beehiveBig) {
+			if (gid == Tiles::beehiveSmall1 ||
+			    gid == Tiles::beehiveMiddle1 ||
+			    gid == Tiles::beehiveBig1) {
 				beeHives.push_back(coordinate);
 			}
 		}
 	}
 	return beeHives;
+}
+
+std::vector<cocos2d::Vec2> TileMapLayer::getHoneyExtractors() {
+	auto size = _objectLayer->getLayerSize();
+	std::vector<cocos2d::Vec2> honeyExtractors;
+
+	for (auto y = 0; y < size.height; y++) {
+		for (auto x = 0; x < size.width; x++) {
+			auto coordinate = Vec2(x, y);
+			auto gid = _objectLayer->getTileGIDAt(coordinate);
+	//TODO Change this to the honey extractor tile / sprite
+			if (gid == Tiles::flower3) {
+				honeyExtractors.push_back(coordinate);
+			}
+		}
+	}
+	return honeyExtractors;
 }
 
 TMXTiledMap *TileMapLayer::getMap() {
@@ -127,41 +144,73 @@ Vec2 TileMapLayer::inTileMapBounds(const Vec2 &pos) {
 	}
 }
 
-bool TileMapLayer::canPlace(Placeable &placeable, Vec2 &position) {
-	return placeable.canPlaceOn(this, position);
+bool TileMapLayer::canPlace(Placeable *placeable, Vec2 &position) {
+	return placeable->canPlaceOn(this, position);
 }
 
-void TileMapLayer::place(Placeable &placeable, Vec2 &position) {
+void TileMapLayer::place(Placeable *placeable, Vec2 &position) {
 	assert(canPlace(placeable, position));
-	placeable.placeOn(this, position);
+	placeable->placeOn(this, position);
 }
 
 bool TileMapLayer::canPlaceTile(const Vec2 &position, int gid) {
 	auto pos = getTilePosition(position);
 
-	return _obstructionLayer->getTileGIDAt(pos) == TileGID::no_obstruction;
+	return _obstructionLayer->getTileGIDAt(pos) == Tiles::no_obstruction;
 }
 
-void TileMapLayer::placeTile(const Vec2 &position, const int gid) {
+void TileMapLayer::placeTile(const Vec2 &position, const int &gid) {
 	auto pos = getTilePosition(position);
 	_objectLayer->setTileGID(gid, pos); //1 = flower; 2,3,4,5 = bush1,2,3,4; 6 = grass; 7 = road
 
-	if (gid == TileGID::beehiveSmall ||
-	    gid == TileGID::beehiveMiddle ||
-	    gid == TileGID::beehiveBig) {
+	if (gid == Tiles::beehiveSmall1 ||
+	    gid == Tiles::beehiveMiddle1 ||
+	    gid == Tiles::beehiveBig1) {
 
-		_obstructionLayer->setTileGID(TileGID::obstruction, pos);
+		_obstructionLayer->setTileGID(Tiles::obstruction, pos);
 
+		notifyObservers();
+	}
+	// TODO: Implement correct honey extractor gid
+	else if (gid == Tiles::flower3) {
 		notifyObservers();
 	}
 }
 
-bool TileMapLayer::canPlaceSprite(const Vec2 &position, int id) {
-	return false;
+bool TileMapLayer::canPlaceSprite(const Vec2 &position, const Size &size, Sprites::SpriteID id) {
+	auto pos = getTilePosition(position);
+
+	for (auto x = 0; x < size.width; x++) {
+		for (auto y = 0; y < size.height; y++) {
+			auto tilePos = Vec2(pos.x - x, pos.y - y);
+
+			if (tilePos.x < 0 || tilePos.y < 0) {
+				return false;
+			}
+			if (_obstructionLayer->getTileGIDAt(tilePos) == Tiles::obstruction) {
+				return false;
+			}
+		}
+	}
+	return true;
 }
 
-void TileMapLayer::placeSprite(const Vec2 &position, int id) {
-	auto pos = _objectLayer->convertToNodeSpace(_objectLayer->getTileAt(position)->getPosition());
+void TileMapLayer::placeSprite(const Vec2 &position, const Size &size, Sprites::SpriteID id) {
+	auto pos = getTilePosition(position);
+
+	for (auto x = 0; x < size.width; x++) {
+		for (auto y = 0; y < size.height; y++) {
+			auto tilePos = Vec2(pos.x - x, pos.y - y);
+			_obstructionLayer->setTileGID(Tiles::obstruction, tilePos);
+			_objectLayer->setTileGID(Tiles::grass, tilePos);
+		}
+	}
+
+	auto sprite = Sprites::getSpriteOf(id);
+	sprite->setScale(MAP_SCALE_SD);
+	sprite->setPosition(position);
+	sprite->setAnchorPoint(Vec2(0.5, 0));
+	this->addChild(sprite, pos.x + pos.y);
 }
 
 void TileMapLayer::showObstructions(bool visible) {
@@ -185,6 +234,10 @@ void TileMapLayer::loadMap() {
 		SaveLoad::loadBeehives();
 	}
 
+	if (SaveLoad::honeyExtractorSaveExists()) {
+        SaveLoad::loadHoneyExtractors();
+    }
+
 	initObstructionLayer();
 }
 
@@ -196,17 +249,13 @@ void TileMapLayer::initObstructionLayer() {
 			auto pos = Vec2(x, y);
 			auto gid = _objectLayer->getTileGIDAt(pos);
 
-			if (gid == TileGID::beehiveSmall ||
-			    gid == TileGID::beehiveMiddle ||
-			    gid == TileGID::beehiveBig) {
-				_obstructionLayer->setTileGID(TileGID::obstruction, pos);
+			if (gid == Tiles::beehiveSmall1 ||
+			    gid == Tiles::beehiveMiddle1 ||
+			    gid == Tiles::beehiveBig1) {
+				_obstructionLayer->setTileGID(Tiles::obstruction, pos);
 			} else {
-				_obstructionLayer->setTileGID(TileGID::no_obstruction, pos);
+				_obstructionLayer->setTileGID(Tiles::no_obstruction, pos);
 			}
 		}
 	}
-}
-
-void TileMapLayer::booleanInverter() {
-	useSD = !useSD;
 }

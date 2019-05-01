@@ -5,7 +5,9 @@
 #ifndef PSE_BEE_GAME_DRAGDROP_H
 #define PSE_BEE_GAME_DRAGDROP_H
 
+#include <TileMapObjects/PlaceableTile.h>
 #include "cocos2d.h"
+#include "TileMapObjects/Placeable.h"
 
 using namespace cocos2d;
 using namespace std;
@@ -14,15 +16,35 @@ using namespace std;
 class TouchUtil {
 protected:
 	bool _isDrag = false;
-	Sprite *drag;
-	vector<Sprite *> spriteList;
+	Placeable *_draggedPlaceable;
+	Sprite *_draggedSprite;
+
+	/**
+	 * I use a hashmap, because each placeable::getSprite() creates a new Sprite each time -> we can therefore
+	 * create distinct sprites for this node's children and the dragged placeable sprite.
+	 */
+	std::map<Sprite *, Placeable *> _spritesToPlaceables;
+	vector<Sprite *> _spriteList;
+	vector<Placeable *> _placeables;
+
+protected:
+	/**
+	 * Adds the given placeable object to the list of placeable objects.
+	 * @param placeable
+	 */
+	void addToPlaceables(Placeable *placeable);
+
 public:
 
-	void setDrag(Point screenTouch, Point layerTouch);
+	/**
+	 * Sets the dragged content to the placeable, which the given touch position touches.
+	 * @param touchPos touch position (local coordinate)
+	 */
+	void setDrag(const Vec2 &touchPos);
 
-	Sprite *getDrag();
+	Placeable *getDraggedPlaceable();
 
-	void addToSpriteList(string name, Vec2 pos, int tag, Size scale);
+	Sprite *getDraggedSprite();
 
 	bool isDrag();
 

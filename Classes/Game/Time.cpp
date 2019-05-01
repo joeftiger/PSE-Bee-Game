@@ -18,6 +18,8 @@ Time *Time::createInstance() {
 	
 	_instance = Time::create();
 	_instance->setName("time");
+
+	
 	return _instance;
 }
 
@@ -26,8 +28,8 @@ Time *Time::getInstance() {
 }
 
 bool Time::invariant() {
-	assert(times.seconds >= 0 && times.months <= 60);
-	assert(times.months >= 0 && times.months <= 12);
+	assert(times.seconds >= 0 && times.seconds <= 60);
+	assert(times.months >= 0 && times.months <= 11);
 	assert(times.years >= 0);
 	return true;
 }
@@ -45,18 +47,31 @@ void Time::time(float dt) {
 		times.months++;
 	}
 
-	if (times.months >= LENGTH_YEAR) {
+	if (times.months >= LENGTH_YEAR - 1) {
 		times.months = 0;
 		times.years++;
 	}
 }
 
 int Time::getMonth() {
-	return times.months;
+	return times.months + 1;
 }
 
+void Time::setStartingMonth() {
+	times.months = 3;
+}
+
+std::string Time::getMonthAsString() {
+	return this->convertToMonth(times.months);
+}
+
+/**
+	Converts integer to Month
+
+*/
 std::string Time::convertToMonth(int i)
-{
+{	
+	i++;
 	assert(i >= 1 && i <= 12);
 
 	switch (i) {
@@ -80,24 +95,24 @@ std::string Time::convertToMonth(int i)
 	
 */
 Season Time::getSeason() {
-	assert(times.months >= 0 && times.months <= 12);
+	assert(times.months >= 0 && times.months <= 11);
 	switch (times.months) {
 	
-	case 3: 
-	case 4:
-	case 5: return Season::Fruehling;
+	case 2: 
+	case 3:
+	case 4: return Season::Fruehling;
 
+	case 5:
 	case 6:
-	case 7:
-	case 8: return Season::Sommer;
+	case 7: return Season::Sommer;
 
+	case 8:
 	case 9:
-	case 10:
-	case 11: return Season::Herbst;
+	case 10: return Season::Herbst;
 
-	case 12:
-	case 1:
-	case 2: return Season::Winter;
+	case 11:
+	case 0:
+	case 1: return Season::Winter;
 
 	}
 }

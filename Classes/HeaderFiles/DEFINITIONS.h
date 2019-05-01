@@ -4,6 +4,7 @@
 /* Priorities */
 #define HUD_PRIORITY 10
 
+#define TILE_MAP_LAYER_NAME "TileMapLayer"
 
 #define MAP_SCALE_SD 0.5f
 #define MAP_SCALE_HD 0.5f
@@ -15,6 +16,6 @@
 #define USE_SD true
 
 /* Time */
-#define LENGTH_MONTH 3 //in minutes
+#define LENGTH_MONTH 1 //in minutes
 #define LENGTH_YEAR 12 //in months
 #endif // __DEFINITIONS_H__

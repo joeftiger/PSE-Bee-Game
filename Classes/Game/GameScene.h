@@ -9,21 +9,18 @@
 #include "ItemPanel/TouchUtil.h"
 #include "ItemPanel/ItemPanelLayer.h"
 #include "Time.h"
+#include "Interacter.h"
 
 
 using namespace cocos2d;
 
 class GameScene : public cocos2d::Scene {
 private:
-	Size visibleSize;
 	Camera *camera;
 	TileMapLayer *_tileMapLayer;
 	HUDLayer *_HUDLayer;
 
-	bool _isTouched;
 	Node *container;
-	Point _touchPosition;
-	Point cameraTravel = Vec2(0, 0);
 
 	ItemPanelLayer *_itemPanel;
 
@@ -32,21 +29,29 @@ private:
 public:
 	static cocos2d::Scene *createScene();
 
-	virtual bool init();
+	virtual bool init() override;
 
+	/**
+     *	Calls BeeHiveUpdate every dt seconds
+     */
 	void beeHiveAtlasUpdate(float dt);
+
+	/**
+     *	Calls HoneyExtractorUpdate every dt seconds
+     */
+	void honeyExtractorAtlasUpdate(float dt);
 
 	bool onTouchBegan(Touch *touch, Event *event);
 
 	void onTouchMoved(Touch *touch, Event *event);
 
-	void onTouchEnded(void *, void *);
+	void onTouchEnded(Touch *touch, Event *event);
 
 	void saveGameState(float dt);
 
-	void touchOnItemPanel();
+	void interactAt(const Vec2& pos);
 
-	void ShowHideItemPanel();
+	Node* getCameraContainer();
 
 	// implement the "static create()" method manually
 	CREATE_FUNC(GameScene);

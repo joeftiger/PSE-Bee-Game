@@ -7,6 +7,7 @@
 #include "HeaderFiles/TimeStruct.h"
 #include "json/rapidjson.h"
 #include "HeaderFiles/Seasons.h"
+#include "SaveLoad/SaveLoad.h"
 
 using namespace cocos2d;
 
@@ -22,6 +23,10 @@ private:
 
 	timeStruct times;
 
+	std::string convertToMonth(int i);
+
+	void time(float dt);
+
 public:
 
 	virtual bool init();
@@ -32,11 +37,11 @@ public:
 
 	bool invariant();
 
-	void time(float dt);
-
 	int getMonth();
 
-	std::string convertToMonth(int i);
+	void setStartingMonth();
+
+	std::string getMonthAsString();
 
 	Season getSeason();
 

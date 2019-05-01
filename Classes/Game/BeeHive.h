@@ -7,19 +7,21 @@
 
 #include "cocos2d.h"
 #include "../HeaderFiles/Restorable.h"
+#include "../HeaderFiles/Interactable.h"
 
-static const int MAX_BEES = 20000;
-static const float MAX_RAW_HONEY = 2000.0f;
+static const int MAX_BEES = 50000;
+static const float MAX_RAW_HONEY = 15000;
 
-class BeeHive : Restorable {
+class BeeHive : Restorable, public Interactable {
 private:
 	int _beesAlive;
 	int _varoaAlive;
 	float _rawHoney;
 
 	cocos2d::Vec2 _position;
-
+	std::string sprite = "tilemaps/Tiles/bienenstock1_klein.png";
 	bool invariant();
+	void varroaRandomizer();
 
 public:
 	/**
@@ -88,6 +90,11 @@ public:
 	float takeRawHoney(float amount);
 
 	/**
+	 * Removes varroas, but also kills 1000 bees.
+	 */
+	void killVarroa();
+
+	/**
 	 * @return position in the tilemap
 	 */
 	cocos2d::Vec2 position();
@@ -106,6 +113,12 @@ public:
 	void toJSON(rapidjson::Document &doc) override;
 
 	void fromJSON(rapidjson::Document &doc) override;
+
+	bool isInteractable() override;
+
+	void doTask() override;
+
+	std::string getSprite() override;
 };
 
 #endif //PSE_BEE_GAME_BEEHIVE_H

@@ -1,19 +1,12 @@
-#include <json/document.h>
-#include <json/stringbuffer.h>
-#include <json/writer.h>
-#include <iostream>
-#include <fstream>
+
 #include "SaveLoad.h"
-#include "json/rapidjson.h"
-#include "json/istreamwrapper.h"
-#include "json/ostreamwrapper.h"
-#include "json/prettywriter.h"
+
 
 using namespace rapidjson;
 
 /**
-	Saves the current tileMap in json-format into "tilemap.json"
-*/
+ *	Saves the current tileMap in json-format into "tilemap.json"
+ */
 void SaveLoad::saveMap() {
 	auto tileMapLayer = (TileMapLayer *) cocos2d::Director::getInstance()->getRunningScene()->getChildByName(
 			TILE_MAP_LAYER_NAME);
@@ -43,9 +36,9 @@ void SaveLoad::saveMap() {
 }
 
 /**
-	Returns a writable path for the given filename
-	@param fileName
-*/
+ *	Returns a writable path for the given filename
+ *	@param fileName
+ */
 std::string SaveLoad::getPath(std::string fileName) {
 	auto fs = FileUtils::getInstance();
 	std::string path = fs->getWritablePath();
@@ -58,10 +51,10 @@ std::string SaveLoad::getPath(std::string fileName) {
 }
 
 /**
-	Writes a json-string into file on disk
-	@param json a string of json objects
-	@param fullPath use getPath() to get a writable path
-*/
+ *	Writes a json-string into file on disk
+ *	@param json a string of json objects
+ *	@param fullPath use getPath() to get a writable path
+ */
 void SaveLoad::jsonToFile(std::string json, std::string fullPath) {
 	bool b = FileUtils::getInstance()->writeStringToFile(json, fullPath);
 	if (b) {
@@ -70,10 +63,10 @@ void SaveLoad::jsonToFile(std::string json, std::string fullPath) {
 }
 
 /**
-	Converts rapidjson::Document object into a string
-	@param rapidjson::Document 
-	@return std::string string for the given Document
-*/
+ *	Converts rapidjson::Document object into a string
+ *	@param rapidjson::Document
+ *	@return std::string string for the given Document
+ */
 std::string SaveLoad::docToString(rapidjson::Document &jsonObj) {
 	rapidjson::StringBuffer buffer;
 	rapidjson::Writer<rapidjson::StringBuffer> jsonWriter(buffer);
@@ -82,8 +75,8 @@ std::string SaveLoad::docToString(rapidjson::Document &jsonObj) {
 }
 
 /**
-	Loads tileMap data from file
-*/
+ *	Loads tileMap data from file
+ */
 std::vector<std::vector<int>> SaveLoad::loadMap() {
 	std::string path = getPath("tilemap.json");
 	std::ifstream ifs(path);
@@ -124,15 +117,10 @@ std::vector<std::vector<int>> SaveLoad::loadMap() {
 	return vec;
 }
 
-
-
 /**
-	Saves all beeHives on the current tileMap into a json-array and writes them into "beehives.json"
-*/
+ *	Saves all beeHives on the current tileMap into a json-array and writes them into "beehives.json"
+ */
 void SaveLoad::saveBeehives() {
-	std::vector<BeeHive *> beeHives;
-	BeeHiveAtlas::getInstance()->getBeeHives(beeHives);
-
 	rapidjson::Document doc;
 	rapidjson::StringBuffer jsonBuffer;
 	rapidjson::PrettyWriter<rapidjson::StringBuffer> jsonWriter(jsonBuffer);
@@ -145,8 +133,8 @@ void SaveLoad::saveBeehives() {
 }
 
 /**
-	reads all beehives from "beehives.json" and returns them
-*/
+ *	reads all beehives from "beehives.json" and returns them
+ */
 void SaveLoad::loadBeehives() {
 	std::ifstream ifs(getPath("beehives.json"));
 
@@ -161,6 +149,47 @@ void SaveLoad::loadBeehives() {
 
 	BeeHiveAtlas::getInstance()->fromJSON(doc);
 
+}
+
+/**
+ *	Saves all honeyExtractors on current tileMap into a json-array and writes them into "honeyextractors.json"
+ */
+void SaveLoad::saveHoneyExtractors() {
+	rapidjson::Document doc;
+	rapidjson::StringBuffer jsonBuffer;
+	rapidjson::PrettyWriter<rapidjson::StringBuffer> jsonWriter(jsonBuffer);
+	doc.SetArray();
+	assert(doc.IsArray());
+	HoneyExtractorAtlas::getInstance()->toJSON(doc);
+
+	doc.Accept(jsonWriter);
+	jsonToFile(docToString(doc), getPath("honeyextractors.json"));
+}
+
+/**
+ *	reads all honeyExtractors from "honeyextractors.json" and returns them
+ */
+void SaveLoad::loadHoneyExtractors() {
+	std::ifstream ifs(getPath("honeyextractors.json"));
+
+	if (!ifs.is_open()) {
+		log("Couldn't load honeyextractors");
+		return;
+	}
+
+	IStreamWrapper isw(ifs);
+	rapidjson::Document doc;
+	doc.ParseStream(isw);
+
+	HoneyExtractorAtlas::getInstance()->fromJSON(doc);
+
+}
+
+void SaveLoad::saveEverything() {
+	SaveLoad::saveBeehives();
+	SaveLoad::saveHoneyExtractors();
+	SaveLoad::saveMap();
+	SaveLoad::saveTime();
 }
 
 void SaveLoad::saveTime() {
@@ -189,11 +218,9 @@ void SaveLoad::loadTime() {
 	Time::getInstance()->fromJSON(doc);
 }
 
-
-
 /**
-	Test-Method, currently unused
-*/
+ *	Test-Method, currently unused
+ */
 void SaveLoad::jsonToFile(rapidjson::Document &jsonObj, std::string fullPath) {
 	//	std::ofstream outputFile;
 	//
@@ -221,8 +248,11 @@ bool SaveLoad::beeHiveSaveExists() {
 	return FileUtils::getInstance()->isFileExist(getPath("beehives.json"));
 }
 
-bool SaveLoad::timesSaveExists()
-{
+bool SaveLoad::honeyExtractorSaveExists() {
+	return FileUtils::getInstance()->isFileExist(getPath("honeyextractors.json"));
+}
+
+bool SaveLoad::timesSaveExists() {
 	return FileUtils::getInstance()->isFileExist(getPath("times.json"));
 }
 
@@ -236,14 +266,22 @@ void SaveLoad::deleteBeeHivesSave() {
 	assert(!beeHiveSaveExists());
 }
 
+void SaveLoad::deleteHoneyExtractorsSave() {
+	FileUtils::getInstance()->removeFile(getPath("honeyextractors.json"));
+	assert(!honeyExtractorSaveExists());
+}
+
 void SaveLoad::deleteTimeSave() {
 	FileUtils::getInstance()->removeFile(getPath("times.json"));
     assert(!timesSaveExists());
 }
 
-// to call all the seperate delete methods
+//  call all separate delete methods
 void SaveLoad::deleteEverything() {
+	BeeHiveAtlas::getInstance()->clear();
+	HoneyExtractorAtlas::getInstance()->clear();
 	deleteBeeHivesSave();
+	deleteHoneyExtractorsSave();
 	deleteTileMapSave();
 	deleteTimeSave();
 }

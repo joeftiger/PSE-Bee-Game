@@ -32,13 +32,10 @@ bool HUDLayer::init() {
 	label->enableOutline(Color4B::BLACK, 1);
 	auto menuItem = MenuItemLabel::create(label);
 	menuItem->setCallback([&](cocos2d::Ref *sender) {
-		SaveLoad::saveMap();
-		SaveLoad::saveBeehives();
-		SaveLoad::saveTime();
+		SaveLoad::saveEverything();
 		Director::getInstance()->replaceScene(MainMenu::scene());
 	});
 	auto backMenu = Menu::create(menuItem, nullptr);
-	backMenu->setPosition(Vec2::ZERO);
 	backMenu->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - onePofScreenW * 8,
 	                           visibleRect.origin.y + onePofScreenH * 5));
 	this->addChild(backMenu, 10);
@@ -87,14 +84,16 @@ bool HUDLayer::init() {
 void HUDLayer::timer(float dt) {
 
 	auto h = std::to_string((int) Player::getInstance()->totalRawHoney());
-	honeyLabel->setString(stringShortener(h));
+	honeyLabel->setString(stringShortener(h) + "g");
 
-	__String *timeToDisplay = __String::createWithFormat("%i", Time::getInstance()->getMonth());
-	timeLabel->setString(timeToDisplay->getCString());
+	auto m = std::to_string((int) Player::getInstance()->returnTotalMoney());
+	moneyLabel->setString(stringShortener(m));
+
+	timeLabel->setString(Time::getInstance()->getMonthAsString());
 }
 
 /**
-	Abbriviates string if longer than 4 Digits
+	Abbreviates string if it is longer than 4 Digits
 	@param s string to be shortened
 	@return shortened string
 */

@@ -6,7 +6,7 @@
 #define PSE_BEE_GAME_PLACEABLE_H
 
 #include <Game/TileMapLayer.h>
-#include <HeaderFiles/TileGID.h>
+#include <Resources/Tiles.h>
 #include "cocos2d.h"
 
 class TileMapLayer;
@@ -19,6 +19,8 @@ public:
 	virtual bool canPlaceOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) = 0;
 
 	virtual void placeOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) = 0;
+
+	virtual cocos2d::Sprite *getSprite() = 0;
 };
 
 #endif //PSE_BEE_GAME_PLACEABLE_H

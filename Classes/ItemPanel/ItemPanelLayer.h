@@ -5,6 +5,7 @@
 #ifndef PSE_BEE_GAME_ITEMPANELLayer_H
 #define PSE_BEE_GAME_ITEMPANELLayer_H
 
+#include <Game/TileMapLayer.h>
 #include "cocos2d.h"
 #include "TouchUtil.h"
 
@@ -14,6 +15,9 @@ class ItemPanelLayer : public LayerColor, public TouchUtil {
 private:
 	LayerColor *_showRec;
 	bool _isItemShow;
+	Point _touchPosition;
+	TileMapLayer *_tileMapLayer;
+	bool _isTouch;
 
 public:
 	static LayerColor *createLayer();
@@ -24,9 +28,17 @@ public:
 
 	LayerColor *getShowRec();
 
-	void showHideItemPanel(const Point &touchPos);
+	void setTileMap(TileMapLayer *tileMap);
 
-	void touchOnItemPanel(const Point &touchPos);
+	void showHideItemPanel(const Vec2 &touchPos);
+
+	void touchOnItemPanel(const Vec2 &touchPos);
+
+    bool onTouchBegan(Touch *touch, Event *event);
+
+    void onTouchMoved(Touch *touch, Event *event);
+
+    void onTouchEnded(Touch *touch, void *);
 
 	CREATE_FUNC(ItemPanelLayer);
 };

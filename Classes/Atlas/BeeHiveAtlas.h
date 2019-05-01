@@ -6,9 +6,11 @@
 #define PSE_BEE_GAME_BEEHIVEATLAS_H
 
 #include "cocos2d.h"
-#include "BeeHive.h"
 #include "Observer.h"
-#include "TileMapLayer.h"
+#include "Game/BeeHive.h"
+#include <HeaderFiles/DEFINITIONS.h>
+#include "Game/TileMapLayer.h"
+
 
 class BeeHiveAtlas : public cocos2d::Node, public Observable, public Observer, public Restorable {
 private:
@@ -55,6 +57,11 @@ public:
 	 * Updates all beehives in the atlas.
 	 */
 	void updateBeeHives(float);
+
+	/**
+	 * Clears all beehives and resets this beehive atlas to its original state.
+	 */
+	void clear();
 
 	void toJSON(rapidjson::Document &doc) override;
 

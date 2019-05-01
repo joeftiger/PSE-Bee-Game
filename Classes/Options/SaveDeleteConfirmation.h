@@ -5,12 +5,9 @@
 #ifndef PROJ_ANDROID_SAVEDELETECONFIRMATION_H
 #define PROJ_ANDROID_SAVEDELETECONFIRMATION_H
 
-#include "MainMenu/MainMenuScene.h"
-#include "OptionsScene.h"
-#include "SaveLoad/SaveLoad.h"
+
 #include "cocos2d.h"
-#include "ui/UIWidget.h"
-#include "ui/CocosGUI.h"
+
 
 
 using namespace cocos2d;
@@ -26,10 +23,16 @@ public:
 
 	virtual bool init();
 
-	// Yes Click Handler
+	/**
+	 * when clicking on  yes, delete save and go back to main menu
+     * Delay: 0.1 seconds       Colour: White
+	 */
     void onYesClick(cocos2d::Ref *sender);
 
-    // No Click Handler
+    /**
+     * when clicking on  no, go back to options scene without deleting save
+     * Delay: 0.1 seconds       Colour: White
+     */
     void onNoClick(cocos2d::Ref *sender);
 
 	// implement the "static create()" method manually
