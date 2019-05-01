@@ -12,7 +12,6 @@
 #include "../HeaderFiles/Restorable.h"
 #include "HeaderFiles/Interactable.h"
 #include <cassert>
-#include <string>
 #include <stdexcept>
 
 
@@ -22,7 +21,7 @@ static const int MULTIPLIER = 2;
 
 class HoneyExtractor : Restorable, public Interactable {
 private:
-	int _honeyInExtractor;
+	float _honeyInExtractor;
     float _rawHoney;
 	cocos2d::Vec2 _position;
 
@@ -61,7 +60,7 @@ public:
 	/**
 	 * @return amount of honey in this extractor
 	 */
-	int honeyInExtractor();
+	float honeyInExtractor();
 
 	/**
 	 * adds the specified amount to the extractor

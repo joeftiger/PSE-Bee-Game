@@ -22,7 +22,7 @@ bool HoneyExtractor::isFull() {
 	return _honeyInExtractor == MAX__HONEY_IN_EXTRACTOR;
 }
 
-int HoneyExtractor::honeyInExtractor() {
+float HoneyExtractor::honeyInExtractor() {
 	return _honeyInExtractor;
 }
 
@@ -33,7 +33,7 @@ void HoneyExtractor::addHoneyToExtractor(float amountAdded) {
 			"[" + std::to_string(amountAdded) + "] is out of range for [_rawHoney = " + std::to_string(_rawHoney) + "]");
 	}
 
-	_rawHoney -= amountAdded;
+	_rawHoney = fmax (_rawHoney - amountAdded, 0.0f);
 	_honeyInExtractor += amountAdded;
 	assert(invariant());
 }
@@ -42,7 +42,7 @@ void HoneyExtractor::addHoneyToExtractor(float amountAdded) {
 void HoneyExtractor::update() {
 	if (!isEmpty()) {
 		Wallet::getInstance()->addMoney(CONVERSION_RATE * MULTIPLIER);
-		_honeyInExtractor -= CONVERSION_RATE;
+		_honeyInExtractor = fmax (_honeyInExtractor - CONVERSION_RATE, 0.0f);
 	}
 	assert(invariant());
 }
