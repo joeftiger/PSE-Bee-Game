@@ -25,6 +25,7 @@
 #include "AppDelegate.h"
 #include "Game/GameScene.h"
 #include "MainMenu/MainMenuScene.h"
+#include "Story/StoryScene.h"
 
 USING_NS_CC;
 

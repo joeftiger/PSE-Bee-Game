@@ -7,7 +7,7 @@
 
 using namespace cocos2d;
 
-namespace IMAGEPATH {
+namespace BACKIMAGEPATH {
 	const char *BACKGROUND_IMAGE = "menu/main-menu-background.png";
 }
 
@@ -31,7 +31,7 @@ void InteractionNode::setFiles(std::string itemName) {
 void InteractionNode::runAnimation() {
 
     Size winSize = Director::getInstance()->getWinSize();
-    _background = Sprite::create(IMAGEPATH::BACKGROUND_IMAGE); //background sprite
+    _background = Sprite::create(BACKIMAGEPATH::BACKGROUND_IMAGE); //background sprite
     _background->setOpacity(0);
     _background->setAnchorPoint(Vec2(0.5,0.5));
     _background->setPosition(Vec2(winSize.width/2, winSize.height/2));

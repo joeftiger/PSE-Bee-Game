@@ -100,6 +100,7 @@ list(APPEND GAME_SOURCE
         Classes/ItemPanel/TouchUtil.cpp
         Classes/TileMapObjects/PlaceableTile.cpp
         Classes/TileMapObjects/PlaceableSprite.cpp
+        Classes/Story/Popup.cpp
         Classes/Game/Time.cpp
         Classes/Resources/Tiles.cpp
         Classes/Resources/Sprites.cpp
@@ -109,6 +110,7 @@ list(APPEND GAME_SOURCE
         Classes/ItemPanel/ItemPanelLayer.cpp
         Classes/Interaction/BeeHivePopup.cpp
         )
+
 list(APPEND GAME_HEADER
         Classes/AppDelegate.h
         Classes/Game/GameScene.h
@@ -133,6 +135,7 @@ list(APPEND GAME_HEADER
         Classes/ItemPanel/TouchUtil.h
         Classes/TileMapObjects/PlaceableTile.h
         Classes/TileMapObjects/PlaceableSprite.h
+        Classes/Story/Popup.h
         Classes/Game/Time.h
         Classes/HeaderFiles/TimeStruct.h
         Classes/HeaderFiles/Seasons.h
