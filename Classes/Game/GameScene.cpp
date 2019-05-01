@@ -1,5 +1,6 @@
 
 #include <Interaction/BeeHivePopup.h>
+#include <Resources/SpriteContainer.h>
 #include "GameScene.h"
 #include "Atlas/BeeHiveAtlas.h"
 #include "Atlas/HoneyExtractorAtlas.h"
@@ -70,11 +71,19 @@ bool GameScene::init() {
 	//camera and huds container
 	container = Node::create();
 	container->addChild(camera);
-	this->addChild(container);
+	this->addChild(container,HUD_PRIORITY, "container");
 	container->addChild(_itemPanel);
 	container->addChild(_HUDLayer);
 	container->setPosition(Vec2(_tileMapLayer->getMap()->getBoundingBox().size.width / 2 - visibleSize.width / 2,
 	                            _tileMapLayer->getMap()->getBoundingBox().size.height / 2 - visibleSize.height / 2));
+
+    //provisory extractor
+    extractor = new HoneyExtractor();
+    Sprite *sprite = SpriteContainer::getInstance()->getSpriteOf(Sprites::SpriteID::honey_extractor);
+    sprite->setAnchorPoint(Vec2(0,0));
+    sprite->setPosition(Vec2(20,20));
+    sprite->setScale(0.3);
+    container->addChild(sprite, HUD_PRIORITY, "extractor");
 
 	this->schedule(schedule_selector(GameScene::saveGameState), 60.0f);
 	this->schedule(schedule_selector(GameScene::beeHiveAtlasUpdate), 1.0f);
@@ -104,6 +113,10 @@ void GameScene::onTouchMoved(Touch *touch, Event *event) {
 }
 
 void GameScene::onTouchEnded(Touch *touch, Event *event) {
+    if(container->getChildByName("extractor")->getBoundingBox().containsPoint(touch->getLocation())) {
+        auto popup = HoneyExtractorPopup::createWith(extractor);
+        container->addChild(popup, 100);
+    }
     auto pos = touch->getLocation() + container->getPosition();	// note it's (+) now
 	//if(!_isMoved) {
         interactAt(pos);
@@ -146,5 +159,9 @@ void GameScene::saveGameState(float dt) {
 
 Node* GameScene::getCameraContainer() {
     return container;
+}
+
+HoneyExtractor* GameScene::getExtractor() {
+    return extractor;
 }
 

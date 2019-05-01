@@ -4,6 +4,7 @@
 
 #include <Resources/Tiles.h>
 #include <Resources/SpriteContainer.h>
+#include <Game/GameScene.h>
 #include "BeeHivePopup.h"
 #include "HeaderFiles/DEFINITIONS.h"
 
@@ -93,7 +94,8 @@ void BeeHivePopup::initButtons() {
 
     auto takeHoney = MenuItemImage::create("menu/yes.png", "menu/yes.png", [=](Ref *sender) {
         cocos2d::log("%s", "take honey");
-        _beeHive->takeRawHoney();
+        auto scene = (GameScene*) Director::getInstance()->getRunningScene();
+        scene->getExtractor()->addHoneyToExtractor(_beeHive->takeRawHoney());
     });
     buttons.pushBack(takeHoney);
 

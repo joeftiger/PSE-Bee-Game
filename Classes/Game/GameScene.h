@@ -10,6 +10,7 @@
 #include "ItemPanel/ItemPanelLayer.h"
 #include "Time.h"
 #include "Interacter.h"
+#include "HoneyExtractor.h"
 
 
 using namespace cocos2d;
@@ -21,6 +22,7 @@ private:
 	HUDLayer *_HUDLayer;
 
 	Node *container;
+	HoneyExtractor * extractor;
 
 	ItemPanelLayer *_itemPanel;
 
@@ -52,6 +54,8 @@ public:
 	void interactAt(const Vec2& pos);
 
 	Node* getCameraContainer();
+
+	HoneyExtractor* getExtractor();
 
 	// implement the "static create()" method manually
 	CREATE_FUNC(GameScene);

@@ -6,7 +6,7 @@ bool HoneyExtractor::invariant() {
 	return true;
 }
 
-HoneyExtractor::HoneyExtractor() : HoneyExtractor(50) {}
+HoneyExtractor::HoneyExtractor() : HoneyExtractor(0) {}
 
 //TODO Discuss if this is sufficient?
 HoneyExtractor::HoneyExtractor(int _honeyInExtractor) {

@@ -71,7 +71,7 @@ void BeeHive::killVarroa() {
 
 void BeeHive::update() {
 	auto alg = GameAlgorithm::getInstance();
-	if (!isFull()) {
+	if (!isEmpty()) {
 		_beesAlive = (int) clampf(_beesAlive + alg->nextBees(_beesAlive, _varoaAlive), 0, MAX_BEES);
 	}
 
