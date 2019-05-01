@@ -63,11 +63,11 @@ void ItemPanelLayer::initializeItemPanel() {
 	_placeables.emplace_back(new PlaceableSprite(Sprites::tree_2));
 	_placeables.emplace_back(new PlaceableSprite(Sprites::tree_4));
 
-	auto i = 0;
-	auto k = 0;
+	auto width = 0;
+	auto height = 0;
 	for (auto p : _placeables) {
-		auto x = (i % 3) * box.width / 3;
-		auto y = (4 - (k % 4)) * box.height / 6;
+		auto x = (width % 3) * box.width / 3;
+		auto y = (4 - (height % 4)) * box.height / 6;
 		auto pos = Vec2(x, y);
 
 		auto sprite = p->getSprite();
@@ -78,8 +78,8 @@ void ItemPanelLayer::initializeItemPanel() {
 
 		_spritesToPlaceables.emplace(sprite, p);
 
-		if (i != 0 && i % 3 == 0) k++;
-		i++;
+		width++;
+		if (width % 3 == 0) height++;
 	}
 }
 
