@@ -94,8 +94,6 @@ void BeeHivePopup::initButtons() {
 
     auto takeHoney = MenuItemImage::create("menu/yes.png", "menu/yes.png", [=](Ref *sender) {
         cocos2d::log("%s", "take honey");
-        auto scene = (GameScene*) Director::getInstance()->getRunningScene();
-        scene->getExtractor()->addHoneyToExtractor(_beeHive->takeRawHoney());
     });
     buttons.pushBack(takeHoney);
 

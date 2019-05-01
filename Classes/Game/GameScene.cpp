@@ -9,6 +9,7 @@
 #include "AppDelegate.h"
 #include "Player.h"
 #include "Interaction/HoneyExtractorPopup.h"
+#include "Interaction/HoneyMover.h"
 
 
 using namespace cocos2d;
@@ -78,12 +79,9 @@ bool GameScene::init() {
 	                            _tileMapLayer->getMap()->getBoundingBox().size.height / 2 - visibleSize.height / 2));
 
     //provisory extractor
-    extractor = new HoneyExtractor();
-    Sprite *sprite = SpriteContainer::getInstance()->getSpriteOf(Sprites::SpriteID::honey_extractor);
-    sprite->setAnchorPoint(Vec2(0,0));
-    sprite->setPosition(Vec2(20,20));
-    sprite->setScale(0.3);
-    container->addChild(sprite, HUD_PRIORITY, "extractor");
+    HoneyMover* honeyMover = HoneyMover::create();
+    honeyMover->setTileMap(_tileMapLayer);
+    container->addChild(honeyMover);
 
 	this->schedule(schedule_selector(GameScene::saveGameState), 60.0f);
 	this->schedule(schedule_selector(GameScene::beeHiveAtlasUpdate), 1.0f);
@@ -113,44 +111,7 @@ void GameScene::onTouchMoved(Touch *touch, Event *event) {
 }
 
 void GameScene::onTouchEnded(Touch *touch, Event *event) {
-    if(container->getChildByName("extractor")->getBoundingBox().containsPoint(touch->getLocation())) {
-        auto popup = HoneyExtractorPopup::createWith(extractor);
-        container->addChild(popup, 100);
-    }
-    auto pos = touch->getLocation() + container->getPosition();	// note it's (+) now
-	//if(!_isMoved) {
-        interactAt(pos);
-	//}
-}
 
-void GameScene::interactAt(const Vec2& pos) {
-    auto selectTilePos = _tileMapLayer->getTilePosition(pos);
-
-    if(BeeHiveAtlas::getInstance()->hasBeeHiveAt(selectTilePos)) {
-		auto beeHive = BeeHiveAtlas::getInstance()->getBeeHiveAt(selectTilePos);
-		auto popup = BeeHivePopup::createWith(beeHive);
-		container->addChild(popup, 100);
-
-//        auto beeHive = BeeHiveAtlas::getInstance()->getBeeHiveAt(selectTilePos);
-//        Interacter *i = Interacter::create();
-//        this->addChild(i, 100);
-//        i->runWith(beeHive);
-//        i->interact();
-
-    } else if(HoneyExtractorAtlas::getInstance()->hasHoneyExtractorAt(selectTilePos)) {
-		
-		auto honeyExtractor = HoneyExtractorAtlas::getInstance()->getHoneyExtractorAt(selectTilePos);
-		auto popup = HoneyExtractorPopup::createWith(honeyExtractor);
-		container->addChild(popup, 100);
-
-		/*
-		auto honeyExtractor = HoneyExtractorAtlas::getInstance()->getHoneyExtractorAt(selectTilePos);
-		Interacter *i = Interacter::create();
-		this->addChild(i, 100);
-		i->runWith(honeyExtractor);
-		i->interact();
-		*/
-    }
 }
 
 void GameScene::saveGameState(float dt) {

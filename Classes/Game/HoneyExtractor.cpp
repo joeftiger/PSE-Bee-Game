@@ -28,7 +28,7 @@ float HoneyExtractor::honeyInExtractor() {
 
 // TODO Origin of honey from a specific beehive
 void HoneyExtractor::addHoneyToExtractor(float amountAdded) {
-	if (amountAdded < 0 || amountAdded > _rawHoney) {
+	if (amountAdded < 0) {
 		throw std::out_of_range(
 			"[" + std::to_string(amountAdded) + "] is out of range for [_rawHoney = " + std::to_string(_rawHoney) + "]");
 	}
