@@ -7,7 +7,7 @@
 #include "ItemPanel/ItemPanelLayer.h"
 #include "AppDelegate.h"
 #include "Player.h"
-#include "Story/StoryScene.h"
+#include "Story/Popup.h"
 
 
 using namespace cocos2d;
@@ -75,6 +75,9 @@ bool GameScene::init() {
 	container->addChild(_HUDLayer);
 	container->setPosition(Vec2(_tileMapLayer->getMap()->getBoundingBox().size.width / 2 - visibleSize.width / 2,
 	                            _tileMapLayer->getMap()->getBoundingBox().size.height / 2 - visibleSize.height / 2));
+
+    //UICustom::Popup *popup = UICustom::Popup::createAsMessage("GROSSVATER", "Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich...");
+    //this->addChild(popup);
 
 	this->schedule(schedule_selector(GameScene::saveGameState), 60.0f);
 	this->schedule(schedule_selector(GameScene::beeHiveAtlasUpdate), 1.0f);

@@ -4,6 +4,7 @@
 #include "MainMenu/MainMenuScene.h"
 #include "Player.h"
 #include "SaveLoad/SaveLoad.h"
+#include "Story/Popup.h"
 
 using namespace cocos2d;
 
@@ -74,6 +75,8 @@ bool HUDLayer::init() {
 	timeLabel->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - onePofScreenW * 5,
 	                            visibleRect.origin.y + visibleRect.size.height - onePofScreenH * 5));
 	this->schedule(schedule_selector(HUDLayer::timer), 0.1f);
+
+
 
 	return true;
 }
