@@ -55,7 +55,11 @@ public:
 
 	static void saveTime();
 
+	static void saveMoney();
+
 	static void loadTime();
+
+	static void loadMoney();
 
 	static void deleteTileMapSave();
 

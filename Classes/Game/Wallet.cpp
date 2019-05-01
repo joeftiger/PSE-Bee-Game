@@ -26,19 +26,21 @@ int Wallet::returnTotalMoney() {
 	return _totalMoney;
 }
 
-/** TODO toJSON and fromJSON for loading adn saving of money
 void Wallet::toJSON(rapidjson::Document &doc) {
 
 	rapidjson::Value obj(rapidjson::kObjectType);
-	obj.AddMember("_totalMoney", _totalMoney, doc.GetAllocator());
+	obj.AddMember("totalMoney", _totalMoney, doc.GetAllocator());
 	doc.PushBack(obj, doc.GetAllocator());
 
 }
 
 void Wallet::fromJSON(rapidjson::Document &doc) {
 
-	assert(doc.HasMember("totalMoney"));
-	const rapidjson::Value &totalMoney = doc["totalMoney"];
+	assert(doc.IsArray());
+
+	const rapidjson::Value &m = doc[0];
+
+	assert(m["totalMoney"].IsInt());
+	_totalMoney = m["totalMoney"].GetInt();
 
 }
-*/

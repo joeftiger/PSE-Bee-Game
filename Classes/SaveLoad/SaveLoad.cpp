@@ -207,6 +207,18 @@ void SaveLoad::saveTime() {
 	jsonToFile(docToString(doc), getPath("times.json"));
 }
 
+
+void SaveLoad::saveMoney() {
+	rapidjson::Document doc;
+	rapidjson::StringBuffer buffer;
+	rapidjson::Writer <rapidjson::StringBuffer> jsonWriter(buffer);
+	doc.SetArray();
+	Time::getInstance()->toJSON(doc);
+
+	doc.Accept(jsonWriter);
+	jsonToFile(docToString(doc), getPath("money.json"));
+}
+
 void SaveLoad::loadTime() {
 	std::ifstream ifs(getPath("times.json"));
 

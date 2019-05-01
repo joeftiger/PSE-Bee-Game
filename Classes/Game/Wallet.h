@@ -6,11 +6,11 @@
 #define PROJ_ANDROID_WALLET_H
 
 #include "cocos2d.h"
-#include <json/stringbuffer.h>
-#include <json/writer.h>
 #include <HeaderFiles/DEFINITIONS.h>
-#include <cassert>
-#include <stdexcept>
+#include "HeaderFiles/Restorable.h"
+#include "json/rapidjson.h"
+
+using namespace cocos2d;
 
 
 class Wallet {
@@ -41,7 +41,9 @@ public:
     */
     int subtractMoney(int amount);
 
-   //TODO Add saving / loading of money
+    void toJSON(rapidjson::Document &doc);
+
+   	void fromJSON(rapidjson::Document &doc);
 
 };
 
