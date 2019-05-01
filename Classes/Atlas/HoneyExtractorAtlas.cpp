@@ -87,7 +87,7 @@ void HoneyExtractorAtlas::fromJSON(rapidjson::Document &doc) {
         rapidjson::StringBuffer buffer;
         rapidjson::Writer <rapidjson::StringBuffer> writer(buffer);
         subDoc.Accept(writer);
-        auto h = new HoneyExtractor();
+        auto h = new HoneyExtractor(0);
         h->fromJSON(subDoc);
 
         _honeyExtractors.emplace(h->position(), h);

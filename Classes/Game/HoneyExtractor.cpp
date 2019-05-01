@@ -2,7 +2,7 @@
 #include "HoneyExtractor.h"
 
 bool HoneyExtractor::invariant() {
-	//	assert(_honeyInExtractor >= 0);
+	assert(_honeyInExtractor >= 0);
 	return true;
 }
 
@@ -10,7 +10,7 @@ HoneyExtractor::HoneyExtractor() : HoneyExtractor(50) {}
 
 //TODO Discuss if this is sufficient?
 HoneyExtractor::HoneyExtractor(int _honeyInExtractor) {
-	_honeyInExtractor = 50;
+	this->_honeyInExtractor = _honeyInExtractor;
 	assert(invariant());
 	}
 
@@ -85,9 +85,7 @@ bool HoneyExtractor::isInteractable() {
 void HoneyExtractor::doTask() {
 	cocos2d::log("%s", "Interacted with HoneyExtractor");
 
-	std::string s = "raw honey: " + std::to_string(_rawHoney);
-
-	cocos2d::log("%s", s.c_str());
+	cocos2d::log("%f", _honeyInExtractor);
 }
 
 std::string HoneyExtractor::getSprite() {
