@@ -3,10 +3,7 @@
 
 
 #include "cocos2d.h"
-#include "Game/TileMapLayer.h"
-#include "Game/BeeHive.h"
-#include "Atlas/BeeHiveAtlas.h"
-#include "Atlas/HoneyExtractorAtlas.h"
+
 #include "Game/Time.h"
 #include "json/rapidjson.h"
 #include "json/istreamwrapper.h"

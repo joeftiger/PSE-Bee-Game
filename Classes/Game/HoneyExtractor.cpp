@@ -38,7 +38,6 @@ void HoneyExtractor::addHoneyToExtractor(float amountAdded) {
 	assert(invariant());
 }
 
-//TODO account for rounding erors and not receiving an int!
 void HoneyExtractor::update() {
 	if (!isEmpty()) {
 		Wallet::getInstance()->addMoney(CONVERSION_RATE * MULTIPLIER);

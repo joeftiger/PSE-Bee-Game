@@ -1,5 +1,9 @@
 
 #include "SaveLoad.h"
+#include "Game/TileMapLayer.h"
+#include "Game/BeeHive.h"
+#include "Atlas/BeeHiveAtlas.h"
+#include "Atlas/HoneyExtractorAtlas.h"
 
 
 using namespace rapidjson;
