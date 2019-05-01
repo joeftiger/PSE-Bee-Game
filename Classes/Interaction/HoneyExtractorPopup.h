@@ -11,6 +11,8 @@ class HoneyExtractorPopup : public Node {
 private:
 	HoneyExtractor *_honeyExtractor;
 
+	Label * _honeyLabel;
+
 	void initBackground();
 
 	void initImage();

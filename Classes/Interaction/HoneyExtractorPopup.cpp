@@ -29,6 +29,27 @@ void HoneyExtractorPopup::initImage() {
 }
 
 void HoneyExtractorPopup::initInfoPanel() {
+
+	auto background = this->getChildByName("background");
+	auto box = background->getContentSize();
+
+	TTFConfig labelConfig;
+	labelConfig.fontFilePath = FONT;
+	labelConfig.fontSize = TEXT_SIZE_HUD;
+
+	_honeyLabel = Label::createWithTTF(labelConfig, "0");
+	_honeyLabel->enableOutline(Color4B::BLACK, 1);
+	_honeyLabel->setAnchorPoint(Vec2(0, 0.5));
+	_honeyLabel->setPosition(Vec2(box.width * 5 / 8, box.height * 2 / 3));
+	_honeyLabel->setScale(2);
+
+	auto honeySprite = SpriteContainer::getInstance()->getSpriteOf(Sprites::honey_glass_2d);
+	honeySprite->setScale(0.1f);
+	honeySprite->setAnchorPoint(Vec2(1, 0.5f));
+	honeySprite->setPosition(Vec2(-30, 15));
+
+	background->addChild(_honeyLabel);
+	_honeyLabel->addChild(honeySprite);
 }
 
 void HoneyExtractorPopup::initButtons() {
@@ -76,8 +97,8 @@ void HoneyExtractorPopup::initTouch() {
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this->getChildByName("background"));
 }
 
-void HoneyExtractorPopup::update(float dt)
-{
+void HoneyExtractorPopup::update(float dt) {
+	_honeyLabel->setString(std::to_string((int)_honeyExtractor->honeyInExtractor()));
 }
 
 HoneyExtractorPopup * HoneyExtractorPopup::createWith(HoneyExtractor * honeyExtractor) {
