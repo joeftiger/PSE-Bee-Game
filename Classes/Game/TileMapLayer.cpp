@@ -207,7 +207,7 @@ void TileMapLayer::placeSprite(const Vec2 &position, const Size &size, Sprites::
 	}
 
 	auto sprite = Sprites::getSpriteOf(id);
-	sprite->setScale(MAP_SCALE_SD);
+	sprite->setScale(1.0f / 3);
 	sprite->setPosition(position);
 	sprite->setAnchorPoint(Vec2(0.5, 0));
 	this->addChild(sprite, pos.x + pos.y);
