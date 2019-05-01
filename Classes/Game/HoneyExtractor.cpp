@@ -32,8 +32,6 @@ void HoneyExtractor::addHoneyToExtractor(float amountAdded) {
 		throw std::out_of_range(
 			"[" + std::to_string(amountAdded) + "] is out of range for [_rawHoney = " + std::to_string(_rawHoney) + "]");
 	}
-
-	_rawHoney = fmax (_rawHoney - amountAdded, 0.0f);
 	_honeyInExtractor += amountAdded;
 	assert(invariant());
 }

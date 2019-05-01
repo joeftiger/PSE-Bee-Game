@@ -16,6 +16,7 @@ private:
     BeeHive* _beeHive;
     HoneyExtractor* _extractor;
     Sprite * _honeySprite;
+    bool _isDrag = false;
 public:
 
     static Node *createNode();

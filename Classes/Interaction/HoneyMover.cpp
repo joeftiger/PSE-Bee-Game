@@ -43,6 +43,7 @@ bool HoneyMover::onTouchBegan(Touch *touch, Event *event) {
     auto pos = _tileMapLayer->getTilePosition(touch->getLocation() + this->getParent()->getPosition());
     if(beeAtlas->hasBeeHiveAt(pos)) {
         _beeHive = beeAtlas->getBeeHiveAt(pos);
+        _isDrag = true;
 
         auto sprite = SpriteContainer::getInstance()->getSpriteOf(Sprites::SpriteID::honey_glass_2d);
 
@@ -66,20 +67,28 @@ void HoneyMover::onTouchMoved(Touch *touch, Event *event) {
 }
 
 void HoneyMover::onTouchEnded(Touch *touch, void *) {
+    if(this->getChildByName("sprite")) {
+        this->removeChildByName("sprite");
+    }
     auto extractorAtlas = HoneyExtractorAtlas::getInstance();
     auto beeAtlas = BeeHiveAtlas::getInstance();
     auto pos = _tileMapLayer->getTilePosition(touch->getLocation() + this->getParent()->getPosition());
     if(extractorAtlas->hasHoneyExtractorAt(pos)) {
 
         _extractor = extractorAtlas->getHoneyExtractorAt(pos);
-        _extractor->addHoneyToExtractor(_beeHive->takeRawHoney());
-        interactAt(pos);
+        if(_isDrag) {
+            _extractor->addHoneyToExtractor(_beeHive->takeRawHoney());
+        }
+
+        auto popup = HoneyExtractorPopup::createWith(_extractor);
+        this->addChild(popup, 100);
+
     } else if (beeAtlas->hasBeeHiveAt(pos)) {
-        interactAt(pos);
+        _beeHive = beeAtlas->getBeeHiveAt(pos);
+        auto popup = BeeHivePopup::createWith(_beeHive);
+        this->addChild(popup, 100);
     }
-    if(this->getChildByName("sprite")) {
-        this->removeChildByName("sprite");
-    }
+    _isDrag = false;
 
 }
 
