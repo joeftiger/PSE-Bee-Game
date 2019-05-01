@@ -1,6 +1,8 @@
 
 #include "SaveLoad.h"
 #include "Game/TileMapLayer.h"
+#include "Game/Wallet.h"
+#include "Game/Time.h"
 #include "Game/BeeHive.h"
 #include "Atlas/BeeHiveAtlas.h"
 #include "Atlas/HoneyExtractorAtlas.h"
@@ -193,6 +195,7 @@ void SaveLoad::saveEverything() {
 	SaveLoad::saveBeehives();
 	SaveLoad::saveHoneyExtractors();
 	SaveLoad::saveMap();
+	SaveLoad::saveMoney();
 	SaveLoad::saveTime();
 }
 
@@ -213,7 +216,7 @@ void SaveLoad::saveMoney() {
 	rapidjson::StringBuffer buffer;
 	rapidjson::Writer <rapidjson::StringBuffer> jsonWriter(buffer);
 	doc.SetArray();
-	Time::getInstance()->toJSON(doc);
+	Wallet::getInstance()->toJSON(doc);
 
 	doc.Accept(jsonWriter);
 	jsonToFile(docToString(doc), getPath("money.json"));
@@ -232,6 +235,21 @@ void SaveLoad::loadTime() {
 	doc.ParseStream(isw);
 
 	Time::getInstance()->fromJSON(doc);
+}
+
+void SaveLoad::loadMoney() {
+	std::ifstream ifs(getPath("money.json"));
+
+	if (!ifs.is_open()) {
+		log("Couldn't load money");
+		return;
+	}
+
+	IStreamWrapper isw(ifs);
+	rapidjson::Document doc;
+	doc.ParseStream(isw);
+
+	Wallet::getInstance()->fromJSON(doc);
 }
 
 /**
@@ -272,6 +290,10 @@ bool SaveLoad::timesSaveExists() {
 	return FileUtils::getInstance()->isFileExist(getPath("times.json"));
 }
 
+bool SaveLoad::moneySaveExists() {
+	return FileUtils::getInstance()->isFileExist(getPath("money.json"));
+}
+
 void SaveLoad::deleteTileMapSave() {
 	FileUtils::getInstance()->removeFile(getPath("tilemap.json"));
 	assert(!tileMapSaveExists());
@@ -292,6 +314,11 @@ void SaveLoad::deleteTimeSave() {
     assert(!timesSaveExists());
 }
 
+void SaveLoad::deleteMoneySave() {
+	FileUtils::getInstance()->removeFile(getPath("money.json"));
+    assert(!moneySaveExists());
+}
+
 //  call all separate delete methods
 void SaveLoad::deleteEverything() {
 	BeeHiveAtlas::getInstance()->clear();
@@ -300,4 +327,5 @@ void SaveLoad::deleteEverything() {
 	deleteHoneyExtractorsSave();
 	deleteTileMapSave();
 	deleteTimeSave();
+	deleteMoneySave();
 }

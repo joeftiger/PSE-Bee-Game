@@ -4,7 +4,6 @@
 
 #include "cocos2d.h"
 
-#include "Game/Time.h"
 #include "json/rapidjson.h"
 #include "json/istreamwrapper.h"
 #include "json/ostreamwrapper.h"
@@ -43,6 +42,8 @@ public:
 
 	static bool timesSaveExists();
 
+	static bool moneySaveExists();
+
 	static void saveBeehives();
 
 	static void loadBeehives();
@@ -68,6 +69,8 @@ public:
 	static void deleteHoneyExtractorsSave();
 
 	static void deleteTimeSave();
+
+	static void deleteMoneySave();
 
 	static void deleteEverything();
 };
