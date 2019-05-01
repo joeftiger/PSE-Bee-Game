@@ -72,15 +72,15 @@ void BeeHive::killVarroa() {
 void BeeHive::update() {
 	auto alg = GameAlgorithm::getInstance();
 	if (!isFull()) {
-		_beesAlive = (int) clampf(alg->nextBees(_beesAlive, _varoaAlive), 0, MAX_BEES);
+		_beesAlive = (int) clampf(_beesAlive + alg->nextBees(_beesAlive, _varoaAlive), 0, MAX_BEES);
 	}
 
 	if (!hasFullStorage()) {
-		_rawHoney = (int) clampf(alg->honeyProduction(_beesAlive), 0, MAX_RAW_HONEY);
+		_rawHoney = (int) clampf(_rawHoney + alg->honeyProduction(_beesAlive), 0, MAX_RAW_HONEY);
 	}
 
 	if (_varoaAlive > 0) {
-	    _varoaAlive = (int) clampf(alg->nextVarroa(_varoaAlive), 0, std::numeric_limits<int>::max());
+	    _varoaAlive = (int) clampf(_varoaAlive + alg->nextVarroa(_varoaAlive), 0, std::numeric_limits<int>::max());
 	}
 
 	varroaRandomizer();
