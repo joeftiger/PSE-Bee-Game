@@ -4,6 +4,10 @@
 
 
 #include "Player.h"
+#include "Wallet.h"
+#include "Atlas/BeeHiveAtlas.h"
+
+#include "Atlas/HoneyExtractorAtlas.h"
 
 
 Player *Player::_instance = nullptr;
