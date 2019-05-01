@@ -25,7 +25,7 @@ void TouchUtil::setDrag(const Vec2 &touchPos) {
             _draggedPlaceable = pair.second;
             _draggedSprite = _draggedPlaceable->getSprite();    // this creates a new sprite -> safe modifications
             _draggedSprite->setPosition(touchPos);
-            _draggedSprite->setScale(MAP_SCALE_SD);
+            _draggedSprite->setScale(MAP_SCALE_SD * 1.5f);
             _draggedSprite->setAnchorPoint(Vec2(0.5, 0));
         }
     }
