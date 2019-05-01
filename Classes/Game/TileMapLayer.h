@@ -6,6 +6,7 @@
 #define PSE_BEE_GAME_TILEMAPLAYER_H
 
 #include <TileMapObjects/Placeable.h>
+#include <Resources/Sprites.h>
 #include "cocos2d.h"
 #include "Observable.h"
 
@@ -93,7 +94,7 @@ public:
 	 * @return <code>true</code> if sprite can be placed. <br>
 	 * 		   <code>false</code> if not.
 	 */
-	bool canPlaceSprite(const Vec2 &position, const Size &size, int id);
+	bool canPlaceSprite(const Vec2 &position, const Size &size, Sprites::SpriteID id);
 
 	/**
 	 * Places the sprite with given size and ID to the specified position.
@@ -101,7 +102,7 @@ public:
 	 * @param size size of sprite (will be counted backwards from position);
 	 * @param id sprite id
 	 */
-	void placeSprite(const Vec2 &position, const Size &size, int id);
+	void placeSprite(const Vec2 &position, const Size &size, Sprites::SpriteID id);
 
 	/**
 	 * Shows / hides the obstruction layer

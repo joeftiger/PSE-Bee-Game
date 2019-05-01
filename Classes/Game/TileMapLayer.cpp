@@ -1,6 +1,7 @@
 #include "TileMapLayer.h"
 #include "HeaderFiles/DEFINITIONS.h"
 #include "Resources/Tiles.h"
+#include "Resources/Sprites.h"
 #include "SaveLoad/SaveLoad.h"
 
 bool TileMapLayer::init() {
@@ -176,12 +177,39 @@ void TileMapLayer::placeTile(const Vec2 &position, const int &gid) {
 	}
 }
 
-bool TileMapLayer::canPlaceSprite(const Vec2 &position, const Size &size, int id) {
-	return false;
+bool TileMapLayer::canPlaceSprite(const Vec2 &position, const Size &size, Sprites::SpriteID id) {
+	auto pos = getTilePosition(position);
+
+	for (auto x = 0; x < size.width; x++) {
+		for (auto y = 0; y < size.height; y++) {
+			auto tilePos = Vec2(pos.x - x, pos.y - y);
+
+			if (tilePos.x < 0 || tilePos.y < 0) {
+				return false;
+			}
+			if (_obstructionLayer->getTileGIDAt(tilePos) == Tiles::obstruction) {
+				return false;
+			}
+		}
+	}
+	return true;
 }
 
-void TileMapLayer::placeSprite(const Vec2 &position, const Size &size, int id) {
-	auto pos = _objectLayer->convertToNodeSpace(_objectLayer->getTileAt(position)->getPosition());
+void TileMapLayer::placeSprite(const Vec2 &position, const Size &size, Sprites::SpriteID id) {
+	auto pos = getTilePosition(position);
+
+	for (auto x = 0; x < size.width; x++) {
+		for (auto y = 0; y < size.height; y++) {
+			auto tilePos = Vec2(pos.x - x, pos.y - y);
+			_obstructionLayer->setTileGID(Tiles::obstruction, tilePos);
+		}
+	}
+
+	auto sprite = Sprites::getSpriteOf(id);
+	sprite->setScale(MAP_SCALE_SD);
+	sprite->setPosition(position);
+	sprite->setAnchorPoint(Vec2(0.5, 0));
+	this->addChild(sprite, pos.x + pos.y);
 }
 
 void TileMapLayer::showObstructions(bool visible) {
