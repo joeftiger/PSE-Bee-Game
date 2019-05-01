@@ -76,7 +76,8 @@ bool HUDLayer::init() {
 	                            visibleRect.origin.y + visibleRect.size.height - onePofScreenH * 5));
 	this->schedule(schedule_selector(HUDLayer::timer), 0.1f);
 
-
+    UICustom::Popup *popup = UICustom::Popup::createAsMessage("GROSSVATER", "Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich...");
+    this->addChild(popup);
 
 	return true;
 }
