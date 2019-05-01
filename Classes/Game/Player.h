@@ -9,12 +9,10 @@
 #include <vector>
 #include <TileMapObjects/Placeable.h>
 #include "BeeHive.h"
-#include "Atlas/BeeHiveAtlas.h"
+
 #include "HoneyExtractor.h"
-#include "Atlas/HoneyExtractorAtlas.h"
 #include "Observer.h"
 #include "Observable.h"
-#include "Wallet.h"
 
 class Player : public Observer, public Observable {
 private:

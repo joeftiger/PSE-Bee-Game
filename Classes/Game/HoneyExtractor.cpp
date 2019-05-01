@@ -19,7 +19,7 @@ bool HoneyExtractor::isEmpty() {
 }
 
 bool HoneyExtractor::isFull() {
-	return _honeyInExtractor == MAX__HONEY_IN_EXTRACTOR;
+	return _honeyInExtractor >= MAX__HONEY_IN_EXTRACTOR;
 }
 
 float HoneyExtractor::honeyInExtractor() {
