@@ -21,7 +21,7 @@ namespace  {
 namespace FONT {
     const float LABEL_OFFSET = 50;
     const float DESCRIPTION_TEXT_SIZE = 45;
-    const float TITLE_TEXT_SIZE = 70;
+    const float TITLE_TEXT_SIZE = 60;
     const char *GAME_FONT = "fonts/OpenSans-Regular.ttf";
     const float LABEL_STROKE = 4;
 }

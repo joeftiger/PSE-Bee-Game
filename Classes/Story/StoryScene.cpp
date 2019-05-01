@@ -13,8 +13,13 @@ bool StoryScene::init() {
 
 	}
 
-    UICustom::Popup *popup = UICustom::Popup::createAsMessage("Test 2", "This is a Message Popup");
-    this->addChild(popup);
+
+
+	UICustom::Popup *popup = UICustom::Popup::createAsMessage("GROSSVATER", "Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich...");
+	this->addChild(popup);
+
+
+
 
 	return true;
 }

@@ -5,6 +5,7 @@
 #include "ItemPanel/ItemPanelLayer.h"
 #include "AppDelegate.h"
 #include "Player.h"
+#include "Story/StoryScene.h"
 
 
 using namespace cocos2d;
@@ -65,8 +66,12 @@ bool GameScene::init() {
 	                            _tileMapLayer->getMap()->getBoundingBox().size.height / 2 - visibleSize.height / 2));
 	cameraTravel -= container->getPosition();
 
+
+
 	this->schedule(schedule_selector(GameScene::saveGameState), 60.0f);
 	this->schedule(schedule_selector(GameScene::beeHiveAtlasUpdate), 1.0f);
+
+
 	return true;
 }
 
