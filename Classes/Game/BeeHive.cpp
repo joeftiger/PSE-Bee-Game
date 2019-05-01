@@ -67,18 +67,20 @@ float BeeHive::takeRawHoney(float amount) {
 void BeeHive::killVarroa() {
 	_varoaAlive = (int) max(0.0f, _varoaAlive * 0.05f);
     _beesAlive = (int) max(0.0f, _beesAlive * 0.9f);
-
 }
 
 void BeeHive::update() {
-	_beesAlive += GameAlgorithm::getInstance()->nextBees(_beesAlive, _varoaAlive, isFull());
-
-	if (!hasFullStorage()) {
-		_rawHoney += GameAlgorithm::getInstance()->honeyProduction(_beesAlive);
+	auto alg = GameAlgorithm::getInstance();
+	if (!isFull()) {
+		_beesAlive = (int) clampf(alg->nextBees(_beesAlive, _varoaAlive), 0, MAX_BEES);
 	}
 
-	if (_varoaAlive >= 0) {
-	    _varoaAlive += GameAlgorithm::getInstance()->nextVarroa(_varoaAlive);
+	if (!hasFullStorage()) {
+		_rawHoney = (int) clampf(alg->honeyProduction(_beesAlive), 0, MAX_RAW_HONEY);
+	}
+
+	if (_varoaAlive > 0) {
+	    _varoaAlive = (int) clampf(alg->nextVarroa(_varoaAlive), 0, std::numeric_limits<int>::max());
 	}
 
 	varroaRandomizer();
