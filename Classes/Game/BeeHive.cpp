@@ -65,7 +65,7 @@ float BeeHive::takeRawHoney(float amount) {
 }
 
 void BeeHive::killVarroa() {
-	_varoaAlive = (int) max(0.0f, _varoaAlive / 20.0f);
+	_varoaAlive = (int) max(0.0f, _varoaAlive * 0.05f);
     _beesAlive = (int) max(0.0f, _beesAlive * 0.9f);
 
 }
@@ -139,8 +139,6 @@ void BeeHive::doTask() {
 
 	// TODO comment in line below once it's running again
     cocos2d::log("%s", s.c_str());
-	
-	
 }
 
 std::string BeeHive::getSprite()
