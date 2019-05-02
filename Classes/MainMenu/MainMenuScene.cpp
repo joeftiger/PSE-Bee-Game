@@ -3,6 +3,7 @@
 #include "Game/GameScene.h"
 #include "About/AboutScene.h"
 #include "Options/OptionsScene.h"
+#include "ui/CocosGUI.h"
 
 Scene *MainMenu::scene() { return MainMenu::create(); }
 
@@ -12,60 +13,86 @@ bool MainMenu::init() {
 	// standard size related functions
 	cocos2d::Rect visibleRect = Director::getInstance()->getOpenGLView()->getVisibleRect();
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
-	onePofScreenH = visibleSize.height / 100;
-    onePofScreenW = visibleSize.width / 100;
+	Vec2 origin = Vec2(visibleSize.width/2, visibleSize.height/2);
 
 	// adding a background, setting the middle as the anchor point and putting as far back as possible
 	auto *background = cocos2d::Sprite::create("menu/main-menu-background.png");
-	background->setPosition(visibleSize.width / 2, visibleSize.height / 2);
 	background->setAnchorPoint(Vec2(0.5, 0.5));
-	background->setScale(0.9f);
+	background->setPosition(origin);
 	this->addChild(background, -1000);
+
+	Vec2 backgroundOrigin = Vec2(background->getBoundingBox().size.width/2,
+                                background->getBoundingBox().size.height/2);
 
 	// Create a title and center it at the top of the screen
 	auto title = Label::createWithTTF("So Bee It!", "fonts/ReemKufi-Regular.ttf", 48);
-	title->setPosition(Vec2(origin.x + visibleSize.width / 2,
-    	                        origin.y + visibleSize.height - title->getContentSize().height));
+	title->setPosition(Vec2(origin.x, visibleSize.height - 80));
 	this->addChild(title, 3);
 
 	// Adding the sprites for the main menu with location and size adjustment
 	// all scaling and position through trial-and-error
-	auto playButton = MenuItemImage::create("menu/start.png", "menu/start.png",
-	                                        CC_CALLBACK_1(MainMenu::onPlayClick, this));
-	playButton->setPosition(Vec2(visibleRect.origin.x,
-									visibleRect.origin.y + onePofScreenH * 19));
-	playButton->setScale(1.04f);
+    auto playButton = ui::Button::create("menu/start.png");
 
-	auto optionsButton = MenuItemImage::create("menu/options.png", "menu/options.png",
-	                                           CC_CALLBACK_1(MainMenu::onOptionsClick, this));
-	optionsButton->setPosition(Vec2(visibleRect.origin.x - onePofScreenW * 5.5,
-									visibleRect.origin.y ));
-	optionsButton->setScale(1.04f);
+    playButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
+        switch (type) {
+            case ui::Widget::TouchEventType::BEGAN:
+                break;
+            case ui::Widget::TouchEventType::ENDED:
+                this->onPlayClick(background);
+                break;
+        }
+    });
+	playButton->setPosition(Vec2(backgroundOrigin.x, backgroundOrigin.y));
+	playButton->setAnchorPoint(Vec2(0.5, -0.26));
+	playButton->setScale(1.3);
 
-	auto aboutButton = MenuItemImage::create("menu/credits.png", "menu/credits.png",
-	                                         CC_CALLBACK_1(MainMenu::onAboutClick, this));
-	aboutButton->setPosition(Vec2(visibleRect.origin.x + onePofScreenW * 7.3,
-									visibleRect.origin.y));
-	aboutButton->setScale(1.04f);
+	auto optionsButton = ui::Button::create("menu/options.png");
+    optionsButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
+        switch (type) {
+            case ui::Widget::TouchEventType::BEGAN:
+                break;
+            case ui::Widget::TouchEventType::ENDED:
+                this->onOptionsClick(background);
+                break;
+        }
+    });
+	optionsButton->setPosition(Vec2(backgroundOrigin.x, backgroundOrigin.y));
+	optionsButton->setAnchorPoint(Vec2(1.025, 0.5));
+	optionsButton->setScale(1.3);
 
-	auto exitButton = MenuItemImage::create("menu/exit.png", "menu/exit.png",
-    	                                        CC_CALLBACK_1(MainMenu::onExitClick, this));
-    exitButton->setPosition(Vec2(visibleRect.origin.x,
-                                    visibleRect.origin.y - onePofScreenH * 19));
-    exitButton->setScale(1.04f);
+    auto aboutButton = ui::Button::create("menu/options.png");
+    aboutButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
+        switch (type) {
+            case ui::Widget::TouchEventType::BEGAN:
+                break;
+            case ui::Widget::TouchEventType::ENDED:
+                this->onAboutClick(background);
+                break;
+        }
+    });
+	aboutButton->setPosition(Vec2(backgroundOrigin.x, backgroundOrigin.y));
+	aboutButton->setAnchorPoint(Vec2(-0.025, 0.5));
+	aboutButton->setScale(1.3);
 
-	// vector of menu items and then adding all the menu items and creating them
-	Vector<MenuItem *> MenuItems;
+    auto exitButton = ui::Button::create("menu/options.png");
+    exitButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
+        switch (type) {
+            case ui::Widget::TouchEventType::BEGAN:
+                break;
+            case ui::Widget::TouchEventType::ENDED:
+                this->onExitClick(background);
+                break;
+        }
+    });
+	exitButton->setAnchorPoint(Vec2(0.5, 1.26));
+    exitButton->setPosition(Vec2(backgroundOrigin.x, backgroundOrigin.y));
+    exitButton->setScale(1.3);
 
-	MenuItems.pushBack(playButton);
-	MenuItems.pushBack(optionsButton);
-	MenuItems.pushBack(aboutButton);
-	MenuItems.pushBack(exitButton);
+	background->addChild(playButton);
+	background->addChild(optionsButton);
+	background->addChild(aboutButton);
+	background->addChild(exitButton);
 
-	auto menu = Menu::createWithArray(MenuItems);
-	this->addChild(menu, 2);
 
 
 	return true;
