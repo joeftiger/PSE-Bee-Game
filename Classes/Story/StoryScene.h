@@ -4,15 +4,21 @@
 #define __STORY_SCENE_H
 
 #include "cocos2d.h"
+#include "Game/Time.h"
+#include "Popup.h"
 
 using namespace cocos2d;
 
-class StoryScene : public cocos2d::Scene {
-
+class StoryScene : public cocos2d::Node {
+private:
+    Time* time;
+    bool state;
 public:
-	static cocos2d::Scene *createScene();
 
 	virtual bool init();
+	//void introPopup();
+	//void update(float dt) override;
+	UICustom::Popup* createPopup(int);
 
 	CREATE_FUNC(StoryScene);
 

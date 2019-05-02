@@ -2,24 +2,49 @@
 
 #include "StoryScene.h"
 #include "Popup.h"
+#include "Game/Time.h"
 
 
-Scene *StoryScene::createScene() { 	return StoryScene::create(); }
 
 bool StoryScene::init() {
 
-	if (!Scene::init()) {
+	if (!Node::init()) {
 		return false;
 
 	}
 
+	time = Time::getInstance();
+	state = true;
 
+	// Popups: Spielstart tutorial, erstes mal varroa,
 
-	UICustom::Popup *popup = UICustom::Popup::createAsMessage("GROSSVATER", "Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich...");
-	this->addChild(popup);
-
-
+    this->schedule(schedule_selector(StoryScene::update), 1.0f);
 
 
 	return true;
+}
+
+/*void StoryScene::update(float delta) {
+    if (time->getMonth()==4 && state){
+        UICustom::Popup *popup = UICustom::Popup::createAsMessage("GROSSVATER", "Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich...");
+        this->addChild(popup);
+        state = false;
+    }
+}*/
+
+/*void StoryScene::introPopup(){
+    UICustom::Popup *popup = UICustom::Popup::createAsMessage("GROSSVATER", "Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich...");
+    this->addChild(popup);
+}*/
+
+UICustom::Popup* StoryScene::createPopup(int id){
+    if (id == 0) { //not working
+        return UICustom::Popup::createAsMessage("GROSSVATER", "Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich...");
+    }
+    /*if (id == 1) {
+        UICustom::Popup *popup1 = UICustom::Popup::createAsMessage("GROSSVATER",
+                                                                   "Varroa.. iiiiih");
+        this->addChild(popup1);
+    }*/
+
 }
