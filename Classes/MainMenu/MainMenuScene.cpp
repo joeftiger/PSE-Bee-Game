@@ -34,26 +34,26 @@ bool MainMenu::init() {
 	// all scaling and position through trial-and-error
 	auto playButton = MenuItemImage::create("menu/start.png", "menu/start.png",
 	                                        CC_CALLBACK_1(MainMenu::onPlayClick, this));
-	playButton->setPosition(Vec2(visibleRect.origin.x + onePofScreenW * 0.8,
-									visibleRect.origin.y + onePofScreenH * 8.3));
+	playButton->setPosition(Vec2(visibleRect.origin.x,
+									visibleRect.origin.y + onePofScreenH * 19));
 	playButton->setScale(1.04f);
 
 	auto optionsButton = MenuItemImage::create("menu/options.png", "menu/options.png",
 	                                           CC_CALLBACK_1(MainMenu::onOptionsClick, this));
 	optionsButton->setPosition(Vec2(visibleRect.origin.x - onePofScreenW * 5.5,
-									visibleRect.origin.y - onePofScreenH * 13.3 ));
+									visibleRect.origin.y ));
 	optionsButton->setScale(1.04f);
 
 	auto aboutButton = MenuItemImage::create("menu/credits.png", "menu/credits.png",
 	                                         CC_CALLBACK_1(MainMenu::onAboutClick, this));
 	aboutButton->setPosition(Vec2(visibleRect.origin.x + onePofScreenW * 7.3,
-									visibleRect.origin.y  - onePofScreenH * 13.3));
+									visibleRect.origin.y));
 	aboutButton->setScale(1.04f);
 
 	auto exitButton = MenuItemImage::create("menu/exit.png", "menu/exit.png",
     	                                        CC_CALLBACK_1(MainMenu::onExitClick, this));
-    exitButton->setPosition(Vec2(visibleRect.origin.x + onePofScreenW  * 0.8,
-                                    visibleRect.origin.y - onePofScreenH * 34.5));
+    exitButton->setPosition(Vec2(visibleRect.origin.x,
+                                    visibleRect.origin.y - onePofScreenH * 19));
     exitButton->setScale(1.04f);
 
 	// vector of menu items and then adding all the menu items and creating them
