@@ -93,7 +93,6 @@ bool MainMenu::init() {
 	background->addChild(optionsButton);
 	background->addChild(aboutButton);
 	background->addChild(exitButton);
-	log(to_string(visibleSize.height).c_str());
 	background->setScale(visibleSize.height/900);
 
 	return true;
