@@ -43,8 +43,7 @@ ssize_t TileMapLayer::getFlowerCount() {
 			auto coordinate = Vec2(x, y);
 			auto gid = _objectLayer->getTileGIDAt(coordinate);
 
-			if (gid == Tiles::flower1 || gid == Tiles::flower2 || gid == Tiles::flower3 ||
-			    gid == Tiles::flower4) {
+			if (Tiles::isFlower(static_cast<Tiles::TileGID>(gid))) {
 				count++;
 			}
 		}
@@ -61,9 +60,7 @@ std::vector<cocos2d::Vec2> TileMapLayer::getBeeHives() {
 			auto coordinate = Vec2(x, y);
 			auto gid = _objectLayer->getTileGIDAt(coordinate);
 
-			if (gid == Tiles::beehiveSmall1 ||
-			    gid == Tiles::beehiveMiddle1 ||
-			    gid == Tiles::beehiveBig1) {
+			if (Tiles::isBeeHive(static_cast<Tiles::TileGID>(gid))) {
 				beeHives.push_back(coordinate);
 			}
 		}
@@ -80,7 +77,7 @@ std::vector<cocos2d::Vec2> TileMapLayer::getHoneyExtractors() {
 			auto coordinate = Vec2(x, y);
 			auto gid = _objectLayer->getTileGIDAt(coordinate);
 	//TODO Change this to the honey extractor tile / sprite
-			if (gid == Tiles::flower3) {
+			if (gid == Tiles::beehive_big_overflow) {
 				honeyExtractors.push_back(coordinate);
 			}
 		}
@@ -153,31 +150,29 @@ void TileMapLayer::place(Placeable *placeable, Vec2 &position) {
 	placeable->placeOn(this, position);
 }
 
-bool TileMapLayer::canPlaceTile(const Vec2 &position, int gid) {
+bool TileMapLayer::canPlaceTile(const Vec2 &position) {
 	auto pos = getTilePosition(position);
 
 	return _obstructionLayer->getTileGIDAt(pos) == Tiles::no_obstruction;
 }
 
-void TileMapLayer::placeTile(const Vec2 &position, const int &gid) {
+void TileMapLayer::placeTile(const Vec2 &position, Tiles::TileGID &gid) {
 	auto pos = getTilePosition(position);
-	_objectLayer->setTileGID(gid, pos); //1 = flower; 2,3,4,5 = bush1,2,3,4; 6 = grass; 7 = road
+	_objectLayer->setTileGID(gid, pos);
 
-	if (gid == Tiles::beehiveSmall1 ||
-	    gid == Tiles::beehiveMiddle1 ||
-	    gid == Tiles::beehiveBig1) {
+	if (Tiles::isBeeHive(gid)) {
 
 		_obstructionLayer->setTileGID(Tiles::obstruction, pos);
 
 		notifyObservers();
 	}
 	// TODO: Implement correct honey extractor gid
-	else if (gid == Tiles::flower3) {
+	else if (gid == Tiles::beehive_big_overflow) {
 		notifyObservers();
 	}
 }
 
-bool TileMapLayer::canPlaceSprite(const Vec2 &position, const Size &size, Sprites::SpriteID id) {
+bool TileMapLayer::canPlaceSprite(const Vec2 &position, const Size &size) {
 	auto pos = getTilePosition(position);
 
 	for (auto x = 0; x < size.width; x++) {
@@ -249,9 +244,7 @@ void TileMapLayer::initObstructionLayer() {
 			auto pos = Vec2(x, y);
 			auto gid = _objectLayer->getTileGIDAt(pos);
 
-			if (gid == Tiles::beehiveSmall1 ||
-			    gid == Tiles::beehiveMiddle1 ||
-			    gid == Tiles::beehiveBig1) {
+			if (Tiles::isBeeHive(static_cast<Tiles::TileGID>(gid))) {
 				_obstructionLayer->setTileGID(Tiles::obstruction, pos);
 			} else {
 				_obstructionLayer->setTileGID(Tiles::no_obstruction, pos);

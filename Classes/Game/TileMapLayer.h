@@ -6,6 +6,7 @@
 #define PSE_BEE_GAME_TILEMAPLAYER_H
 
 #include <TileMapObjects/Placeable.h>
+#include <Resources/Tiles.h>
 #include <Resources/Sprites.h>
 #include "cocos2d.h"
 #include "Observable.h"
@@ -25,7 +26,7 @@ private:
 	void loadMap();
 
 	/**
-	 * Initialzes the obstruction layer accordin to obstructing tiles in the object layer
+	 * Initializes the obstruction layer accordin to obstructing tiles in the object layer
 	 */
 	void initObstructionLayer();
 
@@ -73,18 +74,17 @@ public:
 	/**
 	 * Returns whether the tile at specified position can be replaced or not (e.g. beehive/tree on this tile)
 	 * @param position position in tile coordinates
-	 * @param gid the gid of the new tile
 	 * @return <code>true</code> if tile may be placed. <br>
 	 * 		   <code>false</code> if the position is obstructed.
 	 */
-	bool canPlaceTile(const Vec2 &position, int gid);
+	bool canPlaceTile(const Vec2 &position);
 
 	/**
 	 * Places the given tile (gid) at the given position (forced).
 	 * @param position position in tile coordinates
 	 * @param gid tile gid
 	 */
-	void placeTile(const Vec2 &position, const int &gid);
+	void placeTile(const Vec2 &position, Tiles::TileGID &gid);
 
 	/**
 	 * Returns whether a sprite with given size and ID can be placed at the specified position.
@@ -94,7 +94,7 @@ public:
 	 * @return <code>true</code> if sprite can be placed. <br>
 	 * 		   <code>false</code> if not.
 	 */
-	bool canPlaceSprite(const Vec2 &position, const Size &size, Sprites::SpriteID id);
+	bool canPlaceSprite(const Vec2 &position, const Size &size);
 
 	/**
 	 * Places the sprite with given size and ID to the specified position.
