@@ -50,18 +50,18 @@ bool ItemPanelLayer::init() {
 void ItemPanelLayer::initializeItemPanel() {
 	auto box = this->getBoundingBox().size;
 
-    _placeables.emplace_back(new PlaceableTile(Tiles::beehiveSmall1));
-	_placeables.emplace_back(new PlaceableTile(Tiles::beehiveMiddle1));
-	_placeables.emplace_back(new PlaceableTile(Tiles::beehiveBig1));
-	_placeables.emplace_back(new PlaceableTile(Tiles::flower1));
-	_placeables.emplace_back(new PlaceableTile(Tiles::flower2));
-	_placeables.emplace_back(new PlaceableTile(Tiles::flower3));
-	_placeables.emplace_back(new PlaceableTile(Tiles::flower4));
-	_placeables.emplace_back(new PlaceableTile(Tiles::bush1));
+    _placeables.emplace_back(new PlaceableTile(Tiles::beehive_small));
+	_placeables.emplace_back(new PlaceableTile(Tiles::beehive_middle));
+	_placeables.emplace_back(new PlaceableTile(Tiles::beehive_big));
+	_placeables.emplace_back(new PlaceableTile(Tiles::flower_blue_big));
+	_placeables.emplace_back(new PlaceableTile(Tiles::flower_white_big));
+	_placeables.emplace_back(new PlaceableTile(Tiles::flower_red_big));
+	_placeables.emplace_back(new PlaceableTile(Tiles::flower_pink_big));
+	_placeables.emplace_back(new PlaceableTile(Tiles::bush_big));
 	_placeables.emplace_back(new PlaceableTile(Tiles::road));
-	_placeables.emplace_back(new PlaceableSprite(Sprites::tree_1));
-	_placeables.emplace_back(new PlaceableSprite(Sprites::tree_2));
-	_placeables.emplace_back(new PlaceableSprite(Sprites::tree_4));
+	_placeables.emplace_back(new PlaceableSprite(Sprites::tree_1_spring_summer));
+	_placeables.emplace_back(new PlaceableSprite(Sprites::tree_2_spring_summer));
+	_placeables.emplace_back(new PlaceableSprite(Sprites::tree_3_spring_summer_fall));
 
 	auto width = 0;
 	auto height = 0;
