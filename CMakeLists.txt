@@ -80,6 +80,7 @@ endif ()
 # add cross-platforms source files and header files 
 list(APPEND GAME_SOURCE
         Classes/AppDelegate.cpp
+        Classes/Settings.cpp
         Classes/Game/GameScene.cpp
         Classes/Story/StoryScene.cpp
         Classes/Game/HUDLayer.cpp
@@ -114,6 +115,7 @@ list(APPEND GAME_SOURCE
 
 list(APPEND GAME_HEADER
         Classes/AppDelegate.h
+        Classes/Settings.h
         Classes/Game/GameScene.h
         Classes/Story/StoryScene.h
         Classes/Game/HUDLayer.h
