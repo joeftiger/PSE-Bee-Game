@@ -574,6 +574,36 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>4_9_obstruction.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{194,263}</string>
+                <key>spriteSourceSize</key>
+                <string>{194,263}</string>
+                <key>textureRect</key>
+                <string>{{1551,792},{194,263}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>4_10_no_obstruction.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{194,263}</string>
+                <key>spriteSourceSize</key>
+                <string>{194,263}</string>
+                <key>textureRect</key>
+                <string>{{1744,792},{194,263}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
         </dict>
         <key>metadata</key>
         <dict>
