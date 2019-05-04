@@ -5,7 +5,7 @@
 
 class Tiles {
 public:
-    enum TileGID {
+    enum TileGID : unsigned int {
 	    beehive_small           = 1,
 	    beehive_middle          = 2,
 	    beehive_big             = 3,
