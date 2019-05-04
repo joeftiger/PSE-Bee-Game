@@ -6,6 +6,7 @@
 
 
 SpriteContainer::SpriteContainer() {
+    cocos2d::log("SpriteContainer:\tCreating Instance");
     loadSpriteSheet();
 }
 
@@ -14,10 +15,10 @@ void SpriteContainer::loadSpriteSheet() {
         _cache->removeSpriteFramesFromFile("Spritesheet/SD/spritesheet.plist"); // if HD TEXTURES
         _cache->removeSpriteFramesFromFile("Spritesheet/SD/tilesheet.plist");
         _cache->addSpriteFramesWithFile("Spritesheet/HD/spritesheet.plist");
-        _cache->addSpriteFramesWithFile("SpriteSheet/HD/tilesheet.plist");
+        _cache->addSpriteFramesWithFile("Spritesheet/HD/tilesheet.plist");
     } else {
         _cache->removeSpriteFramesFromFile("Spritesheet/HD/spritesheet.plist"); // if SD TEXTURES
-        _cache->removeSpriteFramesFromFile("SpriteSheet/HD/tilesheet.plist");
+        _cache->removeSpriteFramesFromFile("Spritesheet/HD/tilesheet.plist");
         _cache->addSpriteFramesWithFile("Spritesheet/SD/spritesheet.plist");
         _cache->addSpriteFramesWithFile("Spritesheet/SD/tilesheet.plist");
     }
@@ -27,7 +28,7 @@ Sprite *SpriteContainer::getSpriteOf(Tiles::TileGID gid) {
     switch (gid) {
         case Tiles::beehive_small:              return Sprite::createWithSpriteFrameName("1_1_bienenstock1_klein.png");
         case Tiles::beehive_middle:             return Sprite::createWithSpriteFrameName("1_2_bienenstock1_mittel.png");
-        case Tiles::beehive_big:                return Sprite::createWithSpriteFrameName("1_3_bienenstock_gross.png");
+        case Tiles::beehive_big:                return Sprite::createWithSpriteFrameName("1_3_bienenstock1_gross.png");
         case Tiles::beehive_small_open:         return Sprite::createWithSpriteFrameName("1_4_bienenstock2_klein.png");
         case Tiles::beehive_middle_open:        return Sprite::createWithSpriteFrameName("1_5_bienenstock2_mittel.png");
         case Tiles::beehive_big_open:           return Sprite::createWithSpriteFrameName("1_6_bienenstock2_gross.png");
