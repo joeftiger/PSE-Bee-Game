@@ -2,7 +2,15 @@
 // Created by julius on 28.04.19.
 //
 
+#include <Settings.h>
 #include "SpriteContainer.h"
+
+
+SpriteContainer::SpriteContainer() {
+    auto spritecache = SpriteFrameCache::getInstance();
+    spritecache->addSpriteFramesWithFile("Spritesheet/SD/spritesheet.png");
+    spritecache->getSpriteFrameByName("spritesheet.png");
+}
 
 Sprite *SpriteContainer::getSpriteOf(Tiles::TileGID gid) {
     std::string path = "tilemaps/Tiles/SD/";
@@ -34,17 +42,17 @@ Sprite *SpriteContainer::getSpriteOf(Tiles::TileGID gid) {
 Sprite *SpriteContainer::getSpriteOf(Sprites::SpriteID id) {
     std::string path = "tilemaps/Sprites/";
     switch (id) {
-        case Sprites::tree_1:           return Sprite::create(path + "baum1_spring_summer.png");
+        case Sprites::tree_1_spring_summer:           return Sprite::create(path + "baum1_spring_summer.png");
         case Sprites::tree_1_apple_1:   return Sprite::create(path + "baum1_apfel1.png");
         case Sprites::tree_1_apple_2:   return Sprite::create(path + "baum1_apfel2.png");
         case Sprites::tree_1_apple_3:   return Sprite::create(path + "baum1_apfel3.png");
-        case Sprites::tree_2:           return Sprite::create(path + "baum2_spring_summer.png");
+        case Sprites::tree_2_spring_summer:           return Sprite::create(path + "baum2_spring_summer.png");
         case Sprites::tree_2_apple_1:   return Sprite::create(path + "baum2_apfel1.png");
         case Sprites::tree_2_apple_2:   return Sprite::create(path + "baum2_apfel2.png");
         case Sprites::tree_2_apple_3:   return Sprite::create(path + "baum2_apfel3.png");
-        case Sprites::tree_3_summer:    return Sprite::create(path + "baum3_spring_summer.png");
+        case Sprites::tree_3_spring_summer_fall:    return Sprite::create(path + "baum3_spring_summer.png");
         case Sprites::tree_3_winter:    return Sprite::create(path + "baum3_winter.png");
-        case Sprites::tree_4:           return Sprite::create(path + "baum4_spring_summer.png");
+        case Sprites::tree_4_spring_summer:           return Sprite::create(path + "baum4_spring_summer.png");
         case Sprites::tree_4_apple_1:   return Sprite::create(path + "baum4_apfel1.png");
         case Sprites::tree_4_apple_2:   return Sprite::create(path + "baum4_apfel2.png");
         case Sprites::tree_4_apple_3:   return Sprite::create(path + "baum4_apfel3.png");
@@ -57,4 +65,14 @@ Sprite *SpriteContainer::getSpriteOf(Sprites::SpriteID id) {
         case Sprites::coin_pile:        return Sprite::create(path + "münze_haufen.png");
         default:                        return nullptr;
     }
+}
+
+void SpriteContainer::notify(void *pVoid) {
+	if (Settings::getInstance()->getBool(Settings::SettingName::HD_Resolution)) {
+		_spritecache->removeSpriteFramesFromFile("SpriteSheet/SD/spritesheet.plist");
+		_spritecache->addSpriteFramesWithFile("SpriteSheet/HD/spritesheet.plist");
+	} else {
+		_spritecache->removeSpriteFramesFromFile("SpriteSheet/HD/spritesheet.plist");
+		_spritecache->addSpriteFramesWithFile("SpriteSheet/SD/spritesheet.plist");
+	}
 }
