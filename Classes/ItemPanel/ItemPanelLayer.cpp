@@ -59,9 +59,9 @@ void ItemPanelLayer::initializeItemPanel() {
 	_placeables.emplace_back(new PlaceableTile(Tiles::flower4));
 	_placeables.emplace_back(new PlaceableTile(Tiles::bush1));
 	_placeables.emplace_back(new PlaceableTile(Tiles::road));
-	_placeables.emplace_back(new PlaceableSprite(Sprites::tree_1_spring_summer));
-	_placeables.emplace_back(new PlaceableSprite(Sprites::tree_2_spring_summer));
-	_placeables.emplace_back(new PlaceableSprite(Sprites::tree_4_spring_summer));
+	_placeables.emplace_back(new PlaceableSprite(Sprites::tree_1));
+	_placeables.emplace_back(new PlaceableSprite(Sprites::tree_2));
+	_placeables.emplace_back(new PlaceableSprite(Sprites::tree_4));
 
 	auto width = 0;
 	auto height = 0;
