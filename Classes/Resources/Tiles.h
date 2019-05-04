@@ -6,31 +6,46 @@
 class Tiles {
 public:
     enum TileGID {
-        beehiveBig1 = 1,
-        beehiveSmall1 = 2,
-        beehiveMiddle1 = 3,
-        // open beehiveBig1
-        beehiveBig2 = 4,
-        // open beehiveSmall1
-        beehiveSmall2 = 6,
-        // open beehiveMiddle1
-        beehiveMiddle2 = 7,
-        // overflowing beehiveBig1
-        beehiveBig3 = 8,
-        // overflowing beehiveMiddle1
-        beehiveMiddle3 = 9,
-        flower1 = 11,
-        flower2 = 12,
-        flower3 = 13,
-        flower4 = 14,
-        bush1 = 5,
-        bush2 = 10,
-        bush3 = 15,
-        bush4 = 16,
-        grass = 17,
-        road = 18,
-        obstruction = 19,
-        no_obstruction = 20
+	    beehive_small           = 1,
+	    beehive_middle          = 2,
+	    beehive_big             = 3,
+	    beehive_small_open      = 4,
+	    beehive_middle_open     = 5,
+        beehive_big_open        = 6,
+        beehive_middle_overflow = 7,
+	    beehive_big_overflow    = 8,
+	    grass                   = 9,
+	    road                    = 10,
+	    beehive_small_winter    = 11,
+	    beehive_middle_winter   = 12,
+	    beehive_big_winter      = 13,
+	    flower_blue_small       = 14,
+	    flower_blue_middle      = 15,
+	    flower_blue_big         = 16,
+	    flower_red_small        = 17,
+	    flower_red_middle       = 18,
+	    flower_red_big          = 19,
+	    snow                    = 20,
+	    brushwood_small         = 21,
+	    bush_small              = 22,
+	    bush_big                = 23,
+	    brushwood_big           = 24,
+	    flower_white_small      = 25,
+	    flower_white_middle     = 26,
+	    flower_white_big        = 27,
+	    flower_pink_small       = 28,
+	    flower_pink_middle      = 29,
+	    flower_pink_big         = 30,
+	    brushwood_small_winter  = 31,
+	    bush_small_winter       = 32,
+	    bush_big_winter         = 33,
+	    brushwood_big_winter    = 34,
+	    snow_1                  = 35,
+	    snow_2                  = 36,
+	    snow_3                  = 37,
+	    snow_4                  = 38,
+	    obstruction             = 39,
+	    no_obstruction          = 40        T
     };
 
 	/**
