@@ -12,6 +12,8 @@
 USING_NS_CC;
 
 class SpriteContainer {
+private:
+    SpriteFrameCache *_cache = SpriteFrameCache::getInstance();
 public:
     static SpriteContainer *getInstance() {
         static auto instance = new SpriteContainer();
