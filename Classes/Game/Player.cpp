@@ -21,6 +21,7 @@ Player *Player::getInstance() {
 		_instance = new Player;
 		BeeHiveAtlas::getInstance()->subscribe(*_instance);
 	}
+
 	return _instance;
 }
 
@@ -33,7 +34,7 @@ float Player::totalRawHoney() {
 }
 
 int Player::returnTotalMoney() {
-	totalMoney= Wallet::getInstance()->returnTotalMoney();
+	totalMoney = Wallet::getInstance()->returnTotalMoney();
 	return totalMoney;
 }
 
