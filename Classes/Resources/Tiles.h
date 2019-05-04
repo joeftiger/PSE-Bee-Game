@@ -45,8 +45,22 @@ public:
 	    snow_3                  = 37,
 	    snow_4                  = 38,
 	    obstruction             = 39,
-	    no_obstruction          = 40        T
+	    no_obstruction          = 40
     };
+
+    /**
+     * Returns whether the given tile gid is of type beehive.
+     * @param gid tile gid
+     * @return <code>true</code> if beehive. <code>false</code> if not.
+     */
+    static bool isBeeHive(TileGID gid);
+
+	/**
+	 * Returns whether the given tile gid is of type flower.
+	 * @param gid tile gid
+	 * @return <code>true</code> if flower. <code>false</code> if not.
+	 */
+    static bool isFlower(TileGID gid);
 
 	/**
 	 * Returns the sprite corresponding to the given tile gid.
