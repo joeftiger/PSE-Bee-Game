@@ -15,7 +15,7 @@ const Size &PlaceableSprite::getSize() const {
 }
 
 bool PlaceableSprite::canPlaceOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) {
-	return tileMapLayer->canPlaceSprite(position, _size, _id);
+	return tileMapLayer->canPlaceSprite(position, _size);
 }
 
 void PlaceableSprite::placeOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) {

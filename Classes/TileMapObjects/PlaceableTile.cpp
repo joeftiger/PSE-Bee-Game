@@ -9,7 +9,7 @@ PlaceableTile::PlaceableTile(Tiles::TileGID gid) {
 }
 
 bool PlaceableTile::canPlaceOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) {
-    return tileMapLayer->canPlaceTile(position, _gid);
+    return tileMapLayer->canPlaceTile(position);
 }
 
 void PlaceableTile::placeOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) {
