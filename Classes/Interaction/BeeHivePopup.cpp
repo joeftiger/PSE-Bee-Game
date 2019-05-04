@@ -21,7 +21,7 @@ void BeeHivePopup::initBackground() {
 }
 
 void BeeHivePopup::initImage() {
-    auto image = SpriteContainer::getInstance()->getSpriteOf(Tiles::TileGID::beehiveSmall2);
+    auto image = SpriteContainer::getInstance()->getSpriteOf(Tiles::TileGID::beehive_small_open);
     auto background = this->getChildByName("background");
     auto box = background->getContentSize();
 
