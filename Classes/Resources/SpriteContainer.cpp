@@ -4,6 +4,25 @@
 
 #include "SpriteContainer.h"
 
+
+SpriteContainer::SpriteContainer() {
+    loadSpriteSheet();
+}
+
+void SpriteContainer::loadSpriteSheet() {
+    if (true) {
+        _cache->removeSpriteFramesFromFile("Spritesheet/SD/spritesheet.plist"); // if HD TEXTURES
+        _cache->removeSpriteFramesFromFile("Spritesheet/SD/tilesheet.plist");
+        _cache->addSpriteFramesWithFile("Spritesheet/HD/spritesheet.plist");
+        _cache->addSpriteFramesWithFile("SpriteSheet/HD/tilesheet.plist");
+    } else {
+        _cache->removeSpriteFramesFromFile("Spritesheet/HD/spritesheet.plist"); // if SD TEXTURES
+        _cache->removeSpriteFramesFromFile("SpriteSheet/HD/tilesheet.plist");
+        _cache->addSpriteFramesWithFile("Spritesheet/SD/spritesheet.plist");
+        _cache->addSpriteFramesWithFile("Spritesheet/SD/tilesheet.plist");
+    }
+}
+
 Sprite *SpriteContainer::getSpriteOf(Tiles::TileGID gid) {
     switch (gid) {
         case Tiles::beehive_small:              return Sprite::createWithSpriteFrameName("1_1_bienenstock1_klein.png");

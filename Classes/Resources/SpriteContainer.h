@@ -14,6 +14,14 @@ USING_NS_CC;
 class SpriteContainer {
 private:
     SpriteFrameCache *_cache = SpriteFrameCache::getInstance();
+
+    SpriteContainer();
+
+    /**
+     * Loads the spritesheet.
+     */
+    void loadSpriteSheet();
+
 public:
     static SpriteContainer *getInstance() {
         static auto instance = new SpriteContainer();
