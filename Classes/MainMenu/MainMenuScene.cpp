@@ -16,19 +16,14 @@ bool MainMenu::init() {
 	Vec2 origin = Vec2(visibleSize.width/2, visibleSize.height/2);
 
 	// adding a background, setting the middle as the anchor point and putting as far back as possible
-	auto *background = cocos2d::Sprite::create("menu/main-menu-background.png");
+	auto *background = cocos2d::Sprite::create("menu/main-menu-background-title.png");
 	background->setAnchorPoint(Vec2(0, 0.5));
 	background->setPosition(Vec2(0, origin.y));
 	this->addChild(background, -1000);
 
-	Vec2 backgroundOrigin = Vec2(background->getBoundingBox().size.width/2,
-                                background->getBoundingBox().size.height/2);
+	Vec2 buttonsBed = Vec2(background->getBoundingBox().size.width/2 + 153,
+                                background->getBoundingBox().size.height/2 - 3);
 
-	// Create a title and center it at the top of the screen
-	//auto title = Label::createWithTTF("So Bee It!", "fonts/ReemKufi-Regular.ttf", 48);
-	Sprite* title = Sprite::create("menu/title.png");
-	title->setPosition(Vec2(436, backgroundOrigin.y + 95));
-	background->addChild(title, 3);
 
 	// Adding the sprites for the main menu with location and size adjustment
 	// all scaling and position through trial-and-error
@@ -43,7 +38,7 @@ bool MainMenu::init() {
                 break;
         }
     });
-	playButton->setPosition(Vec2(backgroundOrigin.x, backgroundOrigin.y));
+	playButton->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
 	playButton->setAnchorPoint(Vec2(0.5, -0.27));
 	playButton->setScale(1.3);
 
@@ -57,7 +52,7 @@ bool MainMenu::init() {
                 break;
         }
     });
-	optionsButton->setPosition(Vec2(backgroundOrigin.x, backgroundOrigin.y));
+	optionsButton->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
 	optionsButton->setAnchorPoint(Vec2(1.025, 0.5));
 	optionsButton->setScale(1.3);
 
@@ -71,7 +66,7 @@ bool MainMenu::init() {
                 break;
         }
     });
-	aboutButton->setPosition(Vec2(backgroundOrigin.x, backgroundOrigin.y));
+	aboutButton->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
 	aboutButton->setAnchorPoint(Vec2(-0.025, 0.5));
 	aboutButton->setScale(1.3);
 
@@ -86,14 +81,20 @@ bool MainMenu::init() {
         }
     });
 	exitButton->setAnchorPoint(Vec2(0.5, 1.27));
-    exitButton->setPosition(Vec2(backgroundOrigin.x, backgroundOrigin.y));
+    exitButton->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
     exitButton->setScale(1.3);
+
+    // Create a title and center it at the top of the screen
+	//auto title = Label::createWithTTF("So Bee It!", "fonts/ReemKufi-Regular.ttf", 48);
+	//Sprite* title = Sprite::create("menu/title.png");
+	//title->setPosition(Vec2(464, buttonsBed.y + 97));
+	//background->setScale(visibleSize.height/900);
+	//background->addChild(title, 3);
 
 	background->addChild(playButton);
 	background->addChild(optionsButton);
 	background->addChild(aboutButton);
 	background->addChild(exitButton);
-	background->setScale(visibleSize.height/900);
 
 	return true;
 }
