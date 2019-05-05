@@ -8,15 +8,16 @@ bool TileMapLayer::init() {
 	if (!Layer::init()) return false;
 	useSD = true;
 
-#if (USE_SD == true)
-	cocos2d::log("Using SD");
-	_tileMap = TMXTiledMap::create("tilemaps/mapSD.tmx");
-	_tileMap->setScale(MAP_SCALE_SD);
-#else
-	cocos2d::log("Using HD");
-	_tileMap = TMXTiledMap::create("tilemaps/tilemapHD.tmx");
-	_tileMap->setScale(MAP_SCALE_HD);
-#endif
+	if (true) {
+		cocos2d::log("TileMaplayer:\tloading HD");
+		_tileMap = TMXTiledMap::create("Tilemap/HD/tilemap.tmx");
+		_tileMap->setScale(MAP_SCALE_HD);
+	} else {
+		cocos2d::log("TileMaplayer:\tloading SD");
+		_tileMap = TMXTiledMap::create("Tilemap/SD/tilemap.tmx");
+		_tileMap->setScale(MAP_SCALE_SD);
+	}
+
 	_objectLayer = _tileMap->getLayer("objects");
 	_obstructionLayer = _tileMap->getLayer("obstructions");
 
