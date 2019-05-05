@@ -44,8 +44,8 @@ public:
 	    snow_2                  = 36,
 	    snow_3                  = 37,
 	    snow_4                  = 38,
-	    obstruction             = 39,
-	    no_obstruction          = 40
+	    no_obstruction          = 39,
+	    obstruction             = 40
     };
 
     /**
