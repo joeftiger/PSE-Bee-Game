@@ -9,7 +9,7 @@ bool TileMapLayer::init() {
 	useSD = true;
 
 	if (true) {
-		cocos2d::log("TileMaplayer:\tloading HD");
+		cocos2d::log("TileMaplayer:\tloading HD");                  // TODO: Use settings
 		_tileMap = TMXTiledMap::create("Tilemap/HD/tilemap.tmx");
 		_tileMap->setScale(MAP_SCALE_HD);
 	} else {
