@@ -2,6 +2,7 @@
 // Created by julius on 28.04.19.
 //
 
+#include <Settings.h>
 #include "SpriteContainer.h"
 
 
@@ -11,13 +12,13 @@ SpriteContainer::SpriteContainer() {
 }
 
 void SpriteContainer::loadSpriteSheet() {
-    if (true) {
-        _cache->removeSpriteFramesFromFile("Spritesheet/SD/spritesheet.plist"); // if HD TEXTURES
+    if (Settings::getInstance()->getAsBool(Settings::HD_Textures)) {
+        _cache->removeSpriteFramesFromFile("Spritesheet/SD/spritesheet.plist");
         _cache->removeSpriteFramesFromFile("Spritesheet/SD/tilesheet.plist");
         _cache->addSpriteFramesWithFile("Spritesheet/HD/spritesheet.plist");
         _cache->addSpriteFramesWithFile("Spritesheet/HD/tilesheet.plist");
     } else {
-        _cache->removeSpriteFramesFromFile("Spritesheet/HD/spritesheet.plist"); // if SD TEXTURES
+        _cache->removeSpriteFramesFromFile("Spritesheet/HD/spritesheet.plist");
         _cache->removeSpriteFramesFromFile("Spritesheet/HD/tilesheet.plist");
         _cache->addSpriteFramesWithFile("Spritesheet/SD/spritesheet.plist");
         _cache->addSpriteFramesWithFile("Spritesheet/SD/tilesheet.plist");
