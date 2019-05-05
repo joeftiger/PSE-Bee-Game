@@ -31,9 +31,6 @@ private:
 	void initObstructionLayer();
 
 public:
-
-	bool useSD = false;
-
 	virtual bool init() override;
 
 	ssize_t getTreeCount();
