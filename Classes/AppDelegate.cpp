@@ -53,6 +53,9 @@ static int register_all_packages() {
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
+
+	cocos2d::Device::setKeepScreenOn(true);
+
 	// initialize director
 	auto director = Director::getInstance();
 	auto glview = director->getOpenGLView();

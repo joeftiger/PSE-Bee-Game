@@ -35,8 +35,15 @@ bool GameScene::init() {
 	camera = this->getDefaultCamera();
 	this->removeChild(camera);
 
+	//Time
 	time = Time::createInstance();
 	this->addChild(time);
+	if (SaveLoad::timesSaveExists()) {
+		SaveLoad::loadTime();
+	}
+	else {
+		time->setStartingMonth();
+	}
 
 	// Background TileMap
 	_tileMapLayer = TileMapLayer::create();
@@ -56,13 +63,6 @@ bool GameScene::init() {
 	Player::getInstance();
 	tileMapAtlas->notify(_tileMapLayer);
 	honeyExtractorAtlas->notify(_tileMapLayer);
-
-	if (SaveLoad::timesSaveExists()) {
-		SaveLoad::loadTime();
-	}
-	else {
-		time->setStartingMonth();
-	}
 
 	if (SaveLoad::moneySaveExists()) {
 		SaveLoad::loadMoney();
