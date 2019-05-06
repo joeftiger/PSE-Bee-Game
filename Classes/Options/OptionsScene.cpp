@@ -32,22 +32,27 @@ bool OptionsScene::init() {
 	                        origin.y + visibleSize.height - title->getContentSize().height));
 	this->addChild(title, 1);
 
-	// text to ask for use of SD Textures
-	// TODO Add switch function for textures (Brian 18.4) and then make it visible again via addChild
-	auto optionsText = Label::createWithTTF("Use SD Textures? (Not implemented yet)", "fonts/ReemKufi-Regular.ttf", 24);
-	optionsText->setPosition(Vec2(origin.x + visibleSize.width / 2,
-	                                 origin.y + 40 + 0.5 * visibleSize.height - title->getContentSize().height));
-	// this->addChild(optionsText, 1);
-
     // add save deletion funcitonality
-    auto resetLabel = Label::createWithTTF("Click Here to Reset Your Save", "fonts/ReemKufi-Regular.ttf", 40);
+    auto resetLabel = Label::createWithTTF("Click here to reset your Save", "fonts/ReemKufi-Regular.ttf", 40);
     auto menuItemReset = MenuItemLabel::create(resetLabel);
     menuItemReset->setCallback([&](cocos2d::Ref *sender) {
         Director::getInstance()->replaceScene(SaveDeleteConfirmation::create());
     });
     auto resetMenu = Menu::create(menuItemReset, nullptr);
     resetMenu->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - 3 * title->getContentSize().height));
-                                    this->addChild(resetMenu, 10);
+    this->addChild(resetMenu, 10);
+
+    // switch between textures
+    auto textureLabel = Label::createWithTTF("Click here to switch between HD and SD Textures", "fonts/ReemKufi-Regular.ttf", 40);
+    auto menuItemTextureSwitch= MenuItemLabel::create(textureLabel);
+    // TODO Add switch function for textures
+    menuItemTextureSwitch->setCallback([&](cocos2d::Ref *sender) {
+            Director::getInstance()->replaceScene(SaveDeleteConfirmation::create());
+    });
+    auto textureSwitchMenu = Menu::create(menuItemTextureSwitch, nullptr);
+    textureSwitchMenu->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - 5 * title->getContentSize().height));
+    this->addChild(textureSwitchMenu, 10);
+
 
 	// add the menu item for back to main menu and position it in the bottom right corner of the screen
 	auto label = Label::createWithTTF("Main Menu", "fonts/ReemKufi-Regular.ttf", 20);
