@@ -27,16 +27,16 @@ bool SeasonChanger::init()
 void SeasonChanger::update(float dt) {
 	auto tempSeason = Time::getInstance()->getSeason();
 	
-	if (tempSeason == Season::Fruehling && currentSeason != Season::Fruehling) {
-		currentSeason = Season::Fruehling;
+	if (tempSeason == Season::Spring && currentSeason != Season::Spring) {
+		currentSeason = Season::Spring;
 		this->switchToFruehling();
 	}
-	else if (tempSeason == Season::Sommer && currentSeason != Season::Sommer) {
-		currentSeason = Season::Sommer;
+	else if (tempSeason == Season::Summer && currentSeason != Season::Summer) {
+		currentSeason = Season::Summer;
 		this->switchToSommer();
 	}
-	else if (tempSeason == Season::Herbst && currentSeason != Season::Herbst) {
-		currentSeason = Season::Herbst;
+	else if (tempSeason == Season::Fall && currentSeason != Season::Fall) {
+		currentSeason = Season::Fall;
 		this->switchToHerbst();
 	}
 	else if (tempSeason == Season::Winter && currentSeason != Season::Winter) {
@@ -59,15 +59,15 @@ void SeasonChanger::switchToFruehling() {
 		}
 	}
 	
-	log("%s", "Fruehling");
+	log("%s", "Spring");
 }
 
 void SeasonChanger::switchToSommer() {
-	log("%s", "Sommer");
+	log("%s", "Summer");
 }
 
 void SeasonChanger::switchToHerbst() {
-	log("%s", "Herbst");
+	log("%s", "Fall");
 }
 
 void SeasonChanger::switchToWinter() {

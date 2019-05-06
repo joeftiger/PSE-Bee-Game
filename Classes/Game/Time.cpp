@@ -102,15 +102,15 @@ Season Time::getSeason() {
 	
 	case 2: 
 	case 3:
-	case 4: return Season::Fruehling;
+	case 4: return Season::Spring;
 
 	case 5:
 	case 6:
-	case 7: return Season::Sommer;
+	case 7: return Season::Summer;
 
 	case 8:
 	case 9:
-	case 10: return Season::Herbst;
+	case 10: return Season::Fall;
 
 	case 11:
 	case 0:

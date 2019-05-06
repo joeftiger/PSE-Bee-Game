@@ -2,9 +2,9 @@
 #define SEASONS_H
 
 enum Season {
-	Fruehling = 1,
-	Sommer,
-	Herbst,
+	Spring = 1,
+	Summer,
+	Fall,
 	Winter
 };
 
