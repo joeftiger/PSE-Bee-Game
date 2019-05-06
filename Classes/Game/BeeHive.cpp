@@ -22,6 +22,7 @@ BeeHive::BeeHive(int bees, int varoa) {
 	_beesAlive = bees;
 	_varoaAlive = varoa;
 	_rawHoney = 0;
+	_particlesNode = nullptr;
 	assert(invariant());
 }
 
@@ -73,6 +74,7 @@ void BeeHive::update() {
 	auto alg = GameAlgorithm::getInstance();
 	if (!isEmpty()) {
 		_beesAlive = (int) clampf(_beesAlive + alg->nextBees(_beesAlive, _varoaAlive), 0, MAX_BEES);
+		setParticles();
 	}
 
 	if (!hasFullStorage()) {
@@ -152,4 +154,27 @@ void BeeHive::varroaRandomizer() {
     if(random(0, 10000) < 10) {
         _varoaAlive = (int) random(1, 10);
     }
+}
+
+BeeParticles* BeeHive::getParticles() {
+    return _particlesNode;
+}
+
+void BeeHive::setParticles() {
+    _tileMapLayer = (TileMapLayer*) Director::getInstance()->getRunningScene()->getChildByName(TILE_MAP_LAYER_NAME);
+    counter++;
+    if(!_particlesNode) {
+        _particlesNode = BeeParticles::create();
+        _tileMapLayer->addChild(_particlesNode);
+        _particlesNode->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * MAP_SCALE_SD
+                                    + _tileMapLayer->getMap()->getTileSize() * MAP_SCALE_SD/2));
+    }
+    //node movement
+    //_particlesNode->setPosition(Vec2(_particlesNode->getPosition().x + random(-1.0, 1.0),
+     //       _particlesNode->getPosition().y + random(-1.0, 1.0)));
+    _particlesNode->setQuantity(_beesAlive);
+}
+
+void BeeHive::setTileMap(TileMapLayer* tileMap) {
+    _tileMapLayer = tileMap;
 }

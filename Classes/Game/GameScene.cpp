@@ -1,6 +1,7 @@
 
 #include <Interaction/BeeHivePopup.h>
 #include <Resources/SpriteContainer.h>
+#include <Effects/BeeParticles.h>
 #include "GameScene.h"
 #include "Atlas/BeeHiveAtlas.h"
 #include "Atlas/HoneyExtractorAtlas.h"

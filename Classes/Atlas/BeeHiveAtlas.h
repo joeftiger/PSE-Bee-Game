@@ -16,6 +16,7 @@ class BeeHiveAtlas : public cocos2d::Node, public Observable, public Observer, p
 private:
 	static BeeHiveAtlas *_instance;
 	std::map<cocos2d::Vec2, BeeHive *> _beeHives;
+	TileMapLayer* _tileMapLayer;
 
 	BeeHiveAtlas() = default;
 

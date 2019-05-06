@@ -210,7 +210,7 @@ endif ()
 set(all_code_files
         ${GAME_HEADER}
         ${GAME_SOURCE}
-        Classes/Interaction/HoneyMover.cpp Classes/Interaction/HoneyMover.h)
+        Classes/Interaction/HoneyMover.cpp Classes/Interaction/HoneyMover.h Classes/Effects/BeeParticles.cpp Classes/Effects/BeeParticles.h)
 if (NOT ANDROID)
     add_executable(${APP_NAME} ${all_code_files})
 else ()

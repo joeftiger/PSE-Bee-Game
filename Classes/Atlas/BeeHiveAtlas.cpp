@@ -14,6 +14,8 @@ BeeHiveAtlas *BeeHiveAtlas::getInstance() {
 		_instance = new BeeHiveAtlas;
 	}
 
+	_instance->_tileMapLayer = (TileMapLayer*) Director::getInstance()->getRunningScene()->getChildByName(TILE_MAP_LAYER_NAME);
+
 	return _instance;
 }
 
@@ -35,13 +37,11 @@ BeeHive *BeeHiveAtlas::getBeeHiveAt(const Vec2 &pos) {
 void BeeHiveAtlas::notify(void *observable) {
 	bool notifyObservers = false;
 
-	auto layer = (TileMapLayer *) cocos2d::Director::getInstance()->getRunningScene()->getChildByName(
-			TILE_MAP_LAYER_NAME);
-	if (layer == nullptr) {
-		layer = (TileMapLayer *) observable;
+	if (_tileMapLayer == nullptr) {
+		_tileMapLayer = (TileMapLayer *) observable;
 		notifyObservers = true;
 	}
-	auto positions = layer->getBeeHives();
+	auto positions = _tileMapLayer->getBeeHives();
 
 	// add missing beehives
 	for (const auto &pos : positions) {
