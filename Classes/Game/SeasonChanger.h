@@ -14,7 +14,7 @@ private:
 
 	TileMapLayer * _tileMapLayer;
 	Season currentSeason;
-
+    
 public:
 	
 	static SeasonChanger *create(TileMapLayer *tileMapLayer);
@@ -23,12 +23,7 @@ public:
 
 	void update(float dt) override;
 
-	void switchToFruehling();
-	void switchToSommer();
-	void switchToHerbst();
-	void switchToWinter();
-
-	//CREATE_FUNC(SeasonChanger);
+	void switchSeason(Season currentSeason);
 
 };
 

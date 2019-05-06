@@ -35,6 +35,9 @@ bool GameScene::init() {
 	camera = this->getDefaultCamera();
 	this->removeChild(camera);
 
+	time = Time::createInstance();
+	this->addChild(time);
+
 	// Background TileMap
 	_tileMapLayer = TileMapLayer::create();
 	this->addChild(_tileMapLayer, -1);
@@ -54,8 +57,6 @@ bool GameScene::init() {
 	tileMapAtlas->notify(_tileMapLayer);
 	honeyExtractorAtlas->notify(_tileMapLayer);
 
-	time = Time::createInstance();
-	this->addChild(time);
 	if (SaveLoad::timesSaveExists()) {
 		SaveLoad::loadTime();
 	}

@@ -31,6 +31,7 @@ bool TileMapLayer::init() {
 	
 	auto _seasonChanger = SeasonChanger::create(this);
 	this->addChild(_seasonChanger);
+	_seasonChanger->switchSeason(Time::getInstance()->getSeason());
 
 	return true;
 }
@@ -202,7 +203,8 @@ void TileMapLayer::placeSprite(const Vec2 &position, const Size &size, Sprites::
 		for (auto y = 0; y < size.height; y++) {
 			auto tilePos = Vec2(pos.x - x, pos.y - y);
 			_obstructionLayer->setTileGID(Tiles::obstruction, tilePos);
-			_objectLayer->setTileGID(Tiles::grass, tilePos);
+			_objectLayer->setTileGID(Tiles::getSeasonTileOf(Tiles::grass,
+									Time::getInstance()->getSeason()), tilePos);
 		}
 	}
 
@@ -213,7 +215,7 @@ void TileMapLayer::placeSprite(const Vec2 &position, const Size &size, Sprites::
 		sprite->setScale(MAP_SCALE_SD);
 	}
 	sprite->setPosition(position);
-	sprite->setAnchorPoint(Vec2(0.5, 0));
+	sprite->setAnchorPoint(Vec2(0.5f, 0));
 	this->addChild(sprite, pos.x + pos.y);
 }
 

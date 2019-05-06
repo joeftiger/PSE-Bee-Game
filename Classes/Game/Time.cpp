@@ -60,7 +60,7 @@ int Time::getMonth() {
 }
 
 void Time::setStartingMonth() {
-	times.months = 3;
+	times.months = 2;
 }
 
 std::string Time::getMonthAsString() {
@@ -83,7 +83,7 @@ std::string Time::convertToMonth(int i)
 	case 4: return "April";
 	case 5: return "Mai";
 	case 6: return "Juni";
-	case 7: return "July";
+	case 7: return "Juli";
 	case 8: return "August";
 	case 9: return "September";
 	case 10: return "Oktober";
@@ -102,19 +102,19 @@ Season Time::getSeason() {
 	
 	case 2: 
 	case 3:
-	case 4: return Season::Spring;
+	case 4: return Season::Spring; //Maerz, April, Mai
 
 	case 5:
 	case 6:
-	case 7: return Season::Summer;
+	case 7: return Season::Summer; //Juni, Juli, August
 
 	case 8:
 	case 9:
-	case 10: return Season::Fall;
+	case 10: return Season::Fall; // September, Oktober, November
 
 	case 11:
 	case 0:
-	case 1: return Season::Winter;
+	case 1: return Season::Winter; // Dezember, Januar, Februar
 	}
 }
 
