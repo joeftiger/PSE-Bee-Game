@@ -4,6 +4,7 @@
 #include "Resources/Tiles.h"
 #include "Resources/Sprites.h"
 #include "SaveLoad/SaveLoad.h"
+#include "SeasonChanger.h"
 
 bool TileMapLayer::init() {
 	if (!Layer::init()) return false;
@@ -27,6 +28,9 @@ bool TileMapLayer::init() {
 	this->setName(TILE_MAP_LAYER_NAME);
 	this->loadMap();
 	this->showObstructions(false);
+	
+	auto _seasonChanger = SeasonChanger::create(this);
+	this->addChild(_seasonChanger);
 
 	return true;
 }
@@ -253,3 +257,4 @@ void TileMapLayer::initObstructionLayer() {
 		}
 	}
 }
+

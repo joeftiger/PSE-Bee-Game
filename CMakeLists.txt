@@ -111,6 +111,7 @@ list(APPEND GAME_SOURCE
         Classes/ItemPanel/ItemPanelLayer.cpp
         Classes/Interaction/BeeHivePopup.cpp
         Classes/Interaction/HoneyExtractorPopup.cpp
+		Classes/Game/SeasonChanger.cpp
         )
 
 list(APPEND GAME_HEADER
@@ -152,6 +153,7 @@ list(APPEND GAME_HEADER
 		Classes/Interaction/HoneyExtractorPopup.h
         Classes/Algorithm/GameAlgorithm.h
         Classes/ItemPanel/ItemPanelLayer.h
+		Classes/Game/SeasonChanger.h
         )
 
 if (ANDROID)

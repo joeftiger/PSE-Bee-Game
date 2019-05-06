@@ -21,7 +21,7 @@ private:
 	TMXTiledMap *_tileMap;
 	TMXLayer *_objectLayer;
 	TMXLayer *_obstructionLayer;
-
+	//SeasonChanger *_seasonChanger;
 
 	void loadMap();
 
@@ -108,10 +108,11 @@ public:
 	 */
 	void showObstructions(bool visible);
 
-
 	// implement the "static create()" method manually
 	CREATE_FUNC(TileMapLayer)
 };
 
 
 #endif //PSE_BEE_GAME_TILEMAPLAYER_H
+
+
