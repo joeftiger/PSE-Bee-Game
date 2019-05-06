@@ -35,6 +35,7 @@ Tiles::TileGID Tiles::getSeasonTileOf(Tiles::TileGID gid, Season season) {
 			return season == Season::Winter ? (TileGID) (gid + 10) : gid;
 
 		case grass:
+		case snow:
 			return season == Season::Winter ? snow : grass;
 
 		case beehive_small_winter:
@@ -49,37 +50,38 @@ Tiles::TileGID Tiles::getSeasonTileOf(Tiles::TileGID gid, Season season) {
 		case flower_blue_small:
 		case flower_blue_middle:
 		case flower_blue_big:
-			return season == Season::Winter ? snow_1 : Season::Spring ? flower_blue_big : Season::Summer ? flower_blue_middle : flower_blue_small;
+		case snow_1:
+			if (season == Season::Spring) return flower_blue_big;
+			if (season == Season::Summer) return flower_blue_middle;
+			if (season == Season::Fall)   return flower_blue_small;
+			return snow_1;
 
 		case flower_red_small:
 		case flower_red_middle:
 		case flower_red_big:
-			return season == Season::Winter ? snow_2 : Season::Spring ? flower_red_big : Season::Summer ? flower_red_middle : flower_red_small;
-
-		case snow:
-			return season == Season::Winter ? snow : grass;
+		case snow_2:
+			if (season == Season::Spring) return flower_red_big;
+			if (season == Season::Summer) return flower_red_middle;
+			if (season == Season::Fall)   return flower_red_small;
+			return snow_2;
 
 		case flower_white_small:
 		case flower_white_middle:
 		case flower_white_big:
-			return season == Season::Winter ? snow_3 : Season::Spring ? flower_white_big : Season::Summer ? flower_white_middle : flower_white_small;
+		case snow_3:
+			if (season == Season::Spring) return flower_white_big;
+			if (season == Season::Summer) return flower_white_middle;
+			if (season == Season::Fall)   return flower_white_small;
+			return snow_3;
 
 		case flower_pink_small:
 		case flower_pink_middle:
 		case flower_pink_big:
-			return season == Season::Winter ? snow_4 : Season::Spring ? flower_pink_big : Season::Summer ? flower_pink_middle : flower_pink_small;
-
-		case snow_1:
-			return season == Season::Winter ? snow_1 : Season::Spring ? flower_blue_big : Season::Summer ? flower_blue_middle : flower_blue_small;
-
-		case snow_2:
-			return season == Season::Winter ? snow_2 : Season::Spring ? flower_red_big : Season::Summer ? flower_red_middle : flower_red_small;
-
-		case snow_3:
-			return season == Season::Winter ? snow_3 : Season::Spring ? flower_white_big : Season::Summer ? flower_white_middle : flower_white_small;
-
 		case snow_4:
-			return season == Season::Winter ? snow_4 : Season::Spring ? flower_pink_big : Season::Summer ? flower_pink_middle : flower_pink_small;
+			if (season == Season::Spring) return flower_pink_big;
+			if (season == Season::Summer) return flower_pink_middle;
+			if (season == Season::Fall)   return flower_pink_small;
+			return snow_4;
 
 		default:
 			return gid;
