@@ -39,7 +39,9 @@ bool StoryScene::init() {
 
 UICustom::Popup* StoryScene::createPopup(int id){
     if (id == 0) { //not working
-        return UICustom::Popup::createAsMessage("GROSSVATER", "Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich...");
+        return UICustom::Popup::createAsMessage("GROSSVATER", "Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich...\n"
+                                                              "Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich...\n"
+                                                              "Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich...");
     }
     /*if (id == 1) {
         UICustom::Popup *popup1 = UICustom::Popup::createAsMessage("GROSSVATER",

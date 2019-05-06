@@ -33,7 +33,7 @@ namespace IMAGEPATH {
     const char *CANCEL_BUTTON_PRESSED = "story/CancelPressed.png";
     const char *CLOSE_BUTTON = "story/close.png";
     const char *BACKGROUND_IMAGE = "story/popUpBase.png";
-    const char *IMKER = "imker.png";
+    const char *IMKER = "story/Imker.png";
 }
 namespace UICustom {
     
@@ -190,11 +190,19 @@ namespace UICustom {
         fill->setPosition(Point(FONT::LABEL_OFFSET/4,FONT::LABEL_OFFSET/4));
         fill->setContentSize(Size(size.width - FONT::LABEL_OFFSET/2, size.height - FONT::LABEL_OFFSET* 2));
 
-        Label *heading = Label::createWithTTF(title, FONT::GAME_FONT, FONT::TITLE_TEXT_SIZE);
+        Label *heading = Label::create();
         heading->setPosition(_bg->getContentSize().width/2 , _bg->getContentSize().height - FONT::LABEL_OFFSET);
         _bg->addChild(heading);
         heading->enableOutline(Color4B::BLACK,FONT::LABEL_STROKE);
         heading->enableShadow(Color4B::BLACK, Size(0, -3));
+        auto *imker = Sprite::create(IMAGEPATH::IMKER);
+        heading->addChild(imker);
+
+        /*Label *heading = Label::createWithTTF(title, FONT::GAME_FONT, FONT::TITLE_TEXT_SIZE);
+        heading->setPosition(_bg->getContentSize().width/2 , _bg->getContentSize().height - FONT::LABEL_OFFSET);
+        _bg->addChild(heading);
+        heading->enableOutline(Color4B::BLACK,FONT::LABEL_STROKE);
+        heading->enableShadow(Color4B::BLACK, Size(0, -3));*/
     }
     
     
