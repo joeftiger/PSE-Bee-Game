@@ -3,6 +3,7 @@
 //
 
 #include "OptionsScene.h"
+#include "../Settings.h"
 #include "SaveDeleteConfirmation.h"
 #include "MainMenu/MainMenuScene.h"
 #include "ui/UIWidget.h"
