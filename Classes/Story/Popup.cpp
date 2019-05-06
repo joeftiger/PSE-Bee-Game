@@ -33,7 +33,7 @@ namespace IMAGEPATH {
     const char *CANCEL_BUTTON_PRESSED = "story/CancelPressed.png";
     const char *CLOSE_BUTTON = "story/close.png";
     const char *BACKGROUND_IMAGE = "story/popUpBase.png";
-    const char *IMKER = "story/imker.png";
+    const char *IMKER = "story/imker_no_background.png";
 }
 namespace UICustom {
     
