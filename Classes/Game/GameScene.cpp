@@ -75,7 +75,7 @@ bool GameScene::init() {
 	_itemPanel = ItemPanelLayer::create();
 	_itemPanel->setTileMap(_tileMapLayer);
 
-	//camera and huds container
+	// camera and HUD container
 	container = Node::create();
 	container->addChild(camera);
 	this->addChild(container,HUD_PRIORITY, "container");

@@ -38,8 +38,8 @@ bool ItemPanelLayer::init() {
 	this->setOpacity(GLubyte(90));
 
 	//show Item Panel Layer
-	_showRec = LayerColor::create(Color4B::WHITE, 40, 80);
-	_showRec->setPosition(0 - 40, this->getContentSize().height / 2 - 40);
+	_showRec = LayerColor::create(Color4B::WHITE, 50, 80);
+	_showRec->setPosition(0 - 50, this->getContentSize().height / 2 - 40);
 	this->addChild(_showRec);
 
 	initializeItemPanel();
@@ -49,6 +49,11 @@ bool ItemPanelLayer::init() {
 
 void ItemPanelLayer::initializeItemPanel() {
 	auto box = this->getBoundingBox().size;
+
+	//create label configuration, can be reused in all labels
+    TTFConfig labelConfig;
+	labelConfig.fontFilePath = FONT;
+    labelConfig.fontSize = TEXT_SIZE_HUD;
 
     _placeables.emplace_back(new PlaceableTile(Tiles::beehive_small));
 	_placeables.emplace_back(new PlaceableTile(Tiles::beehive_middle));
@@ -75,6 +80,8 @@ void ItemPanelLayer::initializeItemPanel() {
 		sprite->setAnchorPoint(Vec2(0, 0));
 		sprite->setScale(box.width / (sprite->getBoundingBox().size.width * 3));
 		this->addChild(sprite);
+
+
 
 		_spritesToPlaceables.emplace(sprite, p);
 
