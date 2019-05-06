@@ -9,6 +9,9 @@
 #define MAP_SCALE_SD 0.5f
 #define MAP_SCALE_HD 0.5f
 
+#define TREE_SCALE_HD 2.0f / 3
+
+
 #define UPDATE_TIME 0.01f
 #define TEXT_SIZE_HUD 20
 #define FONT "fonts/ReemKufi-Regular.ttf"
