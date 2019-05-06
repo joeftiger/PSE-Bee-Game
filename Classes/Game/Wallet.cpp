@@ -26,6 +26,10 @@ int Wallet::returnTotalMoney() {
 	return _totalMoney;
 }
 
+void Wallet::clear() {
+	_totalMoney = 0;
+}
+
 void Wallet::toJSON(rapidjson::Document &doc) {
 
 	rapidjson::Value obj(rapidjson::kObjectType);

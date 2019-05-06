@@ -32,6 +32,11 @@ public:
     int returnTotalMoney();
 
 	/**
+	*	Resets the wallet to its original state
+	*/
+	void clear();
+
+	/**
      * @return the total money after adding a specified amount
      */
     int addMoney(int amount);

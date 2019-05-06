@@ -323,6 +323,7 @@ void SaveLoad::deleteMoneySave() {
 void SaveLoad::deleteEverything() {
 	BeeHiveAtlas::getInstance()->clear();
 	HoneyExtractorAtlas::getInstance()->clear();
+	Wallet::getInstance()->clear();
 	deleteBeeHivesSave();
 	deleteHoneyExtractorsSave();
 	deleteTileMapSave();
