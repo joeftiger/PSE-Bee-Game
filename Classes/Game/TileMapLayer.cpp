@@ -31,7 +31,6 @@ bool TileMapLayer::init() {
 	
 	auto _seasonChanger = SeasonChanger::create(this);
 	this->addChild(_seasonChanger);
-	_seasonChanger->switchSeason(Time::getInstance()->getSeason());
 
 	return true;
 }
