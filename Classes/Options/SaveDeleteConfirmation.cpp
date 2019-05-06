@@ -26,7 +26,7 @@ bool SaveDeleteConfirmation::init() {
 	onePofScreenW = visibleSize.width / 100;
 
 	// create a title and set it at the top of the screen
-    auto choiceDescription = Label::createWithTTF("Do you wish to carry out the selected action?", "fonts/ReemKufi-Regular.ttf", 48);
+    auto choiceDescription = Label::createWithTTF("Do you wish to reset your save?", "fonts/ReemKufi-Regular.ttf", 48);
     choiceDescription->setPosition(Vec2(origin.x + visibleSize.width / 2,
                             origin.y + visibleSize.height - choiceDescription->getContentSize().height));
     this->addChild(choiceDescription, 1);
