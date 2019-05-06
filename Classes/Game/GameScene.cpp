@@ -63,7 +63,7 @@ bool GameScene::init() {
 		time->setStartingMonth();
 	}
 
-	if (SaveLoad::moneySaveExists) {
+	if (SaveLoad::moneySaveExists()) {
 		SaveLoad::loadMoney();
 	}
 

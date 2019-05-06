@@ -46,18 +46,19 @@ void SeasonChanger::update(float dt) {
 }
 
 void SeasonChanger::switchToFruehling() {
-	/*
+	
 	auto objectLayer = _tileMapLayer->getLayer();
 	
 	for (int x = 0; x < objectLayer->getLayerSize().height - 1; x++) {
 		for (int y = 0; y < objectLayer->getLayerSize().width - 1; y++) {
-			auto tempGID = objectLayer->getTileGIDAt(Vec2(x, y));
-			if (tempGID == 1) {
-				objectLayer->setTileGID(11, Vec2(x, y));
+			int tempGID = objectLayer->getTileGIDAt(Vec2(x, y));
+			auto gid = static_cast<Tiles::TileGID>(tempGID);
+			if (Tiles::isBeeHive(gid)) {
+				//objectLayer->setTileGID(11, Vec2(x, y));
 			}
 		}
 	}
-	*/
+	
 	log("%s", "Fruehling");
 }
 

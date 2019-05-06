@@ -23,7 +23,7 @@ private:
 
 	void initTouch();
 
-	void update(float dt);
+	void update(float dt) override;
 
 public:
 	

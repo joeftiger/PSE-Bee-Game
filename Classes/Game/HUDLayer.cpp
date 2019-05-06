@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "SaveLoad/SaveLoad.h"
 #include "Story/StoryScene.h"
+#include "Resources/SpriteContainer.h"
 
 using namespace cocos2d;
 
@@ -48,8 +49,8 @@ bool HUDLayer::init() {
 	honeyLabel->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - onePofScreenW * 20,
 	                             visibleRect.origin.y + visibleRect.size.height - onePofScreenH * 5));
 	this->addChild(honeyLabel, HUD_PRIORITY);
-	auto honeySprite = Sprite::create("sprites/honigglas_2d.png");
-	honeySprite->setScale(0.1f);
+	auto honeySprite = SpriteContainer::getInstance()->getSpriteOf(Sprites::honey_glass_2d);
+	honeySprite->setScale(0.5f);
 	honeySprite->setAnchorPoint(Vec2(0.5f, 0.5f));
 	honeySprite->setPosition(Vec2(-30, 15));
 	honeyLabel->addChild(honeySprite);
@@ -61,8 +62,8 @@ bool HUDLayer::init() {
 	moneyLabel->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - onePofScreenW * 11,
 	                             visibleRect.origin.y + visibleRect.size.height - onePofScreenH * 5));
 	this->addChild(moneyLabel, HUD_PRIORITY);
-	auto moneySprite = Sprite::create("sprites/muenze_einzeln.png");
-	moneySprite->setScale(0.1f);
+	auto moneySprite = SpriteContainer::getInstance()->getSpriteOf(Sprites::coin_single);
+	moneySprite->setScale(0.5f);
 	moneySprite->setAnchorPoint(Vec2(0.5f, 0.5f));
 	moneySprite->setPosition(Vec2(-30, 15));
 	moneyLabel->addChild(moneySprite);
