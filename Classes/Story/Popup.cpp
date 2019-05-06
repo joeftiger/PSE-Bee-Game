@@ -182,7 +182,7 @@ namespace UICustom {
         _bg->setScale9Enabled(true);
         _bg->setContentSize(size);
         
-        ui::ImageView *fill = ui::ImageView::create(IMAGEPATH::IMKER);
+        ui::ImageView *fill = ui::ImageView::create(IMAGEPATH::BACKGROUND_IMAGE);
         _bg->addChild(fill);
         fill->setColor(Color3B(210,210,210));
         fill->setScale9Enabled(true);
