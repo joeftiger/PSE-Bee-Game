@@ -1,6 +1,7 @@
 #ifndef TILES_H
 #define TILES_H
 
+#include <HeaderFiles/Seasons.h>
 #include "cocos2d.h"
 
 class Tiles {
@@ -68,6 +69,8 @@ public:
 	 * @return sprite of tile
 	 */
 	static cocos2d::Sprite *getSpriteOf(TileGID gid);
+
+	static TileGID getSeasonTileOf(TileGID gid, Season season);
 };
 
 #endif /* TILES_H */
