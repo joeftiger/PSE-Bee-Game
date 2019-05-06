@@ -49,7 +49,7 @@ void Time::time(float dt) {
 		times.months++;
 	}
 
-	if (times.months >= LENGTH_YEAR - 1) {
+	if (times.months >= LENGTH_YEAR) {
 		times.months = 0;
 		times.years++;
 	}
@@ -115,7 +115,6 @@ Season Time::getSeason() {
 	case 11:
 	case 0:
 	case 1: return Season::Winter;
-
 	}
 }
 
