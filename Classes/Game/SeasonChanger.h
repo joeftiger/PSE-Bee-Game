@@ -19,12 +19,13 @@ public:
 	
 	static SeasonChanger *create(TileMapLayer *tileMapLayer);
 
-	virtual bool init() override;
+	bool init() override;
 
 	void update(float dt) override;
 
-	void switchSeason(Season currentSeason);
+	void switchSeason();
 
+	CREATE_FUNC(SeasonChanger)
 };
 
 #endif //SEASONCHANGER_H
