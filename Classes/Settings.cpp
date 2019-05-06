@@ -27,5 +27,5 @@ void Settings::set(Settings::SettingName setting, const std::string &value) {
 }
 
 void Settings::set(Settings::SettingName setting, bool value) {
-	_settings[setting] = value ? _true : _false;
+	_settings[setting] = value ? "1" : "0";
 }

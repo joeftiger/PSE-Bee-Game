@@ -207,7 +207,11 @@ void TileMapLayer::placeSprite(const Vec2 &position, const Size &size, Sprites::
 	}
 
 	auto sprite = Sprites::getSpriteOf(id);
-	sprite->setScale(1.0f / 3);
+	if (Settings::getInstance()->getAsBool(Settings::HD_Textures)) {
+		sprite->setScale(TREE_SCALE_HD);
+	} else {
+		sprite->setScale(MAP_SCALE_SD);
+	}
 	sprite->setPosition(position);
 	sprite->setAnchorPoint(Vec2(0.5, 0));
 	this->addChild(sprite, pos.x + pos.y);
