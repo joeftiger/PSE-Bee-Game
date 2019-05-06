@@ -27,12 +27,13 @@ namespace FONT {
 }
 
 namespace IMAGEPATH {
-    const char *OK_BUTTON = "Ok.png";
-    const char *OK_BUTTON_PRESSED = "kPressed.png";
-    const char *CANCEL_BUTTON = "Cancel.png";
-    const char *CANCEL_BUTTON_PRESSED = "CancelPressed.png";
-    const char *CLOSE_BUTTON = "close.png";
-    const char *BACKGROUND_IMAGE = "popUpBase.png";
+    const char *OK_BUTTON = "story/Ok.png";
+    const char *OK_BUTTON_PRESSED = "story/kPressed.png";
+    const char *CANCEL_BUTTON = "story/Cancel.png";
+    const char *CANCEL_BUTTON_PRESSED = "story/CancelPressed.png";
+    const char *CLOSE_BUTTON = "story/close.png";
+    const char *BACKGROUND_IMAGE = "story/popUpBase.png";
+    const char *IMKER = "imker.png";
 }
 namespace UICustom {
     
@@ -181,15 +182,14 @@ namespace UICustom {
         _bg->setScale9Enabled(true);
         _bg->setContentSize(size);
         
-        ui::ImageView *fill = ui::ImageView::create(IMAGEPATH::BACKGROUND_IMAGE);
+        ui::ImageView *fill = ui::ImageView::create(IMAGEPATH::IMKER);
         _bg->addChild(fill);
         fill->setColor(Color3B(210,210,210));
         fill->setScale9Enabled(true);
         fill->setAnchorPoint(Point::ANCHOR_BOTTOM_LEFT);
         fill->setPosition(Point(FONT::LABEL_OFFSET/4,FONT::LABEL_OFFSET/4));
         fill->setContentSize(Size(size.width - FONT::LABEL_OFFSET/2, size.height - FONT::LABEL_OFFSET* 2));
-        
-        
+
         Label *heading = Label::createWithTTF(title, FONT::GAME_FONT, FONT::TITLE_TEXT_SIZE);
         heading->setPosition(_bg->getContentSize().width/2 , _bg->getContentSize().height - FONT::LABEL_OFFSET);
         _bg->addChild(heading);
