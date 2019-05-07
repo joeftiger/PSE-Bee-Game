@@ -100,6 +100,7 @@ Sprite *SpriteContainer::getSpriteOf(Sprites::SpriteID id) {
         case Sprites::exit:                         return Sprite::createWithSpriteFrameName("exit.png");
         case Sprites::shop_1:                       return Sprite::createWithSpriteFrameName("shop_1.png");
         case Sprites::shop_2:                       return Sprite::createWithSpriteFrameName("shop_2.png");
+        case Sprites::shop_bg:                      return Sprite::createWithSpriteFrameName("shop-bg_neu.png");
         case Sprites::minus:                        return Sprite::createWithSpriteFrameName("minus.png");
         case Sprites::plus:                         return Sprite::createWithSpriteFrameName("plus.png");
         case Sprites::erlenmeyer:                   return Sprite::createWithSpriteFrameName("erlenmeyerkolben.png");

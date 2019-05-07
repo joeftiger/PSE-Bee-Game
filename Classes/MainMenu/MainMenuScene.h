@@ -16,16 +16,16 @@ public:
 	virtual bool init();
 
 	// Play Click Handler
-	void onPlayClick(cocos2d::Ref *sender);
+	void onPlayClick();
 
 	// Options Click Handler
-	void onOptionsClick(cocos2d::Ref *sender);
+	void onOptionsClick();
 
 	// About Click Handler
-	void onAboutClick(cocos2d::Ref *sender);
+	void onAboutClick();
 
 	// Exit Click Handler
-	void onExitClick(cocos2d::Ref *sender);
+	void onExitClick();
 
 	// implement the "static create()" method manually
 	CREATE_FUNC(MainMenu);

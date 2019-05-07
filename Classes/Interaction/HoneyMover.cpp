@@ -26,9 +26,6 @@ bool HoneyMover::init() {
     listener->onTouchEnded = CC_CALLBACK_2(HoneyMover::onTouchEnded, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
-    _honeySprite = SpriteContainer::getInstance()->getSpriteOf(Sprites::SpriteID::honey_glass_2d);
-    _honeySprite->setAnchorPoint(Vec2(0.5, 0));
-
 
     return true;
 }
@@ -45,12 +42,13 @@ bool HoneyMover::onTouchBegan(Touch *touch, Event *event) {
         _beeHive = beeAtlas->getBeeHiveAt(pos);
         _isDrag = true;
 
-        auto sprite = SpriteContainer::getInstance()->getSpriteOf(Sprites::SpriteID::honey_glass_2d);
-
-        sprite->setPosition(touch->getLocation());
-        sprite->setAnchorPoint(Vec2(0.5, 0));
-        sprite->setScale(0.2);
-        this->addChild(sprite, HUD_PRIORITY, "sprite");
+        if(!_honeySprite) {
+            _honeySprite = SpriteContainer::getInstance()->getSpriteOf(Sprites::SpriteID::honey_glass_2d);
+            _honeySprite->setAnchorPoint(Vec2(0.5, 0));
+            _honeySprite->setScale(0.2);
+            _honeySprite->setVisible(false);
+            this->addChild(_honeySprite);
+        }
 
         return true;
     } else if(extractorAtlas->hasHoneyExtractorAt(pos)) {
@@ -60,13 +58,15 @@ bool HoneyMover::onTouchBegan(Touch *touch, Event *event) {
 }
 
 void HoneyMover::onTouchMoved(Touch *touch, Event *event) {
-    if(this->getChildByName("sprite")) {
-        this->getChildByName("sprite")->setPosition(Vec2(touch->getLocation()));
+    if(_honeySprite) {
+        _honeySprite->setPosition(Vec2(touch->getLocation()));
+        _honeySprite->setVisible(true);
     }
 
 }
 
 void HoneyMover::onTouchEnded(Touch *touch, void *) {
+    _honeySprite->setVisible(false);
     if(this->getChildByName("sprite")) {
         this->removeChildByName("sprite");
     }
