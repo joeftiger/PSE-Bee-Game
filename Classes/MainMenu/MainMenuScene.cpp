@@ -34,7 +34,7 @@ bool MainMenu::init() {
             case ui::Widget::TouchEventType::BEGAN:
                 break;
             case ui::Widget::TouchEventType::ENDED:
-                this->onPlayClick(background);
+                this->onPlayClick();
                 break;
         }
     });
@@ -48,7 +48,7 @@ bool MainMenu::init() {
             case ui::Widget::TouchEventType::BEGAN:
                 break;
             case ui::Widget::TouchEventType::ENDED:
-                this->onOptionsClick(background);
+                this->onOptionsClick();
                 break;
         }
     });
@@ -62,7 +62,7 @@ bool MainMenu::init() {
             case ui::Widget::TouchEventType::BEGAN:
                 break;
             case ui::Widget::TouchEventType::ENDED:
-                this->onAboutClick(background);
+                this->onAboutClick();
                 break;
         }
     });
@@ -76,7 +76,7 @@ bool MainMenu::init() {
             case ui::Widget::TouchEventType::BEGAN:
                 break;
             case ui::Widget::TouchEventType::ENDED:
-                this->onExitClick(background);
+                this->onExitClick();
                 break;
         }
     });
@@ -101,26 +101,26 @@ bool MainMenu::init() {
 
 // when clicking on play - replace scene with game scene
 // Delay: 0.6 seconds       Transition Colour: Orange
-void MainMenu::onPlayClick(cocos2d::Ref *sender) {
+void MainMenu::onPlayClick() {
 	Director::getInstance()->replaceScene(TransitionFade::create(0.3f, GameScene::create(), Color3B(255, 165, 0)));
 }
 // when clicking on options - replace scene with options scene
 // Delay: 0.4 seconds       Transition Colour: White
-void MainMenu::onOptionsClick(cocos2d::Ref *sender) {
+void MainMenu::onOptionsClick() {
 	Director::getInstance()->replaceScene(
 			TransitionFade::create(0.2f, OptionsScene::createScene(), Color3B(255, 255, 255)));
 }
 
 // when clicking on about - replace scene with about scene
 // Delay: 0.4 seconds       Colour: White
-void MainMenu::onAboutClick(cocos2d::Ref *sender) {
+void MainMenu::onAboutClick() {
 	Director::getInstance()->replaceScene(
 			TransitionFade::create(0.2f, AboutScene::createScene(), Color3B(255, 255, 255)));
 }
 
 // when clicking on exit - exit the current scene and the game
 // no transition or anything similiar to make it as quick as possible
-void MainMenu::onExitClick(cocos2d::Ref *sender){
+void MainMenu::onExitClick(){
     //Close the cocos2d-x game scene and quit the application
     Director::getInstance()->end();
 

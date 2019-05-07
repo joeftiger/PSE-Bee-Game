@@ -8,13 +8,12 @@
 #include <Effects/BeeParticles.h>
 #include "cocos2d.h"
 #include "../HeaderFiles/Restorable.h"
-#include "../HeaderFiles/Interactable.h"
 #include "TileMapLayer.h"
 
 static const int MAX_BEES = 50000;
 static const float MAX_RAW_HONEY = 15000;
 
-class BeeHive : Restorable, public Interactable {
+class BeeHive : Restorable {
 private:
 	int _beesAlive;
 	int _varoaAlive;
@@ -22,7 +21,7 @@ private:
 	float _rawHoney;
 	BeeParticles* _particlesNode;
 	cocos2d::Vec2 _position;
-	std::string sprite = "tilemaps/Tiles/bienenstock1_klein.png";
+
 	bool invariant();
 	void varroaRandomizer();
 	TileMapLayer* _tileMapLayer;
@@ -118,17 +117,12 @@ public:
 
 	void fromJSON(rapidjson::Document &doc) override;
 
-	bool isInteractable() override;
-
-	void doTask() override;
-
 	BeeParticles* getParticles();
 
 	void setParticles();
 
 	void setTileMap(TileMapLayer* tileMap);
 
-	std::string getSprite() override;
 };
 
 #endif //PSE_BEE_GAME_BEEHIVE_H

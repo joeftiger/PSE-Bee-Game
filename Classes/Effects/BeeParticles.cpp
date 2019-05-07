@@ -24,7 +24,11 @@ bool BeeParticles::init() {
 
 void BeeParticles::nextParticlesPos(float dt) {
     for(auto particle : _particles) {
-        particle->setPosition(Vec2(particle->getPosition().x + random(-2.0, 2.0), particle->getPosition().y + random(-2.0, 2.0)));
+        if(particle->getPosition().length() >= 70) {
+            particle->setPosition(0,0);
+        } else {
+            particle->setPosition(Vec2(particle->getPosition().x + random(-2.0, 2.0), particle->getPosition().y + random(-2.0, 2.0)));
+        }
     }
 }
 

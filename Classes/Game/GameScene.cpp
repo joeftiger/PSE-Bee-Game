@@ -105,7 +105,6 @@ void GameScene::honeyExtractorAtlasUpdate(float dt) {
 }
 
 bool GameScene::onTouchBegan(Touch *touch, Event *event) {
-	_itemPanel->showHideItemPanel(touch->getLocation() - container->getPosition());
 	return true;
 }
 

@@ -1,17 +1,9 @@
 #include "SeasonChanger.h"
 
 SeasonChanger * SeasonChanger::create(TileMapLayer * tileMapLayer) {
-
-	SeasonChanger *node = new (std::nothrow) SeasonChanger();
-	if (node && node->init()) {
-		node->_tileMapLayer = tileMapLayer;
-
-		node->autorelease();
-		return node;
-	}
-
-	CC_SAFE_DELETE(node);
-	return nullptr;
+	auto node = SeasonChanger::create();
+	node->_tileMapLayer = tileMapLayer;
+	return node;
 }
 
 bool SeasonChanger::init()
@@ -25,27 +17,15 @@ bool SeasonChanger::init()
 
 
 void SeasonChanger::update(float dt) {
-	auto tempSeason = Time::getInstance()->getSeason();
-	
-	if (tempSeason == Season::Spring && currentSeason != Season::Spring) {
-		currentSeason = Season::Spring;
-		switchSeason(currentSeason);
-	}
-	else if (tempSeason == Season::Summer && currentSeason != Season::Summer) {
-		currentSeason = Season::Summer;
-		switchSeason(currentSeason);
-	}
-	else if (tempSeason == Season::Fall && currentSeason != Season::Fall) {
-		currentSeason = Season::Fall;
-		switchSeason(currentSeason);
-	}
-	else if (tempSeason == Season::Winter && currentSeason != Season::Winter) {
-		currentSeason = Season::Winter;
-		switchSeason(currentSeason);
+	auto nextSeason = Time::getInstance()->getSeason();
+	if (nextSeason != currentSeason) {
+		currentSeason = nextSeason;
+		switchSeason();
 	}
 }
 
-void SeasonChanger::switchSeason(Season currentSeason) {
+void SeasonChanger::switchSeason() {
+	cocos2d::log("SeasonChanger:\tSwitching to %u", currentSeason);
 	auto objectLayer = _tileMapLayer->getLayer();
 
 	for (int x = 0; x < objectLayer->getLayerSize().height; x++) {

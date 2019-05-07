@@ -37,6 +37,7 @@ public:
         exit,
         shop_1,
         shop_2,
+        shop_bg,
         minus,
         plus,
         erlenmeyer,

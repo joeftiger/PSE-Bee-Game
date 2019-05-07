@@ -6,6 +6,8 @@
 #include <TileMapObjects/PlaceableTile.h>
 #include <Resources/Sprites.h>
 #include <TileMapObjects/PlaceableSprite.h>
+#include <Resources/SpriteContainer.h>
+#include <cocos/ui/UIButton.h>
 #include "ItemPanelLayer.h"
 #include "TouchUtil.h"
 #include "HeaderFiles/DEFINITIONS.h"
@@ -38,9 +40,30 @@ bool ItemPanelLayer::init() {
 	this->setOpacity(GLubyte(90));
 
 	//show Item Panel Layer
-	_showRec = LayerColor::create(Color4B::WHITE, 50, 80);
-	_showRec->setPosition(0 - 50, this->getContentSize().height / 2 - 40);
+    _showRec = ui::Button::create("shop/shop_1.png");
+
+    _showRec->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
+        switch (type) {
+            case ui::Widget::TouchEventType::BEGAN:
+                break;
+            case ui::Widget::TouchEventType::ENDED:
+                this->showHideItemPanel();
+                break;
+        }
+    });
+
+    //_showRec = SpriteContainer::getInstance()->getSpriteOf(Sprites::SpriteID::shop_1);
+	_showRec->setAnchorPoint(Vec2(1, 0.5));
+	_showRec->setPosition(Vec2(0, this->getContentSize().height / 2));
+	_showRec->setScale(1);
 	this->addChild(_showRec);
+
+    //shop background
+    auto bg = Sprite::create("shop/shop-bg_neu.png");
+    bg->setScale(this->getContentSize().width/bg->getContentSize().width);
+    bg->setAnchorPoint(Vec2(1,1));
+    bg->setPosition(this->_contentSize);
+    this->addChild(bg);
 
 	initializeItemPanel();
 
@@ -81,8 +104,6 @@ void ItemPanelLayer::initializeItemPanel() {
 		sprite->setScale(box.width / (sprite->getBoundingBox().size.width * 3));
 		this->addChild(sprite);
 
-
-
 		_spritesToPlaceables.emplace(sprite, p);
 
 		width++;
@@ -90,7 +111,7 @@ void ItemPanelLayer::initializeItemPanel() {
 	}
 }
 
-LayerColor *ItemPanelLayer::getShowRec() {
+ui::Button *ItemPanelLayer::getShowRec() {
 	return _showRec;
 }
 
@@ -98,8 +119,7 @@ void ItemPanelLayer::setTileMap(TileMapLayer* tileMap) {
     _tileMapLayer = tileMap;
 }
 
-void ItemPanelLayer::showHideItemPanel(const Vec2 &touchPos) {
-	if (_showRec->getBoundingBox().containsPoint(touchPos - this->getPosition())) {
+void ItemPanelLayer::showHideItemPanel() {
 		if (_isItemShow) {
 			MoveBy *hide = MoveBy::create(0.2, Vec2(this->getBoundingBox().size.width, 0));
 			this->runAction(hide);
@@ -112,11 +132,7 @@ void ItemPanelLayer::showHideItemPanel(const Vec2 &touchPos) {
 			_isItemShow = true;
 			_tileMapLayer->showObstructions(true);
 		}
-		_isTouch = true;
-	}
-	if (_isItemShow) {
-		touchOnItemPanel(touchPos);
-	}
+
 }
 
 void ItemPanelLayer::touchOnItemPanel(const Vec2 &touchPos) {
@@ -130,7 +146,9 @@ void ItemPanelLayer::touchOnItemPanel(const Vec2 &touchPos) {
 }
 
 bool ItemPanelLayer::onTouchBegan(Touch *touch, Event *event) {
-    this->showHideItemPanel(touch->getLocation());
+    if (_isItemShow) {
+        touchOnItemPanel(touch->getLocation());
+    }
     return _isTouch;
 }
 
