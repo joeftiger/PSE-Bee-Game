@@ -129,27 +129,6 @@ void BeeHive::fromJSON(rapidjson::Document &doc) {
 	_position.y = beeHive["_posY"].GetInt();
 }
 
-bool BeeHive::isInteractable() {
-	return _interactable;
-}
-
-void BeeHive::doTask() {
-    //TODO: add actual implementation
-    cocos2d::log("%s", "Interacted with Beehive");
-	
-    std::string s = "raw honey: " + std::to_string(_rawHoney);
-    s += "\t bees alive: " + std::to_string(_beesAlive);
-    s += "\t varroa alive: " + std::to_string(_varoaAlive);
-
-	// TODO comment in line below once it's running again
-    cocos2d::log("%s", s.c_str());
-}
-
-std::string BeeHive::getSprite()
-{
-	return sprite;
-}
-
 void BeeHive::varroaRandomizer() {
     if(random(0, 10000) < 10) {
         _varoaAlive = (int) random(1, 10);

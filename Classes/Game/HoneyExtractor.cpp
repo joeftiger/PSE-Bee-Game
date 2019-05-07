@@ -75,17 +75,3 @@ void HoneyExtractor::fromJSON(rapidjson::Document &doc) {
 	assert(honeyExtractor["_posY"].IsInt());
 	_position.y = honeyExtractor["_posY"].GetInt();
 }
-
-bool HoneyExtractor::isInteractable() {
-	return _interactable;
-}
-
-void HoneyExtractor::doTask() {
-	cocos2d::log("%s", "Interacted with HoneyExtractor");
-
-	cocos2d::log("%f", _honeyInExtractor);
-}
-
-std::string HoneyExtractor::getSprite() {
-	return sprite;
-}

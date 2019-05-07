@@ -10,7 +10,6 @@
 #include "BeeHive.h"
 #include "Wallet.h"
 #include "../HeaderFiles/Restorable.h"
-#include "HeaderFiles/Interactable.h"
 #include <cassert>
 #include <stdexcept>
 
@@ -19,13 +18,11 @@ static const float MAX__HONEY_IN_EXTRACTOR = 100.0f;
 static const int CONVERSION_RATE = 3;
 static const int MULTIPLIER = 2;
 
-class HoneyExtractor : Restorable, public Interactable {
+class HoneyExtractor : Restorable {
 private:
 	float _honeyInExtractor;
     float _rawHoney;
 	cocos2d::Vec2 _position;
-
-	std::string sprite = "sprites/honigschleuder.png";
 
 	bool invariant();
 
@@ -90,11 +87,6 @@ public:
 
 	void fromJSON(rapidjson::Document &doc) override;
 
-	bool isInteractable() override;
-
-	void doTask() override;
-
-	std::string getSprite() override;
 };
 
 #endif //PROJ_ANDROID_HONEYEXTRACTOR_H
