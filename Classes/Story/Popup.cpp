@@ -33,7 +33,7 @@ namespace IMAGEPATH {
     const char *CANCEL_BUTTON_PRESSED = "story/CancelPressed.png";
     const char *CLOSE_BUTTON = "story/close.png";
     const char *BACKGROUND_IMAGE = "story/popUpBase.png";
-    const char *IMKER = "story/imker.png";
+    const char *IMKER = "story/imker_no_background.png";
 }
 namespace UICustom {
     
@@ -195,8 +195,8 @@ namespace UICustom {
         _bg->addChild(heading);
         heading->enableOutline(Color4B::BLACK,FONT::LABEL_STROKE);
         heading->enableShadow(Color4B::BLACK, Size(0, -3));
-
-        auto *imker = Sprite::create(IMAGEPATH::IMKER);
+        
+        auto imker = Sprite::create(IMAGEPATH::IMKER);
         heading->addChild(imker);
 
         /*Label *heading = Label::createWithTTF(title, FONT::GAME_FONT, FONT::TITLE_TEXT_SIZE);
