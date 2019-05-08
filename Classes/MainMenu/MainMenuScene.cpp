@@ -17,12 +17,12 @@ bool MainMenu::init() {
 
 	// adding a background, setting the middle as the anchor point and putting as far back as possible
 	auto *background = cocos2d::Sprite::create("menu/main-menu-background-title.png");
-	background->setAnchorPoint(Vec2(0, 0.5));
+	background->setAnchorPoint(Vec2(0.0f, 0.5f));
 	background->setPosition(Vec2(0, origin.y));
 	this->addChild(background, -1000);
 
-	Vec2 buttonsBed = Vec2(background->getBoundingBox().size.width/2 + 153,
-                                background->getBoundingBox().size.height/2 - 3);
+	Vec2 buttonsBed = Vec2(background->getBoundingBox().size.width/2 + 153.0f,
+                                background->getBoundingBox().size.height/2 - 3.0f);
 
 
 	// Adding the sprites for the main menu with location and size adjustment
@@ -39,8 +39,8 @@ bool MainMenu::init() {
         }
     });
 	playButton->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
-	playButton->setAnchorPoint(Vec2(0.5, -0.27));
-	playButton->setScale(1.3);
+	playButton->setAnchorPoint(Vec2(0.5f, -0.27f));
+	playButton->setScale(1.3f);
 
 	auto optionsButton = ui::Button::create("menu/options.png");
     optionsButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
@@ -53,8 +53,8 @@ bool MainMenu::init() {
         }
     });
 	optionsButton->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
-	optionsButton->setAnchorPoint(Vec2(1.025, 0.5));
-	optionsButton->setScale(1.3);
+	optionsButton->setAnchorPoint(Vec2(1.025f, 0.5f));
+	optionsButton->setScale(1.3f);
 
     auto aboutButton = ui::Button::create("menu/credits.png");
     aboutButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
@@ -67,8 +67,8 @@ bool MainMenu::init() {
         }
     });
 	aboutButton->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
-	aboutButton->setAnchorPoint(Vec2(-0.025, 0.5));
-	aboutButton->setScale(1.3);
+	aboutButton->setAnchorPoint(Vec2(-0.025f, 0.5f));
+	aboutButton->setScale(1.3f);
 
     auto exitButton = ui::Button::create("menu/exit.png");
     exitButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
@@ -80,9 +80,9 @@ bool MainMenu::init() {
                 break;
         }
     });
-	exitButton->setAnchorPoint(Vec2(0.5, 1.27));
+	exitButton->setAnchorPoint(Vec2(0.5f, 1.27f));
     exitButton->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
-    exitButton->setScale(1.3);
+    exitButton->setScale(1.3f);
 
     // Create a title and center it at the top of the screen
 	//auto title = Label::createWithTTF("So Bee It!", "fonts/ReemKufi-Regular.ttf", 48);
