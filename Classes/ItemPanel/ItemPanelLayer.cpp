@@ -55,7 +55,7 @@ bool ItemPanelLayer::init() {
     //_showRec = SpriteContainer::getInstance()->getSpriteOf(Sprites::SpriteID::shop_1);
 	_showRec->setAnchorPoint(Vec2(1, 0.5));
 	_showRec->setPosition(Vec2(0, this->getContentSize().height / 2));
-	_showRec->setScale(1);
+	_showRec->setScale(0.6f);
 	this->addChild(_showRec);
 
     //shop background
