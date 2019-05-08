@@ -196,9 +196,11 @@ namespace UICustom {
         heading->enableOutline(Color4B::BLACK,FONT::LABEL_STROKE);
         heading->enableShadow(Color4B::BLACK, Size(0, -3));
         
-        auto imker = Sprite::create(IMAGEPATH::IMKER);
-        imker->setScale(1.0f);
-        heading->addChild(imker);
+		auto imker = ui::ImageView::create(IMAGEPATH::IMKER);
+		imker->setScale9Enabled(true);
+		imker->setAnchorPoint(Vec2(1, 0));
+		imker->setPosition(Vec2(_bg->getContentSize().width, _bg->getContentSize().height * 0.9));
+        _bg->addChild(imker, -1);
 
         /*Label *heading = Label::createWithTTF(title, FONT::GAME_FONT, FONT::TITLE_TEXT_SIZE);
         heading->setPosition(_bg->getContentSize().width/2 , _bg->getContentSize().height - FONT::LABEL_OFFSET);
