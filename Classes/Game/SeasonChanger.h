@@ -11,6 +11,7 @@ using namespace cocos2d;
 class SeasonChanger : public Node {
 
 private:
+	int currentRow = 0;
 
 	TileMapLayer * _tileMapLayer;
 	Season currentSeason;
