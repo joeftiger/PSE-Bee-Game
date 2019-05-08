@@ -46,6 +46,10 @@ public:
 
 	TMXTiledMap *getMap();
 
+	/**
+	 * Returns the layer containing all objects (NOT the obstruction layer)
+	 * @return object layer
+	 */
 	TMXLayer *getLayer();
 
 	Vec2 getTilePosition(Vec2 pos);
