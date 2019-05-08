@@ -9,7 +9,6 @@
 #include "ItemPanel/TouchUtil.h"
 #include "ItemPanel/ItemPanelLayer.h"
 #include "Time.h"
-#include "Interacter.h"
 #include "HoneyExtractor.h"
 
 
@@ -29,7 +28,6 @@ private:
 	Time *time;
 
 public:
-	static cocos2d::Scene *createScene();
 
 	virtual bool init() override;
 
@@ -51,11 +49,7 @@ public:
 
 	void saveGameState(float dt);
 
-	void interactAt(const Vec2& pos);
-
 	Node* getCameraContainer();
-
-	HoneyExtractor* getExtractor();
 
 	// implement the "static create()" method manually
 	CREATE_FUNC(GameScene);

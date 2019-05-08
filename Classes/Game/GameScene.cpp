@@ -15,8 +15,6 @@
 
 using namespace cocos2d;
 
-Scene *GameScene::createScene() {	return GameScene::create(); }
-
 bool GameScene::init() {
 	if (!Scene::init()) return false;
 
@@ -125,9 +123,5 @@ void GameScene::saveGameState(float dt) {
 
 Node* GameScene::getCameraContainer() {
     return container;
-}
-
-HoneyExtractor* GameScene::getExtractor() {
-    return extractor;
 }
 
