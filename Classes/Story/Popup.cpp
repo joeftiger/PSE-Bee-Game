@@ -183,7 +183,7 @@ namespace UICustom {
 		auto imker = ui::ImageView::create(IMAGEPATH::IMKER);
 		imker->setScale9Enabled(true);
 		imker->setAnchorPoint(Vec2(1, 0));
-		imker->setPosition(Vec2(_bg->getContentSize().width * 0.9f, _bg->getContentSize().height * 0.9f));
+		imker->setPosition(Vec2(_bg->getContentSize().width * 0.2f, _bg->getContentSize().height * 0.9f));
         _bg->addChild(imker, -1);
 
         /*Label *heading = Label::createWithTTF(title, FONT::GAME_FONT, FONT::TITLE_TEXT_SIZE);
