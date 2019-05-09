@@ -129,6 +129,7 @@ list(APPEND GAME_HEADER
         Classes/Game/Time.h
         Classes/Game/Wallet.h
         Classes/HeaderFiles/Interactable.h
+        Classes/HeaderFiles/HealthStates.h
         Classes/HeaderFiles/Restorable.h
         Classes/HeaderFiles/Seasons.h
         Classes/HeaderFiles/TimeStruct.h
@@ -152,7 +153,7 @@ list(APPEND GAME_HEADER
         Classes/Story/StoryScene.h
         Classes/TileMapObjects/PlaceableSprite.h
         Classes/TileMapObjects/PlaceableTile.h
-        )
+		)
 
 if (ANDROID)
     # change APP_NAME to the share library name for Android, it's value depend on AndroidManifest.xml
