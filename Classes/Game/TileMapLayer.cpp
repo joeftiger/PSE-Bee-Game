@@ -98,6 +98,10 @@ TMXLayer *TileMapLayer::getLayer() {
 	return _tileMap->getLayer("objects");
 }
 
+std::vector<Sprite *> TileMapLayer::getSpriteList() {
+	return _spriteList;
+}
+
 Vec2 TileMapLayer::getTilePosition(Vec2 pos) {
 
 	auto box = _tileMap->getBoundingBox();
@@ -263,4 +267,3 @@ void TileMapLayer::initObstructionLayer() {
 		}
 	}
 }
-

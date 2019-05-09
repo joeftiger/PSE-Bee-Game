@@ -54,6 +54,12 @@ public:
 	 */
 	TMXLayer *getLayer();
 
+	/**
+	 * Returns the list of child sprites (trees, etc.)
+	 * @return list of sprites
+	 */
+	std::vector<Sprite *> getSpriteList();
+
 	Vec2 getTilePosition(Vec2 pos);
 
 	Vec2 inTileMapBounds(const Vec2 &pos);
