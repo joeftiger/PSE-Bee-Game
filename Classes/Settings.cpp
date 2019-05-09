@@ -21,13 +21,16 @@ int Settings::getAsInt(Settings::SettingName setting) {
 }
 
 void Settings::set(Settings::SettingName setting, const std::string &value) {
+	cocos2d::log("Setting %d to %s", setting, value);
 	_settings[setting] = value;
 }
 
 void Settings::set(Settings::SettingName setting, bool value) {
+	cocos2d::log("Setting %d to %i", setting, value);
 	_settings[setting] = value ? "1" : "";
 }
 
 void Settings::set(Settings::SettingName setting, int value) {
+	cocos2d::log("Setting %d to %i", setting, value);
 	_settings[setting] = std::to_string(value);
 }
