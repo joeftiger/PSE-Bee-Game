@@ -1,6 +1,3 @@
-//
-// Created by julius on 22.03.19.
-//
 
 #ifndef PSE_BEE_GAME_PLAYER_H
 #define PSE_BEE_GAME_PLAYER_H
@@ -9,11 +6,13 @@
 #include <vector>
 #include <TileMapObjects/Placeable.h>
 #include "BeeHive.h"
-
 #include "HoneyExtractor.h"
 #include "Observer.h"
 #include "Observable.h"
 
+/**
+ *	Player object that has money (from a wallet object) and honey
+ */
 class Player : public Observer, public Observable {
 private:
 	static Player *_instance;

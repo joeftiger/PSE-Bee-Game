@@ -11,9 +11,11 @@
 #include "Time.h"
 #include "HoneyExtractor.h"
 
-
 using namespace cocos2d;
 
+/**
+ * The GameScene that has a HUDLayer and deals with collecting and connecting the game's logic
+ */
 class GameScene : public cocos2d::Scene {
 private:
 	Camera *camera;

@@ -1,5 +1,7 @@
 
 #include "HoneyExtractor.h"
+#include "BeeHive.h"
+#include "Wallet.h"
 
 bool HoneyExtractor::invariant() {
 	assert(_honeyInExtractor >= 0);
@@ -8,7 +10,6 @@ bool HoneyExtractor::invariant() {
 
 HoneyExtractor::HoneyExtractor() : HoneyExtractor(0) {}
 
-//TODO Discuss if this is sufficient?
 HoneyExtractor::HoneyExtractor(int _honeyInExtractor) {
 	this->_honeyInExtractor = _honeyInExtractor;
 	assert(invariant());
@@ -26,7 +27,6 @@ float HoneyExtractor::honeyInExtractor() {
 	return _honeyInExtractor;
 }
 
-// TODO Origin of honey from a specific beehive
 void HoneyExtractor::addHoneyToExtractor(float amountAdded) {
 	if (amountAdded < 0) {
 		throw std::out_of_range(

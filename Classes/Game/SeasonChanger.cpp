@@ -1,3 +1,4 @@
+
 #include "SeasonChanger.h"
 
 SeasonChanger * SeasonChanger::create(TileMapLayer * tileMapLayer) {

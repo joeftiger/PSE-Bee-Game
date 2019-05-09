@@ -1,12 +1,7 @@
-//
-// Created by julius on 22.03.19.
-//
-
 
 #include "Player.h"
 #include "Wallet.h"
 #include "Atlas/BeeHiveAtlas.h"
-
 #include "Atlas/HoneyExtractorAtlas.h"
 
 
