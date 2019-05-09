@@ -175,7 +175,7 @@ void BeeHivePopup::update(float dt) {
 
     _beesLabel->setString(stringShortener(std::to_string((int) _beeHive->beesAlive())));
 
-    _varroaLabel->setString(stringShortener(std::to_string((int) _beeHive->varoaAlive())));
+    _varroaLabel->setString(stringShortener(std::to_string((int) _beeHive->varroaAlive())));
 }
 
 std::string BeeHivePopup::stringShortener(std::string s) {

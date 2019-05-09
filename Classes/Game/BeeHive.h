@@ -17,7 +17,7 @@ static const float MAX_RAW_HONEY = 15000;
 class BeeHive : Restorable {
 private:
 	int _beesAlive;
-	int _varoaAlive;
+	int _varroaAlive;
     int counter = 0;
 	float _rawHoney;
 	BeeParticles* _particlesNode;
@@ -42,9 +42,9 @@ public:
 	/**
 	 * Creates a new infected beehive
 	 * @param bees  the initial number of bees
-	 * @param varoa  the initial number of varoa
+	 * @param varroa  the initial number of varroa
 	 */
-	explicit BeeHive(int bees, int varoa);
+	explicit BeeHive(int bees, int varroa);
 
 	/**
 	 * Returns whether this beehive is empty and has no bees in it.
@@ -64,9 +64,9 @@ public:
 	int beesAlive();
 
 	/**
-	 * @return number of varoa
+	 * @return number of varroa
 	 */
-	int varoaAlive();
+	int varroaAlive();
 
 	/**
 	 * @return total raw honey
