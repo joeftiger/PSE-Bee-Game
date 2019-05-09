@@ -13,11 +13,11 @@ std::string Settings::get(Settings::SettingName setting) {
 }
 
 bool Settings::getAsBool(Settings::SettingName setting) {
-	try {
-		return _settings.at(setting) == _true;
-	} catch (const std::out_of_range &e) {
-		return false;
-	}
+	return _settings.at(setting) == _true;
+}
+
+int Settings::getAsInt(Settings::SettingName setting) {
+	return std::atoi(_settings.at(setting).c_str());
 }
 
 void Settings::set(Settings::SettingName setting, const std::string &value) {
@@ -26,4 +26,8 @@ void Settings::set(Settings::SettingName setting, const std::string &value) {
 
 void Settings::set(Settings::SettingName setting, bool value) {
 	_settings[setting] = value ? _true : _false;
+}
+
+void Settings::set(Settings::SettingName setting, int value) {
+	_settings[setting] = std::to_string(value);
 }
