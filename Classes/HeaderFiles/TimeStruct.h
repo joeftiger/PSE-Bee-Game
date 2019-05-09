@@ -3,10 +3,10 @@
 
 
 struct timeStruct {
-	float timePassed;
-	int seconds;
-	int months;
-	int years;
+	float timePassed = 0;
+	int seconds = 0;
+	int months = 0;
+	int years = 0;
 };
 
 #endif //TIMESTRUCT_H
