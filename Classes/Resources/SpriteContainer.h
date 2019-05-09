@@ -47,7 +47,7 @@ public:
      * @param id sprite id
      * @return corresponding sprite frame name
      */
-    std::string getSpriteFrameNameOf(Sprites::SpriteID id);
+    static std::string getSpriteFrameNameOf(Sprites::SpriteID id);
 };
 
 
