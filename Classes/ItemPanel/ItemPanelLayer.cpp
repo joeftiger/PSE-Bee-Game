@@ -1,6 +1,3 @@
-//
-// Created by Uro on 3/30/2019.
-//
 
 #include <Resources/Tiles.h>
 #include <TileMapObjects/PlaceableTile.h>

@@ -1,6 +1,3 @@
-//
-// Created by Uro on 3/30/2019.
-//
 
 #ifndef PSE_BEE_GAME_ITEMPANELLayer_H
 #define PSE_BEE_GAME_ITEMPANELLayer_H
@@ -12,6 +9,9 @@
 
 using namespace cocos2d;
 
+/**
+ * ItemPanelLayer that holds sprites and tiles to be set on the tileMap
+ */
 class ItemPanelLayer : public LayerColor, public TouchUtil {
 private:
     ui::Button *_showRec;
@@ -31,6 +31,9 @@ public:
 
 	void setTileMap(TileMapLayer *tileMap);
 
+	/**
+	 * show / hide the item panel
+	 */
 	void showHideItemPanel();
 
 	void touchOnItemPanel(const Vec2 &touchPos);

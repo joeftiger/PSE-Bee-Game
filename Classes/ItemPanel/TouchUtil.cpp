@@ -1,6 +1,3 @@
-//
-// Created by Uro on 3/29/2019.
-//
 
 #include "TouchUtil.h"
 #include <list>
