@@ -1,6 +1,3 @@
-//
-// Created by julius on 30.04.19.
-//
 
 #ifndef PSE_BEE_GAME_BEEHIVEPOPUP_H
 #define PSE_BEE_GAME_BEEHIVEPOPUP_H
@@ -9,7 +6,9 @@
 #include "cocos2d.h"
 
 USING_NS_CC;
-
+/**
+ * Pop-up window with information for beehives (honey, varroa, population)
+ */
 class BeeHivePopup : public Node {
 private:
     BeeHive *_beeHive;
@@ -54,7 +53,7 @@ private:
 
 public:
     /**
-     * Creates the beehive popup with given beehive to extract information from.
+     * Creates the beehive popup with given beehive to get information from.
      * @param beeHive beehive to display
      * @return Node
      */

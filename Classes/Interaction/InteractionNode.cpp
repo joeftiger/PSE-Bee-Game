@@ -1,6 +1,3 @@
-//
-// Created by uro on 4/28/19.
-//
 
 #include "InteractionNode.h"
 #include "cocos2d.h"

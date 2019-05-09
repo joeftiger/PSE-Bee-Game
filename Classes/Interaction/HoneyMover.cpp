@@ -1,12 +1,8 @@
-//
-// Created by uro on 5/1/19.
-//
 
 #include <Atlas/HoneyExtractorAtlas.h>
 #include <Atlas/BeeHiveAtlas.h>
 #include <Resources/SpriteContainer.h>
 #include "HoneyMover.h"
-
 #include "cocos2d.h"
 #include "Game/GameScene.h"
 #include "BeeHivePopup.h"
@@ -25,7 +21,6 @@ bool HoneyMover::init() {
     listener->onTouchMoved = CC_CALLBACK_2(HoneyMover::onTouchMoved, this);
     listener->onTouchEnded = CC_CALLBACK_2(HoneyMover::onTouchEnded, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-
 
     return true;
 }
@@ -99,24 +94,11 @@ void HoneyMover::interactAt(const Vec2& pos) {
         auto popup = BeeHivePopup::createWith(beeHive);
         this->addChild(popup, 100);
 
-//        auto beeHive = BeeHiveAtlas::getInstance()->getBeeHiveAt(selectTilePos);
-//        Interacter *i = Interacter::create();
-//        this->addChild(i, 100);
-//        i->runWith(beeHive);
-//        i->interact();
-
     } else if(HoneyExtractorAtlas::getInstance()->hasHoneyExtractorAt(pos)) {
 
         auto honeyExtractor = HoneyExtractorAtlas::getInstance()->getHoneyExtractorAt(pos);
         auto popup = HoneyExtractorPopup::createWith(honeyExtractor);
         this->addChild(popup, 100);
 
-        /*
-        auto honeyExtractor = HoneyExtractorAtlas::getInstance()->getHoneyExtractorAt(selectTilePos);
-        Interacter *i = Interacter::create();
-        this->addChild(i, 100);
-        i->runWith(honeyExtractor);
-        i->interact();
-        */
     }
 }

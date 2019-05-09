@@ -1,6 +1,3 @@
-//
-// Created by uro on 4/28/19.
-//
 
 #ifndef PSE_BEE_GAME_INTERACTIONNODE_H
 #define PSE_BEE_GAME_INTERACTIONNODE_H
@@ -9,6 +6,9 @@
 
 using namespace cocos2d;
 
+/**
+ * Interaction functionality as a node to be used in other objects / classes
+ */
 class InteractionNode : public Node {
 private:
     std::string _itemName;

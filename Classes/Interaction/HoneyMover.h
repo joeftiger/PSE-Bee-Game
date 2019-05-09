@@ -1,6 +1,3 @@
-//
-// Created by uro on 5/1/19.
-//
 
 #ifndef PSE_BEE_GAME_HONEYMOVER_H
 #define PSE_BEE_GAME_HONEYMOVER_H
@@ -10,6 +7,9 @@
 
 using namespace cocos2d;
 
+/**
+ * Moves a set amount of honey from beehive to a honey extractor or the other way
+ */
 class HoneyMover : public Node {
 private:
     TileMapLayer *_tileMapLayer;
