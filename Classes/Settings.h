@@ -11,11 +11,15 @@
 class Settings {
 public:
 	enum SettingName {
-		HD_Textures
+		HD_Textures,
+		Tutorial
 	};
 
 private:
 	std::map<SettingName, std::string> _settings;
+
+	std::string _true = "1";
+	std::string _false = "0";
 
 	Settings();
 
