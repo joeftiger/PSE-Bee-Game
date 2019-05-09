@@ -7,6 +7,7 @@
 #include "cocos2d.h"
 #include "../HeaderFiles/Restorable.h"
 #include "TileMapLayer.h"
+#include "../HeaderFiles/HealthStates.h"
 
 static const int MAX_BEES = 50000;
 static const float MAX_RAW_HONEY = 15000;
@@ -22,6 +23,8 @@ private:
 	float _rawHoney;
 	BeeParticles* _particlesNode;
 	cocos2d::Vec2 _position;
+
+	HealthState _currentHealth;
 
 	bool invariant();
 	void varroaRandomizer();
@@ -92,6 +95,12 @@ public:
 	 * @throws std::out_of_range() if amount is an invalid value
 	 */
 	float takeRawHoney(float amount);
+
+
+	/**
+     * calculates current health of beehive in relation to varroa
+     */
+    HealthState currentHealth();
 
 	/**
 	 * Removes varroas, but also kills 1000 bees.

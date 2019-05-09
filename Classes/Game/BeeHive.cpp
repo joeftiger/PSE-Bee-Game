@@ -7,6 +7,7 @@
 #include "BeeHive.h"
 #include "GameScene.h"
 #include "../HeaderFiles/HealthStates.h"
+#include "Time.h"
 
 bool BeeHive::invariant() {
 	//assert(_beesAlive >= 0);
@@ -64,6 +65,18 @@ float BeeHive::takeRawHoney(float amount) {
 
 	assert(invariant());
 	return amount;
+}
+
+HealthState BeeHive::currentHealth() {
+	if (_beesAlive / _varroaAlive  >= 0.75) {
+		return HealthState::Healthy;
+	} else if (_beesAlive / _varroaAlive  >= 0.40) {
+		return HealthState::Average;
+    } else if (_beesAlive / _varroaAlive  >= 0.01) {
+	    return HealthState::Unhealthy;
+    } else {
+	    return HealthState::Dead;
+    }
 }
 
 void BeeHive::killVarroa() {

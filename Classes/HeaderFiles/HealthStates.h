@@ -4,7 +4,7 @@
 /**
  * List of the 4 health states
  */
-enum HealthStates {
+enum HealthState {
 	Dead,
 	Unhealthy,
 	Average,
