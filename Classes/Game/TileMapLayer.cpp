@@ -98,6 +98,10 @@ TMXLayer *TileMapLayer::getLayer() {
 	return _tileMap->getLayer("objects");
 }
 
+std::vector<Sprite *> TileMapLayer::getSpriteList() {
+	return _spriteList;
+}
+
 Vec2 TileMapLayer::getTilePosition(Vec2 pos) {
 
 	auto box = _tileMap->getBoundingBox();
@@ -202,8 +206,8 @@ void TileMapLayer::placeSprite(const Vec2 &position, const Size &size, Sprites::
 		for (auto y = 0; y < size.height; y++) {
 			auto tilePos = Vec2(pos.x - x, pos.y - y);
 			_obstructionLayer->setTileGID(Tiles::obstruction, tilePos);
-			_objectLayer->setTileGID(Tiles::getSeasonTileOf(Tiles::grass,
-									Time::getInstance()->getSeason()), tilePos);
+			_objectLayer->setTileGID(Tiles::getSeasonTileGIDof(Tiles::grass,
+			                                                   Time::getInstance()->getSeason()), tilePos);
 		}
 	}
 
@@ -263,4 +267,3 @@ void TileMapLayer::initObstructionLayer() {
 		}
 	}
 }
-

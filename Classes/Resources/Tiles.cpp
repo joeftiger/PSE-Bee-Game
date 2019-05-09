@@ -23,7 +23,7 @@ cocos2d::Sprite *Tiles::getSpriteOf(Tiles::TileGID gid) {
     return SpriteContainer::getInstance()->getSpriteOf(gid);
 }
 
-Tiles::TileGID Tiles::getSeasonTileOf(Tiles::TileGID gid, Season season) {
+Tiles::TileGID Tiles::getSeasonTileGIDof(Tiles::TileGID gid, Season season) {
 	switch (gid) {
 		case beehive_small:
 		case beehive_middle:

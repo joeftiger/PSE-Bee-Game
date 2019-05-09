@@ -70,7 +70,13 @@ public:
 	 */
 	static cocos2d::Sprite *getSpriteOf(TileGID gid);
 
-	static TileGID getSeasonTileOf(TileGID gid, Season season);
+	/**
+	 * Returns the seasonal tile of the given tile gid according to the season.
+	 * @param gid tile gid
+	 * @param season season to look up
+	 * @return corresponding seasonal tile
+	 */
+	static TileGID getSeasonTileGIDof(TileGID gid, Season season);
 };
 
 #endif /* TILES_H */
