@@ -1,7 +1,9 @@
 #ifndef TIMESTRUCT_H
 #define TIMESTRUCT_H
 
-
+/**
+ * structure definitions for time
+ */
 struct timeStruct {
 	float timePassed;
 	int seconds;
