@@ -2,6 +2,7 @@
 #include "HeaderFiles/DEFINITIONS.h"
 #include <Resources/Tiles.h>
 #include <Resources/SpriteContainer.h>
+#include <Settings.h>
 #include "ui/CocosGUI.h"
 #include "Game/Player.h"
 
@@ -24,7 +25,6 @@ void HoneyExtractorPopup::initImage() {
 
 	image->setAnchorPoint(Vec2(0, 0.5));
 	image->setPosition(box.width / 10, box.height * 2 / 3);
-	image->setScale(0.3f);
 	background->addChild(image, 1, "image");
 }
 
