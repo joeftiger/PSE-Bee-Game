@@ -37,7 +37,7 @@ void SeasonChanger::switchSeason() {
 	for (int y = 0; y < objectLayer->getLayerSize().width; y++) {
 		int tempGID = objectLayer->getTileGIDAt(Vec2(currentRow, y));
 		auto gid = static_cast<Tiles::TileGID>(tempGID);
-		objectLayer->setTileGID(Tiles::getSeasonTileOf(gid, Time::getInstance()->getSeason()), Vec2(currentRow, y));
+		objectLayer->setTileGID(Tiles::getSeasonTileGIDof(gid, Time::getInstance()->getSeason()), Vec2(currentRow, y));
 	}
 	currentRow++;
 
@@ -46,7 +46,7 @@ void SeasonChanger::switchSeason() {
 		for (int y = 0; y < objectLayer->getLayerSize().width; y++) {
 			int tempGID = objectLayer->getTileGIDAt(Vec2(x, y));
 			auto gid = static_cast<Tiles::TileGID>(tempGID);
-			objectLayer->setTileGID(Tiles::getSeasonTileOf(gid, currentSeason), Vec2(x, y));
+			objectLayer->setTileGID(Tiles::getSeasonTileGIDof(gid, currentSeason), Vec2(x, y));
 		}
 	}
 	*/

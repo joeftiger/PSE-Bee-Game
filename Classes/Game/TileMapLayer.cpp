@@ -202,8 +202,8 @@ void TileMapLayer::placeSprite(const Vec2 &position, const Size &size, Sprites::
 		for (auto y = 0; y < size.height; y++) {
 			auto tilePos = Vec2(pos.x - x, pos.y - y);
 			_obstructionLayer->setTileGID(Tiles::obstruction, tilePos);
-			_objectLayer->setTileGID(Tiles::getSeasonTileOf(Tiles::grass,
-									Time::getInstance()->getSeason()), tilePos);
+			_objectLayer->setTileGID(Tiles::getSeasonTileGIDof(Tiles::grass,
+			                                                   Time::getInstance()->getSeason()), tilePos);
 		}
 	}
 

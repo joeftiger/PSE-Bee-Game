@@ -76,7 +76,7 @@ public:
 	 * @param season season to look up
 	 * @return corresponding seasonal tile
 	 */
-	static TileGID getSeasonTileOf(TileGID gid, Season season);
+	static TileGID getSeasonTileGIDof(TileGID gid, Season season);
 };
 
 #endif /* TILES_H */
