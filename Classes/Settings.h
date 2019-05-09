@@ -18,9 +18,6 @@ public:
 private:
 	std::map<SettingName, std::string> _settings;
 
-	std::string _true = "1";
-	std::string _false = "0";
-
 	Settings();
 
 public:
