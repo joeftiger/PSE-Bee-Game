@@ -117,7 +117,6 @@ void BeeHivePopup::initButtons() {
 
     Vector<MenuItem *> exitButton;
     MenuItemImage *closeButton = MenuItemImage::create("menu/no.png", "menu/no.png", [=](Ref *sender) {
-        cocos2d::log("%s", "exit");
         this->removeFromParentAndCleanup(true);
     });
     exitButton.pushBack(closeButton);
