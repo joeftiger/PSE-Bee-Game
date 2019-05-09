@@ -1,6 +1,3 @@
-//
-// Created by uro on 5/5/19.
-//
 
 #include <Resources/SpriteContainer.h>
 #include "BeeParticles.h"

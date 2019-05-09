@@ -1,6 +1,3 @@
-//
-// Created by uro on 5/5/19.
-//
 
 #ifndef PSE_BEE_GAME_BEEPARTICLES_H
 #define PSE_BEE_GAME_BEEPARTICLES_H
@@ -9,6 +6,9 @@
 
 using namespace cocos2d;
 
+/**
+ * Creating a certain amount of beehive particles, with a slightly randomized path
+ */
 class BeeParticles : public Node {
 private:
     std::vector<Sprite*> _particles;

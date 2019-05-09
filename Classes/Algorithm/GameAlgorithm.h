@@ -1,6 +1,4 @@
-//
-// Created by uro on 4/25/19.
-//
+
 
 #ifndef PSE_BEE_GAME_GAMEALGORITHM_H
 #define PSE_BEE_GAME_GAMEALGORITHM_H
@@ -13,7 +11,9 @@
 #include "Game/BeeHive.h"
 #include "Atlas/BeeHiveAtlas.h"
 
-
+/**
+ * Algorithm for generating honey with various factors
+ */
 class GameAlgorithm {
 private:
     static GameAlgorithm *_instance;

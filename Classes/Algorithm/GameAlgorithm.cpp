@@ -1,6 +1,3 @@
-//
-// Created by uro on 4/25/19.
-//
 
 #include <Game/Time.h>
 #include "GameAlgorithm.h"

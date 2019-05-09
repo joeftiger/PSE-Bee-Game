@@ -1,6 +1,6 @@
-//
-// Created by brian on 25/03/2019.
-//
+/**
+ * OptionsScene that displays various options
+ */
 
 #include "OptionsScene.h"
 #include "../Settings.h"
