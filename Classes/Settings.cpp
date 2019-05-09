@@ -1,6 +1,3 @@
-/**
- *
- */
 
 #include <cocos/base/CCConsole.h>
 #include "Settings.h"

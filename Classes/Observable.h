@@ -1,12 +1,13 @@
-//
-// Created by julius on 24.03.19.
-//
+
 
 #ifndef PSE_BEE_GAME_OBSERVABLE_H
 #define PSE_BEE_GAME_OBSERVABLE_H
 
 #include "Observer.h"
 
+/**
+ * methods need for a class to be observed
+ */
 class Observable {
 private:
 

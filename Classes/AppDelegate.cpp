@@ -60,12 +60,12 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	auto director = Director::getInstance();
 	auto glview = director->getOpenGLView();
 	if (!glview) {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-		glview = GLViewImpl::createWithRect("PSE-Bee-Game", cocos2d::Rect(0, 0, designResolutionSize.width,
+		#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
+			glview = GLViewImpl::createWithRect("PSE-Bee-Game", cocos2d::Rect(0, 0, designResolutionSize.width,
 		                                                                  designResolutionSize.height));
-#else
+		#else
 		glview = GLViewImpl::create("PSE-Bee-Game");
-#endif
+		#endif
 		director->setOpenGLView(glview);
 	}
 

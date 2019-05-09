@@ -1,6 +1,3 @@
-//
-// Created by julius on 05.05.19.
-//
 
 #ifndef PSE_BEE_GAME_SETTINGS_H
 #define PSE_BEE_GAME_SETTINGS_H
@@ -8,6 +5,9 @@
 
 #include <map>
 
+/**
+ * collection of settings and methods to interact with them for the game
+ */
 class Settings {
 public:
 	enum SettingName {
