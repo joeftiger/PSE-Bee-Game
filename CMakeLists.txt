@@ -79,79 +79,79 @@ endif ()
 
 # add cross-platforms source files and header files 
 list(APPEND GAME_SOURCE
+        Classes/About/AboutScene.cpp
+        Classes/Algorithm/GameAlgorithm.cpp
         Classes/AppDelegate.cpp
-        Classes/Settings.cpp
-        Classes/Game/GameScene.cpp
-        Classes/Story/StoryScene.cpp
-        Classes/Game/HUDLayer.cpp
-        Classes/MainMenu/MainMenuScene.cpp
-        Classes/Game/TileMapLayer.cpp
-        Classes/Game/BeeHive.cpp
-        Classes/Game/HoneyExtractor.cpp
-        Classes/Game/Player.cpp
-        Classes/Game/Interacter.cpp
-		Classes/Game/Wallet.cpp
         Classes/Atlas/BeeHiveAtlas.cpp
         Classes/Atlas/HoneyExtractorAtlas.cpp
-        Classes/About/AboutScene.cpp
-        Classes/Options/OptionsScene.cpp
-        Classes/Options/SaveDeleteConfirmation.cpp
-        Classes/Shop/ShopScene.cpp
-        Classes/SaveLoad/SaveLoad.cpp
-        Classes/ItemPanel/TouchUtil.cpp
-        Classes/TileMapObjects/PlaceableTile.cpp
-        Classes/TileMapObjects/PlaceableSprite.cpp
-        Classes/Story/Popup.cpp
+        Classes/Game/BeeHive.cpp
+        Classes/Game/GameScene.cpp
+        Classes/Game/HUDLayer.cpp
+        Classes/Game/HoneyExtractor.cpp
+        Classes/Game/Interacter.cpp
+        Classes/Game/Player.cpp
+		Classes/Game/TileMapLayer.cpp
         Classes/Game/Time.cpp
-        Classes/Resources/Tiles.cpp
-        Classes/Resources/Sprites.cpp
-        Classes/Resources/SpriteContainer.cpp
-        Classes/Interaction/InteractionNode.cpp
-        Classes/Algorithm/GameAlgorithm.cpp
-        Classes/ItemPanel/ItemPanelLayer.cpp
+        Classes/Game/Wallet.cpp
         Classes/Interaction/BeeHivePopup.cpp
         Classes/Interaction/HoneyExtractorPopup.cpp
+        Classes/Interaction/InteractionNode.cpp
+        Classes/ItemPanel/ItemPanelLayer.cpp
+        Classes/ItemPanel/TouchUtil.cpp
+        Classes/MainMenu/MainMenuScene.cpp
+        Classes/Options/OptionsScene.cpp
+        Classes/Options/SaveDeleteConfirmation.cpp
+        Classes/Resources/SpriteContainer.cpp
+        Classes/Resources/Sprites.cpp
+        Classes/Resources/Tiles.cpp
+        Classes/SaveLoad/SaveLoad.cpp
+        Classes/Settings.cpp
+        Classes/Shop/ShopScene.cpp
+        Classes/Story/Popup.cpp
+        Classes/Story/StoryScene.cpp
+        Classes/TileMapObjects/PlaceableSprite.cpp
+        Classes/TileMapObjects/PlaceableTile.cpp
         )
 
 list(APPEND GAME_HEADER
+        Classes/About/AboutScene.h
+        Classes/Algorithm/GameAlgorithm.h
         Classes/AppDelegate.h
-        Classes/Settings.h
-        Classes/Game/GameScene.h
-        Classes/Story/StoryScene.h
-        Classes/Game/HUDLayer.h
-        Classes/MainMenu/MainMenuScene.h
-        Classes/Game/TileMapLayer.h
-        Classes/Game/BeeHive.h
-        Classes/Game/HoneyExtractor.h
-        Classes/Game/Player.h
-        Classes/Game/Interacter.h
-		Classes/Game/Wallet.h
-        Classes/Observer.h
-        Classes/Observable.h
         Classes/Atlas/BeeHiveAtlas.h
         Classes/Atlas/HoneyExtractorAtlas.h
-        Classes/About/AboutScene.h
-        Classes/Options/OptionsScene.h
-        Classes/Options/SaveDeleteConfirmation.h
-        Classes/Shop/ShopScene.h
-        Classes/SaveLoad/SaveLoad.h
-        Classes/ItemPanel/TouchUtil.h
-        Classes/TileMapObjects/PlaceableTile.h
-        Classes/TileMapObjects/PlaceableSprite.h
-        Classes/Story/Popup.h
+        Classes/Game/BeeHive.h
+        Classes/Game/GameScene.h
+        Classes/Game/HUDLayer.h
+        Classes/Game/HoneyExtractor.h
+        Classes/Game/Interacter.h
+        Classes/Game/Player.h
+        Classes/Game/TileMapLayer.h
         Classes/Game/Time.h
-        Classes/HeaderFiles/TimeStruct.h
-        Classes/HeaderFiles/Seasons.h
+        Classes/Game/Wallet.h
         Classes/HeaderFiles/Interactable.h
         Classes/HeaderFiles/Restorable.h
-        Classes/Resources/Tiles.h
-        Classes/Resources/Sprites.h
-        Classes/Resources/SpriteContainer.h
-        Classes/Interaction/InteractionNode.h
+        Classes/HeaderFiles/Seasons.h
+        Classes/HeaderFiles/TimeStruct.h
         Classes/Interaction/BeeHivePopup.h
-		Classes/Interaction/HoneyExtractorPopup.h
-        Classes/Algorithm/GameAlgorithm.h
+        Classes/Interaction/HoneyExtractorPopup.h
+        Classes/Interaction/InteractionNode.h
         Classes/ItemPanel/ItemPanelLayer.h
+        Classes/ItemPanel/TouchUtil.h
+        Classes/MainMenu/MainMenuScene.h
+        Classes/Observable.h
+        Classes/Observer.h
+        Classes/Options/OptionsScene.h
+        Classes/Options/SaveDeleteConfirmation.h
+        Classes/Resources/SpriteContainer.h
+        Classes/Resources/Sprites.h
+        Classes/Resources/Tiles.h
+        Classes/SaveLoad/SaveLoad.h
+        Classes/Settings.h
+        Classes/Shop/ShopScene.h
+        Classes/Story/Popup.h
+        Classes/Story/StoryScene.h
+        Classes/TileMapObjects/PlaceableSprite.h
+        Classes/TileMapObjects/PlaceableTile.h
         )
 
 if (ANDROID)
