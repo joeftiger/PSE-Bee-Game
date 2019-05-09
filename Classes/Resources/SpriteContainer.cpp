@@ -117,3 +117,8 @@ std::string SpriteContainer::getSpriteFrameNameOf(Sprites::SpriteID id) {
         default:                                    return nullptr;
     }
 }
+
+SpriteFrame *SpriteContainer::getSpriteFrameOf(Sprites::SpriteID id) {
+    auto name = getSpriteFrameNameOf(id);
+	return _cache->getSpriteFrameByName(name);
+}
