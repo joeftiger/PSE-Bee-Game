@@ -16,6 +16,12 @@ private:
 	float onePofScreenH;
 	float onePofScreenW;
 
+
+
+	void initTextureButton();
+
+	void initTutorialButton();
+
 public:
 	static cocos2d::Scene *createScene();
 
@@ -23,6 +29,7 @@ public:
 
 	// reset button click handler
 	void onDeleteSaveClick(cocos2d::Ref *sender);
+
 
 	// implement the "static create()" method manually
 	CREATE_FUNC(OptionsScene);

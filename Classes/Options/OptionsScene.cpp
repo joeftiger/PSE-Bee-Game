@@ -10,6 +10,36 @@ using namespace cocos2d;
 using namespace cocos2d::ui;
 
 
+void OptionsScene::initTextureButton() {
+	auto checkbox = CheckBox::create();
+	checkbox->loadTextureBackGround("Sprites/SD.png");
+	checkbox->loadTextureBackGroundDisabled("Sprites/SD.png");
+	checkbox->loadTextureBackGroundSelected("Sprites/HD.png");
+	checkbox->loadTextureFrontCross("Sprites/HD.png");
+	checkbox->loadTextureFrontCrossDisabled("Sprites/SD.png");
+
+	checkbox->addTouchEventListener([&](Ref* sender, Widget::TouchEventType type) {
+		if (type == Widget::TouchEventType::ENDED) {
+			cocos2d::log("Options:\tSwitching textures");
+			Settings::getInstance()->set(Settings::SettingName::HD_Textures, checkbox->isSelected());
+		}
+	});
+
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+	checkbox->setAnchorPoint(Vec2(0.5, 0.5));
+	checkbox->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 3.0f));
+
+	checkbox->setSelected(Settings::getInstance()->getAsBool(Settings::SettingName::HD_Textures));
+
+	this->addChild(checkbox, 10);
+}
+
+void OptionsScene::initTutorialButton() {
+	// TODO
+}
+
 Scene *OptionsScene::createScene() { return OptionsScene::create(); }
 
 // on "init" you need to initialize your instance
@@ -41,15 +71,10 @@ bool OptionsScene::init() {
     this->addChild(resetMenu, 10);
 
     // switch between textures
-    auto textureLabel = Label::createWithTTF("Click here to switch between HD and SD Textures", "fonts/ReemKufi-Regular.ttf", 40);
-    auto menuItemTextureSwitch= MenuItemLabel::create(textureLabel);
-    // TODO Add switch function for textures!!!
-    menuItemTextureSwitch->setCallback([&](cocos2d::Ref *sender) {
-            Director::getInstance()->replaceScene(SaveDeleteConfirmation::create());
-    });
-    auto textureSwitchMenu = Menu::create(menuItemTextureSwitch, nullptr);
-    textureSwitchMenu->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - 5 * title->getContentSize().height));
-    this->addChild(textureSwitchMenu, 10);
+    initTextureButton();
+
+
+
 
 
 	// add the menu item for back to main menu and position it in the bottom right corner of the screen
