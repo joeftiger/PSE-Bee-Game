@@ -59,9 +59,7 @@ std::string Time::convertToMonth(int i)
 	}
 }
 
-/**
-	
-*/
+
 Season Time::getSeason() {
 	assert(times.months >= 0 && times.months <= 11);
 	switch (times.months) {
