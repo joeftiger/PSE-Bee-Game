@@ -32,7 +32,7 @@ private:
 
 public:
 	/**
-	 * Creates a new healthy beehive with 100 bees.
+	 * Creates a new healthy beehive with 4000 bees.
 	 */
 	explicit BeeHive();
 
