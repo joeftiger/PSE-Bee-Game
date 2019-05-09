@@ -1,6 +1,4 @@
-//
-// Created by julius on 22.03.19.
-//
+
 
 #ifndef PSE_BEE_GAME_BEEHIVE_H
 #define PSE_BEE_GAME_BEEHIVE_H
@@ -13,6 +11,9 @@
 static const int MAX_BEES = 50000;
 static const float MAX_RAW_HONEY = 15000;
 
+/**
+ * BeeHive object with honey and bees as well as varroa
+ */
 class BeeHive : Restorable {
 private:
 	int _beesAlive;
@@ -117,6 +118,9 @@ public:
 
 	void fromJSON(rapidjson::Document &doc) override;
 
+	/**
+     * Creating the particles for animation
+     */
 	BeeParticles* getParticles();
 
 	void setParticles();
