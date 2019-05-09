@@ -25,8 +25,6 @@ private:
 
 	ItemPanelLayer *_itemPanel;
 
-	Time *time;
-
 public:
 
 	virtual bool init() override;

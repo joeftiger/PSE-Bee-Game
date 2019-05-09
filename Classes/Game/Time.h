@@ -7,32 +7,38 @@
 #include "HeaderFiles/TimeStruct.h"
 #include "json/rapidjson.h"
 #include "HeaderFiles/Seasons.h"
+#include "TileMapLayer.h"
 
 using namespace cocos2d;
 
 class Time: public Node, Restorable  {
 private:
-	static Time *_instance;
+	timeStruct times;
+
+	int _currentRow = 0;
+	TileMapLayer * _tileMapLayer;
+	Season _currentSeason;
 
 	Time() = default;
 
 	Time(const Time &);
 
-	~Time() = default;
-
-	timeStruct times;
+	~Time() final = default;
 
 	std::string convertToMonth(int i);
 
-	void time(float dt);
+	void update(float dt) override;
 
 public:
 
 	virtual bool init();
 
-	static Time * createInstance();
+	void setTileMapLayer(TileMapLayer *tileMapLayer);
 
-	static Time * getInstance();
+	static Time *getInstance() {
+		static auto instance = Time::create();
+		return instance;
+	}
 
 	bool invariant();
 
@@ -43,6 +49,16 @@ public:
 	std::string getMonthAsString();
 
 	Season getSeason();
+
+	/**
+	 * Switches the tilemap's trees to the current season.
+	 */
+	void switchSeasonalTrees();
+
+	/**
+	 * Switches the tilemap's tiles sequentially (row by row) to the current season.
+	 */
+	void switchSeasonalTilesSequential();
 
 	void toJSON(rapidjson::Document &doc);
 

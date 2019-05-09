@@ -4,7 +4,7 @@
 #include "Resources/Tiles.h"
 #include "Resources/Sprites.h"
 #include "SaveLoad/SaveLoad.h"
-#include "SeasonChanger.h"
+#include "Time.h"
 
 bool TileMapLayer::init() {
 	if (!Layer::init()) return false;
@@ -28,9 +28,6 @@ bool TileMapLayer::init() {
 	this->setName(TILE_MAP_LAYER_NAME);
 	this->loadMap();
 	this->showObstructions(false);
-	
-	auto _seasonChanger = SeasonChanger::create(this);
-	this->addChild(_seasonChanger);
 
 	return true;
 }
@@ -211,6 +208,7 @@ void TileMapLayer::placeSprite(const Vec2 &position, const Size &size, Sprites::
 		}
 	}
 
+	id = Sprites::getSeasonSpriteIDof(id, Time::getInstance()->getSeason());
 	auto sprite = Sprites::getSpriteOf(id);
 	if (Settings::getInstance()->getAsBool(Settings::HD_Textures)) {
 		sprite->setScale(TREE_SCALE_HD);
@@ -219,6 +217,8 @@ void TileMapLayer::placeSprite(const Vec2 &position, const Size &size, Sprites::
 	}
 	sprite->setAnchorPoint(Vec2(0.5f, 0));
 	sprite->setPosition(position);
+	sprite->setTag(id);
+
 	_spriteList.emplace_back(sprite);
 	this->addChild(sprite, pos.x + pos.y);
 }

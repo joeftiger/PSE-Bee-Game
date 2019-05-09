@@ -33,19 +33,18 @@ bool GameScene::init() {
 	camera = this->getDefaultCamera();
 	this->removeChild(camera);
 
-	//Time
-	time = Time::createInstance();
-	this->addChild(time);
-	if (SaveLoad::timesSaveExists()) {
-		SaveLoad::loadTime();
-	}
-	else {
-		time->setStartingMonth();
-	}
 
 	// Background TileMap
 	_tileMapLayer = TileMapLayer::create();
 	this->addChild(_tileMapLayer, -1);
+
+	//Time
+	auto time = Time::getInstance();
+	time->setTileMapLayer(_tileMapLayer);
+	this->addChild(time);
+	if (SaveLoad::timesSaveExists()) {
+		SaveLoad::loadTime();
+	}
 
 	// TileMapAtlas and observe TileMap
 	auto tileMapAtlas = BeeHiveAtlas::getInstance();
