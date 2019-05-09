@@ -116,43 +116,44 @@ list(APPEND GAME_SOURCE
 list(APPEND GAME_HEADER
         Classes/AppDelegate.h
         Classes/Settings.h
-        Classes/Game/GameScene.h
-        Classes/Story/StoryScene.h
-        Classes/Game/HUDLayer.h
+        Classes/About/AboutScene.h
+		Classes/Algorithm/GameAlgorithm.h
+		Classes/Atlas/BeeHiveAtlas.h
+        Classes/Atlas/HoneyExtractorAtlas.h
         Classes/MainMenu/MainMenuScene.h
         Classes/Game/TileMapLayer.h
         Classes/Game/BeeHive.h
+		Classes/Game/GameScene.h
         Classes/Game/HoneyExtractor.h
+		Classes/Game/HUDLayer.h
         Classes/Game/Player.h
         Classes/Game/Interacter.h
 		Classes/Game/Wallet.h
         Classes/Observer.h
         Classes/Observable.h
-        Classes/Atlas/BeeHiveAtlas.h
-        Classes/Atlas/HoneyExtractorAtlas.h
-        Classes/About/AboutScene.h
         Classes/Options/OptionsScene.h
         Classes/Options/SaveDeleteConfirmation.h
         Classes/Shop/ShopScene.h
         Classes/SaveLoad/SaveLoad.h
-        Classes/ItemPanel/TouchUtil.h
         Classes/TileMapObjects/PlaceableTile.h
         Classes/TileMapObjects/PlaceableSprite.h
         Classes/Story/Popup.h
+		Classes/Story/StoryScene.h
         Classes/Game/Time.h
         Classes/HeaderFiles/TimeStruct.h
         Classes/HeaderFiles/Seasons.h
+		Classes/HeaderFiles/HealthStates.h
         Classes/HeaderFiles/Interactable.h
         Classes/HeaderFiles/Restorable.h
-        Classes/Resources/Tiles.h
-        Classes/Resources/Sprites.h
-        Classes/Resources/SpriteContainer.h
         Classes/Interaction/InteractionNode.h
         Classes/Interaction/BeeHivePopup.h
 		Classes/Interaction/HoneyExtractorPopup.h
-        Classes/Algorithm/GameAlgorithm.h
         Classes/ItemPanel/ItemPanelLayer.h
-        )
+        Classes/ItemPanel/TouchUtil.h
+		Classes/Resources/Tiles.h
+        Classes/Resources/Sprites.h
+        Classes/Resources/SpriteContainer.h
+		)
 
 if (ANDROID)
     # change APP_NAME to the share library name for Android, it's value depend on AndroidManifest.xml
