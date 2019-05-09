@@ -23,6 +23,8 @@ private:
 	TMXLayer *_obstructionLayer;
 	//SeasonChanger *_seasonChanger;
 
+	std::vector<Sprite *> _spriteList;
+
 	void loadMap();
 
 	/**
