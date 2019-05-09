@@ -1,6 +1,3 @@
-//
-// Created by brian on 29/04/2019.
-//
 
 #ifndef PROJ_ANDROID_WALLET_H
 #define PROJ_ANDROID_WALLET_H
@@ -12,19 +9,20 @@
 
 using namespace cocos2d;
 
-
+/**
+ * a singleton wallet object, that is used for interacting with money that belongs to a player
+ */
 class Wallet {
 private:
 
 	bool invariant();
-
 	int _totalMoney;
+
 public:
 	static Wallet *getInstance() {
 		static auto instance = new Wallet();
 		return instance;
 	}
-
 
 	/**
      * @return current total money

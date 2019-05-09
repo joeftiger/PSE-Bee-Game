@@ -10,6 +10,9 @@ using namespace cocos2d;
 
 class SeasonChanger : public Node {
 
+/**
+ *	Iterates the seasons (spring, summer, autumn and winter)
+ */
 private:
 	int currentRow = 0;
 

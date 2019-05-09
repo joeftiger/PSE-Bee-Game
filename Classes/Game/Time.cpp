@@ -12,15 +12,10 @@ bool Time::init() {
 	return true;
 }
 
-/**
-*	Creates a new Time-Instance, only call this once
-*	This is already called in GameScene, use getInstance() to get Time 
-*/
 Time *Time::createInstance() {
 	
 	_instance = Time::create();
 	_instance->setName("time");
-
 	
 	return _instance;
 }
@@ -67,10 +62,6 @@ std::string Time::getMonthAsString() {
 	return this->convertToMonth(times.months);
 }
 
-/**
-	Converts integer to Month
-
-*/
 std::string Time::convertToMonth(int i)
 {	
 	i++;

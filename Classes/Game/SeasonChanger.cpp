@@ -21,7 +21,6 @@ bool SeasonChanger::init()
 void SeasonChanger::update(float dt) {
 	auto nextSeason = Time::getInstance()->getSeason();
 	if (nextSeason != currentSeason) {
-		//currentSeason = nextSeason;
 		switchSeason();
 	} 
 	if (currentRow >= _tileMapLayer->getLayer()->getLayerSize().height) {

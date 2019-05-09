@@ -1,6 +1,3 @@
-//
-// Created by julius on 21.03.19.
-//
 
 #ifndef PSE_BEE_GAME_TILEMAPLAYER_H
 #define PSE_BEE_GAME_TILEMAPLAYER_H
@@ -21,7 +18,6 @@ private:
 	TMXTiledMap *_tileMap;
 	TMXLayer *_objectLayer;
 	TMXLayer *_obstructionLayer;
-	//SeasonChanger *_seasonChanger;
 
 	std::vector<Sprite *> _spriteList;
 
@@ -62,6 +58,10 @@ public:
 
 	Vec2 getTilePosition(Vec2 pos);
 
+	/**
+     * Checks whether the given vector is out of bounds
+     * @return (0,0) if out of bounds, otherwise the vector itself
+     */
 	Vec2 inTileMapBounds(const Vec2 &pos);
 
 	/**
