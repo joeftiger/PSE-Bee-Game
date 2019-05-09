@@ -1,6 +1,6 @@
-//
-// Created by julius on 05.05.19.
-//
+/**
+ *
+ */
 
 #include <cocos/base/CCConsole.h>
 #include "Settings.h"

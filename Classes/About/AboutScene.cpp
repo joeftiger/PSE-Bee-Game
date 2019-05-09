@@ -1,6 +1,3 @@
-//
-// Created by brian on 25/03/2019.
-//
 
 #include "AboutScene.h"
 

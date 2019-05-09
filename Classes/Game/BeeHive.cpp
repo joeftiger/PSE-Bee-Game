@@ -9,7 +9,7 @@
 
 bool BeeHive::invariant() {
 	//assert(_beesAlive >= 0);
-	//assert(_varoaAlive >= 0);
+	//assert(_varroaAlive >= 0);
 	//assert(_rawHoney >= 0.0f);
 	return true;
 }
@@ -18,9 +18,9 @@ BeeHive::BeeHive() : BeeHive(5000) {}
 
 BeeHive::BeeHive(int bees) : BeeHive(bees, 0) {}
 
-BeeHive::BeeHive(int bees, int varoa) {
+BeeHive::BeeHive(int bees, int varroa) {
 	_beesAlive = bees;
-	_varoaAlive = varoa;
+	_varroaAlive = varroa;
 	_rawHoney = 0;
 	_particlesNode = nullptr;
 	assert(invariant());
@@ -38,8 +38,8 @@ int BeeHive::beesAlive() {
 	return _beesAlive;
 }
 
-int BeeHive::varoaAlive() {
-	return _varoaAlive;
+int BeeHive::varroaAlive() {
+	return _varroaAlive;
 }
 
 float BeeHive::rawHoney() {
@@ -66,14 +66,14 @@ float BeeHive::takeRawHoney(float amount) {
 }
 
 void BeeHive::killVarroa() {
-	_varoaAlive = (int) max(0.0f, _varoaAlive * 0.05f);
+	_varroaAlive = (int) max(0.0f, _varroaAlive * 0.05f);
     _beesAlive = (int) max(0.0f, _beesAlive * 0.9f);
 }
 
 void BeeHive::update() {
 	auto alg = GameAlgorithm::getInstance();
 	if (!isEmpty()) {
-		_beesAlive = (int) clampf(_beesAlive + alg->nextBees(_beesAlive, _varoaAlive), 0, MAX_BEES);
+		_beesAlive = (int) clampf(_beesAlive + alg->nextBees(_beesAlive, _varroaAlive), 0, MAX_BEES);
 		setParticles();
 	}
 
@@ -81,8 +81,8 @@ void BeeHive::update() {
 		_rawHoney = (int) clampf(_rawHoney + alg->honeyProduction(_beesAlive), 0, MAX_RAW_HONEY);
 	}
 
-	if (_varoaAlive > 0) {
-	    _varoaAlive = (int) clampf(_varoaAlive + alg->nextVarroa(_varoaAlive), 0, std::numeric_limits<int>::max());
+	if (_varroaAlive > 0) {
+	    _varroaAlive = (int) clampf(_varroaAlive + alg->nextVarroa(_varroaAlive), 0, std::numeric_limits<int>::max());
 	}
 
 	varroaRandomizer();
@@ -101,7 +101,7 @@ void BeeHive::setPosition(const cocos2d::Vec2 &pos) {
 void BeeHive::toJSON(rapidjson::Document &doc) {
 	rapidjson::Value obj(rapidjson::kObjectType);
 	obj.AddMember("_beesAlive", _beesAlive, doc.GetAllocator());
-	obj.AddMember("_varoaAlive", _varoaAlive, doc.GetAllocator());
+	obj.AddMember("_varroaAlive", _varroaAlive, doc.GetAllocator());
 	obj.AddMember("_rawHoney", _rawHoney, doc.GetAllocator());
 	obj.AddMember("_posX", int(_position.x), doc.GetAllocator());
 	obj.AddMember("_posY", int(_position.y), doc.GetAllocator());
@@ -116,8 +116,8 @@ void BeeHive::fromJSON(rapidjson::Document &doc) {
 	assert(beeHive["_beesAlive"].IsInt());
 	_beesAlive = beeHive["_beesAlive"].GetInt();
 
-	assert(beeHive["_varoaAlive"].IsInt());
-	_varoaAlive = beeHive["_varoaAlive"].GetInt();
+	assert(beeHive["_varroaAlive"].IsInt());
+	_varroaAlive = beeHive["_varroaAlive"].GetInt();
 
 	assert(beeHive["_rawHoney"].IsFloat());
 	_rawHoney = beeHive["_rawHoney"].GetFloat();
@@ -131,7 +131,7 @@ void BeeHive::fromJSON(rapidjson::Document &doc) {
 
 void BeeHive::varroaRandomizer() {
     if(random(0, 10000) < 10) {
-        _varoaAlive = (int) random(1, 10);
+        _varroaAlive = (int) random(1, 10);
     }
 }
 

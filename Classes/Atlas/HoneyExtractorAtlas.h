@@ -1,19 +1,16 @@
-//
-// Created by brian on 25/04/2019.
-//
 
 #ifndef PROJ_ANDROID_HONEYEXTRACTORATLAS_H
 #define PROJ_ANDROID_HONEYEXTRACTORATLAS_H
-
 
 #include "cocos2d.h"
 #include "Observer.h"
 #include "Game/HoneyExtractor.h"
 #include "Game/TileMapLayer.h"
 #include <HeaderFiles/DEFINITIONS.h>
-#include <json/stringbuffer.h>
-#include <json/writer.h>
 
+/**
+ * HoneyExtractorAtlas that counts, gets, and interacts with HoneyExtractors
+ */
 class HoneyExtractorAtlas : public cocos2d::Node, public Observable, public Observer, public Restorable {
 private:
     static HoneyExtractorAtlas*_instance;

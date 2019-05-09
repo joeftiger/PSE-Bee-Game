@@ -1,8 +1,7 @@
-//
-// Created by brian on 25/04/2019.
-//
 
 #include "HoneyExtractorAtlas.h"
+#include <json/stringbuffer.h>
+#include <json/writer.h>
 
 HoneyExtractorAtlas *HoneyExtractorAtlas::_instance = nullptr;
 

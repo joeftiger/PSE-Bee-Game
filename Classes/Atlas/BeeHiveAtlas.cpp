@@ -1,6 +1,3 @@
-//
-// Created by julius on 25.03.19.
-//
 
 #include "BeeHiveAtlas.h"
 #include <json/stringbuffer.h>

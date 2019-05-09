@@ -1,6 +1,3 @@
-//
-// Created by julius on 25.03.19.
-//
 
 #ifndef PSE_BEE_GAME_BEEHIVEATLAS_H
 #define PSE_BEE_GAME_BEEHIVEATLAS_H
@@ -11,7 +8,9 @@
 #include <HeaderFiles/DEFINITIONS.h>
 #include "Game/TileMapLayer.h"
 
-
+/**
+ * BeeHiveAtlas that counts, gets, and interacts with BeeHives
+ */
 class BeeHiveAtlas : public cocos2d::Node, public Observable, public Observer, public Restorable {
 private:
 	static BeeHiveAtlas *_instance;
