@@ -6,6 +6,7 @@
 #include <Interaction/InteractionNode.h>
 #include "BeeHive.h"
 #include "GameScene.h"
+#include "../HeaderFiles/HealthStates.h"
 
 bool BeeHive::invariant() {
 	//assert(_beesAlive >= 0);
@@ -14,7 +15,7 @@ bool BeeHive::invariant() {
 	return true;
 }
 
-BeeHive::BeeHive() : BeeHive(5000) {}
+BeeHive::BeeHive() : BeeHive(4000) {}
 
 BeeHive::BeeHive(int bees) : BeeHive(bees, 0) {}
 

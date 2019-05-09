@@ -11,7 +11,8 @@
 class Settings {
 public:
 	enum SettingName {
-		HD_Textures
+		HD_Textures,
+		Tutorial
 	};
 
 private:
@@ -34,12 +35,20 @@ public:
 	std::string get(SettingName setting);
 
 	/**
-	 * Returns the value for the given setting as bool with the restriction that only
-	 * <code>setting == "1"</code> returns <code>true</code>
+	 * Returns the bool value for the given setting.
+	 * If no such value present, returns a <code>nullptr</code>
 	 * @param setting name of setting
 	 * @return bool value
 	 */
 	bool getAsBool(SettingName setting);
+
+	/**
+	 * Returns the int value for the given setting.
+	 * If no such value present, returns a <code>nullptr</code>
+	 * @param setting name of setting
+	 * @return int value
+	 */
+	int getAsInt(SettingName setting);
 
 	/**
 	 * Sets the value for the given setting.
@@ -54,6 +63,13 @@ public:
 	 * @param value bool value
 	 */
 	void set(SettingName setting, bool value);
+
+	/**
+	 * Sets the int value for the given setting.
+	 * @param setting name of setting
+	 * @param value int value
+	 */
+	void set(SettingName setting, int value);
 };
 
 

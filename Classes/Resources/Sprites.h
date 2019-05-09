@@ -11,7 +11,7 @@
  */
 class Sprites {
 public:
-    enum SpriteID {
+    enum SpriteID : int {
         tree_1_spring_summer,
         tree_1_fall,
         tree_1_winter,

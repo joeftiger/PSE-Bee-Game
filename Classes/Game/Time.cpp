@@ -1,53 +1,28 @@
 
+#include <Resources/SpriteContainer.h>
 #include "Time.h"
 #include "SaveLoad/SaveLoad.h"
-
-Time *Time::_instance = nullptr;
 
 bool Time::init() {
 	if (!Node::init()) return false;
 
-	this->schedule(schedule_selector(Time::time), UPDATE_TIME);
+	setStartingMonth();
+	_currentSeason = getSeason();
+
+	this->schedule(schedule_selector(Time::update), UPDATE_TIME);
 
 	return true;
 }
 
-Time *Time::createInstance() {
-	
-	_instance = Time::create();
-	_instance->setName("time");
-	
-	return _instance;
-}
-
-Time *Time::getInstance() {
-	return _instance;
+void Time::setTileMapLayer(TileMapLayer *tileMapLayer) {
+	_tileMapLayer = tileMapLayer;
 }
 
 bool Time::invariant() {
 	assert(times.seconds >= 0 && times.seconds <= 60);
-	assert(times.months >= 0 && times.months <= 11);
+	assert(times.months >= 0 && times.months < 12);
 	assert(times.years >= 0);
 	return true;
-}
-
-void Time::time(float dt) {
-	times.timePassed += dt;
-
-	if (times.timePassed > 1) {
-		times.timePassed = 0;
-		times.seconds++;
-	}
-
-	if (times.seconds / 60 >= LENGTH_MONTH) {
-		times.seconds = 0;
-		times.months++;
-	}
-
-	if (times.months >= LENGTH_YEAR) {
-		times.months = 0;
-		times.years++;
-	}
 }
 
 int Time::getMonth() {
@@ -55,6 +30,7 @@ int Time::getMonth() {
 }
 
 void Time::setStartingMonth() {
+	cocos2d::log("Time:\tSetting starting month");
 	times.months = 2;
 }
 
@@ -63,23 +39,22 @@ std::string Time::getMonthAsString() {
 }
 
 std::string Time::convertToMonth(int i)
-{	
-	i++;
-	assert(i >= 1 && i <= 12);
+{
+	assert(i >= 0 && i < 12);
 
 	switch (i) {
-	case 1: return "Januar";
-	case 2: return "Februar";
-	case 3: return "Maerz";
-	case 4: return "April";
-	case 5: return "Mai";
-	case 6: return "Juni";
-	case 7: return "Juli";
-	case 8: return "August";
-	case 9: return "September";
-	case 10: return "Oktober";
-	case 11: return "November";
-	case 12: return "Dezember";
+	case 0: return "Januar";
+	case 1: return "Februar";
+	case 2: return "Maerz";
+	case 3: return "April";
+	case 4: return "Mai";
+	case 5: return "Juni";
+	case 6: return "Juli";
+	case 7: return "August";
+	case 8: return "September";
+	case 9: return "Oktober";
+	case 10: return "November";
+	case 11: return "Dezember";
 	default: return "not possible";
 	}
 }
@@ -106,6 +81,7 @@ Season Time::getSeason() {
 	case 11:
 	case 0:
 	case 1: return Season::Winter; // Dezember, Januar, Februar
+	default:return Season::Spring;
 	}
 }
 
@@ -136,4 +112,49 @@ void Time::fromJSON(rapidjson::Document & doc) {
 	times.years = t["years"].GetInt();
 }
 
+void Time::update(float dt) {
+	times.timePassed += dt;
+	if (times.timePassed > 1) {
+		times.timePassed -= 1;
+		times.seconds++;
+	}
+	if (times.seconds / 60 >= LENGTH_MONTH) {
+		times.seconds = 0;
+		times.months++;
+	}
+	if (times.months >= LENGTH_YEAR) {
+		times.months = 0;
+		times.years++;
+	}
 
+	auto nextSeason = getSeason();
+	if (nextSeason != _currentSeason) {
+		_currentSeason = nextSeason;
+		_currentRow = 0;
+		switchSeasonalTrees();
+		switchSeasonalTilesSequential();
+
+		cocos2d::log("SeasonChanger:\tSwitched to %i", Time::getInstance()->getSeason());
+	} else if (_currentRow < _tileMapLayer->getLayer()->getLayerSize().height) {
+		switchSeasonalTilesSequential();
+	}
+}
+
+void Time::switchSeasonalTrees() {
+	for (auto sprite : _tileMapLayer->getSpriteList()) {
+		auto seasonID = Sprites::getSeasonSpriteIDof(static_cast<Sprites::SpriteID>(sprite->getTag()), _currentSeason);
+		auto frame = SpriteContainer::getInstance()->getSpriteFrameOf(seasonID);
+		sprite->setSpriteFrame(frame);
+	}
+}
+
+void Time::switchSeasonalTilesSequential() {
+	auto objectLayer = _tileMapLayer->getLayer();
+
+	for (int y = 0; y < objectLayer->getLayerSize().width; y++) {
+		int tempGID = objectLayer->getTileGIDAt(Vec2(_currentRow, y));
+		auto gid = static_cast<Tiles::TileGID>(tempGID);
+		objectLayer->setTileGID(Tiles::getSeasonTileGIDof(gid, Time::getInstance()->getSeason()), Vec2(_currentRow, y));
+	}
+	_currentRow++;
+}

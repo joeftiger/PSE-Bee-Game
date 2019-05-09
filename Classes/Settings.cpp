@@ -5,6 +5,7 @@
 Settings::Settings() {
 	cocos2d::log("Settings:\tCreating instance");
 	set(SettingName::HD_Textures, true);
+	set(SettingName::Tutorial, true);
 }
 
 std::string Settings::get(Settings::SettingName setting) {
@@ -12,11 +13,11 @@ std::string Settings::get(Settings::SettingName setting) {
 }
 
 bool Settings::getAsBool(Settings::SettingName setting) {
-	try {
-		return _settings.at(setting) == "1";
-	} catch (const std::out_of_range &e) {
-		return false;
-	}
+	return _settings.at(setting) == "1";
+}
+
+int Settings::getAsInt(Settings::SettingName setting) {
+	return std::atoi(_settings.at(setting).c_str());
 }
 
 void Settings::set(Settings::SettingName setting, const std::string &value) {
@@ -24,5 +25,9 @@ void Settings::set(Settings::SettingName setting, const std::string &value) {
 }
 
 void Settings::set(Settings::SettingName setting, bool value) {
-	_settings[setting] = value ? "1" : "0";
+	_settings[setting] = value ? "1" : "";
+}
+
+void Settings::set(Settings::SettingName setting, int value) {
+	_settings[setting] = std::to_string(value);
 }

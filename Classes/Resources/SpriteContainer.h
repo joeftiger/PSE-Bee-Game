@@ -48,6 +48,13 @@ public:
      * @return corresponding sprite frame name
      */
     std::string getSpriteFrameNameOf(Sprites::SpriteID id);
+
+	/**
+	 * Returns the sprite frame of the given sprite id.
+	 * @param id sprite id
+	 * @return corresponding sprite frame
+	 */
+    SpriteFrame *getSpriteFrameOf(Sprites::SpriteID id);
 };
 
 
