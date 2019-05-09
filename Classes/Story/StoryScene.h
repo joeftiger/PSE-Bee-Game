@@ -14,9 +14,18 @@ using namespace cocos2d;
 class StoryScene : public cocos2d::Node {
 private:
     Time* time;
-    bool state;
-public:
+    //bool state;
+    bool firstTime0;
+    bool firstTime1;
+    bool firstTime2;
+    bool firstTime3;
+    bool firstTime4;
 
+public:
+    static StoryScene *getInstance() {
+        static auto instance = new StoryScene();
+        return instance;
+    }
 	virtual bool init();
 	//void introPopup();
 	//void update(float dt) override;

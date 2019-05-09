@@ -134,6 +134,11 @@ public:
 	 *	calls all other delete methods for easier access
 	 */
 	static void deleteEverything();
+
+	/**
+	 *  save Story states in "story.json"
+	 */
+	 static void saveStory();
 };
 
 #endif //SAVELOAD_H
