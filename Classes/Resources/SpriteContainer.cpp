@@ -72,44 +72,48 @@ Sprite *SpriteContainer::getSpriteOf(Tiles::TileGID gid) {
 }
 
 Sprite *SpriteContainer::getSpriteOf(Sprites::SpriteID id) {
-    SpriteFrame *frame;
+    auto spriteFrameName = getSpriteFrameNameOf(id);
+    return Sprite::createWithSpriteFrameName(spriteFrameName);
+}
+
+std::string SpriteContainer::getSpriteFrameNameOf(Sprites::SpriteID id) {
     switch (id) {
-        case Sprites::tree_1_spring_summer:         return Sprite::createWithSpriteFrameName("baum1_spring_summer.png");
-        case Sprites::tree_1_fall:                  return Sprite::createWithSpriteFrameName("baum1_fall.png");
-        case Sprites::tree_1_winter:                return Sprite::createWithSpriteFrameName("baum1_winter.png");
-        case Sprites::tree_1_apple_1:               return Sprite::createWithSpriteFrameName("baum1_apfel1.png");
-        case Sprites::tree_1_apple_2:               return Sprite::createWithSpriteFrameName("baum1_apfel2.png");
-        case Sprites::tree_1_apple_3:               return Sprite::createWithSpriteFrameName("baum1_apfel3.png");
-        case Sprites::tree_2_spring_summer:         return Sprite::createWithSpriteFrameName("baum2_spring_summer.png");
-        case Sprites::tree_2_fall:                  return Sprite::createWithSpriteFrameName("baum2_fall.png");
-        case Sprites::tree_2_winter:                return Sprite::createWithSpriteFrameName("baum2_winter.png");
-        case Sprites::tree_2_apple_1:               return Sprite::createWithSpriteFrameName("baum2_apfel1.png");
-        case Sprites::tree_2_apple_2:               return Sprite::createWithSpriteFrameName("baum2_apfel2.png");
-        case Sprites::tree_2_apple_3:               return Sprite::createWithSpriteFrameName("baum2_apfel3.png");
-        case Sprites::tree_3_spring_summer_fall:    return Sprite::createWithSpriteFrameName("baum3_spring_summer_fall.png");
-        case Sprites::tree_3_winter:                return Sprite::createWithSpriteFrameName("baum3_winter.png");
-        case Sprites::tree_4_spring_summer:         return Sprite::createWithSpriteFrameName("baum4_spring_summer.png");
-        case Sprites::tree_4_fall:                  return Sprite::createWithSpriteFrameName("baum4_fall.png");
-        case Sprites::tree_4_winter:                return Sprite::createWithSpriteFrameName("baum4_winter.png");
-        case Sprites::tree_4_apple_1:               return Sprite::createWithSpriteFrameName("baum4_apfel1.png");
-        case Sprites::tree_4_apple_2:               return Sprite::createWithSpriteFrameName("baum4_apfel2.png");
-        case Sprites::tree_4_apple_3:               return Sprite::createWithSpriteFrameName("baum4_apfel3.png");
-        case Sprites::start:                        return Sprite::createWithSpriteFrameName("start.png");
-        case Sprites::options:                      return Sprite::createWithSpriteFrameName("options.png");
-        case Sprites::credits:                      return Sprite::createWithSpriteFrameName("credits.png");
-        case Sprites::exit:                         return Sprite::createWithSpriteFrameName("exit.png");
-        case Sprites::shop_1:                       return Sprite::createWithSpriteFrameName("shop_1.png");
-        case Sprites::shop_2:                       return Sprite::createWithSpriteFrameName("shop_2.png");
-        case Sprites::shop_bg:                      return Sprite::createWithSpriteFrameName("shop-bg_neu.png");
-        case Sprites::minus:                        return Sprite::createWithSpriteFrameName("minus.png");
-        case Sprites::plus:                         return Sprite::createWithSpriteFrameName("plus.png");
-        case Sprites::erlenmeyer:                   return Sprite::createWithSpriteFrameName("erlenmeyerkolben.png");
-        case Sprites::honey_glass_2d:               return Sprite::createWithSpriteFrameName("honigglas_2d.png");
-        case Sprites::honey_glass_3d:               return Sprite::createWithSpriteFrameName("honigglas_3d.png");
-        case Sprites::honey_bucket:                 return Sprite::createWithSpriteFrameName("honigkessel.png");
-        case Sprites::honey_extractor:              return Sprite::createWithSpriteFrameName("honigschleuder.png");
-        case Sprites::coin_single:                  return Sprite::createWithSpriteFrameName("münze_einzeln.png");
-        case Sprites::coin_pile:                    return Sprite::createWithSpriteFrameName("münze_haufen.png");
+        case Sprites::tree_1_spring_summer:         return "baum1_spring_summer.png";
+        case Sprites::tree_1_fall:                  return "baum1_fall.png";
+        case Sprites::tree_1_winter:                return "baum1_winter.png";
+        case Sprites::tree_1_apple_1:               return "baum1_apfel1.png";
+        case Sprites::tree_1_apple_2:               return "baum1_apfel2.png";
+        case Sprites::tree_1_apple_3:               return "baum1_apfel3.png";
+        case Sprites::tree_2_spring_summer:         return "baum2_spring_summer.png";
+        case Sprites::tree_2_fall:                  return "baum2_fall.png";
+        case Sprites::tree_2_winter:                return "baum2_winter.png";
+        case Sprites::tree_2_apple_1:               return "baum2_apfel1.png";
+        case Sprites::tree_2_apple_2:               return "baum2_apfel2.png";
+        case Sprites::tree_2_apple_3:               return "baum2_apfel3.png";
+        case Sprites::tree_3_spring_summer_fall:    return "baum3_spring_summer_fall.png";
+        case Sprites::tree_3_winter:                return "baum3_winter.png";
+        case Sprites::tree_4_spring_summer:         return "baum4_spring_summer.png";
+        case Sprites::tree_4_fall:                  return "baum4_fall.png";
+        case Sprites::tree_4_winter:                return "baum4_winter.png";
+        case Sprites::tree_4_apple_1:               return "baum4_apfel1.png";
+        case Sprites::tree_4_apple_2:               return "baum4_apfel2.png";
+        case Sprites::tree_4_apple_3:               return "baum4_apfel3.png";
+        case Sprites::start:                        return "start.png";
+        case Sprites::options:                      return "options.png";
+        case Sprites::credits:                      return "credits.png";
+        case Sprites::exit:                         return "exit.png";
+        case Sprites::shop_1:                       return "shop_1.png";
+        case Sprites::shop_2:                       return "shop_2.png";
+        case Sprites::shop_bg:                      return "shop-bg_neu.png";
+        case Sprites::minus:                        return "minus.png";
+        case Sprites::plus:                         return "plus.png";
+        case Sprites::erlenmeyer:                   return "erlenmeyerkolben.png";
+        case Sprites::honey_glass_2d:               return "honigglas_2d.png";
+        case Sprites::honey_glass_3d:               return "honigglas_3d.png";
+        case Sprites::honey_bucket:                 return "honigkessel.png";
+        case Sprites::honey_extractor:              return "honigschleuder.png";
+        case Sprites::coin_single:                  return "münze_einzeln.png";
+        case Sprites::coin_pile:                    return "münze_haufen.png";
         default:                                    return nullptr;
     }
 }
