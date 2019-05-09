@@ -6,6 +6,7 @@
 #include "Game/BeeHive.h"
 #include "Atlas/BeeHiveAtlas.h"
 #include "Atlas/HoneyExtractorAtlas.h"
+#include "Story/StoryScene.h"
 #include "json/prettywriter.h"
 #include "json/istreamwrapper.h"
 #include "json/ostreamwrapper.h"
@@ -311,4 +312,16 @@ void SaveLoad::deleteEverything() {
 	deleteTileMapSave();
 	deleteTimeSave();
 	deleteMoneySave();
+}
+
+void SaveLoad::saveStory() {
+    rapidjson::Document doc;
+    rapidjson::StringBuffer jsonBuffer;
+    rapidjson::PrettyWriter<rapidjson::StringBuffer> jsonWriter(jsonBuffer);
+    doc.SetArray();
+    assert(doc.IsArray());
+    StoryScene::getInstance()->toJSON(doc);
+
+    doc.Accept(jsonWriter);
+    jsonToFile(docToString(doc), getPath("story.json"));
 }
