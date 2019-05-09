@@ -1,6 +1,3 @@
-/**
- * OptionsScene that displays various options
- */
 
 #include "OptionsScene.h"
 #include "../Settings.h"
@@ -46,7 +43,7 @@ bool OptionsScene::init() {
     // switch between textures
     auto textureLabel = Label::createWithTTF("Click here to switch between HD and SD Textures", "fonts/ReemKufi-Regular.ttf", 40);
     auto menuItemTextureSwitch= MenuItemLabel::create(textureLabel);
-    // TODO Add switch function for textures
+    // TODO Add switch function for textures!!!
     menuItemTextureSwitch->setCallback([&](cocos2d::Ref *sender) {
             Director::getInstance()->replaceScene(SaveDeleteConfirmation::create());
     });

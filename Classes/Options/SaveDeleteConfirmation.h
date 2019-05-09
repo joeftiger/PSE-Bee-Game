@@ -1,6 +1,3 @@
-//
-// Created by brian on 24/04/2019.
-//
 
 #ifndef PROJ_ANDROID_SAVEDELETECONFIRMATION_H
 #define PROJ_ANDROID_SAVEDELETECONFIRMATION_H
@@ -8,10 +5,10 @@
 
 #include "cocos2d.h"
 
-
-
 using namespace cocos2d;
-
+/*
+ * scene to ask for an additional confirmation for deleting the save
+ */
 class SaveDeleteConfirmation : public cocos2d::Scene {
 private:
 

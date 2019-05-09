@@ -6,6 +6,10 @@
 #include "cocos2d.h"
 #include "ui/UIWidget.h"
 
+/**
+ * a main menu scene with interactable buttons that lead to the game, options & about scene
+ * as well as a button to exit the game
+ */
 class MainMenu : public cocos2d::Scene {
 private:
 	float onePofScreenH;

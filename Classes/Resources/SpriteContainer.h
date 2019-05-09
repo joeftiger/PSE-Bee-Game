@@ -1,6 +1,3 @@
-//
-// Created by julius on 28.04.19.
-//
 
 #ifndef PSE_BEE_GAME_SPRITECONTAINER_H
 #define PSE_BEE_GAME_SPRITECONTAINER_H
@@ -11,6 +8,9 @@
 
 USING_NS_CC;
 
+/**
+ * converting sprites and tiles to their corresponding images for further use
+ */
 class SpriteContainer {
 private:
     SpriteFrameCache *_cache = SpriteFrameCache::getInstance();

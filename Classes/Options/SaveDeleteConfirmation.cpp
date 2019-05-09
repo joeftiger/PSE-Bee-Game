@@ -1,6 +1,3 @@
-//
-// Created by brian on 24/04/2019.
-//
 
 #include "SaveDeleteConfirmation.h"
 #include "MainMenu/MainMenuScene.h"
