@@ -1,6 +1,3 @@
-//
-// Created by Uro on 3/29/2019.
-//
 
 #ifndef PSE_BEE_GAME_DRAGDROP_H
 #define PSE_BEE_GAME_DRAGDROP_H
@@ -12,7 +9,9 @@
 using namespace cocos2d;
 using namespace std;
 
-
+/**
+ * TouchUtilities to deal with dragging onto the tileMap
+ */
 class TouchUtil {
 protected:
 	bool _isDrag = false;
@@ -20,8 +19,8 @@ protected:
 	Sprite *_draggedSprite;
 
 	/**
-	 * I use a hashmap, because each placeable::getSprite() creates a new Sprite each time -> we can therefore
-	 * create distinct sprites for this node's children and the dragged placeable sprite.
+	 * Using a hashmap, because each placeable::getSprite() creates a new Sprite
+	 * thus we can create distinct sprites for this node's children and the dragged placeable sprite.
 	 */
 	std::map<Sprite *, Placeable *> _spritesToPlaceables;
 	vector<Sprite *> _spriteList;

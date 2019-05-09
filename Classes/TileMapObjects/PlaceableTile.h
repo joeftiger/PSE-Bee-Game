@@ -1,6 +1,3 @@
-//
-// Created by julius on 14.04.19.
-//
 
 #ifndef PSE_BEE_GAME_PLACEABLETILE_H
 #define PSE_BEE_GAME_PLACEABLETILE_H

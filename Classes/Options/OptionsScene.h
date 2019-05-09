@@ -1,6 +1,3 @@
-//
-// Created by brian on 25/03/2019.
-//
 
 #ifndef _OPTIONSSCENE_H
 #define _OPTIONSSCENE_H
@@ -10,7 +7,9 @@
 
 
 using namespace cocos2d;
-
+/**
+ * OptionsScene with deleting the save functionality and switching tileMaps
+ */
 class OptionsScene : public cocos2d::Scene {
 private:
 

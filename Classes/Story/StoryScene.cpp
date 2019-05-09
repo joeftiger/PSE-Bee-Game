@@ -1,10 +1,7 @@
 
-
 #include "StoryScene.h"
 #include "Popup.h"
 #include "Game/Time.h"
-
-
 
 bool StoryScene::init() {
 
@@ -39,9 +36,8 @@ bool StoryScene::init() {
 
 UICustom::Popup* StoryScene::createPopup(int id){
 	switch (id) {
-	case 0: return UICustom::Popup::createAsMessage("GROSSVATER", "Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich...\n"
-		"Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich...\n"
-		"Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich...");
+	case 0: return UICustom::Popup::createAsMessage("GROSSVATER", "Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich.\n"
+		"Kannst du auf meine Bienen aufpassen? Nur bis ich wieder da bin...");
 	case 1: return UICustom::Popup::createAsMessage("GROSSVATER", "Varroa.. iiiiih");
 	case 2: return UICustom::Popup::createAsMessage("GROSSVATER", "i");
 

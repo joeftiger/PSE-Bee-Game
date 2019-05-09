@@ -1,10 +1,3 @@
-//
-//  Popup.h
-//  dreamWeek
-//
-//  Created by Bilal Mirza on 07/08/2017.
-//
-//
 
 #ifndef Popup_h
 #define Popup_h
@@ -13,15 +6,12 @@
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
 
-/*
- -Displays a popup
- -Resizes itself
- -Automatically swallows rest of the touches
- -Exit is called if touch is outside Bg
+/**
+ * a pop-up that can resize itself to screen-size and is exited if touched outside the pop-up
  */
 
+
 namespace UICustom {
-    
     
     class PopupDelegates : public cocos2d::LayerRadialGradient
     {

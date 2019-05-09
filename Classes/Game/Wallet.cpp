@@ -1,11 +1,5 @@
-//
-// Created by brian on 29/04/2019.
-//
 
 #include "Wallet.h"
-
-
-
 
 bool Wallet::invariant() {
 	return true;

@@ -1,5 +1,4 @@
 
-
 #ifndef __STORY_SCENE_H
 #define __STORY_SCENE_H
 
@@ -9,6 +8,9 @@
 
 using namespace cocos2d;
 
+/**
+ * Story dialogue via pop-ups that display text with the "granddaddy" sprite
+ */
 class StoryScene : public cocos2d::Node {
 private:
     Time* time;

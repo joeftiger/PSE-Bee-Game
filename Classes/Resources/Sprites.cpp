@@ -1,6 +1,3 @@
-//
-// Created by julius on 28.04.19.
-//
 
 #include "Sprites.h"
 #include "SpriteContainer.h"

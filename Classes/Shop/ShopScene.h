@@ -5,7 +5,10 @@
 #include "cocos2d.h"
 #include "HeaderFiles/DEFINITIONS.h"
 
-
+/**
+ * shop scene
+ * TODO Check if currently used???
+ */
 class ShopScene : public cocos2d::Scene {
 private:
 public:

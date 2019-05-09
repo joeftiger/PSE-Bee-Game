@@ -1,7 +1,6 @@
-//
-// Created by Tobias on 27.04.2019.
-//
+
 #include "Interacter.h"
+#include "GameScene.h"
 
 bool Interacter::init() {
     if(!Node::init()) return false;
@@ -13,9 +12,6 @@ void Interacter::runWith(Interactable *interactingObj) {
     this->interactingObj = interactingObj;
 }
 
-/**
-	Interact with the initialized object
-*/
 void Interacter::interact() {
 	assert(interactingObj);
 	InteractionNode* node = InteractionNode::create();

@@ -1,6 +1,3 @@
-//
-// Created by julius on 30.04.19.
-//
 
 #include <Resources/Tiles.h>
 #include <Resources/SpriteContainer.h>

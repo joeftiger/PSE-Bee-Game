@@ -1,23 +1,20 @@
-//
-// Created by brian on 25/04/2019.
-//
 
 #ifndef PROJ_ANDROID_HONEYEXTRACTOR_H
 #define PROJ_ANDROID_HONEYEXTRACTOR_H
 
-
 #include "cocos2d.h"
-#include "BeeHive.h"
-#include "Wallet.h"
 #include "../HeaderFiles/Restorable.h"
 #include <cassert>
 #include <stdexcept>
 
 
 static const float MAX__HONEY_IN_EXTRACTOR = 100.0f;
-static const int CONVERSION_RATE = 3;
+static const int CONVERSION_RATE = 5;
 static const int MULTIPLIER = 2;
 
+/**
+ * HoneyExtractor object that takes honey and converts it into money.
+ */
 class HoneyExtractor : Restorable {
 private:
 	float _honeyInExtractor;
@@ -31,14 +28,13 @@ public:
 	float amountAdded;
 
 	/**
-	 * TODO Set to 0 honey when done testing
-	 * Creates a new honey extractor with 50 raw honey as input.
+	 * Creates a new honey extractor with 0 raw honey as input.
 	 */
 	explicit HoneyExtractor();
 
 	/**
-	 * TODO Set to 0 honey when done testing
-	 * Creates a new honey extractor with 50 raw honey as input.
+	 * Creates a new honey extractor with _honeyInExtractor
+	 * @param _honeyInExtractor how much honey is in the current extractor
      */
     explicit HoneyExtractor(int _honeyInExtractor);
 

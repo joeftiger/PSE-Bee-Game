@@ -11,6 +11,9 @@
 
 using namespace cocos2d;
 
+/**
+ *	for dealing with, getting a month, setting the starting month and interacting with seasons
+ */
 class Time: public Node, Restorable  {
 private:
 	timeStruct times;
@@ -25,6 +28,9 @@ private:
 
 	~Time() final = default;
 
+	/**
+     *	Convert int to months
+     */
 	std::string convertToMonth(int i);
 
 	void update(float dt) override;
@@ -67,7 +73,4 @@ public:
 	CREATE_FUNC(Time);
 };
 
-
 #endif //TIME_H
-
-

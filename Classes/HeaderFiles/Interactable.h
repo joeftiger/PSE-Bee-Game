@@ -1,14 +1,15 @@
-//
-// Created by Tobias on 27.04.2019.
-//
 
 #ifndef PROJ_ANDROID_INTERACTABLE_H
 #define PROJ_ANDROID_INTERACTABLE_H
 
+/**
+ * Any class that implements interactable, has to implement interactability with sprites
+ */
 class Interactable {
 private:
 
 	std::string sprite;
+
 public:
     bool _interactable = true;
 

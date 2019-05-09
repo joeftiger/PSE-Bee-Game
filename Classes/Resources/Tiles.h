@@ -4,6 +4,9 @@
 #include <HeaderFiles/Seasons.h>
 #include "cocos2d.h"
 
+/**
+ * list of all the TileGID as well as whether a tile corresponds to a certain object
+ */
 class Tiles {
 public:
     enum TileGID : unsigned int {

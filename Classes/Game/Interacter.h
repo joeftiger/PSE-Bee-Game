@@ -1,6 +1,3 @@
-//
-// Created by Tobias on 27.04.2019.
-//
 
 #ifndef PROJ_ANDROID_INTERACTER_H
 #define PROJ_ANDROID_INTERACTER_H
@@ -8,10 +5,12 @@
 #include "cocos2d.h"
 #include "../HeaderFiles/Interactable.h"
 #include "Interaction/InteractionNode.h"
-#include "GameScene.h"
 
 using namespace cocos2d;
 
+/**
+ * Creates a new honey extractor with 0 raw honey as input.
+ */
 class Interacter : public cocos2d::Node {
 
 private:
@@ -24,6 +23,9 @@ public:
 
     void runWith(Interactable *interactingObj);
 
+	/**
+     *	Interact with the initialized object
+     */
     void interact();
 
     CREATE_FUNC(Interacter);

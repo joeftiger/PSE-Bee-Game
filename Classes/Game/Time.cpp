@@ -38,10 +38,6 @@ std::string Time::getMonthAsString() {
 	return this->convertToMonth(times.months);
 }
 
-/**
-	Converts integer to Month
-
-*/
 std::string Time::convertToMonth(int i)
 {
 	assert(i >= 0 && i < 12);

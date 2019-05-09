@@ -1,6 +1,3 @@
-//
-// Created by julius on 28.04.19.
-//
 
 #ifndef PSE_BEE_GAME_SPRITES_H
 #define PSE_BEE_GAME_SPRITES_H
@@ -9,6 +6,9 @@
 #include <cocos/2d/CCSprite.h>
 #include <HeaderFiles/Seasons.h>
 
+/**
+ * list of all of the IDs of sprites as well as testing if they correspond to certain objects
+ */
 class Sprites {
 public:
     enum SpriteID : int {

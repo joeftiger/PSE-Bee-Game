@@ -1,10 +1,10 @@
-//
-// Created by julius on 24.03.19.
-//
 
 #ifndef PSE_BEE_GAME_OBSERVER_H
 #define PSE_BEE_GAME_OBSERVER_H
 
+/**
+ * Observer that can be notified of changes and then respond or react accordingly
+ */
 class Observer {
 public:
 	/**

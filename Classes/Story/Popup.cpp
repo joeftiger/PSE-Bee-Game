@@ -1,10 +1,3 @@
-//
-//  Popup.cpp
-//  dreamWeek
-//
-//  Created by Bilal Mirza on 07/08/2017.
-//
-//
 
 #include "Popup.h"
 
@@ -33,11 +26,9 @@ namespace IMAGEPATH {
     const char *CANCEL_BUTTON_PRESSED = "story/CancelPressed.png";
     const char *CLOSE_BUTTON = "story/close.png";
     const char *BACKGROUND_IMAGE = "story/popUpBase.png";
-    const char *IMKER = "story/imker_no_background.png";
+    const char *IMKER = "story/imkerNoBackground.png";
 }
 namespace UICustom {
-    
-    
     
     PopupDelegates *PopupDelegates::create()
     {
@@ -106,12 +97,6 @@ namespace UICustom {
         _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
     }
 
-    
-    
-    
-    
-    
-    
     Popup *Popup::createAsMessage(const std::string &title, const std::string &msg)
     {
         return createAsConfirmDialogue(title, msg, NULL);
@@ -167,7 +152,6 @@ namespace UICustom {
         CC_SAFE_DELETE(node);
         return nullptr;
     }
-    
 
     
     void Popup::initBg(Size size,const std::string &title)

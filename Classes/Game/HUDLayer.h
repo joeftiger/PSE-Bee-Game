@@ -8,6 +8,9 @@
 
 using namespace cocos2d;
 
+/**
+ * HUDLayer that displays time, money, honey and season
+ */
 class HUDLayer : public Layer {
 private:
 
