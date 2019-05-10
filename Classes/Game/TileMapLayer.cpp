@@ -7,6 +7,7 @@
 #include "Time.h"
 #include <json/stringbuffer.h>
 #include <json/writer.h>
+#include <TileMapObjects/PlaceableSprite.h>
 
 bool TileMapLayer::init() {
 	if (!Layer::init()) return false;
@@ -298,11 +299,10 @@ void TileMapLayer::fromJSON(rapidjson::Document &doc) {
 			cocos2d::log("%f", (float) sprite["posY"].GetDouble());
 
 			//TODO: Create and place Placeable Sprite with loaded data
-			/*
-			auto id = static_cast<Sprites::SpriteID>(sprite["id"].GetInt());
-			this->place(new PlaceableSprite(id) , Vec2((float)sprite["posX"].GetDouble(), (float)sprite["posY"].GetDouble()));
-			*/
 
+			auto id = static_cast<Sprites::SpriteID>(sprite["id"].GetInt());
+			auto pos = Vec2(sprite["posX"].GetDouble(), sprite["posY"].GetDouble());
+			this->place(new PlaceableSprite(id) , pos);
 		}
 	}
 }
