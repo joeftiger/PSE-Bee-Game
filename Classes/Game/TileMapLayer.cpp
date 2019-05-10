@@ -296,6 +296,8 @@ void TileMapLayer::fromJSON(rapidjson::Document &doc) {
 			cocos2d::log("%i", sprite["id"].GetInt());
 			cocos2d::log("%f", (float) sprite["posX"].GetDouble());
 			cocos2d::log("%f", (float) sprite["posY"].GetDouble());
+
+			//TODO: Create and place Placeable Sprite with loaded data
 			/*
 			auto id = static_cast<Sprites::SpriteID>(sprite["id"].GetInt());
 			this->place(new PlaceableSprite(id) , Vec2((float)sprite["posX"].GetDouble(), (float)sprite["posY"].GetDouble()));
