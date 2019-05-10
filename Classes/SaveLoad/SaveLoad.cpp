@@ -52,15 +52,14 @@ std::string SaveLoad::getPath(std::string fileName) {
 		fs->createDirectory(path + "saves/");
 	}
 	path = path + "saves/" + fileName;
-	cocos2d::log("%s %s", "writable path", path.c_str());
+	//cocos2d::log("%s %s", "writable path", path.c_str());
 	return path;
 }
 
 
 void SaveLoad::jsonToFile(std::string json, std::string fullPath) {
-	bool b = FileUtils::getInstance()->writeStringToFile(json, fullPath);
-	if (b) {
-		log("successfully wrote to file");
+	if (FileUtils::getInstance()->writeStringToFile(json, fullPath)) {
+		log("Writing to %s successful", fullPath.c_str());
 	}
 }
 
