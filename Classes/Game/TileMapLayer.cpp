@@ -36,7 +36,13 @@ bool TileMapLayer::init() {
 }
 
 ssize_t TileMapLayer::getTreeCount() {
-	return 2;
+	int count = 0;
+	for (const auto s : _spriteList) {
+		if (Sprites::isTree(static_cast<Sprites::SpriteID>(s->getTag()))) {
+			count++;
+		}
+	}
+	return count;
 }
 
 ssize_t TileMapLayer::getFlowerCount() {
