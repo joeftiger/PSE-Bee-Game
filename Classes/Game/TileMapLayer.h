@@ -7,13 +7,16 @@
 #include <Resources/Sprites.h>
 #include "cocos2d.h"
 #include "Observable.h"
+#include "json/rapidjson.h"
+#include "json/document.h"
+#include "HeaderFiles/Restorable.h"
 
 USING_NS_CC;
 
 // pre-declare to <fix> "Placeable has no type."
 class Placeable;
 
-class TileMapLayer : public cocos2d::Layer, public Observable {
+class TileMapLayer : public cocos2d::Layer, public Observable, public Restorable {
 private:
 	TMXTiledMap *_tileMap;
 	TMXLayer *_objectLayer;
@@ -119,6 +122,10 @@ public:
 	 * 				  <code>false</code> if the obstruction layer is hidden.
 	 */
 	void showObstructions(bool visible);
+
+	void toJSON(rapidjson::Document &doc);
+
+	void fromJSON(rapidjson::Document &doc);
 
 	// implement the "static create()" method manually
 	CREATE_FUNC(TileMapLayer)

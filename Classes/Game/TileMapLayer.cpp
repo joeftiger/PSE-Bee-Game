@@ -5,6 +5,8 @@
 #include "Resources/Sprites.h"
 #include "SaveLoad/SaveLoad.h"
 #include "Time.h"
+#include <json/stringbuffer.h>
+#include <json/writer.h>
 
 bool TileMapLayer::init() {
 	if (!Layer::init()) return false;
@@ -227,17 +229,85 @@ void TileMapLayer::showObstructions(bool visible) {
 	_obstructionLayer->setVisible(visible);
 }
 
+void TileMapLayer::toJSON(rapidjson::Document & doc) {
+	
+	rapidjson::StringBuffer s;
+	rapidjson::Writer<rapidjson::StringBuffer> writer(s);
+
+	writer.StartObject();
+	writer.String("TileMap");
+	writer.StartArray();
+	for (int i = 0; i < _objectLayer->getLayerSize().width; i++) {
+		writer.StartArray();
+		for (int j = 0; j < _objectLayer->getLayerSize().height; j++) {
+			writer.Uint(_objectLayer->getTileGIDAt(Vec2(i, j)));
+		}
+		writer.EndArray();
+	}
+	writer.EndArray();
+
+	if (!_spriteList.empty()) {
+		writer.String("Sprites");
+		writer.StartArray();
+		for (auto sprite : _spriteList) {
+			writer.StartObject();
+
+			writer.String("id");
+			writer.Int(sprite->getTag());
+
+			writer.String("posX");
+			writer.Double(sprite->getPositionX());
+
+			writer.String("posY");
+			writer.Double(sprite->getPositionY());
+
+			writer.EndObject();
+		}
+		writer.EndArray();
+	}
+	writer.EndObject();
+	doc.Parse(s.GetString());
+
+}
+
+void TileMapLayer::fromJSON(rapidjson::Document &doc) {
+	assert(doc.HasMember("TileMap"));
+	rapidjson::Value& tileMap = doc["TileMap"];
+
+	for (rapidjson::SizeType x = 0; x < tileMap.Size(); x++) {
+
+		auto row = tileMap[x].GetArray();
+
+		for (rapidjson::SizeType y = 0; y < row.Size(); y++) {
+			assert(row[y].IsInt());
+			_objectLayer->setTileGID(row[y].GetInt(), Vec2(x, y));
+		}
+	}
+
+	if (doc.HasMember("Sprites")) {
+		rapidjson::Value& sprites = doc["Sprites"];
+
+		for (rapidjson::SizeType i = 0; i < sprites.Size(); i++) {
+			rapidjson::Value& sprite = sprites[i];
+			assert(sprite["id"].IsInt());
+			assert(sprite["posX"].IsDouble());
+			assert(sprite["posY"].IsDouble());
+
+			cocos2d::log("%i", sprite["id"].GetInt());
+			cocos2d::log("%f", (float) sprite["posX"].GetDouble());
+			cocos2d::log("%f", (float) sprite["posY"].GetDouble());
+			/*
+			auto id = static_cast<Sprites::SpriteID>(sprite["id"].GetInt());
+			this->place(new PlaceableSprite(id) , Vec2((float)sprite["posX"].GetDouble(), (float)sprite["posY"].GetDouble()));
+			*/
+
+		}
+	}
+}
+
 void TileMapLayer::loadMap() {
 	if (SaveLoad::tileMapSaveExists()) {
-		auto data = SaveLoad::loadMap();
-		auto layer = this->getLayer();
-
-
-		for (int x = 0; x < data.size(); x++) {
-			for (int y = 0; y < data[x].size(); y++) {
-				layer->setTileGID(data[x][y], Vec2(x, y));
-			}
-		}
+		SaveLoad::loadMap(this);
 	}
 
 	if (SaveLoad::beeHiveSaveExists()) {
