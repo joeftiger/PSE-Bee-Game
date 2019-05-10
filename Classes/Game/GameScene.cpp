@@ -39,9 +39,10 @@ bool GameScene::init() {
 	this->addChild(_tileMapLayer, -1);
 
 	//Time
+	
 	auto time = Time::getInstance();
 	time->setTileMapLayer(_tileMapLayer);
-	this->addChild(time);
+
 	if (SaveLoad::timesSaveExists()) {
 		SaveLoad::loadTime();
 	}
@@ -52,9 +53,6 @@ bool GameScene::init() {
 
 	auto honeyExtractorAtlas = HoneyExtractorAtlas::getInstance();
     _tileMapLayer->subscribe(*honeyExtractorAtlas);
-
-	//this->scheduleUpdate();
-	//this->getScheduler()->schedule(schedule_selector(BeeHiveAtlas::updateBeeHives), tileMapAtlas,1.0f, false, s);
 
 	// getInstance() subscribes to TileMapAtlas, if not called already
 	Player::getInstance();
@@ -89,9 +87,12 @@ bool GameScene::init() {
 	this->schedule(schedule_selector(GameScene::saveGameState), 60.0f);
 	this->schedule(schedule_selector(GameScene::beeHiveAtlasUpdate), 1.0f);
 	this->schedule(schedule_selector(GameScene::honeyExtractorAtlasUpdate), 1.0f);
+	this->schedule(schedule_selector(GameScene::timeUpdate), UPDATE_TIME);
 	return true;
 }
-
+void GameScene::timeUpdate(float dt) {
+	Time::getInstance()->update(dt);
+}
 
 void GameScene::beeHiveAtlasUpdate(float dt) {
 	BeeHiveAtlas::getInstance()->updateBeeHives(dt);

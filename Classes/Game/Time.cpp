@@ -3,15 +3,9 @@
 #include "Time.h"
 #include "SaveLoad/SaveLoad.h"
 
-bool Time::init() {
-	if (!Node::init()) return false;
-
+Time::Time() {
 	setStartingMonth();
 	_currentSeason = getSeason();
-
-	this->schedule(schedule_selector(Time::update), UPDATE_TIME);
-
-	return true;
 }
 
 void Time::setTileMapLayer(TileMapLayer *tileMapLayer) {

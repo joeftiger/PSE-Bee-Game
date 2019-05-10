@@ -14,7 +14,7 @@ using namespace cocos2d;
 /**
  *	for dealing with, getting a month, setting the starting month and interacting with seasons
  */
-class Time: public Node, Restorable  {
+class Time: public Restorable  {
 private:
 	timeStruct times;
 
@@ -22,29 +22,29 @@ private:
 	TileMapLayer * _tileMapLayer;
 	Season _currentSeason;
 
-	Time() = default;
+	//Time() = default;
 
 	Time(const Time &);
 
-	~Time() final = default;
+	//~Time() final = default;
 
 	/**
      *	Convert int to months
      */
 	std::string convertToMonth(int i);
 
-	void update(float dt) override;
-
 public:
 
-	virtual bool init();
+	Time();
 
 	void setTileMapLayer(TileMapLayer *tileMapLayer);
 
 	static Time *getInstance() {
-		static auto instance = Time::create();
+		static auto instance = new Time();
 		return instance;
 	}
+
+	void update(float dt);
 
 	bool invariant();
 
@@ -70,7 +70,6 @@ public:
 
 	void fromJSON(rapidjson::Document &doc);
 
-	CREATE_FUNC(Time);
 };
 
 #endif //TIME_H

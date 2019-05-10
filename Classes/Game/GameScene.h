@@ -31,6 +31,8 @@ public:
 
 	virtual bool init() override;
 
+	void timeUpdate(float dt);
+
 	/**
      *	Calls BeeHiveUpdate every dt seconds
      */
