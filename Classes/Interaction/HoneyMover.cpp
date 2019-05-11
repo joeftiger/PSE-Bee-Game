@@ -32,23 +32,30 @@ void HoneyMover::setTileMap(TileMapLayer* tileMap) {
 bool HoneyMover::onTouchBegan(Touch *touch, Event *event) {
     auto beeAtlas = BeeHiveAtlas::getInstance();
     auto extractorAtlas = HoneyExtractorAtlas::getInstance();
-    auto pos = _tileMapLayer->getTilePosition(touch->getLocation() + this->getParent()->getPosition());
-    if(beeAtlas->hasBeeHiveAt(pos)) {
-        _beeHive = beeAtlas->getBeeHiveAt(pos);
-        _isDrag = true;
 
-        if(!_honeySprite) {
-            _honeySprite = SpriteContainer::getInstance()->getSpriteOf(Sprites::SpriteID::honey_glass_2d);
-            _honeySprite->setAnchorPoint(Vec2(0.5, 0));
-            _honeySprite->setScale(0.2);
-            _honeySprite->setVisible(false);
-            this->addChild(_honeySprite);
-        }
+	auto tempPos = touch->getLocation() + this->getParent()->getPosition();
 
-        return true;
-    } else if(extractorAtlas->hasHoneyExtractorAt(pos)) {
-        return true;
-    }
+	if(_tileMapLayer->isTouchOnTileMap(tempPos)) {
+		auto pos = _tileMapLayer->getTilePosition(tempPos);
+		if (beeAtlas->hasBeeHiveAt(pos)) {
+			_beeHive = beeAtlas->getBeeHiveAt(pos);
+			_isDrag = true;
+
+			if (!_honeySprite) {
+				_honeySprite = SpriteContainer::getInstance()->getSpriteOf(Sprites::SpriteID::honey_glass_2d);
+				_honeySprite->setAnchorPoint(Vec2(0.5, 0));
+				_honeySprite->setScale(0.2);
+				_honeySprite->setVisible(false);
+				this->addChild(_honeySprite);
+			}
+
+			return true;
+		}
+		else if (extractorAtlas->hasHoneyExtractorAt(pos)) {
+			return true;
+		}
+	}
+    
     return false;
 }
 

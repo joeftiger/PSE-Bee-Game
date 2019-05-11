@@ -156,6 +156,38 @@ Vec2 TileMapLayer::inTileMapBounds(const Vec2 &pos) {
 	}
 }
 
+bool TileMapLayer::isTouchOnTileMap(Vec2 pos) {
+
+	auto box = _tileMap->getBoundingBox();
+	auto A = (box.size.width * box.size.height) / 2;
+	auto d = sqrt(pow(box.size.width / 2, 2) + pow(box.size.height / 2, 2));
+	auto h = A / d;
+	auto skew = sqrt(pow(d, 2) - pow(h, 2));
+	auto angle = atan(box.size.height / box.size.width);
+
+	pos.x -= box.size.width / 2;
+	pos.y -= box.size.height;
+
+	auto temp = pos.x * cos(angle) - pos.y * sin(angle);
+	pos.y = pos.x * sin(angle) + pos.y * cos(angle);
+	pos.x = temp;
+
+	pos.y *= -1;
+
+	pos.x += skew * (pos.y / h);
+	//auto s = std::to_string(pos.x) + "   " + std::to_string(pos.y).c_str();
+	pos.x = _tileMap->getMapSize().width * pos.x / d;
+	pos.y = _tileMap->getMapSize().height * pos.y / h;
+
+	pos.x = (int)pos.x;
+	pos.y = (int)pos.y;
+
+	if (pos.x > _tileMap->getMapSize().width - 1 || pos.x < 0 || pos.y > _tileMap->getMapSize().height - 1 || pos.y < 0) {
+		return false;
+	}
+	return true;
+}
+
 bool TileMapLayer::canPlace(Placeable *placeable, Vec2 &position) {
 	return placeable->canPlaceOn(this, position);
 }
@@ -299,10 +331,6 @@ void TileMapLayer::fromJSON(rapidjson::Document &doc) {
 			assert(sprite["id"].IsInt());
 			assert(sprite["posX"].IsDouble());
 			assert(sprite["posY"].IsDouble());
-
-			cocos2d::log("%i", sprite["id"].GetInt());
-			cocos2d::log("%f", (float) sprite["posX"].GetDouble());
-			cocos2d::log("%f", (float) sprite["posY"].GetDouble());
 
 			auto id = static_cast<Sprites::SpriteID>(sprite["id"].GetInt());
 			auto pos = Vec2(sprite["posX"].GetDouble(), sprite["posY"].GetDouble());

@@ -68,6 +68,11 @@ public:
 	Vec2 inTileMapBounds(const Vec2 &pos);
 
 	/**
+	* Checks whether a given vector touches the tilemap
+	*/
+	bool isTouchOnTileMap(Vec2 pos);
+
+	/**
 	 * Checks whether the given placeable object can be placed at the specified position.
 	 * If the area around the position is obstructed, <code>false</code> will be returned.
 	 * @param placeable the object to place
