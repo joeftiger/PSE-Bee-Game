@@ -3,7 +3,6 @@
 #include <string>
 #include <stdexcept>
 #include <Algorithm/GameAlgorithm.h>
-#include <Interaction/InteractionNode.h>
 #include "BeeHive.h"
 #include "GameScene.h"
 #include "../HeaderFiles/HealthStates.h"

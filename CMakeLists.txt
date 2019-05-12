@@ -88,14 +88,12 @@ list(APPEND GAME_SOURCE
         Classes/Game/GameScene.cpp
         Classes/Game/HUDLayer.cpp
         Classes/Game/HoneyExtractor.cpp
-        Classes/Game/Interacter.cpp
         Classes/Game/Player.cpp
 		Classes/Game/TileMapLayer.cpp
         Classes/Game/Time.cpp
         Classes/Game/Wallet.cpp
         Classes/Interaction/BeeHivePopup.cpp
         Classes/Interaction/HoneyExtractorPopup.cpp
-        Classes/Interaction/InteractionNode.cpp
         Classes/ItemPanel/ItemPanelLayer.cpp
         Classes/ItemPanel/TouchUtil.cpp
         Classes/MainMenu/MainMenuScene.cpp
@@ -123,19 +121,16 @@ list(APPEND GAME_HEADER
         Classes/Game/GameScene.h
         Classes/Game/HUDLayer.h
         Classes/Game/HoneyExtractor.h
-        Classes/Game/Interacter.h
         Classes/Game/Player.h
         Classes/Game/TileMapLayer.h
         Classes/Game/Time.h
         Classes/Game/Wallet.h
-        Classes/HeaderFiles/Interactable.h
         Classes/HeaderFiles/HealthStates.h
         Classes/HeaderFiles/Restorable.h
         Classes/HeaderFiles/Seasons.h
         Classes/HeaderFiles/TimeStruct.h
         Classes/Interaction/BeeHivePopup.h
         Classes/Interaction/HoneyExtractorPopup.h
-        Classes/Interaction/InteractionNode.h
         Classes/ItemPanel/ItemPanelLayer.h
         Classes/ItemPanel/TouchUtil.h
         Classes/MainMenu/MainMenuScene.h
