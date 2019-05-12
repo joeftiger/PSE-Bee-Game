@@ -72,13 +72,6 @@ bool OptionsScene::init() {
     exitButton->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
     exitButton->setScale(1.3f);
 
-    // Create a title and center it at the top of the screen
-    //auto title = Label::createWithTTF("So Bee It!", "fonts/ReemKufi-Regular.ttf", 48);
-    //Sprite* title = Sprite::create("menu/title.png");
-    //title->setPosition(Vec2(464, buttonsBed.y + 97));
-    //background->setScale(visibleSize.height/900);
-    //background->addChild(title, 3);
-
     background->addChild(textureCheckbox);
     background->addChild(resetButton);
     background->addChild(emptyButton);
