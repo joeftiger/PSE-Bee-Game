@@ -11,24 +11,13 @@ using namespace cocos2d;
  * OptionsScene with deleting the save functionality and switching tileMaps
  */
 class OptionsScene : public cocos2d::Scene {
-private:
-
-	float onePofScreenH;
-	float onePofScreenW;
-
-
-
-	void initTextureButton();
-
-	void initTutorialButton();
-
 public:
 	static cocos2d::Scene *createScene();
 
 	virtual bool init();
 
 	// reset button click handler
-	void onDeleteSaveClick(cocos2d::Ref *sender);
+	void onDeleteSaveClick();
 
 
 	// implement the "static create()" method manually

@@ -1,4 +1,5 @@
 
+#include <HeaderFiles/DEFINITIONS.h>
 #include "OptionsScene.h"
 #include "../Settings.h"
 #include "SaveDeleteConfirmation.h"
@@ -10,93 +11,84 @@ using namespace cocos2d;
 using namespace cocos2d::ui;
 
 
-void OptionsScene::initTextureButton() {
-	auto checkbox = CheckBox::create();
-	checkbox->loadTextureBackGround("Sprites/SD.png");
-	checkbox->loadTextureBackGroundDisabled("Sprites/SD.png");
-	checkbox->loadTextureBackGroundSelected("Sprites/HD.png");
-	checkbox->loadTextureFrontCross("Sprites/HD.png");
-	checkbox->loadTextureFrontCrossDisabled("Sprites/SD.png");
-
-	checkbox->addTouchEventListener([&](Ref* sender, Widget::TouchEventType type) {
-		if (type == Widget::TouchEventType::ENDED) {
-			cocos2d::log("Options:\tSwitching textures");
-			auto settings = Settings::getInstance();
-			auto option = Settings::SettingName::HD_Textures;
-			settings->set(option, !settings->getAsBool(option));
-		}
-	});
-
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
-	checkbox->setAnchorPoint(Vec2(0.5, 0.5));
-	checkbox->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 3.0f));
-
-	checkbox->setSelected(Settings::getInstance()->getAsBool(Settings::SettingName::HD_Textures));
-
-	this->addChild(checkbox, 10);
-}
-
-void OptionsScene::initTutorialButton() {
-	// TODO
-}
-
 Scene *OptionsScene::createScene() { return OptionsScene::create(); }
 
 // on "init" you need to initialize your instance
 bool OptionsScene::init() {
-	if (!Scene::init()) return false;
+    // standard size related functions
+    cocos2d::Rect visibleRect = Director::getInstance()->getOpenGLView()->getVisibleRect();
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Vec2(visibleSize.width / 2, visibleSize.height / 2);
 
-	// standard size related functions
-	cocos2d::Rect visibleRect = Director::getInstance()->getOpenGLView()->getVisibleRect();
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    // adding a background, setting the middle as the anchor point and putting as far back as possible
+    auto *background = cocos2d::Sprite::create("menu/main-menu-background-title.png");
+    background->setAnchorPoint(Vec2(0.0f, 0.5f));
+    background->setPosition(Vec2(0, origin.y));
+    this->addChild(background, -1000);
 
-	onePofScreenH = visibleSize.height / 100;
-	onePofScreenW = visibleSize.width / 100;
+    Vec2 buttonsBed = Vec2(background->getBoundingBox().size.width / 2 + 153.0f,
+                           background->getBoundingBox().size.height / 2 - 3.0f);
 
-	// create a title and set it at the top of the screen
-	auto title = Label::createWithTTF("Options", "fonts/ReemKufi-Regular.ttf", 48);
-	title->setPosition(Vec2(origin.x + visibleSize.width / 2,
-	                        origin.y + visibleSize.height - title->getContentSize().height));
-	this->addChild(title, 1);
 
-    // add save deletion funcitonality
-    auto resetLabel = Label::createWithTTF("Click here to reset your Save", "fonts/ReemKufi-Regular.ttf", 40);
-    auto menuItemReset = MenuItemLabel::create(resetLabel);
-    menuItemReset->setCallback([&](cocos2d::Ref *sender) {
-        Director::getInstance()->replaceScene(SaveDeleteConfirmation::create());
+    // Adding the sprites for the main menu with location and size adjustment
+    // all scaling and position through trial-and-error
+    auto resetButton = ui::Button::create("menu/options.png");
+    resetButton->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
+        if (type == ui::Widget::TouchEventType::ENDED) {
+            onDeleteSaveClick();
+        }
     });
-    auto resetMenu = Menu::create(menuItemReset, nullptr);
-    resetMenu->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - 3 * title->getContentSize().height));
-    this->addChild(resetMenu, 10);
-
-    // switch between textures
-    initTextureButton();
+    resetButton->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
+    resetButton->setAnchorPoint(Vec2(1.025f, 0.5f));
+    resetButton->setAnchorPoint(Vec2(0.5f, -0.27f));
+    resetButton->setScale(1.3f);
 
 
+    auto textureCheckbox = CheckBox::create("Sprites/SD.png", "Sprites/HD.png", "Sprites/HD.png", "Sprites/SD.png",
+                                     "Sprites/SD.png");
+    textureCheckbox->addTouchEventListener([&](Ref *sender, Widget::TouchEventType type) {
+        if (type == Widget::TouchEventType::ENDED) {
+            Settings::getInstance()->set(Settings::HD_Textures, !Settings::getInstance()->getAsBool(Settings::HD_Textures));
+        }
+    });
+    textureCheckbox->setSelected(Settings::getInstance()->getAsBool(Settings::SettingName::HD_Textures));
+    textureCheckbox->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
+    textureCheckbox->setAnchorPoint(Vec2(1.025f, 0.5f));
+    textureCheckbox->setScale(1.3f);
 
 
+    auto emptyButton = ui::Button::create("Sprites/empty.png");
+    emptyButton->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
+    emptyButton->setAnchorPoint(Vec2(-0.025f, 0.5f));
+    emptyButton->setScale(1.3f);
 
-	// add the menu item for back to main menu and position it in the bottom right corner of the screen
-	auto label = Label::createWithTTF("Main Menu", "fonts/ReemKufi-Regular.ttf", 20);
-	auto menuItemBack = MenuItemLabel::create(label);
-	menuItemBack->setCallback([&](cocos2d::Ref *sender) {
-		Director::getInstance()->replaceScene(MainMenu::scene());
-	});
-	auto backMenu = Menu::create(menuItemBack, nullptr);
-	backMenu->setPosition(Vec2::ZERO);
-	backMenu->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - onePofScreenW * 8,
-	                           visibleRect.origin.y + onePofScreenH * 5));
-	this->addChild(backMenu, 10);
+    auto exitButton = ui::Button::create("menu/exit.png");
+    exitButton->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
+        if (type == ui::Widget::TouchEventType::ENDED) {
+            Director::getInstance()->replaceScene(MainMenu::scene());
+        }
+    });
+    exitButton->setAnchorPoint(Vec2(0.5f, 1.27f));
+    exitButton->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
+    exitButton->setScale(1.3f);
 
+    // Create a title and center it at the top of the screen
+    //auto title = Label::createWithTTF("So Bee It!", "fonts/ReemKufi-Regular.ttf", 48);
+    //Sprite* title = Sprite::create("menu/title.png");
+    //title->setPosition(Vec2(464, buttonsBed.y + 97));
+    //background->setScale(visibleSize.height/900);
+    //background->addChild(title, 3);
 
-	return true;
+    background->addChild(textureCheckbox);
+    background->addChild(resetButton);
+    background->addChild(emptyButton);
+    background->addChild(exitButton);
+
+    return true;
 }
 
-// upon presseing the rest button, delete the save and go back to main menu
-void OptionsScene::onDeleteSaveClick(cocos2d::Ref *sender) {
-	Director::getInstance()->replaceScene(
-			TransitionFade::create(0.2f, SaveDeleteConfirmation::create(), Color3B(255, 255, 255)));
+// upon pressing the rest button, delete the save and go back to main menu
+void OptionsScene::onDeleteSaveClick() {
+    Director::getInstance()->replaceScene(
+            TransitionFade::create(0.2f, SaveDeleteConfirmation::create(), Color3B(255, 255, 255)));
 }
