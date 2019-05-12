@@ -37,9 +37,9 @@ bool ItemPanelLayer::init() {
 	this->setOpacity(GLubyte(90));
 
 	//show Item Panel Layer
-    _showRec = ui::Button::create("shop/shop_1.png");
+    auto showButton = ui::Button::create("shop/shop_1.png");
 
-    _showRec->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
+    showButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
         switch (type) {
             case ui::Widget::TouchEventType::BEGAN:
                 break;
@@ -49,11 +49,11 @@ bool ItemPanelLayer::init() {
         }
     });
 
-    //_showRec = SpriteContainer::getInstance()->getSpriteOf(Sprites::SpriteID::shop_1);
-	_showRec->setAnchorPoint(Vec2(1, 0.5));
-	_showRec->setPosition(Vec2(0, this->getContentSize().height / 2));
-	_showRec->setScale(0.6f);
-	this->addChild(_showRec);
+    //showButton = SpriteContainer::getInstance()->getSpriteOf(Sprites::SpriteID::shop_1);
+	showButton->setAnchorPoint(Vec2(1, 0.5));
+	showButton->setPosition(Vec2(0, this->getContentSize().height / 2));
+	showButton->setScale(0.6f);
+	this->addChild(showButton);
 
     //shop background
     auto bg = Sprite::create("shop/shop-bg_neu.png");
@@ -106,10 +106,6 @@ void ItemPanelLayer::initializeItemPanel() {
 		width++;
 		if (width % 3 == 0) height++;
 	}
-}
-
-ui::Button *ItemPanelLayer::getShowRec() {
-	return _showRec;
 }
 
 void ItemPanelLayer::setTileMap(TileMapLayer* tileMap) {

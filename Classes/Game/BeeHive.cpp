@@ -154,7 +154,6 @@ BeeParticles* BeeHive::getParticles() {
 
 void BeeHive::setParticles() {
     _tileMapLayer = (TileMapLayer*) Director::getInstance()->getRunningScene()->getChildByName(TILE_MAP_LAYER_NAME);
-    counter++;
     if(!_particlesNode) {
         _particlesNode = BeeParticles::create();
         _tileMapLayer->addChild(_particlesNode);

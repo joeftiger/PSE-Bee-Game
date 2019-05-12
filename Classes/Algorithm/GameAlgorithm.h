@@ -12,7 +12,7 @@
 #include "Atlas/BeeHiveAtlas.h"
 
 /**
- * Algorithm for generating honey with various factors
+ * Orcestrates gameplay algorithms.
  */
 class GameAlgorithm {
 private:
@@ -25,13 +25,30 @@ public:
 
     /**
      * Returns the amount of honey produced every second, depending on the amount of bees.
+     * Called @BeeHive update.
      *
      * @param bees
      * @return
      */
     float honeyProduction(int bees);
 
+    /**
+     * Returns the amount to add or subtract from the bees of a beehive.
+     * Called @BeeHive update.
+     *
+     * @param bees
+     * @param varroa
+     * @return
+     */
     int nextBees(int bees, int varroa);
+
+    /**
+     * Doubles the amount of varroa of a beehive every 10 days in-game time.
+     * Called @BeeHive update.
+     *
+     * @param varroa
+     * @return
+     */
     int nextVarroa(int varroa);
 
     void setBeeHives();

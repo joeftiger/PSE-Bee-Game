@@ -18,7 +18,6 @@ class BeeHive : Restorable {
 private:
 	int _beesAlive;
 	int _varroaAlive;
-    int counter = 0;
 	float _rawHoney;
 	BeeParticles* _particlesNode;
 	cocos2d::Vec2 _position;

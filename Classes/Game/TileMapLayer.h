@@ -62,11 +62,17 @@ public:
 	 */
 	std::vector<Sprite *> getSpriteList();
 
+	/**
+	 * Transforms a position on the tile map to tile coordinates.
+	 *
+	 * @param pos
+	 * @return
+	 */
 	Vec2 getTilePosition(Vec2 pos);
 
 	/**
      * Checks whether the given vector is out of bounds
-     * @return (0,0) if out of bounds, otherwise the vector itself
+     * @return the vector in tile map nearest to the position.
      */
 	Vec2 inTileMapBounds(const Vec2 &pos);
 

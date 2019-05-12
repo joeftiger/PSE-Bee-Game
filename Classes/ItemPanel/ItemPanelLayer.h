@@ -14,9 +14,7 @@ using namespace cocos2d;
  */
 class ItemPanelLayer : public LayerColor, public TouchUtil {
 private:
-    ui::Button *_showRec;
 	bool _isItemShow;
-	Point _touchPosition;
 	TileMapLayer *_tileMapLayer;
 	bool _isTouch;
 
@@ -25,9 +23,10 @@ public:
 
 	virtual bool init();
 
+	/**
+	 * Initializes the sprites that can be dragged and placed.
+	 */
 	void initializeItemPanel();
-
-	ui::Button *getShowRec();
 
 	void setTileMap(TileMapLayer *tileMap);
 
