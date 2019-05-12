@@ -48,6 +48,8 @@ public:
 
 	bool invariant();
 
+	void clear();
+
 	int getMonth();
 
 	void setStartingMonth();
