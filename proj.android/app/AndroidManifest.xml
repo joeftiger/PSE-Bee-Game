@@ -15,11 +15,10 @@
         <!-- Tell Cocos2dxActivity the name of our .so -->
         <meta-data android:name="android.app.lib_name"
                    android:value="MyGame" />
-
+		<!-- android:hardwareAccelerated="false" -->
         <activity
-			android:hardwareAccelerated="false"
             android:name="org.cocos2dx.cpp.AppActivity"
-            android:screenOrientation="landscape"
+            android:screenOrientation="sensorLandscape"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"

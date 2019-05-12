@@ -14,6 +14,8 @@ proj.android/.idea/
 proj.android/app/PSE-Bee-Game.iml
 cocos2d/cocos/platform/android/libcocos2dx/libcocos2dx.iml
 proj.android/proj.android.iml
+proj.android/build.gradle
+proj.android/gradle/
 *.obj
 *.dll
 *.tlog
@@ -24,3 +26,10 @@ proj.android/proj.android.iml
 *.idb
 *.aps
 proj.win32/.vs/PSE-Bee-Game/v15/.suo
+
+# IDE folder
+.idea/
+
+# arch fmod lib different from deb
+
+cocos2d/external/linux-specific
