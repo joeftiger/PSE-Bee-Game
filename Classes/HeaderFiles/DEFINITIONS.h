@@ -10,7 +10,7 @@
 
 #define TILE_MAP_LAYER_NAME "TileMapLayer"
 
-#define MAP_SCALE_HD 1.0f
+#define MAP_SCALE_HD 0.75f
 #define MAP_SCALE_SD (MAP_SCALE_HD * 2)
 
 #define TREE_SCALE_HD (MAP_SCALE_HD * 4.0f / 3)
