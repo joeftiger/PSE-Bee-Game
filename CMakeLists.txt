@@ -36,12 +36,10 @@ set(hostname)
 cmake_host_system_information(RESULT hostname QUERY HOSTNAME)
 
 # Needed to compile on Linux
-        message(STATUS "Linux - setting flag \"-no-pie\"")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -no-pie")
+
 if (CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
-    if (NOT $ENV{TRAVIS_CI_TEST_BUILD}
-STREQUAL "true")
-    endif()
+    message(STATUS "Linux - setting flag \"-no-pie\"")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -no-pie")
 
     if (${CMAKE_VERSION} VERSION_EQUAL "3.11" OR ${CMAKE_VERSION} VERSION_GREATER "3.11")
         # use new OpenGL instead of legacy (laptop/desktop Julius)

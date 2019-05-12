@@ -21,7 +21,6 @@ public:
 		"HD_Textures",
 		"Tutorial"
 	};
-
 private:
 	std::map<SettingName, std::string> _settings;
 

@@ -40,13 +40,8 @@ bool ItemPanelLayer::init() {
     auto showButton = ui::Button::create("shop/shop_1.png");
 
     showButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-        switch (type) {
-            case ui::Widget::TouchEventType::BEGAN:
-                break;
-            case ui::Widget::TouchEventType::ENDED:
-                this->showHideItemPanel();
-                break;
-        }
+		if (type == ui::Widget::TouchEventType::ENDED)
+			this->showHideItemPanel();
     });
 
     //showButton = SpriteContainer::getInstance()->getSpriteOf(Sprites::SpriteID::shop_1);
