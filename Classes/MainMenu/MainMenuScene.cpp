@@ -30,12 +30,8 @@ bool MainMenu::init() {
     auto playButton = ui::Button::create("menu/start.png");
 
     playButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-        switch (type) {
-            case ui::Widget::TouchEventType::BEGAN:
-                break;
-            case ui::Widget::TouchEventType::ENDED:
-                this->onPlayClick();
-                break;
+        if (type == ui::Widget::TouchEventType::ENDED) {
+            this->onPlayClick();
         }
     });
 	playButton->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
@@ -44,12 +40,8 @@ bool MainMenu::init() {
 
 	auto optionsButton = ui::Button::create("menu/options.png");
     optionsButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-        switch (type) {
-            case ui::Widget::TouchEventType::BEGAN:
-                break;
-            case ui::Widget::TouchEventType::ENDED:
-                this->onOptionsClick();
-                break;
+        if (type == ui::Widget::TouchEventType::ENDED) {
+            this->onOptionsClick();
         }
     });
 	optionsButton->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
@@ -58,12 +50,8 @@ bool MainMenu::init() {
 
     auto aboutButton = ui::Button::create("menu/credits.png");
     aboutButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-        switch (type) {
-            case ui::Widget::TouchEventType::BEGAN:
-                break;
-            case ui::Widget::TouchEventType::ENDED:
-                this->onAboutClick();
-                break;
+        if (type == ui::Widget::TouchEventType::ENDED) {
+            this->onAboutClick();
         }
     });
 	aboutButton->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
@@ -72,12 +60,8 @@ bool MainMenu::init() {
 
     auto exitButton = ui::Button::create("menu/exit.png");
     exitButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-        switch (type) {
-            case ui::Widget::TouchEventType::BEGAN:
-                break;
-            case ui::Widget::TouchEventType::ENDED:
-                this->onExitClick();
-                break;
+        if (type == ui::Widget::TouchEventType::ENDED) {
+            this->onExitClick();
         }
     });
 	exitButton->setAnchorPoint(Vec2(0.5f, 1.27f));
