@@ -12,7 +12,7 @@ using namespace cocos2d;
 /**
  * a singleton wallet object, that is used for interacting with money that belongs to a player
  */
-class Wallet {
+class Wallet : Restorable {
 private:
 
 	bool invariant();
@@ -44,9 +44,9 @@ public:
     */
     int subtractMoney(int amount);
 
-    void toJSON(rapidjson::Document &doc);
+    void toJSON(rapidjson::Document &doc) override;
 
-   	void fromJSON(rapidjson::Document &doc);
+   	void fromJSON(rapidjson::Document &doc) override;
 
 };
 

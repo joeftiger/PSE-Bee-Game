@@ -66,9 +66,9 @@ public:
 	 */
 	void switchSeasonalTilesSequential();
 
-	void toJSON(rapidjson::Document &doc);
+	void toJSON(rapidjson::Document &doc) override;
 
-	void fromJSON(rapidjson::Document &doc);
+	void fromJSON(rapidjson::Document &doc) override;
 
 };
 
