@@ -156,7 +156,7 @@ Vec2 TileMapLayer::inTileMapBounds(const Vec2 &pos) {
 	}
 }
 
-bool TileMapLayer::isTouchOnTileMap(Vec2 pos) {
+bool TileMapLayer::isVectorOnTileMap(Vec2 pos) {
 
 	auto box = _tileMap->getBoundingBox();
 	auto A = (box.size.width * box.size.height) / 2;
@@ -238,30 +238,34 @@ bool TileMapLayer::canPlaceSprite(const Vec2 &position, const Size &size) {
 }
 
 void TileMapLayer::placeSprite(const Vec2 &position, const Size &size, Sprites::SpriteID id) {
-	auto pos = getTilePosition(position);
+	if (isVectorOnTileMap(position)) {
+		auto pos = getTilePosition(position);
 
-	for (auto x = 0; x < size.width; x++) {
-		for (auto y = 0; y < size.height; y++) {
-			auto tilePos = Vec2(pos.x - x, pos.y - y);
-			_obstructionLayer->setTileGID(Tiles::obstruction, tilePos);
-			_objectLayer->setTileGID(Tiles::getSeasonTileGIDof(Tiles::grass,
-			                                                   Time::getInstance()->getSeason()), tilePos);
+		for (auto x = 0; x < size.width; x++) {
+			for (auto y = 0; y < size.height; y++) {
+				auto tilePos = Vec2(pos.x - x, pos.y - y);
+				_obstructionLayer->setTileGID(Tiles::obstruction, tilePos);
+				_objectLayer->setTileGID(Tiles::getSeasonTileGIDof(Tiles::grass,
+					Time::getInstance()->getSeason()), tilePos);
+			}
 		}
-	}
 
-	id = Sprites::getSeasonSpriteIDof(id, Time::getInstance()->getSeason());
-	auto sprite = Sprites::getSpriteOf(id);
-	if (Settings::getInstance()->getAsBool(Settings::HD_Textures)) {
-		sprite->setScale(TREE_SCALE_HD);
-	} else {
-		sprite->setScale(TREE_SCALE_SD);
-	}
-	sprite->setAnchorPoint(Vec2(0.5f, 0));
-	sprite->setPosition(position);
-	sprite->setTag(id);
+		id = Sprites::getSeasonSpriteIDof(id, Time::getInstance()->getSeason());
+		auto sprite = Sprites::getSpriteOf(id);
+		if (Settings::getInstance()->getAsBool(Settings::HD_Textures)) {
+			sprite->setScale(TREE_SCALE_HD);
+		}
+		else {
+			sprite->setScale(TREE_SCALE_SD);
+		}
+		sprite->setAnchorPoint(Vec2(0.5f, 0));
+		sprite->setPosition(position);
+		sprite->setTag(id);
 
-	_spriteList.emplace_back(sprite);
-	this->addChild(sprite, pos.x + pos.y);
+		_spriteList.emplace_back(sprite);
+		this->addChild(sprite, pos.x + pos.y);
+	}
+	
 }
 
 void TileMapLayer::showObstructions(bool visible) {

@@ -35,7 +35,7 @@ bool HoneyMover::onTouchBegan(Touch *touch, Event *event) {
 
 	auto tempPos = touch->getLocation() + this->getParent()->getPosition();
 
-	if(_tileMapLayer->isTouchOnTileMap(tempPos)) {
+	if(_tileMapLayer->isVectorOnTileMap(tempPos)) {
 		auto pos = _tileMapLayer->getTilePosition(tempPos);
 		if (beeAtlas->hasBeeHiveAt(pos)) {
 			_beeHive = beeAtlas->getBeeHiveAt(pos);
