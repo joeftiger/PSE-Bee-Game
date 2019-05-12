@@ -4,6 +4,7 @@
 #include <iterator>
 #include <iostream>
 #include <TileMapObjects/PlaceableTile.h>
+#include <Settings.h>
 #include "HeaderFiles/DEFINITIONS.h"
 #include "Resources/Tiles.h"
 
@@ -22,7 +23,11 @@ void TouchUtil::setDrag(const Vec2 &touchPos) {
             _draggedPlaceable = pair.second;
             _draggedSprite = _draggedPlaceable->getSprite();    // this creates a new sprite -> safe modifications
             _draggedSprite->setPosition(touchPos);
-            _draggedSprite->setScale(MAP_SCALE_SD * 1.5f);
+            if (Settings::getInstance()->getAsBool(Settings::HD_Textures)) {
+				_draggedSprite->setScale(TREE_SCALE_HD * 1.1);
+            } else {
+            	_draggedSprite->setScale(TREE_SCALE_SD * 1.1);
+            }
             _draggedSprite->setAnchorPoint(Vec2(0.5, 0));
         }
     }
