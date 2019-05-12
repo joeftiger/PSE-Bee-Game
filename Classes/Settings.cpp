@@ -32,3 +32,11 @@ void Settings::set(Settings::SettingName setting, bool value) {
 void Settings::set(Settings::SettingName setting, int value) {
 	_settings[setting] = std::to_string(value);
 }
+
+void Settings::setMapScale(float scale) {
+    _mapScale = scale;
+}
+
+float Settings::getMapScale() {
+    return _mapScale;
+}

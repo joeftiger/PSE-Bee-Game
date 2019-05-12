@@ -3,6 +3,7 @@
 #include <string>
 #include <stdexcept>
 #include <Algorithm/GameAlgorithm.h>
+#include <Settings.h>
 #include "BeeHive.h"
 #include "GameScene.h"
 #include "../HeaderFiles/HealthStates.h"
@@ -157,8 +158,8 @@ void BeeHive::setParticles() {
     if(!_particlesNode) {
         _particlesNode = BeeParticles::create();
         _tileMapLayer->addChild(_particlesNode);
-        _particlesNode->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * MAP_SCALE_SD
-                                    + _tileMapLayer->getMap()->getTileSize() * MAP_SCALE_SD/2));
+        _particlesNode->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * Settings::getInstance()->getMapScale()
+                                    + _tileMapLayer->getMap()->getTileSize() * Settings::getInstance()->getMapScale()/2));
     }
     //node movement
     //_particlesNode->setPosition(Vec2(_particlesNode->getPosition().x + random(-1.0, 1.0),
