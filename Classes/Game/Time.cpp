@@ -19,6 +19,13 @@ bool Time::invariant() {
 	return true;
 }
 
+void Time::clear() {
+	times.timePassed = 0;
+	times.seconds = 0;
+	times.months = 2;
+	times.years = 0;
+}
+
 int Time::getMonth() {
 	return times.months + 1;
 }
