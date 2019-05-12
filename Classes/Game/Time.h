@@ -12,7 +12,7 @@
 using namespace cocos2d;
 
 /**
- *	for dealing with, getting a month, setting the starting month and interacting with seasons
+ *	for dealing with, getting a month, setting the starting month and interacting with seasons aswell as change seasons
  */
 class Time: public Restorable  {
 private:

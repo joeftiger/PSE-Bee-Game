@@ -7,7 +7,7 @@
 using namespace cocos2d;
 
 /**
- * Creating a certain amount of "bee" particles, with a slightly randomized path
+ * Creating a certain amount of "bee" particles for a BeeHive, with a slightly randomized path. Amount of particles is dependend on amount of bees in the BeeHive
  */
 class BeeParticles : public Node {
 private:

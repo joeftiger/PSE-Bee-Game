@@ -16,6 +16,9 @@ USING_NS_CC;
 // pre-declare to <fix> "Placeable has no type."
 class Placeable;
 
+/**
+*	Implements the TileMap, has several helper-methods for placing new tiles/sprites, responsible for saving and loading the TileMap
+*/
 class TileMapLayer : public cocos2d::Layer, public Observable, public Restorable {
 private:
 	TMXTiledMap *_tileMap;
