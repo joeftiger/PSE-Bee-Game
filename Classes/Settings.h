@@ -15,6 +15,8 @@ public:
 		Tutorial = 1
 	};
 
+	float _mapScale;
+
 	std::string name[2]{
 		"HD_Textures",
 		"Tutorial"
@@ -75,6 +77,9 @@ public:
 	 * @param value int value
 	 */
 	void set(SettingName setting, int value);
+
+	void setMapScale(float scale);
+	float getMapScale();
 };
 
 

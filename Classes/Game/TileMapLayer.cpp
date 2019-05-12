@@ -12,16 +12,18 @@
 bool TileMapLayer::init() {
 	if (!Layer::init()) return false;
 
-	if (Settings::getInstance()->getAsBool(Settings::HD_Textures)) {
+	auto settings = Settings::getInstance();
+	if (settings->getAsBool(Settings::HD_Textures)) {
 		cocos2d::log("TileMaplayer:\tloading HD");
 		_tileMap = TMXTiledMap::create("Tilemap/HD/tilemap.tmx");
-		_tileMap->setScale(MAP_SCALE_HD);
+		settings->setMapScale(MAP_SCALE_HD);
 	} else {
 		cocos2d::log("TileMaplayer:\tloading SD");
 		_tileMap = TMXTiledMap::create("Tilemap/SD/tilemap.tmx");
-		_tileMap->setScale(MAP_SCALE_SD);
+		settings->setMapScale(MAP_SCALE_SD);
 	}
 
+	_tileMap->setScale(settings->getMapScale());
 	_objectLayer = _tileMap->getLayer("objects");
 	_obstructionLayer = _tileMap->getLayer("obstructions");
 

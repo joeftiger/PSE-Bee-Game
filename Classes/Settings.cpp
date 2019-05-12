@@ -35,3 +35,11 @@ void Settings::set(Settings::SettingName setting, int value) {
 	cocos2d::log("Setting %d to %i", setting, value);
 	_settings[setting] = std::to_string(value);
 }
+
+void Settings::setMapScale(float scale) {
+    _mapScale = scale;
+}
+
+float Settings::getMapScale() {
+    return _mapScale;
+}
