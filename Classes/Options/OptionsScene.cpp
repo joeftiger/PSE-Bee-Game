@@ -21,7 +21,9 @@ void OptionsScene::initTextureButton() {
 	checkbox->addTouchEventListener([&](Ref* sender, Widget::TouchEventType type) {
 		if (type == Widget::TouchEventType::ENDED) {
 			cocos2d::log("Options:\tSwitching textures");
-			Settings::getInstance()->set(Settings::SettingName::HD_Textures, checkbox->isSelected());
+			auto settings = Settings::getInstance();
+			auto option = Settings::SettingName::HD_Textures;
+			settings->set(option, !settings->getAsBool(option));
 		}
 	});
 
