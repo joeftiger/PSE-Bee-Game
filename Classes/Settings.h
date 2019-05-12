@@ -17,10 +17,6 @@ public:
 
 	float _mapScale;
 
-	std::string name[2]{
-		"HD_Textures",
-		"Tutorial"
-	};
 private:
 	std::map<SettingName, std::string> _settings;
 
