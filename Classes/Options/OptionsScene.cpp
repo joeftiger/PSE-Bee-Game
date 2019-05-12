@@ -35,7 +35,7 @@ bool OptionsScene::init() {
     auto resetButton = ui::Button::create("menu/reset.png");
     resetButton->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
         if (type == ui::Widget::TouchEventType::ENDED) {
-            onDeleteSaveClick();
+            this->onDeleteSaveClick();
         }
     });
     resetButton->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
@@ -45,10 +45,11 @@ bool OptionsScene::init() {
 
 
     auto textureCheckbox = CheckBox::create("Sprites/SD.png", "Sprites/HD.png", "Sprites/HD.png", "Sprites/SD.png",
-                                     "Sprites/SD.png");
+                                            "Sprites/SD.png");
     textureCheckbox->addTouchEventListener([&](Ref *sender, Widget::TouchEventType type) {
         if (type == Widget::TouchEventType::ENDED) {
-            Settings::getInstance()->set(Settings::HD_Textures, !Settings::getInstance()->getAsBool(Settings::HD_Textures));
+            Settings::getInstance()->set(Settings::HD_Textures,
+                                         !Settings::getInstance()->getAsBool(Settings::HD_Textures));
         }
     });
     textureCheckbox->setSelected(Settings::getInstance()->getAsBool(Settings::SettingName::HD_Textures));
@@ -65,7 +66,8 @@ bool OptionsScene::init() {
     auto exitButton = ui::Button::create("menu/exit.png");
     exitButton->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
         if (type == ui::Widget::TouchEventType::ENDED) {
-            Director::getInstance()->replaceScene(MainMenu::scene());
+            Director::getInstance()->replaceScene(
+                    TransitionFade::create(0.2f, MainMenu::scene(), Color3B(177, 124, 0)));
         }
     });
     exitButton->setAnchorPoint(Vec2(0.5f, 1.27f));
@@ -82,5 +84,6 @@ bool OptionsScene::init() {
 
 // upon pressing the rest button, delete the save and go back to main menu
 void OptionsScene::onDeleteSaveClick() {
-    Director::getInstance()->replaceScene(SaveDeleteConfirmation::create());
+    Director::getInstance()->replaceScene(
+            TransitionFade::create(0.2f, SaveDeleteConfirmation::createScene(), Color3B(177, 124, 0)));
 }
