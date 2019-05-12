@@ -32,7 +32,7 @@ bool OptionsScene::init() {
 
     // Adding the sprites for the main menu with location and size adjustment
     // all scaling and position through trial-and-error
-    auto resetButton = ui::Button::create("menu/options.png");
+    auto resetButton = ui::Button::create("menu/reset.png");
     resetButton->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
         if (type == ui::Widget::TouchEventType::ENDED) {
             onDeleteSaveClick();
@@ -89,6 +89,5 @@ bool OptionsScene::init() {
 
 // upon pressing the rest button, delete the save and go back to main menu
 void OptionsScene::onDeleteSaveClick() {
-    Director::getInstance()->replaceScene(
-            TransitionFade::create(0.2f, SaveDeleteConfirmation::create(), Color3B(255, 255, 255)));
+    Director::getInstance()->replaceScene(SaveDeleteConfirmation::create());
 }
