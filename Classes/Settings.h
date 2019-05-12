@@ -11,8 +11,13 @@
 class Settings {
 public:
 	enum SettingName {
-		HD_Textures,
-		Tutorial
+		HD_Textures = 0,
+		Tutorial = 1
+	};
+
+	std::string name[2]{
+		"HD_Textures",
+		"Tutorial"
 	};
 
 private:
