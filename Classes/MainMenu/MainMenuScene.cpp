@@ -22,13 +22,12 @@ bool MainMenu::init() {
 	this->addChild(background, -1000);
 
 	Vec2 buttonsBed = Vec2(background->getBoundingBox().size.width/2 + 153.0f,
-                                background->getBoundingBox().size.height/2 - 3.0f);
+                           background->getBoundingBox().size.height/2 - 3.0f);
 
 
 	// Adding the sprites for the main menu with location and size adjustment
 	// all scaling and position through trial-and-error
     auto playButton = ui::Button::create("menu/start.png");
-
     playButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
         if (type == ui::Widget::TouchEventType::ENDED) {
             this->onPlayClick();
