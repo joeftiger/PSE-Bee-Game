@@ -220,6 +220,9 @@ void TileMapLayer::placeTile(const Vec2 &position, Tiles::TileGID &gid) {
 }
 
 bool TileMapLayer::canPlaceSprite(const Vec2 &position, const Size &size) {
+    if (!isVectorOnTileMap(position)) {
+        return false;
+    }
 	auto pos = getTilePosition(position);
 
 	for (auto x = 0; x < size.width; x++) {
@@ -238,7 +241,6 @@ bool TileMapLayer::canPlaceSprite(const Vec2 &position, const Size &size) {
 }
 
 void TileMapLayer::placeSprite(const Vec2 &position, const Size &size, Sprites::SpriteID id) {
-	if (isVectorOnTileMap(position)) {
 		auto pos = getTilePosition(position);
 
 		for (auto x = 0; x < size.width; x++) {
@@ -264,8 +266,6 @@ void TileMapLayer::placeSprite(const Vec2 &position, const Size &size, Sprites::
 
 		_spriteList.emplace_back(sprite);
 		this->addChild(sprite, pos.x + pos.y);
-	}
-	
 }
 
 void TileMapLayer::showObstructions(bool visible) {
@@ -338,7 +338,10 @@ void TileMapLayer::fromJSON(rapidjson::Document &doc) {
 
 			auto id = static_cast<Sprites::SpriteID>(sprite["id"].GetInt());
 			auto pos = Vec2(sprite["posX"].GetDouble(), sprite["posY"].GetDouble());
-			this->place(new PlaceableSprite(id) , pos);
+			auto placeable = new PlaceableSprite(id);
+			if (canPlace(placeable, pos)) {
+			    place(placeable, pos);
+			}
 		}
 	}
 }
