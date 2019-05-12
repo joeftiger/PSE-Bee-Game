@@ -182,10 +182,8 @@ bool TileMapLayer::isVectorOnTileMap(Vec2 pos) {
 	pos.x = (int)pos.x;
 	pos.y = (int)pos.y;
 
-	if (pos.x > _tileMap->getMapSize().width - 1 || pos.x < 0 || pos.y > _tileMap->getMapSize().height - 1 || pos.y < 0) {
-		return false;
-	}
-	return true;
+    return !(pos.x > _tileMap->getMapSize().width - 1 || pos.x < 0 || pos.y > _tileMap->getMapSize().height - 1 ||
+             pos.y < 0);
 }
 
 bool TileMapLayer::canPlace(Placeable *placeable, Vec2 &position) {
