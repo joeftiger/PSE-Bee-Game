@@ -40,18 +40,6 @@ void HealthIndicators::setHealth(HealthState _currentHealth) {
 
 }
 
-void HealthIndicators::nextParticlesPos(float dt) {
-    for(auto indicators : _indicators) {
-        if(indicators->getPosition().length() >= 70) {
-            indicators->setPosition(0,0);
-        } else {
-            indicators->setPosition(Vec2(indicators->getPosition().x + random(-2.0, 2.0), indicators->getPosition().y + random(-2.0, 2.0)));
-        }
-    }
-}
-
-
-
 void HealthIndicators::update(int delta) {
     if(delta > 0) {
         for(int i = 0; i < delta; i++) {

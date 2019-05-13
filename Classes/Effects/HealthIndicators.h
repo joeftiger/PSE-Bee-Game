@@ -22,14 +22,6 @@ public:
 
 	void setHealth(HealthState _currentHealth);
 
-
-	/**
-     * Updates particle positions scheduled for every frame.
-     * TODO Replace or adjust this method
-     * @param dt
-     */
-    void nextParticlesPos(float dt);
-
 	/**
      * updates particles.
      * TODO this whole method
