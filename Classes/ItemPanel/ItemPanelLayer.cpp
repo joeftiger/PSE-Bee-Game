@@ -90,11 +90,18 @@ void ItemPanelLayer::initializeItemPanel() {
 		auto y = (4 - (height % 4)) * box.height / 6;
 		auto pos = Vec2(x, y);
 
-		auto sprite = p->getSprite();
+		auto sprite = p->getSprite(); 
 		sprite->setPosition(pos);
-		sprite->setAnchorPoint(Vec2(0, 0));
+		sprite->setAnchorPoint(Vec2(0.0f, 0.0f));
 		sprite->setScale(box.width / (sprite->getBoundingBox().size.width * 3));
-		this->addChild(sprite);
+		this->addChild(sprite, x + y);
+
+		auto price = Label::createWithTTF(labelConfig, "$$$"); //TODO: Change Text to p->getPrice() once implemented
+		price->enableOutline(Color4B::BLACK, 1);
+		price->setScale(1 / sprite->getScale());
+		price->setAnchorPoint(Vec2(0.5f, 0.0f));
+		price->setPosition(sprite->getBoundingBox().size.width / 2, -sprite->getBoundingBox().size.height / 10); //TODO:fix Position
+		sprite->addChild(price, sprite->getLocalZOrder() + 1);
 
 		_spritesToPlaceables.emplace(sprite, p);
 
@@ -118,6 +125,7 @@ void ItemPanelLayer::showHideItemPanel() {
 			MoveBy *show = MoveBy::create(0.2, Vec2(-this->getBoundingBox().size.width, 0));
 			this->runAction(show);
 			_isItemShow = true;
+
 			_tileMapLayer->showObstructions(true);
 		}
 
