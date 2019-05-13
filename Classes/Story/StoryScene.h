@@ -14,16 +14,43 @@ using namespace cocos2d;
 class StoryScene : public cocos2d::Node {
 private:
     Time* time;
-    bool state;
-public:
+    bool firstTime0 = true;
+    bool firstTime1 = true;
+    bool firstTime2 = true;
+    bool firstTime3 = true;
+    bool firstTime4 = true;
 
+public:
+    static StoryScene *getInstance() {
+        static auto instance = new StoryScene();
+        return instance;
+    }
 	virtual bool init();
-	//void introPopup();
-	//void update(float dt) override;
+
+    /**
+     * creates a popup with a gived ID:
+     * 0 = Intro
+     * 1 = Beehive
+     * 2 = Varroa
+     * 3 = Shop
+     * 4 =
+     * @return the popup
+     */
 	UICustom::Popup* createPopup(int);
 
 	CREATE_FUNC(StoryScene);
 
+    /**
+     * Saving and loading states in "story.json" if the popup has shown already
+     * @param doc
+     */
+    void toJSON(rapidjson::Document &doc) ;
+    void fromJSON(rapidjson::Document &doc) ;
+
+    /**
+     *  Call this to disable Story Popups
+     */
+     void skipTutorial();
 };
 
 
