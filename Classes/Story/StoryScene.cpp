@@ -28,12 +28,13 @@ UICustom::Popup* StoryScene::createPopup(int id) {
     switch (id) {
         case 0: //Intro
             if (firstTime0) {
-                return UICustom::Popup::createAsMessage("GROSSVATER",
-                                                        "Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich.\n"
-                                                        "Kannst du auf meine Bienen aufpassen? Nur bis ich wieder da bin...");
-
+                auto popup = UICustom::Popup::createAsMessage("GROSSVATER",
+                                                 "Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich.\n"
+                                                 "Kannst du auf meine Bienen aufpassen? Nur bis ich wieder da bin...");
+                firstTime0 = false;
+                SaveLoad::saveStory();
+                return popup;
             }
-            firstTime0 = false; //todo: save state to "story.json"
 
         case 1: //Beehive Info
             if (firstTime1) {
