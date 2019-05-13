@@ -81,7 +81,7 @@ bool HUDLayer::init() {
     //this->addChild(popup);
     //auto storyScene = StoryScene::create();
     //this->addChild(storyScene, 50);
-    auto storyScene = StoryScene::create();
+    auto storyScene = StoryScene::getInstance();
     UICustom::Popup* popup = storyScene->createPopup(0);
     this->addChild(popup);
 
