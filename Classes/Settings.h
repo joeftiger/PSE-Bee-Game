@@ -10,15 +10,16 @@
  */
 class Settings {
 public:
-	enum SettingName {
+	enum Option {
 		HD_Textures = 0,
-		Tutorial = 1
+		Show_Tutorial = 1,
+		Map_Scale = 2
 	};
 
 	float _mapScale;
 
 private:
-	std::map<SettingName, std::string> _settings;
+	std::map<Option, std::string> _settings;
 
 	Settings();
 
@@ -29,52 +30,64 @@ public:
 	}
 
 	/**
-	 * Returns the value for the given setting.
+	 * Returns the value for the given option.
 	 * If no such value present, returns a <code>nullptr</code>
-	 * @param setting name of setting
+	 * @param option name of option
 	 * @return raw value
 	 */
-	std::string get(SettingName setting);
+	std::string get(Option option);
 
 	/**
-	 * Returns the bool value for the given setting.
-	 * If no such value present, returns a <code>nullptr</code>
-	 * @param setting name of setting
+	 * Returns the bool value for the given option.
+	 * If no such value present, returns a <code>false</code>
+	 * @param option name of option
 	 * @return bool value
 	 */
-	bool getAsBool(SettingName setting);
+	bool getAsBool(Option option);
 
 	/**
-	 * Returns the int value for the given setting.
-	 * If no such value present, returns a <code>nullptr</code>
-	 * @param setting name of setting
+	 * Returns the int value for the given option.
+	 * If no such value present, returns a <code>0</code>
+	 * @param option name of option
 	 * @return int value
 	 */
-	int getAsInt(SettingName setting);
+	int getAsInt(Option option);
 
 	/**
-	 * Sets the value for the given setting.
-	 * @param setting name of setting
+	 * Returns the float value for the given option.
+	 * If no such value present, returns a <code>0</code>
+	 * @param option name of option
+	 * @return float value
+	 */
+	float getAsFloat(Option option);
+
+	/**
+	 * Sets the value for the given option.
+	 * @param option name of option
 	 * @param value raw value
 	 */
-	void set(SettingName setting, const std::string &value);
+	void set(Option option, const std::string &value);
 
 	/**
-	 * Sets the bool value for the given setting.
-	 * @param setting name of setting
+	 * Sets the bool value for the given option.
+	 * @param option name of option
 	 * @param value bool value
 	 */
-	void set(SettingName setting, bool value);
+	void set(Option option, bool value);
 
 	/**
-	 * Sets the int value for the given setting.
-	 * @param setting name of setting
+	 * Sets the int value for the given option.
+	 * @param option name of option
 	 * @param value int value
 	 */
-	void set(SettingName setting, int value);
+	void set(Option option, int value);
 
-	void setMapScale(float scale);
-	float getMapScale();
+	/**
+	 * Sets the float value for the given option.
+	 * @param option name of option
+	 * @param value float value
+	 */
+	void set(Option option, float value);
 };
 
 

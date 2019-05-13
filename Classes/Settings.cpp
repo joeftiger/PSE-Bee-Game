@@ -1,42 +1,44 @@
 
 #include <cocos/base/CCConsole.h>
+#include <HeaderFiles/DEFINITIONS.h>
 #include "Settings.h"
 
 Settings::Settings() {
 	cocos2d::log("Settings:\tCreating instance");
-	set(SettingName::HD_Textures, true);
-	set(SettingName::Tutorial, true);
+	set(Option::HD_Textures, true);
+	set(Option::Show_Tutorial, true);
+	set(Option::Map_Scale, MAP_SCALE_HD);
 }
 
-std::string Settings::get(Settings::SettingName setting) {
-	return _settings.at(setting);
+std::string Settings::get(Settings::Option option) {
+	return _settings.at(option);
 }
 
-bool Settings::getAsBool(Settings::SettingName setting) {
-	return _settings.at(setting) == "1";
+bool Settings::getAsBool(Settings::Option option) {
+	return get(option) == "1";
 }
 
-int Settings::getAsInt(Settings::SettingName setting) {
-	return std::atoi(_settings.at(setting).c_str());
+int Settings::getAsInt(Settings::Option option) {
+	return std::atoi(get(option).c_str());
 }
 
-void Settings::set(Settings::SettingName setting, const std::string &value) {
-	_settings[setting] = value;
+float Settings::getAsFloat(Settings::Option option) {
+	return static_cast<float>(std::atof(get(option).c_str()));
 }
 
-void Settings::set(Settings::SettingName setting, bool value) {
-	auto val = value ? "1" : "0";
-	_settings[setting] = val;
+void Settings::set(Settings::Option option, const std::string &value) {
+	_settings[option] = value;
 }
 
-void Settings::set(Settings::SettingName setting, int value) {
-	_settings[setting] = std::to_string(value);
+void Settings::set(Settings::Option option, bool value) {
+	std::string val = value ? "1" : "";
+	set(option, val);
 }
 
-void Settings::setMapScale(float scale) {
-    _mapScale = scale;
+void Settings::set(Settings::Option option, int value) {
+	set(option, std::to_string(value));
 }
 
-float Settings::getMapScale() {
-    return _mapScale;
+void Settings::set(Settings::Option option, float value) {
+	set(option, std::to_string(value));
 }

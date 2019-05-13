@@ -163,8 +163,8 @@ void BeeHive::setParticles() {
     if(!_particlesNode) {
         _particlesNode = BeeParticles::create();
         _tileMapLayer->addChild(_particlesNode);
-        _particlesNode->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * Settings::getInstance()->getMapScale()
-                                    + _tileMapLayer->getMap()->getTileSize() * Settings::getInstance()->getMapScale()/2));
+        _particlesNode->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * Settings::getInstance()->getAsFloat(Settings::Map_Scale)
+                                    + _tileMapLayer->getMap()->getTileSize() * Settings::getInstance()->getAsFloat(Settings::Map_Scale)/2));
     }
     //node movement
     //_particlesNode->setPosition(Vec2(_particlesNode->getPosition().x + random(-1.0, 1.0),
@@ -178,8 +178,8 @@ void BeeHive::setHealthIndicators() {
 			_currentHealth = currentHealth();
             _healthIndicatorNode = HealthIndicators::create();
             _tileMapLayer->addChild(_healthIndicatorNode);
-            _healthIndicatorNode->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * Settings::getInstance()->getMapScale()
-                                                 + _tileMapLayer->getMap()->getTileSize() * Settings::getInstance()->getMapScale()/2));
+            _healthIndicatorNode->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * Settings::getInstance()->getAsFloat(Settings::Map_Scale)
+                                                 + _tileMapLayer->getMap()->getTileSize() * Settings::getInstance()->getAsFloat(Settings::Map_Scale)/2));
 	}
 
         //node movement
