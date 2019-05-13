@@ -44,7 +44,7 @@ bool HoneyMover::onTouchBegan(Touch *touch, Event *event) {
 			if (!_honeySprite) {
 				_honeySprite = SpriteContainer::getInstance()->getSpriteOf(Sprites::SpriteID::honey_glass_2d);
 				_honeySprite->setAnchorPoint(Vec2(0.5, 0));
-				_honeySprite->setScale(0.2);
+				_honeySprite->setScale(0.6f);
 				_honeySprite->setVisible(false);
 				this->addChild(_honeySprite);
 			}
