@@ -86,6 +86,7 @@ list(APPEND GAME_SOURCE
         Classes/Atlas/BeeHiveAtlas.cpp
         Classes/Atlas/HoneyExtractorAtlas.cpp
 		Classes/Effects/BeeParticles.cpp
+		Classes/Effects/HealthIndicators.cpp
         Classes/Game/BeeHive.cpp
         Classes/Game/GameScene.cpp
         Classes/Game/HUDLayer.cpp
@@ -121,6 +122,7 @@ list(APPEND GAME_HEADER
         Classes/Atlas/BeeHiveAtlas.h
         Classes/Atlas/HoneyExtractorAtlas.h
 		Classes/Effects/BeeParticles.h
+		Classes/Effects/HealthIndicators.cpp
         Classes/Game/BeeHive.h
         Classes/Game/GameScene.h
         Classes/Game/HUDLayer.h
@@ -136,7 +138,6 @@ list(APPEND GAME_HEADER
         Classes/Interaction/BeeHivePopup.h
         Classes/Interaction/HoneyExtractorPopup.h
 		Classes/Interaction/HoneyMover.h
-
         Classes/ItemPanel/ItemPanelLayer.h
         Classes/ItemPanel/TouchUtil.h
         Classes/MainMenu/MainMenuScene.h
