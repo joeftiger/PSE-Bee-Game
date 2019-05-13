@@ -20,14 +20,16 @@ bool HealthIndicators::init() {
 }
 
 void HealthIndicators::setHealth(HealthState _currentHealth) {
+
+
 	if (_currentHealth == Healthy) {
-
+		auto stateImage = Sprite::create("indicators/greenSquare.png");
     } else if (_currentHealth == Average) {
-
+		auto stateImage = Sprite::create("indicators/yellowSquare.png");
 	} else if (_currentHealth == Unhealthy) {
-
-    } else {
-        //dead
+		auto stateImage = Sprite::create("indicators/redSquare.png");
+    } else { //dead
+        auto stateImage = Sprite::create("indicators/blackSquare.png");
     }
 
 }
