@@ -13,6 +13,13 @@ bool StoryScene::init() {
 	if (SaveLoad::storySaveExists()) {
 		SaveLoad::loadStory();
 	}
+	else {
+		firstTime0 = true;
+		firstTime1 = true;
+		firstTime2 = true;
+		firstTime3 = true;
+		firstTime4 = true;
+	}
 
 	return true;
 }
@@ -54,7 +61,6 @@ UICustom::Popup* StoryScene::createPopup(int id) {
 }
 
 void StoryScene::toJSON(rapidjson::Document &doc) {
-
     rapidjson::Value obj(rapidjson::kObjectType);
     obj.AddMember("firstTime0", firstTime0, doc.GetAllocator());
     obj.AddMember("firstTime1", firstTime1, doc.GetAllocator());
@@ -62,12 +68,11 @@ void StoryScene::toJSON(rapidjson::Document &doc) {
     obj.AddMember("firstTime3", firstTime3, doc.GetAllocator());
     obj.AddMember("firstTime4", firstTime4, doc.GetAllocator());
     doc.PushBack(obj, doc.GetAllocator());
-
 }
 
 void StoryScene::fromJSON(rapidjson::Document &doc) {
     assert(doc.IsArray());
-    const rapidjson::Value &story = doc["story"];
+    const rapidjson::Value &story = doc[0];
 
     assert(story["firstTime0"].IsBool());
     firstTime0 = story["firstTime0"].GetBool();

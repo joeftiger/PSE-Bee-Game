@@ -271,6 +271,10 @@ void SaveLoad::deleteMoneySave() {
     assert(!moneySaveExists());
 }
 
+void SaveLoad::deleteStorySave() {
+	FileUtils::getInstance()->removeFile(getPath("story.json"));
+	assert(!storySaveExists());
+}
 
 void SaveLoad::deleteEverything() {
 	BeeHiveAtlas::getInstance()->clear();
@@ -282,6 +286,7 @@ void SaveLoad::deleteEverything() {
 	deleteTileMapSave();
 	deleteTimeSave();
 	deleteMoneySave();
+	deleteStorySave();
 }
 
 void SaveLoad::saveStory() {

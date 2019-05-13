@@ -147,6 +147,8 @@ public:
      static void loadStory();
 
 	 static bool storySaveExists();
+
+	 static void deleteStorySave();
 };
 
 #endif //SAVELOAD_H
