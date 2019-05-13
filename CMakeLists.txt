@@ -85,6 +85,7 @@ list(APPEND GAME_SOURCE
         Classes/AppDelegate.cpp
         Classes/Atlas/BeeHiveAtlas.cpp
         Classes/Atlas/HoneyExtractorAtlas.cpp
+		Classes/Effects/BeeParticles.cpp
         Classes/Game/BeeHive.cpp
         Classes/Game/GameScene.cpp
         Classes/Game/HUDLayer.cpp
@@ -95,6 +96,7 @@ list(APPEND GAME_SOURCE
         Classes/Game/Wallet.cpp
         Classes/Interaction/BeeHivePopup.cpp
         Classes/Interaction/HoneyExtractorPopup.cpp
+		Classes/Interaction/HoneyMover.cpp
         Classes/ItemPanel/ItemPanelLayer.cpp
         Classes/ItemPanel/TouchUtil.cpp
         Classes/MainMenu/MainMenuScene.cpp
@@ -118,6 +120,7 @@ list(APPEND GAME_HEADER
         Classes/AppDelegate.h
         Classes/Atlas/BeeHiveAtlas.h
         Classes/Atlas/HoneyExtractorAtlas.h
+		Classes/Effects/BeeParticles.h
         Classes/Game/BeeHive.h
         Classes/Game/GameScene.h
         Classes/Game/HUDLayer.h
@@ -132,6 +135,8 @@ list(APPEND GAME_HEADER
         Classes/HeaderFiles/TimeStruct.h
         Classes/Interaction/BeeHivePopup.h
         Classes/Interaction/HoneyExtractorPopup.h
+		Classes/Interaction/HoneyMover.h
+
         Classes/ItemPanel/ItemPanelLayer.h
         Classes/ItemPanel/TouchUtil.h
         Classes/MainMenu/MainMenuScene.h
@@ -207,7 +212,7 @@ endif ()
 set(all_code_files
         ${GAME_HEADER}
         ${GAME_SOURCE}
-        Classes/Interaction/HoneyMover.cpp Classes/Interaction/HoneyMover.h Classes/Effects/BeeParticles.cpp Classes/Effects/BeeParticles.h)
+           )
 if (NOT ANDROID)
     add_executable(${APP_NAME} ${all_code_files})
 else ()
