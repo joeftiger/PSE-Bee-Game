@@ -58,7 +58,6 @@ UICustom::Popup* StoryScene::createPopup(int id) {
 
 void StoryScene::toJSON(rapidjson::Document &doc) {
     rapidjson::Value obj(rapidjson::kObjectType);
-	cocos2d::log("%d", firstTime0);
     obj.AddMember("firstTime0", firstTime0, doc.GetAllocator());
     obj.AddMember("firstTime1", firstTime1, doc.GetAllocator());
     obj.AddMember("firstTime2", firstTime2, doc.GetAllocator());
@@ -70,7 +69,6 @@ void StoryScene::toJSON(rapidjson::Document &doc) {
 void StoryScene::fromJSON(rapidjson::Document &doc) {
     assert(doc.IsArray());
     const rapidjson::Value &story = doc[0];
-
     assert(story["firstTime0"].IsBool());
     firstTime0 = story["firstTime0"].GetBool();
     assert(story["firstTime1"].IsBool());
