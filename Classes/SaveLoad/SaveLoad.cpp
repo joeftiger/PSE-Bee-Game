@@ -21,27 +21,10 @@ using namespace rapidjson;
 void SaveLoad::saveMap() {
 	auto tileMapLayer = (TileMapLayer *) cocos2d::Director::getInstance()->getRunningScene()->getChildByName(
 			TILE_MAP_LAYER_NAME);
-	auto layer = tileMapLayer->getLayer();
 
 	rapidjson::Document d;
-	rapidjson::StringBuffer s;
-	Writer<rapidjson::StringBuffer> writer(s);
-	writer.StartObject();
-
-	for (int i = 0; i < layer->getLayerSize().width; i++) {
-		std::string s = std::to_string(i);
-		writer.Key(s.c_str());
-		writer.StartArray();
-		for (int j = 0; j < layer->getLayerSize().height; j++) {
-			writer.Uint(layer->getTileGIDAt(Vec2(i, j)));
-		}
-		writer.EndArray();
-	}
-	writer.EndObject();
-
-	log("%s %s", "tileMapJson", s.GetString());
-	d.Parse(s.GetString());
-
+	tileMapLayer->toJSON(d);
+	
 	jsonToFile(docToString(d), getPath("tilemap.json"));
 }
 
@@ -53,15 +36,14 @@ std::string SaveLoad::getPath(std::string fileName) {
 		fs->createDirectory(path + "saves/");
 	}
 	path = path + "saves/" + fileName;
-	cocos2d::log("%s %s", "writable path", path.c_str());
+	//cocos2d::log("%s %s", "writable path", path.c_str());
 	return path;
 }
 
 
 void SaveLoad::jsonToFile(std::string json, std::string fullPath) {
-	bool b = FileUtils::getInstance()->writeStringToFile(json, fullPath);
-	if (b) {
-		log("successfully wrote to file");
+	if (FileUtils::getInstance()->writeStringToFile(json, fullPath)) {
+		log("Writing to %s successful", fullPath.c_str());
 	}
 }
 
@@ -73,12 +55,9 @@ std::string SaveLoad::docToString(rapidjson::Document &jsonObj) {
 	return std::string(buffer.GetString());
 }
 
-
-std::vector<std::vector<int>> SaveLoad::loadMap() {
+void SaveLoad::loadMap(TileMapLayer *tileMap) {
 	std::string path = getPath("tilemap.json");
 	std::ifstream ifs(path);
-
-	std::vector<std::vector<int>> vec;
 
 	if (!ifs.is_open()) {
 		log("%s", "Couldn't load map");
@@ -97,23 +76,12 @@ std::vector<std::vector<int>> SaveLoad::loadMap() {
 
 	if (d.HasParseError()) {
 		log("%u", d.GetParseError());
-		return vec;
 	}
-
 	ifs.close();
-	for (rapidjson::Value::ConstMemberIterator itr = d.MemberBegin(); itr != d.MemberEnd(); ++itr) {
-		assert(itr->value.IsArray());
-		std::vector<int> temp;
-		for (auto &m : itr->value.GetArray()) {
-			assert(m.IsInt());
-			temp.push_back(m.GetInt());
-		}
-		vec.push_back(temp);
-	}
 
-	return vec;
+	tileMap->fromJSON(d);
+
 }
-
 
 void SaveLoad::saveBeehives() {
 	rapidjson::Document doc;
@@ -308,6 +276,7 @@ void SaveLoad::deleteEverything() {
 	BeeHiveAtlas::getInstance()->clear();
 	HoneyExtractorAtlas::getInstance()->clear();
 	Wallet::getInstance()->clear();
+	Time::getInstance()->clear();
 	deleteBeeHivesSave();
 	deleteHoneyExtractorsSave();
 	deleteTileMapSave();

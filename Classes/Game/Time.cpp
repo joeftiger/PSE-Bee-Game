@@ -3,15 +3,9 @@
 #include "Time.h"
 #include "SaveLoad/SaveLoad.h"
 
-bool Time::init() {
-	if (!Node::init()) return false;
-
+Time::Time() {
 	setStartingMonth();
 	_currentSeason = getSeason();
-
-	this->schedule(schedule_selector(Time::update), UPDATE_TIME);
-
-	return true;
 }
 
 void Time::setTileMapLayer(TileMapLayer *tileMapLayer) {
@@ -23,6 +17,13 @@ bool Time::invariant() {
 	assert(times.months >= 0 && times.months < 12);
 	assert(times.years >= 0);
 	return true;
+}
+
+void Time::clear() {
+	times.timePassed = 0;
+	times.seconds = 0;
+	times.months = 2;
+	times.years = 0;
 }
 
 int Time::getMonth() {
@@ -59,9 +60,7 @@ std::string Time::convertToMonth(int i)
 	}
 }
 
-/**
-	
-*/
+
 Season Time::getSeason() {
 	assert(times.months >= 0 && times.months <= 11);
 	switch (times.months) {

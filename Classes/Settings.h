@@ -11,9 +11,11 @@
 class Settings {
 public:
 	enum SettingName {
-		HD_Textures,
-		Tutorial
+		HD_Textures = 0,
+		Tutorial = 1
 	};
+
+	float _mapScale;
 
 private:
 	std::map<SettingName, std::string> _settings;
@@ -70,6 +72,9 @@ public:
 	 * @param value int value
 	 */
 	void set(SettingName setting, int value);
+
+	void setMapScale(float scale);
+	float getMapScale();
 };
 
 

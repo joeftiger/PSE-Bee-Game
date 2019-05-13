@@ -5,6 +5,7 @@
 
 #include "json/rapidjson.h"
 #include "json/document.h"
+#include "Game/TileMapLayer.h"
 
 using namespace cocos2d;
 
@@ -31,6 +32,8 @@ private:
 	 */
 	static std::string docToString(rapidjson::Document &jsonObj);
 
+	
+
 public:
 
 	/**
@@ -38,12 +41,10 @@ public:
      */
 	static void saveMap();
 
-
-
     /**
      *	Loads tileMap data from file
      */
-	static std::vector<std::vector<int>> loadMap();
+	static void loadMap(TileMapLayer *tileMap);
 
 	/**
 	 *	Writes a json-string into file on disk

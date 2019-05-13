@@ -10,6 +10,7 @@
 #include "HeaderFiles/DEFINITIONS.h"
 #include "MainMenu/MainMenuScene.h"
 #include "Game/TileMapLayer.h"
+#include "Game/Wallet.h"
 
 using namespace cocos2d;
 
@@ -37,23 +38,18 @@ bool ItemPanelLayer::init() {
 	this->setOpacity(GLubyte(90));
 
 	//show Item Panel Layer
-    _showRec = ui::Button::create("shop/shop_1.png");
+    auto showButton = ui::Button::create("shop/shop_1.png");
 
-    _showRec->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-        switch (type) {
-            case ui::Widget::TouchEventType::BEGAN:
-                break;
-            case ui::Widget::TouchEventType::ENDED:
-                this->showHideItemPanel();
-                break;
-        }
+    showButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
+		if (type == ui::Widget::TouchEventType::ENDED)
+			this->showHideItemPanel();
     });
 
-    //_showRec = SpriteContainer::getInstance()->getSpriteOf(Sprites::SpriteID::shop_1);
-	_showRec->setAnchorPoint(Vec2(1, 0.5));
-	_showRec->setPosition(Vec2(0, this->getContentSize().height / 2));
-	_showRec->setScale(0.6f);
-	this->addChild(_showRec);
+    //showButton = SpriteContainer::getInstance()->getSpriteOf(Sprites::SpriteID::shop_1);
+	showButton->setAnchorPoint(Vec2(1, 0.5));
+	showButton->setPosition(Vec2(0, this->getContentSize().height / 2));
+	showButton->setScale(0.6f);
+	this->addChild(showButton);
 
     //shop background
     auto bg = Sprite::create("shop/shop-bg_neu.png");
@@ -71,9 +67,9 @@ void ItemPanelLayer::initializeItemPanel() {
 	auto box = this->getBoundingBox().size;
 
 	//create label configuration, can be reused in all labels
-    TTFConfig labelConfig;
+	TTFConfig labelConfig;
 	labelConfig.fontFilePath = FONT;
-    labelConfig.fontSize = TEXT_SIZE_HUD;
+	labelConfig.fontSize = TEXT_SIZE_HUD;
 
     _placeables.emplace_back(new PlaceableTile(Tiles::beehive_small));
 	_placeables.emplace_back(new PlaceableTile(Tiles::beehive_middle));
@@ -95,21 +91,32 @@ void ItemPanelLayer::initializeItemPanel() {
 		auto y = (4 - (height % 4)) * box.height / 6;
 		auto pos = Vec2(x, y);
 
-		auto sprite = p->getSprite();
+		auto sprite = p->getSprite(); 
 		sprite->setPosition(pos);
-		sprite->setAnchorPoint(Vec2(0, 0));
+		sprite->setAnchorPoint(Vec2(0.0f, 0.0f));
 		sprite->setScale(box.width / (sprite->getBoundingBox().size.width * 3));
-		this->addChild(sprite);
+		this->addChild(sprite, x + y);
+
+		auto price = Label::createWithTTF(labelConfig, std::to_string(100)); //TODO: Change Text to p->getPrice() once implemented
+		price->enableOutline(Color4B::BLACK, 1);
+		//price->setScale(1.0f);
+		price->setAnchorPoint(Vec2(0.5f, 1.0f));
+		price->setPositionX(pos.x + sprite->getBoundingBox().size.width * 0.5f); //TODO:fix Position
+		price->setPositionY(pos.y);
+		this->addChild(price, sprite->getLocalZOrder() + 1);
+
+		auto priceSprite = SpriteContainer::getInstance()->getSpriteOf(Sprites::coin_single);
+		priceSprite->setScale(0.3f);
+		priceSprite->setAnchorPoint(Vec2(0.5f, 1.0f));
+		priceSprite->setPositionX(pos.x + sprite->getBoundingBox().size.width * 0.75f); //TODO:fix Position
+		priceSprite->setPositionY(pos.y); 
+		this->addChild(priceSprite, sprite->getLocalZOrder() + 1);
 
 		_spritesToPlaceables.emplace(sprite, p);
 
 		width++;
 		if (width % 3 == 0) height++;
 	}
-}
-
-ui::Button *ItemPanelLayer::getShowRec() {
-	return _showRec;
 }
 
 void ItemPanelLayer::setTileMap(TileMapLayer* tileMap) {
@@ -127,6 +134,7 @@ void ItemPanelLayer::showHideItemPanel() {
 			MoveBy *show = MoveBy::create(0.2, Vec2(-this->getBoundingBox().size.width, 0));
 			this->runAction(show);
 			_isItemShow = true;
+
 			_tileMapLayer->showObstructions(true);
 		}
 
@@ -159,7 +167,18 @@ void ItemPanelLayer::onTouchEnded(Touch *touch, void *) {
     auto pos = touch->getLocation() + this->getParent()->getPosition();
     if (isDrag()) {
     	if (_tileMapLayer->canPlace(_draggedPlaceable, pos)) {
-    		_tileMapLayer->place(_draggedPlaceable, pos);
+			if (Wallet::getInstance()->returnTotalMoney() >= 100) { //TODO: actual price
+				_tileMapLayer->place(_draggedPlaceable, pos);
+				Wallet::getInstance()->subtractMoney(100);
+			}
+			else { 
+				auto noMoneyLabel = Label::createWithTTF("Du hast nicht genug Geld", FONT, 40);
+				noMoneyLabel->enableOutline(Color4B::BLACK, 1);
+				auto winSize = Director::getInstance()->getWinSize();
+				noMoneyLabel->setPosition(winSize.width / 2 , winSize.height * 0.75f);
+				this->getParent()->addChild(noMoneyLabel, 1000);
+				noMoneyLabel->runAction(Sequence::create(FadeTo::create(4.0f, 0), RemoveSelf::create(), NULL));
+			}
     	}
 
         this->removeChild(this->getDraggedSprite());

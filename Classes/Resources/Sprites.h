@@ -58,6 +58,13 @@ public:
     static bool isHoneyExtractor(SpriteID id);
 
     /**
+     * Returns whether the given sprite is is of type tree.
+     * @param id sprite id
+     * @return <code>true</code> if tree. <code>false</code> if not.
+     */
+    static bool isTree(SpriteID id);
+
+    /**
 	 * Returns the sprite corresponding to the given sprite id.
 	 * @param id id of sprite
 	 * @return sprite

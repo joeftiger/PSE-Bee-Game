@@ -22,20 +22,15 @@ bool MainMenu::init() {
 	this->addChild(background, -1000);
 
 	Vec2 buttonsBed = Vec2(background->getBoundingBox().size.width/2 + 153.0f,
-                                background->getBoundingBox().size.height/2 - 3.0f);
+                           background->getBoundingBox().size.height/2 - 3.0f);
 
 
 	// Adding the sprites for the main menu with location and size adjustment
 	// all scaling and position through trial-and-error
     auto playButton = ui::Button::create("menu/start.png");
-
     playButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-        switch (type) {
-            case ui::Widget::TouchEventType::BEGAN:
-                break;
-            case ui::Widget::TouchEventType::ENDED:
-                this->onPlayClick();
-                break;
+        if (type == ui::Widget::TouchEventType::ENDED) {
+            this->onPlayClick();
         }
     });
 	playButton->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
@@ -44,12 +39,8 @@ bool MainMenu::init() {
 
 	auto optionsButton = ui::Button::create("menu/options.png");
     optionsButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-        switch (type) {
-            case ui::Widget::TouchEventType::BEGAN:
-                break;
-            case ui::Widget::TouchEventType::ENDED:
-                this->onOptionsClick();
-                break;
+        if (type == ui::Widget::TouchEventType::ENDED) {
+            this->onOptionsClick();
         }
     });
 	optionsButton->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
@@ -58,12 +49,8 @@ bool MainMenu::init() {
 
     auto aboutButton = ui::Button::create("menu/credits.png");
     aboutButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-        switch (type) {
-            case ui::Widget::TouchEventType::BEGAN:
-                break;
-            case ui::Widget::TouchEventType::ENDED:
-                this->onAboutClick();
-                break;
+        if (type == ui::Widget::TouchEventType::ENDED) {
+            this->onAboutClick();
         }
     });
 	aboutButton->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
@@ -72,12 +59,8 @@ bool MainMenu::init() {
 
     auto exitButton = ui::Button::create("menu/exit.png");
     exitButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-        switch (type) {
-            case ui::Widget::TouchEventType::BEGAN:
-                break;
-            case ui::Widget::TouchEventType::ENDED:
-                this->onExitClick();
-                break;
+        if (type == ui::Widget::TouchEventType::ENDED) {
+            this->onExitClick();
         }
     });
 	exitButton->setAnchorPoint(Vec2(0.5f, 1.27f));
@@ -102,20 +85,20 @@ bool MainMenu::init() {
 // when clicking on play - replace scene with game scene
 // Delay: 0.6 seconds       Transition Colour: Orange
 void MainMenu::onPlayClick() {
-	Director::getInstance()->replaceScene(TransitionFade::create(0.3f, GameScene::create(), Color3B(255, 165, 0)));
+	Director::getInstance()->replaceScene(TransitionFade::create(0.3f, GameScene::create(), Color3B(177, 124, 0)));
 }
 // when clicking on options - replace scene with options scene
 // Delay: 0.4 seconds       Transition Colour: White
 void MainMenu::onOptionsClick() {
 	Director::getInstance()->replaceScene(
-			TransitionFade::create(0.2f, OptionsScene::createScene(), Color3B(255, 255, 255)));
+			TransitionFade::create(0.2f, OptionsScene::createScene(), Color3B(177, 124, 0)));
 }
 
 // when clicking on about - replace scene with about scene
 // Delay: 0.4 seconds       Colour: White
 void MainMenu::onAboutClick() {
 	Director::getInstance()->replaceScene(
-			TransitionFade::create(0.2f, AboutScene::createScene(), Color3B(255, 255, 255)));
+			TransitionFade::create(0.2f, AboutScene::createScene(), Color3B(177, 124, 0)));
 }
 
 // when clicking on exit - exit the current scene and the game

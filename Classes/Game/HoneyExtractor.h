@@ -25,8 +25,6 @@ private:
 
 public:
 
-	float amountAdded;
-
 	/**
 	 * Creates a new honey extractor with 0 raw honey as input.
 	 */

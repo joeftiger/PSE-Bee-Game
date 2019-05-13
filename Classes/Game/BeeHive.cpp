@@ -3,10 +3,11 @@
 #include <string>
 #include <stdexcept>
 #include <Algorithm/GameAlgorithm.h>
-#include <Interaction/InteractionNode.h>
+#include <Settings.h>
 #include "BeeHive.h"
 #include "GameScene.h"
 #include "../HeaderFiles/HealthStates.h"
+#include "Time.h"
 
 bool BeeHive::invariant() {
 	//assert(_beesAlive >= 0);
@@ -64,6 +65,18 @@ float BeeHive::takeRawHoney(float amount) {
 
 	assert(invariant());
 	return amount;
+}
+
+HealthState BeeHive::currentHealth() {
+	if (_beesAlive / _varroaAlive  >= 0.75) {
+		return HealthState::Healthy;
+	} else if (_beesAlive / _varroaAlive  >= 0.40) {
+		return HealthState::Average;
+    } else if (_beesAlive / _varroaAlive  >= 0.01) {
+	    return HealthState::Unhealthy;
+    } else {
+	    return HealthState::Dead;
+    }
 }
 
 void BeeHive::killVarroa() {
@@ -142,12 +155,11 @@ BeeParticles* BeeHive::getParticles() {
 
 void BeeHive::setParticles() {
     _tileMapLayer = (TileMapLayer*) Director::getInstance()->getRunningScene()->getChildByName(TILE_MAP_LAYER_NAME);
-    counter++;
     if(!_particlesNode) {
         _particlesNode = BeeParticles::create();
         _tileMapLayer->addChild(_particlesNode);
-        _particlesNode->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * MAP_SCALE_SD
-                                    + _tileMapLayer->getMap()->getTileSize() * MAP_SCALE_SD/2));
+        _particlesNode->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * Settings::getInstance()->getMapScale()
+                                    + _tileMapLayer->getMap()->getTileSize() * Settings::getInstance()->getMapScale()/2));
     }
     //node movement
     //_particlesNode->setPosition(Vec2(_particlesNode->getPosition().x + random(-1.0, 1.0),

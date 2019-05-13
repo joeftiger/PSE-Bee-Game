@@ -22,6 +22,10 @@ private:
 	TileMapLayer *_tileMapLayer;
 	HUDLayer *_HUDLayer;
 
+	/**
+	 * The container contains all the objects that move together with the camera.
+	 * Contains: camera, @HUDLayer, @ItemPanelLayer.
+	 */
 	Node *container;
 	HoneyExtractor * extractor;
 
@@ -30,6 +34,8 @@ private:
 public:
 
 	virtual bool init() override;
+
+	void timeUpdate(float dt);
 
 	/**
      *	Calls BeeHiveUpdate every dt seconds
@@ -43,6 +49,9 @@ public:
 
 	bool onTouchBegan(Touch *touch, Event *event);
 
+	/**
+	 * Moves the container, thus also the camera.
+	 */
 	void onTouchMoved(Touch *touch, Event *event);
 
 	void onTouchEnded(Touch *touch, Event *event);

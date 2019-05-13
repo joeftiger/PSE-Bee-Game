@@ -14,6 +14,7 @@
     <ProjectGuid>{76A39BB2-9B84-4C65-98A5-654D86B86F2A}</ProjectGuid>
     <RootNamespace>test_win32</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -100,7 +101,8 @@
       </Command>
     </PostBuildEvent>
     <PreLinkEvent>
-      <Command></Command>
+      <Command>
+      </Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup>
@@ -112,7 +114,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
       <Inputs>$(TargetFileName)</Inputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
-
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -143,19 +144,85 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
       </Command>
     </PostBuildEvent>
     <PreLinkEvent>
-      <Command></Command>
+      <Command>
+      </Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Classes\About\AboutScene.cpp" />
+    <ClCompile Include="..\Classes\Algorithm\GameAlgorithm.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
-    <ClCompile Include="..\Classes\GameScene.cpp" />
-	<ClCompile Include="..\Classes\MainMenuScene.cpp" />
+    <ClCompile Include="..\Classes\Atlas\HoneyExtractorAtlas.cpp" />
+    <ClCompile Include="..\Classes\Effects\BeeParticles.cpp" />
+    <ClCompile Include="..\Classes\Game\BeeHive.cpp" />
+    <ClCompile Include="..\Classes\Atlas\BeeHiveAtlas.cpp" />
+    <ClCompile Include="..\Classes\Game\GameScene.cpp" />
+    <ClCompile Include="..\Classes\Game\HoneyExtractor.cpp" />
+    <ClCompile Include="..\Classes\Game\HUDLayer.cpp" />
+    <ClCompile Include="..\Classes\Game\Player.cpp" />
+    <ClCompile Include="..\Classes\Game\TileMapLayer.cpp" />
+    <ClCompile Include="..\Classes\Game\Time.cpp" />
+    <ClCompile Include="..\Classes\Game\Wallet.cpp" />
+    <ClCompile Include="..\Classes\Interaction\BeeHivePopup.cpp" />
+    <ClCompile Include="..\Classes\Interaction\HoneyExtractorPopup.cpp" />
+    <ClCompile Include="..\Classes\Interaction\HoneyMover.cpp" />
+    <ClCompile Include="..\Classes\ItemPanel\ItemPanelLayer.cpp" />
+    <ClCompile Include="..\Classes\ItemPanel\TouchUtil.cpp" />
+    <ClCompile Include="..\Classes\MainMenu\MainMenuScene.cpp" />
+    <ClCompile Include="..\Classes\Options\OptionsScene.cpp" />
+    <ClCompile Include="..\Classes\Options\SaveDeleteConfirmation.cpp" />
+    <ClCompile Include="..\Classes\Resources\SpriteContainer.cpp" />
+    <ClCompile Include="..\Classes\Resources\Sprites.cpp" />
+    <ClCompile Include="..\Classes\Resources\Tiles.cpp" />
+    <ClCompile Include="..\Classes\SaveLoad\SaveLoad.cpp" />
+    <ClCompile Include="..\Classes\Settings.cpp" />
+    <ClCompile Include="..\Classes\Shop\ShopScene.cpp" />
+    <ClCompile Include="..\Classes\Story\Popup.cpp" />
+    <ClCompile Include="..\Classes\Story\StoryScene.cpp" />
+    <ClCompile Include="..\Classes\TileMapObjects\PlaceableSprite.cpp" />
+    <ClCompile Include="..\Classes\TileMapObjects\PlaceableTile.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Classes\About\AboutScene.h" />
+    <ClInclude Include="..\Classes\Algorithm\GameAlgorithm.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
-    <ClInclude Include="..\Classes\GameScene.h" />
-    <ClInclude Include="..\Classes\MainMenuScene.h" />
+    <ClInclude Include="..\Classes\Atlas\HoneyExtractorAtlas.h" />
+    <ClInclude Include="..\Classes\Effects\BeeParticles.h" />
+    <ClInclude Include="..\Classes\Game\BeeHive.h" />
+    <ClInclude Include="..\Classes\Atlas\BeeHiveAtlas.h" />
+    <ClInclude Include="..\Classes\Game\GameScene.h" />
+    <ClInclude Include="..\Classes\Game\HoneyExtractor.h" />
+    <ClInclude Include="..\Classes\Game\HUDLayer.h" />
+    <ClInclude Include="..\Classes\Game\Player.h" />
+    <ClInclude Include="..\Classes\Game\TileMapLayer.h" />
+    <ClInclude Include="..\Classes\Game\Time.h" />
+    <ClInclude Include="..\Classes\Game\Wallet.h" />
+    <ClInclude Include="..\Classes\HeaderFiles\DEFINITIONS.h" />
+    <ClInclude Include="..\Classes\HeaderFiles\Restorable.h" />
+    <ClInclude Include="..\Classes\HeaderFiles\Seasons.h" />
+    <ClInclude Include="..\Classes\HeaderFiles\TimeStruct.h" />
+    <ClInclude Include="..\Classes\Interaction\BeeHivePopup.h" />
+    <ClInclude Include="..\Classes\Interaction\HoneyExtractorPopup.h" />
+    <ClInclude Include="..\Classes\Interaction\HoneyMover.h" />
+    <ClInclude Include="..\Classes\ItemPanel\ItemPanelLayer.h" />
+    <ClInclude Include="..\Classes\ItemPanel\TouchUtil.h" />
+    <ClInclude Include="..\Classes\MainMenu\MainMenuScene.h" />
+    <ClInclude Include="..\Classes\Observable.h" />
+    <ClInclude Include="..\Classes\Observer.h" />
+    <ClInclude Include="..\Classes\Options\OptionsScene.h" />
+    <ClInclude Include="..\Classes\Options\SaveDeleteConfirmation.h" />
+    <ClInclude Include="..\Classes\Resources\SpriteContainer.h" />
+    <ClInclude Include="..\Classes\Resources\Sprites.h" />
+    <ClInclude Include="..\Classes\Resources\Tiles.h" />
+    <ClInclude Include="..\Classes\SaveLoad\SaveLoad.h" />
+    <ClInclude Include="..\Classes\Settings.h" />
+    <ClInclude Include="..\Classes\Shop\ShopScene.h" />
+    <ClInclude Include="..\Classes\Story\Popup.h" />
+    <ClInclude Include="..\Classes\Story\StoryScene.h" />
+    <ClInclude Include="..\Classes\TileMapObjects\Placeable.h" />
+    <ClInclude Include="..\Classes\TileMapObjects\PlaceableSprite.h" />
+    <ClInclude Include="..\Classes\TileMapObjects\PlaceableTile.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

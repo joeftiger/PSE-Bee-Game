@@ -10,6 +10,51 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\About">
+      <UniqueIdentifier>{3f362176-21f8-4e39-ab62-be12356489a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Game">
+      <UniqueIdentifier>{71b0bac5-adfe-4bbb-8f5c-b9b03ce0ca9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\HeaderFiles">
+      <UniqueIdentifier>{9fd7ea6f-7bd6-4545-9ea4-c054ade331b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ItemPanel">
+      <UniqueIdentifier>{1280e2c8-d56d-41c9-a23e-0a3da5e0f275}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\MainMenu">
+      <UniqueIdentifier>{a739a4cb-0beb-4bd1-a1ef-63d1704424f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Options">
+      <UniqueIdentifier>{47754b29-108e-45ec-b63b-b7612bd49e48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\SaveLoad">
+      <UniqueIdentifier>{765a7132-25cf-4f4f-bfbc-18a310340eab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Shop">
+      <UniqueIdentifier>{9b4f4166-224b-45ed-995d-65806c5b0ce9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Story">
+      <UniqueIdentifier>{8f38aa54-7d4f-46b4-8f36-303d526e7fe7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\TileMapObjects">
+      <UniqueIdentifier>{d9e5855f-9f10-4f1e-987b-1154995c3219}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Atlas">
+      <UniqueIdentifier>{703516b2-2d0a-4e3d-bb27-9b399bb93350}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Algorithm">
+      <UniqueIdentifier>{02cfec6c-c2b7-4fbd-8175-f465f27189f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Resources">
+      <UniqueIdentifier>{923220fb-ebb1-49dc-9d16-2033125b32e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Interaction">
+      <UniqueIdentifier>{a4fc4613-c4ba-4c56-9d1e-b97e7ad94f16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Effects">
+      <UniqueIdentifier>{4d818ecf-fda4-44cf-9419-f8fcace70e07}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -18,7 +63,97 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
+    <ClCompile Include="..\Classes\About\AboutScene.cpp">
+      <Filter>src\About</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Game\BeeHive.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Game\GameScene.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Game\HUDLayer.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ItemPanel\ItemPanelLayer.cpp">
+      <Filter>src\ItemPanel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MainMenu\MainMenuScene.cpp">
+      <Filter>src\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Options\OptionsScene.cpp">
+      <Filter>src\Options</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TileMapObjects\PlaceableSprite.cpp">
+      <Filter>src\TileMapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TileMapObjects\PlaceableTile.cpp">
+      <Filter>src\TileMapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Game\Player.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SaveLoad\SaveLoad.cpp">
+      <Filter>src\SaveLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Shop\ShopScene.cpp">
+      <Filter>src\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Story\StoryScene.cpp">
+      <Filter>src\Story</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ItemPanel\TouchUtil.cpp">
+      <Filter>src\ItemPanel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Game\TileMapLayer.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Game\Time.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Atlas\BeeHiveAtlas.cpp">
+      <Filter>src\Atlas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Options\SaveDeleteConfirmation.cpp">
+      <Filter>src\Options</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Game\HoneyExtractor.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Atlas\HoneyExtractorAtlas.cpp">
+      <Filter>src\Atlas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Algorithm\GameAlgorithm.cpp">
+      <Filter>src\Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Resources\SpriteContainer.cpp">
+      <Filter>src\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Resources\Sprites.cpp">
+      <Filter>src\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Resources\Tiles.cpp">
+      <Filter>src\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Game\Wallet.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Interaction\BeeHivePopup.cpp">
+      <Filter>src\Interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Story\Popup.cpp">
+      <Filter>src\Story</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Interaction\HoneyExtractorPopup.cpp">
+      <Filter>src\Interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Interaction\HoneyMover.cpp">
+      <Filter>src\Interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Effects\BeeParticles.cpp">
+      <Filter>src\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Settings.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,7 +164,118 @@
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\HelloWorldScene.h">
+    <ClInclude Include="..\Classes\Observable.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Observer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\About\AboutScene.h">
+      <Filter>src\About</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\BeeHive.h">
+      <Filter>src\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HeaderFiles\DEFINITIONS.h">
+      <Filter>src\HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\GameScene.h">
+      <Filter>src\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\HUDLayer.h">
+      <Filter>src\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ItemPanel\ItemPanelLayer.h">
+      <Filter>src\ItemPanel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainMenu\MainMenuScene.h">
+      <Filter>src\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Options\OptionsScene.h">
+      <Filter>src\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TileMapObjects\Placeable.h">
+      <Filter>src\TileMapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TileMapObjects\PlaceableSprite.h">
+      <Filter>src\TileMapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TileMapObjects\PlaceableTile.h">
+      <Filter>src\TileMapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\Player.h">
+      <Filter>src\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HeaderFiles\Restorable.h">
+      <Filter>src\HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SaveLoad\SaveLoad.h">
+      <Filter>src\SaveLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HeaderFiles\Seasons.h">
+      <Filter>src\HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Shop\ShopScene.h">
+      <Filter>src\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Story\StoryScene.h">
+      <Filter>src\Story</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HeaderFiles\TimeStruct.h">
+      <Filter>src\HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ItemPanel\TouchUtil.h">
+      <Filter>src\ItemPanel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\TileMapLayer.h">
+      <Filter>src\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\Time.h">
+      <Filter>src\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Atlas\BeeHiveAtlas.h">
+      <Filter>src\Atlas</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Options\SaveDeleteConfirmation.h">
+      <Filter>src\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\HoneyExtractor.h">
+      <Filter>src\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Atlas\HoneyExtractorAtlas.h">
+      <Filter>src\Atlas</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Algorithm\GameAlgorithm.h">
+      <Filter>src\Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Resources\SpriteContainer.h">
+      <Filter>src\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Resources\Sprites.h">
+      <Filter>src\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Resources\Tiles.h">
+      <Filter>src\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\Wallet.h">
+      <Filter>src\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Interaction\BeeHivePopup.h">
+      <Filter>src\Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Story\Popup.h">
+      <Filter>src\Story</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Interaction\HoneyExtractorPopup.h">
+      <Filter>src\Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Interaction\HoneyMover.h">
+      <Filter>src\Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Effects\BeeParticles.h">
+      <Filter>src\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Settings.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

@@ -36,6 +36,7 @@ set(hostname)
 cmake_host_system_information(RESULT hostname QUERY HOSTNAME)
 
 # Needed to compile on Linux
+
 if (CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
     message(STATUS "Linux - setting flag \"-no-pie\"")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -no-pie")
@@ -84,18 +85,19 @@ list(APPEND GAME_SOURCE
         Classes/AppDelegate.cpp
         Classes/Atlas/BeeHiveAtlas.cpp
         Classes/Atlas/HoneyExtractorAtlas.cpp
+		Classes/Effects/BeeParticles.cpp
+		Classes/Effects/HealthIndicators.cpp
         Classes/Game/BeeHive.cpp
         Classes/Game/GameScene.cpp
         Classes/Game/HUDLayer.cpp
         Classes/Game/HoneyExtractor.cpp
-        Classes/Game/Interacter.cpp
         Classes/Game/Player.cpp
 		Classes/Game/TileMapLayer.cpp
         Classes/Game/Time.cpp
         Classes/Game/Wallet.cpp
         Classes/Interaction/BeeHivePopup.cpp
         Classes/Interaction/HoneyExtractorPopup.cpp
-        Classes/Interaction/InteractionNode.cpp
+		Classes/Interaction/HoneyMover.cpp
         Classes/ItemPanel/ItemPanelLayer.cpp
         Classes/ItemPanel/TouchUtil.cpp
         Classes/MainMenu/MainMenuScene.cpp
@@ -119,23 +121,23 @@ list(APPEND GAME_HEADER
         Classes/AppDelegate.h
         Classes/Atlas/BeeHiveAtlas.h
         Classes/Atlas/HoneyExtractorAtlas.h
+		Classes/Effects/BeeParticles.h
+		Classes/Effects/HealthIndicators.cpp
         Classes/Game/BeeHive.h
         Classes/Game/GameScene.h
         Classes/Game/HUDLayer.h
         Classes/Game/HoneyExtractor.h
-        Classes/Game/Interacter.h
         Classes/Game/Player.h
         Classes/Game/TileMapLayer.h
         Classes/Game/Time.h
         Classes/Game/Wallet.h
-        Classes/HeaderFiles/Interactable.h
         Classes/HeaderFiles/HealthStates.h
         Classes/HeaderFiles/Restorable.h
         Classes/HeaderFiles/Seasons.h
         Classes/HeaderFiles/TimeStruct.h
         Classes/Interaction/BeeHivePopup.h
         Classes/Interaction/HoneyExtractorPopup.h
-        Classes/Interaction/InteractionNode.h
+		Classes/Interaction/HoneyMover.h
         Classes/ItemPanel/ItemPanelLayer.h
         Classes/ItemPanel/TouchUtil.h
         Classes/MainMenu/MainMenuScene.h
@@ -211,7 +213,7 @@ endif ()
 set(all_code_files
         ${GAME_HEADER}
         ${GAME_SOURCE}
-        Classes/Interaction/HoneyMover.cpp Classes/Interaction/HoneyMover.h Classes/Effects/BeeParticles.cpp Classes/Effects/BeeParticles.h)
+           )
 if (NOT ANDROID)
     add_executable(${APP_NAME} ${all_code_files})
 else ()

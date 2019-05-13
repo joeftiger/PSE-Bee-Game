@@ -7,13 +7,19 @@
 #include <Resources/Sprites.h>
 #include "cocos2d.h"
 #include "Observable.h"
+#include "json/rapidjson.h"
+#include "json/document.h"
+#include "HeaderFiles/Restorable.h"
 
 USING_NS_CC;
 
 // pre-declare to <fix> "Placeable has no type."
 class Placeable;
 
-class TileMapLayer : public cocos2d::Layer, public Observable {
+/**
+*	Implements the TileMap, has several helper-methods for placing new tiles/sprites, responsible for saving and loading the TileMap
+*/
+class TileMapLayer : public cocos2d::Layer, public Observable, public Restorable {
 private:
 	TMXTiledMap *_tileMap;
 	TMXLayer *_objectLayer;
@@ -56,13 +62,24 @@ public:
 	 */
 	std::vector<Sprite *> getSpriteList();
 
+	/**
+	 * Transforms a position on the tile map to tile coordinates.
+	 *
+	 * @param pos
+	 * @return
+	 */
 	Vec2 getTilePosition(Vec2 pos);
 
 	/**
      * Checks whether the given vector is out of bounds
-     * @return (0,0) if out of bounds, otherwise the vector itself
+     * @return the vector in tile map nearest to the position.
      */
 	Vec2 inTileMapBounds(const Vec2 &pos);
+
+	/**
+	* Checks whether a given vector touches the tilemap
+	*/
+	bool isVectorOnTileMap(Vec2 pos);
 
 	/**
 	 * Checks whether the given placeable object can be placed at the specified position.
@@ -119,6 +136,10 @@ public:
 	 * 				  <code>false</code> if the obstruction layer is hidden.
 	 */
 	void showObstructions(bool visible);
+
+	void toJSON(rapidjson::Document &doc) override;
+
+	void fromJSON(rapidjson::Document &doc) override;
 
 	// implement the "static create()" method manually
 	CREATE_FUNC(TileMapLayer)
