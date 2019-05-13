@@ -10,6 +10,7 @@
 #include "HeaderFiles/DEFINITIONS.h"
 #include "MainMenu/MainMenuScene.h"
 #include "Game/TileMapLayer.h"
+#include "Game/Wallet.h"
 
 using namespace cocos2d;
 
@@ -66,9 +67,9 @@ void ItemPanelLayer::initializeItemPanel() {
 	auto box = this->getBoundingBox().size;
 
 	//create label configuration, can be reused in all labels
-    TTFConfig labelConfig;
+	TTFConfig labelConfig;
 	labelConfig.fontFilePath = FONT;
-    labelConfig.fontSize = TEXT_SIZE_HUD;
+	labelConfig.fontSize = TEXT_SIZE_HUD;
 
     _placeables.emplace_back(new PlaceableTile(Tiles::beehive_small));
 	_placeables.emplace_back(new PlaceableTile(Tiles::beehive_middle));
@@ -158,7 +159,18 @@ void ItemPanelLayer::onTouchEnded(Touch *touch, void *) {
     auto pos = touch->getLocation() + this->getParent()->getPosition();
     if (isDrag()) {
     	if (_tileMapLayer->canPlace(_draggedPlaceable, pos)) {
-    		_tileMapLayer->place(_draggedPlaceable, pos);
+			if (Wallet::getInstance()->returnTotalMoney() >= 100) {
+				_tileMapLayer->place(_draggedPlaceable, pos);
+				Wallet::getInstance()->subtractMoney(100);
+			}
+			else { // "Du hast nicht genug Geld"
+				auto noMoneyLabel = Label::createWithTTF("Du hast nicht genug Geld", FONT, 40);
+				noMoneyLabel->enableOutline(Color4B::BLACK, 1);
+				auto winSize = Director::getInstance()->getWinSize();
+				noMoneyLabel->setPosition(winSize.width / 2 , winSize.height * 0.75f);
+				this->getParent()->addChild(noMoneyLabel, 1000);
+				noMoneyLabel->runAction(Sequence::create(FadeTo::create(4.0f, 0), RemoveSelf::create(), NULL));
+			}
     	}
 
         this->removeChild(this->getDraggedSprite());
