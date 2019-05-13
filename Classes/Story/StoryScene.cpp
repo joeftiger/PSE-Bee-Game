@@ -28,31 +28,49 @@ UICustom::Popup* StoryScene::createPopup(int id) {
                 SaveLoad::saveStory();
                 return popup;
             }
+            else return nullptr;
 
         case 1: //Beehive Info
             if (firstTime1) {
-                return UICustom::Popup::createAsMessage("GROSSVATER", "Hi Brian please insert beehive info here\n"
-                                                                      "...and if you need another line here :) ");
-            }
+                auto popup = UICustom::Popup::createAsMessage("GROSSVATER",
+                                                              "Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich.\n"
+                                                              "Kannst du auf meine Bienen aufpassen? Nur bis ich wieder da bin...");
+                firstTime1 = false;
+                SaveLoad::saveStory();
+                return popup;
+            } break;
 	
         case 2: //Varroa Info
             if (firstTime2) {
-                return UICustom::Popup::createAsMessage("GROSSVATER", "Hi Brian please insert varroa info here\n"
-                                                                      "and if you need another line here :) ");
-            }
+                auto popup = UICustom::Popup::createAsMessage("GROSSVATER",
+                                                              "Achtung! Deine Bienen sind an Varroa erkrankt.\n"
+                                                              "Schau doch im Shop nach, ob du etwas dagegen finden kannst.");
+                firstTime2 = false;
+                SaveLoad::saveStory();
+                return popup;
+            } break;
 			
         case 3: //Shop Info
             if (firstTime3) {
-                return UICustom::Popup::createAsMessage("GROSSVATER", "Hi Brian please insert shop info here\n"
-                                                                      "and if you need another line here :) ");
-            }
+                auto popup = UICustom::Popup::createAsMessage("GROSSVATER", //todo: change text when shop is done
+                                                              "Im Shop kannst du verschiedene Sachen kaufen.\n"
+                                                              "placeholder");
+                firstTime3 = false;
+                SaveLoad::saveStory();
+                return popup;
+            } break;
 			
         case 4: //Fall/Winter Season Info
             if (firstTime4) {
-                return UICustom::Popup::createAsMessage("GROSSVATER",
-                                                        "Hi Brian please insert first fall/winter season info here\n"
-                                                        "and if you need another line here :) ");
-            }
+                auto popup = UICustom::Popup::createAsMessage("GROSSVATER",
+                                                              "Der Winter naht.\n"
+                                                              "Die Bienen brauchen genug Nahrung um den Winter zu überleben");
+                firstTime4 = false;
+                SaveLoad::saveStory();
+                return popup;
+            } break;
+        default:
+            break;
     }
 }
 

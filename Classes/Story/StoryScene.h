@@ -33,7 +33,7 @@ public:
      * 1 = Beehive
      * 2 = Varroa
      * 3 = Shop
-     * 4 =
+     * 4 = First Winter Info
      * @return the popup
      */
 	UICustom::Popup* createPopup(int);
