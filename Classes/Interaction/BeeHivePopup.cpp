@@ -9,22 +9,21 @@ void BeeHivePopup::initBackground() {
     auto visibleSize = Director::getInstance()->getOpenGLView()->getVisibleSize();
     auto size = visibleSize * 0.75;
 
-    auto background = Sprite::create();
-    background->setTextureRect(Rect(0, 0, size.width, size.height));    // background size
-    background->setColor(Color3B(255, 243, 190));
-    background->setAnchorPoint(Vec2(0.5, 0.5));
+    _background = Sprite::create();
+	_background->setTextureRect(Rect(0, 0, size.width, size.height));    // background size
+	_background->setColor(Color3B(255, 243, 190));
+	_background->setAnchorPoint(Vec2(0.5, 0.5));
 
-    this->addChild(background, -1, "background");
+    this->addChild(_background, -1, "background");
 }
 
 void BeeHivePopup::initImage() {
     auto image = SpriteContainer::getInstance()->getSpriteOf(Tiles::TileGID::beehive_small_open);
-    auto background = this->getChildByName("background");
-    auto box = background->getContentSize();
+    auto box = _background->getContentSize();
 
     image->setAnchorPoint(Vec2(0, 0.5));
     image->setPosition(box.width / 10, box.height * 2 / 3);
-    background->addChild(image, 1, "image");
+    _background->addChild(image, 1, "image");
 }
 
 void BeeHivePopup::initInfoPanel() {
@@ -33,8 +32,7 @@ void BeeHivePopup::initInfoPanel() {
     TTFConfig labelConfig;
     labelConfig.fontFilePath = FONT;
     labelConfig.fontSize = TEXT_SIZE_HUD;
-    auto background = this->getChildByName("background");
-    auto box = background->getContentSize();
+    auto box = _background->getContentSize();
 
     //honey
     _honeyLabel = Label::createWithTTF(labelConfig, "0");
@@ -47,7 +45,7 @@ void BeeHivePopup::initInfoPanel() {
     honeySprite->setAnchorPoint(Vec2(1, 0.5f));
     honeySprite->setPosition(Vec2(-30, 15));
 
-    background->addChild(_honeyLabel);
+    _background->addChild(_honeyLabel);
     _honeyLabel->addChild(honeySprite);
 
     //bees
@@ -62,7 +60,7 @@ void BeeHivePopup::initInfoPanel() {
     beeSprite->setAnchorPoint(Vec2(1, 0.5f));
     beeSprite->setPosition(Vec2(-30, 15));
 
-    background->addChild(_beesLabel);
+	_background->addChild(_beesLabel);
     _beesLabel->addChild(beeSprite);
 
     //varroa
@@ -76,7 +74,7 @@ void BeeHivePopup::initInfoPanel() {
     varroaSprite->setAnchorPoint(Vec2(1, 0.5f));
     varroaSprite->setPosition(Vec2(-30, 15));
 
-    background->addChild(_varroaLabel);
+	_background->addChild(_varroaLabel);
     _varroaLabel->addChild(varroaSprite);
 }
 
@@ -87,7 +85,8 @@ void BeeHivePopup::initButtons() {
      * - giveMedicine();
      */
     Vector<MenuItem *> buttons;
-    auto box = this->getChildByName("background")->getContentSize();
+
+	auto box = _background->getContentSize();
 
     auto takeHoney = MenuItemImage::create("menu/yes.png", "menu/yes.png", [=](Ref *sender) {
         cocos2d::log("%s", "take honey");
@@ -112,6 +111,17 @@ void BeeHivePopup::initButtons() {
     this->addChild(menu, 10, "buttonMenu");
 
 
+	auto exitButton = ui::Button::create("menu/no.png");
+	exitButton->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
+		if (type == ui::Widget::TouchEventType::ENDED) {
+			this->removeFromParentAndCleanup(true);
+		}
+	});
+	exitButton->setScale(0.15f);
+	exitButton->setAnchorPoint(Vec2(1.0f, 1.0f));
+	exitButton->setPosition(Vec2(box.width, box.height));
+	_background->addChild(exitButton);
+	/*
     Vector<MenuItem *> exitButton;
     MenuItemImage *closeButton = MenuItemImage::create("menu/no.png", "menu/no.png", [=](Ref *sender) {
         this->removeFromParentAndCleanup(true);
@@ -120,9 +130,10 @@ void BeeHivePopup::initButtons() {
 
     auto exitMenu = Menu::createWithArray(exitButton);
     exitMenu->setAnchorPoint(Vec2(1.0f, 1.0f));
-    exitMenu->setPosition(Vec2(-box.width * 5 / 7, -box.height * 4 / 5));
+    exitMenu->setPosition(Vec2(-box.width / 4, -box.height / 4));
     exitMenu->setScale(0.2f);
     this->addChild(exitMenu, 10, "exitMenu");
+	*/
 }
 
 void BeeHivePopup::initTouch() {
@@ -130,7 +141,7 @@ void BeeHivePopup::initTouch() {
 
     listener->setSwallowTouches(true);
     listener->onTouchBegan = CC_CALLBACK_2(BeeHivePopup::onTouchBegan, this);
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, _background);
 }
 
 BeeHivePopup *BeeHivePopup::createWith(BeeHive *beeHive) {
