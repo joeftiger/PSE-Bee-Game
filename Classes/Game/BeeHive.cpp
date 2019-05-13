@@ -175,13 +175,16 @@ void BeeHive::setParticles() {
 void BeeHive::setHealthIndicators() {
     _tileMapLayer = (TileMapLayer*) Director::getInstance()->getRunningScene()->getChildByName(TILE_MAP_LAYER_NAME);
 	if(!_healthIndicatorNode) {
-			//TODO Change to create function of healhIndicators
-			/**
-            _healthIndicatorNode = BeeParticles::create();
+			_currentHealth = currentHealth();
+            _healthIndicatorNode = HealthIndicators::create();
             _tileMapLayer->addChild(_healthIndicatorNode);
             _healthIndicatorNode->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * Settings::getInstance()->getMapScale()
-                                        + _tileMapLayer->getMap()->getTileSize() * Settings::getInstance()->getMapScale()/2));
-        */}
+                                                 + _tileMapLayer->getMap()->getTileSize() * Settings::getInstance()->getMapScale()/2));
+	}
+
+        //node movement
+        //_particlesNode->setPosition(Vec2(_particlesNode->getPosition().x + random(-1.0, 1.0),
+     //       _particlesNode->getPosition().y + random(-1.0, 1.0)));
 }
 
 void BeeHive::setTileMap(TileMapLayer* tileMap) {

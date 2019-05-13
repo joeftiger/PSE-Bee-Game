@@ -77,13 +77,12 @@ bool HUDLayer::init() {
 	                            visibleRect.origin.y + visibleRect.size.height - onePofScreenH * 5));
 	this->schedule(schedule_selector(HUDLayer::timer), 0.1f);
 
-    //UICustom::Popup *popup = UICustom::Popup::createAsMessage("GROSSVATER", "Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich...");
-    //this->addChild(popup);
-    //auto storyScene = StoryScene::create();
-    //this->addChild(storyScene, 50);
-    auto storyScene = StoryScene::create();
+	// create Intro popup
+    auto storyScene = StoryScene::getInstance();
     UICustom::Popup* popup = storyScene->createPopup(0);
-    this->addChild(popup);
+    if (popup){
+        this->addChild(popup,80);
+    }
 
 	return true;
 }

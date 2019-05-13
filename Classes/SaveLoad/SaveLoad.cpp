@@ -6,6 +6,7 @@
 #include "Game/BeeHive.h"
 #include "Atlas/BeeHiveAtlas.h"
 #include "Atlas/HoneyExtractorAtlas.h"
+#include "Story/StoryScene.h"
 #include "json/prettywriter.h"
 #include "json/istreamwrapper.h"
 #include "json/ostreamwrapper.h"
@@ -147,6 +148,7 @@ void SaveLoad::saveEverything() {
 	SaveLoad::saveMap();
 	SaveLoad::saveMoney();
 	SaveLoad::saveTime();
+	SaveLoad::saveStory();
 }
 
 void SaveLoad::saveTime() {
@@ -269,6 +271,10 @@ void SaveLoad::deleteMoneySave() {
     assert(!moneySaveExists());
 }
 
+void SaveLoad::deleteStorySave() {
+	FileUtils::getInstance()->removeFile(getPath("story.json"));
+	assert(!storySaveExists());
+}
 
 void SaveLoad::deleteEverything() {
 	BeeHiveAtlas::getInstance()->clear();
@@ -280,4 +286,36 @@ void SaveLoad::deleteEverything() {
 	deleteTileMapSave();
 	deleteTimeSave();
 	deleteMoneySave();
+	deleteStorySave();
+}
+
+void SaveLoad::saveStory() {
+    rapidjson::Document doc;
+    rapidjson::StringBuffer jsonBuffer;
+    rapidjson::PrettyWriter<rapidjson::StringBuffer> jsonWriter(jsonBuffer);
+    doc.SetArray();
+    assert(doc.IsArray());
+    StoryScene::getInstance()->toJSON(doc);
+
+    doc.Accept(jsonWriter);
+    jsonToFile(docToString(doc), getPath("story.json"));
+}
+
+void SaveLoad::loadStory() {
+    std::ifstream ifs(getPath("story.json"));
+
+    if (!ifs.is_open()) {
+        log("Couldn't load states");
+        return;
+    }
+
+    IStreamWrapper isw(ifs);
+    rapidjson::Document doc;
+    doc.ParseStream(isw);
+
+    StoryScene::getInstance()->fromJSON(doc);
+}
+
+bool SaveLoad::storySaveExists() {
+	return FileUtils::getInstance()->isFileExist(getPath("story.json"));
 }

@@ -3,6 +3,7 @@
 #define HEALTHINDICATORS_H
 
 #include "cocos2d.h"
+#include "../HeaderFiles/HealthStates.h"
 
 using namespace cocos2d;
 
@@ -13,17 +14,13 @@ class HealthIndicators : public Node {
 private:
 	std::vector<Sprite*> _indicators;
 
+	HealthState _currentHealth;
+
 public:
 	static Node *createNode();
 	virtual bool init();
 
-
-	/**
-     * Updates particle positions scheduled for every frame.
-     * TODO Replace or adjust this method
-     * @param dt
-     */
-    void nextParticlesPos(float dt);
+	void setHealth(HealthState _currentHealth);
 
 	/**
      * updates particles.
