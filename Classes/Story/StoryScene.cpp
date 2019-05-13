@@ -2,6 +2,7 @@
 #include "StoryScene.h"
 #include "Popup.h"
 #include "Game/Time.h"
+#include "SaveLoad/SaveLoad.h"
 
 bool StoryScene::init() {
 
@@ -10,9 +11,19 @@ bool StoryScene::init() {
 
 	}
 
-	//if () //todo: if no "story.json" save state file exists, create one with all "firstTime" states set to true.
-	//else () //todo: if "story.json" exists, import its states.
-	//todo: Maybe able to set all false with skip tutorial button.
+    // Load states or create state file if none exists.
+	auto fs = FileUtils::getInstance();
+    std::string path = fs->getWritablePath();
+    if (fs->isFileExist(path + "saves/story.json")){
+        SaveLoad::loadStory();
+    } else {
+        firstTime0 = true;
+        firstTime1 = true;
+        firstTime2 = true;
+        firstTime3 = true;
+        firstTime4 = true;
+        SaveLoad::saveStory();
+    }
 
 
 	return true;
@@ -68,21 +79,25 @@ void StoryScene::toJSON(rapidjson::Document &doc) {
 
 void StoryScene::fromJSON(rapidjson::Document &doc) {
     assert(doc.IsArray());
-    const rapidjson::Value &beeHive = doc[""];
+    const rapidjson::Value &story = doc["story"];
 
-    //assert(beeHive.HasMember("_beesAlive"));
-    assert(beeHive["_beesAlive"].IsInt());
-    _beesAlive = beeHive["_beesAlive"].GetInt();
+    assert(story["firstTime0"].IsBool());
+    firstTime0 = story["firstTime0"].GetBool();
+    assert(story["firstTime1"].IsBool());
+    firstTime1 = story["firstTime1"].GetBool();
+    assert(story["firstTime2"].IsBool());
+    firstTime2 = story["firstTime2"].GetBool();
+    assert(story["firstTime3"].IsBool());
+    firstTime3 = story["firstTime3"].GetBool();
+    assert(story["firstTime4"].IsBool());
+    firstTime4 = story["firstTime4"].GetBool();
+}
 
-    assert(beeHive["_varroaAlive"].IsInt());
-    _varroaAlive = beeHive["_varroaAlive"].GetInt();
-
-    assert(beeHive["_rawHoney"].IsFloat());
-    _rawHoney = beeHive["_rawHoney"].GetFloat();
-
-    assert(beeHive["_posX"].IsInt());
-    _position.x = beeHive["_posX"].GetInt();
-
-    assert(beeHive["_posY"].IsInt());
-    _position.y = beeHive["_posY"].GetInt();
+void StoryScene::skipTutorial(){
+    firstTime0 = false;
+    firstTime1 = false;
+    firstTime2 = false;
+    firstTime3 = false;
+    firstTime4 = false;
+    SaveLoad::saveStory();
 }

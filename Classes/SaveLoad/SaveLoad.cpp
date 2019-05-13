@@ -325,3 +325,18 @@ void SaveLoad::saveStory() {
     doc.Accept(jsonWriter);
     jsonToFile(docToString(doc), getPath("story.json"));
 }
+
+void SaveLoad::loadStory() {
+    std::ifstream ifs(getPath("story.json"));
+
+    if (!ifs.is_open()) {
+        log("Couldn't load states");
+        return;
+    }
+
+    IStreamWrapper isw(ifs);
+    rapidjson::Document doc;
+    doc.ParseStream(isw);
+
+    StoryScene::getInstance()->fromJSON(doc);
+}

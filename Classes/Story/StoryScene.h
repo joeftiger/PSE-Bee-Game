@@ -33,6 +33,17 @@ public:
 
 	CREATE_FUNC(StoryScene);
 
+    /**
+     * Saving and loading states in "story.json" if the popup has shown already
+     * @param doc
+     */
+    void toJSON(rapidjson::Document &doc) ;
+    void fromJSON(rapidjson::Document &doc) ;
+
+    /**
+     *  Call this to disable Story Popups
+     */
+     void skipTutorial();
 };
 
 

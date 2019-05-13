@@ -139,6 +139,11 @@ public:
 	 *  save Story states in "story.json"
 	 */
 	 static void saveStory();
+
+     /**
+     *  load Story states from "story.json" and return them
+     */
+     static void loadStory();
 };
 
 #endif //SAVELOAD_H
