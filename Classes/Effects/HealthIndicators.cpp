@@ -13,7 +13,7 @@ bool HealthIndicators::init() {
     if (!Node::init()) {
         return false;
     }
-    this->schedule(schedule_selector(HealthIndicators::nextParticlesPos), 0.033f);
+    //this->schedule(schedule_selector(HealthIndicators::nextParticlesPos), 0.033f);
     this->update(123);
 
     return true;
