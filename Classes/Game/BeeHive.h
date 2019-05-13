@@ -2,8 +2,8 @@
 #ifndef PSE_BEE_GAME_BEEHIVE_H
 #define PSE_BEE_GAME_BEEHIVE_H
 
-#include "Effects/BeeParticles.h"
-#include "Effects/HealthIndicators.h"
+#include "../Effects/BeeParticles.h"
+#include "../Effects/HealthIndicators.h"
 #include "cocos2d.h"
 #include "../HeaderFiles/Restorable.h"
 #include "TileMapLayer.h"
@@ -139,6 +139,8 @@ public:
     BeeParticles* getHealthIndicators();
 
 	void setParticles();
+
+	void setHealthIndicators();
 
 	void setTileMap(TileMapLayer* tileMap);
 
