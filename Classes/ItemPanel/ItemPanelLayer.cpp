@@ -99,7 +99,6 @@ void ItemPanelLayer::initializeItemPanel() {
 
 		auto price = Label::createWithTTF(labelConfig, std::to_string(100)); //TODO: Change Text to p->getPrice() once implemented
 		price->enableOutline(Color4B::BLACK, 1);
-		//price->setScale(1.0f);
 		price->setAnchorPoint(Vec2(0.5f, 1.0f));
 		price->setPositionX(pos.x + sprite->getBoundingBox().size.width * 0.5f); //TODO:fix Position
 		price->setPositionY(pos.y);
@@ -107,10 +106,10 @@ void ItemPanelLayer::initializeItemPanel() {
 
 		auto priceSprite = SpriteContainer::getInstance()->getSpriteOf(Sprites::coin_single);
 		priceSprite->setScale(0.3f);
-		priceSprite->setAnchorPoint(Vec2(0.5f, 1.0f));
-		priceSprite->setPositionX(pos.x + sprite->getBoundingBox().size.width * 0.75f); //TODO:fix Position
-		priceSprite->setPositionY(pos.y); 
-		this->addChild(priceSprite, sprite->getLocalZOrder() + 1);
+		priceSprite->setAnchorPoint(Vec2(1.0f, 0.5f));
+		priceSprite->setPositionX(-priceSprite->getBoundingBox().size.width * 3 / 5); //TODO:fix Position
+		priceSprite->setPositionY(priceSprite->getBoundingBox().size.height / 1.5f);
+		price->addChild(priceSprite, sprite->getLocalZOrder() + 1);
 
 		_spritesToPlaceables.emplace(sprite, p);
 
