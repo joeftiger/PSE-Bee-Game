@@ -15,6 +15,7 @@ private:
     Label * _honeyLabel;
     Label * _beesLabel;
     Label * _varroaLabel;
+	Sprite *_background;
 
     /**
      * Initializes the background image.
