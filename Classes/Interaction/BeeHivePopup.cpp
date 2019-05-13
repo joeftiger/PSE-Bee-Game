@@ -109,7 +109,7 @@ void BeeHivePopup::initButtons() {
 	auto giveMedicine = ui::Button::create("menu/yes.png");
 	giveMedicine->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
 		if (type == ui::Widget::TouchEventType::ENDED) {
-			
+			_beeHive->killVarroa();
 		}
 	});
 	buttons.pushBack(giveMedicine);
