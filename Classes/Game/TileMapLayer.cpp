@@ -205,7 +205,8 @@ bool TileMapLayer::canPlaceTile(const Vec2 &position) {
 
 void TileMapLayer::placeTile(const Vec2 &position, Tiles::TileGID &gid) {
 	auto pos = getTilePosition(position);
-	_objectLayer->setTileGID(gid, pos);
+	auto seasonalGID = Tiles::getSeasonTileGIDof(gid, Time::getInstance()->getSeason());
+	_objectLayer->setTileGID(seasonalGID, pos);
 
 	if (Tiles::isBeeHive(gid)) {
 
