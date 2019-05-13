@@ -8,23 +8,11 @@ bool StoryScene::init() {
 
 	if (!Node::init()) {
 		return false;
-
 	}
 
-    // Load states or create state file if none exists.
-	auto fs = FileUtils::getInstance();
-    std::string path = fs->getWritablePath();
-    if (fs->isFileExist(path + "saves/story.json")){
-        SaveLoad::loadStory();
-    } else {
-        firstTime0 = true;
-        firstTime1 = true;
-        firstTime2 = true;
-        firstTime3 = true;
-        firstTime4 = true;
-        SaveLoad::saveStory();
-    }
-
+	if (SaveLoad::storySaveExists()) {
+		SaveLoad::loadStory();
+	}
 
 	return true;
 }

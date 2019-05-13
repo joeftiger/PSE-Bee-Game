@@ -144,6 +144,8 @@ public:
      *  load Story states from "story.json" and return them
      */
      static void loadStory();
+
+	 static bool storySaveExists();
 };
 
 #endif //SAVELOAD_H

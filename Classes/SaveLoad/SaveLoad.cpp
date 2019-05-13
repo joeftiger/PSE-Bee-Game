@@ -180,6 +180,7 @@ void SaveLoad::saveEverything() {
 	SaveLoad::saveMap();
 	SaveLoad::saveMoney();
 	SaveLoad::saveTime();
+	SaveLoad::saveStory();
 }
 
 void SaveLoad::saveTime() {
@@ -339,4 +340,8 @@ void SaveLoad::loadStory() {
     doc.ParseStream(isw);
 
     StoryScene::getInstance()->fromJSON(doc);
+}
+
+bool SaveLoad::storySaveExists() {
+	return FileUtils::getInstance()->isFileExist(getPath("story.json"));
 }
