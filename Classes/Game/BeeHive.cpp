@@ -25,6 +25,7 @@ BeeHive::BeeHive(int bees, int varroa) {
 	_varroaAlive = varroa;
 	_rawHoney = 0;
 	_particlesNode = nullptr;
+	_healthIndicatorNode = nullptr;
 	assert(invariant());
 }
 

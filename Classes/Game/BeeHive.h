@@ -2,7 +2,8 @@
 #ifndef PSE_BEE_GAME_BEEHIVE_H
 #define PSE_BEE_GAME_BEEHIVE_H
 
-#include <Effects/BeeParticles.h>
+#include "Effects/BeeParticles.h"
+#include "Effects/HealthIndicators.h"
 #include "cocos2d.h"
 #include "../HeaderFiles/Restorable.h"
 #include "TileMapLayer.h"
@@ -20,6 +21,7 @@ private:
 	int _varroaAlive;
 	float _rawHoney;
 	BeeParticles* _particlesNode;
+	HealthIndicators* _healthIndicatorNode;
 	cocos2d::Vec2 _position;
 
 	HealthState _currentHealth;
@@ -129,6 +131,12 @@ public:
      * Creating the particles for animation
      */
 	BeeParticles* getParticles();
+
+	/**
+     * Creating the health Indicators to display
+     * TODO
+     */
+    BeeParticles* getHealthIndicators();
 
 	void setParticles();
 
