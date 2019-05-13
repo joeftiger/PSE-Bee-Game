@@ -38,7 +38,8 @@ UICustom::Popup* StoryScene::createPopup(int id) {
                 firstTime1 = false;
                 SaveLoad::saveStory();
                 return popup;
-            } break;
+            }
+            else return nullptr;
 	
         case 2: //Varroa Info
             if (firstTime2) {
@@ -48,7 +49,8 @@ UICustom::Popup* StoryScene::createPopup(int id) {
                 firstTime2 = false;
                 SaveLoad::saveStory();
                 return popup;
-            } break;
+            }
+            else return nullptr;
 			
         case 3: //Shop Info
             if (firstTime3) {
@@ -58,7 +60,8 @@ UICustom::Popup* StoryScene::createPopup(int id) {
                 firstTime3 = false;
                 SaveLoad::saveStory();
                 return popup;
-            } break;
+            }
+            else return nullptr;
 			
         case 4: //Fall/Winter Season Info
             if (firstTime4) {
@@ -68,9 +71,11 @@ UICustom::Popup* StoryScene::createPopup(int id) {
                 firstTime4 = false;
                 SaveLoad::saveStory();
                 return popup;
-            } break;
+            }
+            else return nullptr;
+
         default:
-            break;
+            return nullptr;
     }
 }
 
