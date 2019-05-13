@@ -14,7 +14,6 @@ using namespace cocos2d;
 class StoryScene : public cocos2d::Node {
 private:
     Time* time;
-    //bool state;
     bool firstTime0 = true;
     bool firstTime1 = true;
     bool firstTime2 = true;
@@ -27,8 +26,16 @@ public:
         return instance;
     }
 	virtual bool init();
-	//void introPopup();
-	//void update(float dt) override;
+
+    /**
+     * creates a popup with a gived ID:
+     * 0 = Intro
+     * 1 = Beehive
+     * 2 = Varroa
+     * 3 = Shop
+     * 4 =
+     * @return the popup
+     */
 	UICustom::Popup* createPopup(int);
 
 	CREATE_FUNC(StoryScene);

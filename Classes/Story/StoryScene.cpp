@@ -81,7 +81,7 @@ void StoryScene::fromJSON(rapidjson::Document &doc) {
     firstTime4 = story["firstTime4"].GetBool();
 }
 
-void StoryScene::skipTutorial(){
+void StoryScene::skipTutorial(){ // todo: implement button in options scene
     firstTime0 = false;
     firstTime1 = false;
     firstTime2 = false;
