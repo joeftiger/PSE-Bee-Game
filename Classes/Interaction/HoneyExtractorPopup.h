@@ -13,6 +13,8 @@ private:
 
 	Label * _honeyLabel;
 
+	Sprite * _background;
+
     /**
      * Initializes the background image.
      */

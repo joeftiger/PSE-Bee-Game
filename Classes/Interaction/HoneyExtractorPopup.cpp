@@ -10,28 +10,27 @@ void HoneyExtractorPopup::initBackground() {
 	auto visibleSize = Director::getInstance()->getOpenGLView()->getVisibleSize();
 	auto size = visibleSize * 0.75;
 
-	auto background = Sprite::create();
-	background->setTextureRect(Rect(0, 0, size.width, size.height));    // background size
-	background->setColor(Color3B(255, 243, 190));
-	background->setAnchorPoint(Vec2(0.5, 0.5));
+	_background = Sprite::create();
+	_background->setTextureRect(Rect(0, 0, size.width, size.height));    // background size
+	_background->setColor(Color3B(255, 243, 190));
+	_background->setAnchorPoint(Vec2(0.5, 0.5));
 
-	this->addChild(background, -1, "background");
+	this->addChild(_background, -1, "background");
 }
 
 void HoneyExtractorPopup::initImage() {
 	auto image = SpriteContainer::getInstance()->getSpriteOf(Sprites::SpriteID::honey_extractor);
-	auto background = this->getChildByName("background");
-	auto box = background->getContentSize();
+	auto box = _background->getContentSize();
 
-	image->setAnchorPoint(Vec2(0, 0.5));
-	image->setPosition(box.width / 10, box.height * 2 / 3);
-	background->addChild(image, 1, "image");
+	image->setAnchorPoint(Vec2(0.0f, 1.0f));
+	image->setScale(2.0f);
+	image->setPosition(box.width / 10, box.height * 0.85f);
+	_background->addChild(image, 1, "image");
 }
 
 void HoneyExtractorPopup::initInfoPanel() {
 
-	auto background = this->getChildByName("background");
-	auto box = background->getContentSize();
+	auto box = _background->getContentSize();
 
 	TTFConfig labelConfig;
 	labelConfig.fontFilePath = FONT;
@@ -48,30 +47,28 @@ void HoneyExtractorPopup::initInfoPanel() {
 	honeySprite->setAnchorPoint(Vec2(1, 0.5f));
 	honeySprite->setPosition(Vec2(-30, 15));
 
-	background->addChild(_honeyLabel);
+	_background->addChild(_honeyLabel);
 	_honeyLabel->addChild(honeySprite);
 }
 
 void HoneyExtractorPopup::initButtons() {
-	auto background = this->getChildByName("background");
-	auto box = background->getContentSize();
+
+	auto box = _background->getContentSize();
 
 	auto closeButton = ui::Button::create("menu/no.png");
 
 	closeButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
 		switch (type) {
-		case ui::Widget::TouchEventType::BEGAN:
-			break;
 		case ui::Widget::TouchEventType::ENDED:
 			this->removeFromParentAndCleanup(true);
 			break;
 		}
 	});
-	closeButton->setScale(0.2f);
-	closeButton->setPosition(Vec2(box.width * 0.9f, box.height * 0.9f));
-
-	background->addChild(closeButton);
-
+	closeButton->setScale(0.15f);
+	closeButton->setAnchorPoint(Vec2(1.0f, 1.0f));
+	closeButton->setPosition(Vec2(box.width, box.height));
+	_background->addChild(closeButton);
+	
 	auto addHoneyButton = ui::Button::create("menu/yes.png");
 
 	addHoneyButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
@@ -85,8 +82,9 @@ void HoneyExtractorPopup::initButtons() {
 	});
 
 	addHoneyButton->setScale(0.2f);
-	addHoneyButton->setPosition(Vec2(box.width * 0.1f, box.height * 0.1f));
-	background->addChild(addHoneyButton);
+	addHoneyButton->setAnchorPoint(Vec2(0.0f,0.0f));
+	_background->addChild(addHoneyButton);
+	
 }
 
 void HoneyExtractorPopup::initTouch() {
@@ -94,7 +92,7 @@ void HoneyExtractorPopup::initTouch() {
 
 	listener->setSwallowTouches(true);
 	listener->onTouchBegan = CC_CALLBACK_2(HoneyExtractorPopup::onTouchBegan, this);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this->getChildByName("background"));
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, _background);
 }
 
 void HoneyExtractorPopup::update(float dt) {

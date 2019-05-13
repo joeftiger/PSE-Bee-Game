@@ -19,10 +19,11 @@ void BeeHivePopup::initBackground() {
 
 void BeeHivePopup::initImage() {
     auto image = SpriteContainer::getInstance()->getSpriteOf(Tiles::TileGID::beehive_small_open);
-    auto box = _background->getContentSize();
+	auto box = _background->getContentSize();
 
-    image->setAnchorPoint(Vec2(0, 0.5));
-    image->setPosition(box.width / 10, box.height * 2 / 3);
+    image->setAnchorPoint(Vec2(0.0f, 1.0f));
+    image->setPosition(box.width / 10, box.height);
+	image->setScale(2.0f);
     _background->addChild(image, 1, "image");
 }
 
@@ -41,7 +42,7 @@ void BeeHivePopup::initInfoPanel() {
     _honeyLabel->setPosition(Vec2(box.width * 5 / 8, box.height * 2 / 3));
     _honeyLabel->setScale(2);
     auto honeySprite = SpriteContainer::getInstance()->getSpriteOf(Sprites::honey_glass_2d);
-    honeySprite->setScale(0.1f);
+    honeySprite->setScale(0.3f);
     honeySprite->setAnchorPoint(Vec2(1, 0.5f));
     honeySprite->setPosition(Vec2(-30, 15));
 
@@ -56,7 +57,7 @@ void BeeHivePopup::initInfoPanel() {
     _beesLabel->setScale(2);
     auto beeSprite = SpriteContainer::getInstance()->getSpriteOf(
             Sprites::erlenmeyer); //to change with a bee sprite
-    beeSprite->setScale(0.1f);
+    beeSprite->setScale(0.3f);
     beeSprite->setAnchorPoint(Vec2(1, 0.5f));
     beeSprite->setPosition(Vec2(-30, 15));
 
@@ -70,7 +71,7 @@ void BeeHivePopup::initInfoPanel() {
     _varroaLabel->setPosition(Vec2(box.width * 5 / 8, box.height * 1 / 3));
     _varroaLabel->setScale(2);
     auto varroaSprite = SpriteContainer::getInstance()->getSpriteOf(Sprites::honey_glass_3d);
-    varroaSprite->setScale(0.1f);
+    varroaSprite->setScale(0.3f);
     varroaSprite->setAnchorPoint(Vec2(1, 0.5f));
     varroaSprite->setPosition(Vec2(-30, 15));
 
@@ -84,32 +85,48 @@ void BeeHivePopup::initButtons() {
      * - giveSugarWater();
      * - giveMedicine();
      */
-    Vector<MenuItem *> buttons;
+    Vector<ui::Button*> buttons;
 
 	auto box = _background->getContentSize();
 
-    auto takeHoney = MenuItemImage::create("menu/yes.png", "menu/yes.png", [=](Ref *sender) {
-        cocos2d::log("%s", "take honey");
-    });
-    buttons.pushBack(takeHoney);
+	auto takeHoney = ui::Button::create("menu/yes.png");
+	takeHoney->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
+		if (type == ui::Widget::TouchEventType::ENDED) {
+			
+		}
+	});
+	takeHoney->setScale(0.3f);
+	buttons.pushBack(takeHoney);
 
-    auto giveSugarWater = MenuItemImage::create("menu/yes.png", "menu/yes.png", [=](Ref *sender) {
-        cocos2d::log("%s", "give sugar");
-    });
-    buttons.pushBack(giveSugarWater);
+	auto giveSugarWater = ui::Button::create("menu/yes.png");
+	giveSugarWater->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
+		if (type == ui::Widget::TouchEventType::ENDED) {
+			
+		}
+	});
+	buttons.pushBack(giveSugarWater);
 
-    auto giveMedicine = MenuItemImage::create("menu/yes.png", "menu/yes.png", [=](Ref *sender) {
-        cocos2d::log("%s", "give medicine");
-        _beeHive->killVarroa();
-    });
-    buttons.pushBack(giveMedicine);
+	auto giveMedicine = ui::Button::create("menu/yes.png");
+	giveMedicine->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
+		if (type == ui::Widget::TouchEventType::ENDED) {
+			
+		}
+	});
+	buttons.pushBack(giveMedicine);
 
-    auto menu = Menu::createWithArray(buttons);
-    menu->alignItemsHorizontally();
-    menu->setScale(0.3f);
-    menu->setPosition(Vec2(-box.width * 5 / 7, -box.height * 4 / 5));
-    this->addChild(menu, 10, "buttonMenu");
-
+	int index = 0;
+	auto buttonSize = takeHoney->getBoundingBox().size;
+	auto offset = buttonSize.width * 2.5f;
+	auto basePos = Vec2(-offset, 0);
+	
+	
+	for (ui::Button* b : buttons) {
+		b->setAnchorPoint(Vec2(0, 0));
+		b->setScale(0.3f);
+		_background->addChild(b);
+		b->setPosition(Vec2(basePos.x + (buttonSize.width * index) + offset, basePos.y));
+		index++;
+	}
 
 	auto exitButton = ui::Button::create("menu/no.png");
 	exitButton->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
@@ -121,19 +138,7 @@ void BeeHivePopup::initButtons() {
 	exitButton->setAnchorPoint(Vec2(1.0f, 1.0f));
 	exitButton->setPosition(Vec2(box.width, box.height));
 	_background->addChild(exitButton);
-	/*
-    Vector<MenuItem *> exitButton;
-    MenuItemImage *closeButton = MenuItemImage::create("menu/no.png", "menu/no.png", [=](Ref *sender) {
-        this->removeFromParentAndCleanup(true);
-    });
-    exitButton.pushBack(closeButton);
 
-    auto exitMenu = Menu::createWithArray(exitButton);
-    exitMenu->setAnchorPoint(Vec2(1.0f, 1.0f));
-    exitMenu->setPosition(Vec2(-box.width / 4, -box.height / 4));
-    exitMenu->setScale(0.2f);
-    this->addChild(exitMenu, 10, "exitMenu");
-	*/
 }
 
 void BeeHivePopup::initTouch() {
