@@ -21,16 +21,22 @@ bool HealthIndicators::init() {
 
 void HealthIndicators::setHealth(HealthState _currentHealth) {
 
+	// initialize with "healthy" image
+	auto stateImage = Sprite::create("indicators/greenSquare.png");
 
 	if (_currentHealth == Healthy) {
-		auto stateImage = Sprite::create("indicators/greenSquare.png");
+		stateImage = Sprite::create("indicators/greenSquare.png");
     } else if (_currentHealth == Average) {
-		auto stateImage = Sprite::create("indicators/yellowSquare.png");
+		stateImage = Sprite::create("indicators/yellowSquare.png");
 	} else if (_currentHealth == Unhealthy) {
-		auto stateImage = Sprite::create("indicators/redSquare.png");
+		stateImage = Sprite::create("indicators/redSquare.png");
     } else { //dead
-        auto stateImage = Sprite::create("indicators/blackSquare.png");
+        stateImage = Sprite::create("indicators/blackSquare.png");
     }
+
+    stateImage->setScale(0.4f); //TODO Mess around with this when played
+    _indicators.push_back(stateImage);
+    this->addChild(stateImage);
 
 }
 
