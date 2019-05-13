@@ -32,9 +32,9 @@ UICustom::Popup* StoryScene::createPopup(int id) {
 
         case 1: //Beehive Info
             if (firstTime1) {
-                auto popup = UICustom::Popup::createAsMessage("GROSSVATER",
-                                                              "Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich.\n"
-                                                              "Kannst du auf meine Bienen aufpassen? Nur bis ich wieder da bin...");
+                auto popup = UICustom::Popup::createAsMessage("GROSSVATER", //todo: change text when popup is done
+                                                              "change text when popup is done.\n"
+                                                              "placeholder...");
                 firstTime1 = false;
                 SaveLoad::saveStory();
                 return popup;
@@ -55,7 +55,7 @@ UICustom::Popup* StoryScene::createPopup(int id) {
         case 3: //Shop Info
             if (firstTime3) {
                 auto popup = UICustom::Popup::createAsMessage("GROSSVATER", //todo: change text when shop is done
-                                                              "Im Shop kannst du verschiedene Sachen kaufen.\n"
+                                                              "change text when shop is done..\n"
                                                               "placeholder");
                 firstTime3 = false;
                 SaveLoad::saveStory();

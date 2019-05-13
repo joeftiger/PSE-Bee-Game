@@ -7,6 +7,7 @@
 #include "Game/GameScene.h"
 #include "BeeHivePopup.h"
 #include "HoneyExtractorPopup.h"
+#include "Story/StoryScene.h"
 
 Node *HoneyMover::createNode() {return HoneyMover::create();}
 
@@ -89,6 +90,14 @@ void HoneyMover::onTouchEnded(Touch *touch, void *) {
         _beeHive = beeAtlas->getBeeHiveAt(pos);
         auto popup = BeeHivePopup::createWith(_beeHive);
         this->addChild(popup, 100);
+
+        // Tutorial Popup
+        auto storyScene = StoryScene::getInstance();
+        UICustom::Popup* popupS = storyScene->createPopup(1);
+        if (popupS){
+            this->addChild(popupS,200);
+        }
+
     }
     _isDrag = false;
 
@@ -100,6 +109,13 @@ void HoneyMover::interactAt(const Vec2& pos) {
         auto beeHive = BeeHiveAtlas::getInstance()->getBeeHiveAt(pos);
         auto popup = BeeHivePopup::createWith(beeHive);
         this->addChild(popup, 100);
+
+        // Tutorial Popup
+        auto storyScene = StoryScene::getInstance();
+        UICustom::Popup* popupS = storyScene->createPopup(1);
+        if (popupS){
+            this->addChild(popupS,200);
+        }
 
     } else if(HoneyExtractorAtlas::getInstance()->hasHoneyExtractorAt(pos)) {
 
