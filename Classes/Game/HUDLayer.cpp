@@ -81,7 +81,7 @@ bool HUDLayer::init() {
     auto storyScene = StoryScene::getInstance();
     UICustom::Popup* popup = storyScene->createPopup(0);
     if (popup){
-        this->addChild(popup,80);
+        this->addChild(popup,200);
     }
 
 	return true;
