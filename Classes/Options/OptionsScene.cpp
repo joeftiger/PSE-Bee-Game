@@ -49,7 +49,7 @@ bool OptionsScene::init() {
                                          !Settings::getInstance()->getAsBool(Settings::HD_Textures));
         }
     });
-    textureCheckbox->setSelected(Settings::getInstance()->getAsBool(Settings::SettingName::HD_Textures));
+    textureCheckbox->setSelected(Settings::getInstance()->getAsBool(Settings::Option::HD_Textures));
     textureCheckbox->setAnchorPoint(Vec2(1.025f, 0.5f));
     textureCheckbox->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
     textureCheckbox->setScale(1.3f);
