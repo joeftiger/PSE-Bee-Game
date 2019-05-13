@@ -1,5 +1,5 @@
 
-#include <Resources/SpriteContainer.h>
+#include "../Resources/SpriteContainer.h"
 #include "BeeParticles.h"
 #include "cocos2d.h"
 

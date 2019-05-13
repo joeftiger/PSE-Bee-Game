@@ -25,6 +25,7 @@ BeeHive::BeeHive(int bees, int varroa) {
 	_varroaAlive = varroa;
 	_rawHoney = 0;
 	_particlesNode = nullptr;
+	_healthIndicatorNode = nullptr;
 	assert(invariant());
 }
 
@@ -153,6 +154,10 @@ BeeParticles* BeeHive::getParticles() {
     return _particlesNode;
 }
 
+BeeParticles* BeeHive::getHealthIndicators() {
+    //return _healthIndicatorNode;
+}
+
 void BeeHive::setParticles() {
     _tileMapLayer = (TileMapLayer*) Director::getInstance()->getRunningScene()->getChildByName(TILE_MAP_LAYER_NAME);
     if(!_particlesNode) {
@@ -165,6 +170,18 @@ void BeeHive::setParticles() {
     //_particlesNode->setPosition(Vec2(_particlesNode->getPosition().x + random(-1.0, 1.0),
      //       _particlesNode->getPosition().y + random(-1.0, 1.0)));
     _particlesNode->setQuantity(_beesAlive);
+}
+
+void BeeHive::setHealthIndicators() {
+    _tileMapLayer = (TileMapLayer*) Director::getInstance()->getRunningScene()->getChildByName(TILE_MAP_LAYER_NAME);
+	if(!_healthIndicatorNode) {
+			//TODO Change to create function of healhIndicators
+			/**
+            _healthIndicatorNode = BeeParticles::create();
+            _tileMapLayer->addChild(_healthIndicatorNode);
+            _healthIndicatorNode->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * Settings::getInstance()->getMapScale()
+                                        + _tileMapLayer->getMap()->getTileSize() * Settings::getInstance()->getMapScale()/2));
+        */}
 }
 
 void BeeHive::setTileMap(TileMapLayer* tileMap) {
