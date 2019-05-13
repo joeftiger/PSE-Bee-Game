@@ -55,10 +55,18 @@ bool OptionsScene::init() {
     textureCheckbox->setScale(1.3f);
 
 
-    auto emptyButton = ui::Button::create("Sprites/empty.png");
-    emptyButton->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
-    emptyButton->setAnchorPoint(Vec2(-0.025f, 0.5f));
-    emptyButton->setScale(1.3f);
+    auto showTutorial = CheckBox::create("Sprites/tutorial_off.png", "Sprites/tutorial_on.png", "Sprites/tutorial_on.png",
+                                         "Sprites/tutorial_off.png", "Sprites/tutorial_off.png");
+	showTutorial->addTouchEventListener([&](Ref *sender, Widget::TouchEventType type) {
+		if (type == Widget::TouchEventType::ENDED) {
+			Settings::getInstance()->set(Settings::Show_Tutorial,
+			                             !Settings::getInstance()->getAsBool(Settings::Show_Tutorial));
+		}
+	});
+	showTutorial->setSelected(Settings::getInstance()->getAsBool(Settings::Option::Show_Tutorial));
+    showTutorial->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
+    showTutorial->setAnchorPoint(Vec2(-0.025f, 0.5f));
+    showTutorial->setScale(1.3f);
 
     auto exitButton = ui::Button::create("menu/exit.png");
     exitButton->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
@@ -73,7 +81,7 @@ bool OptionsScene::init() {
 
     backgroundOptions->addChild(textureCheckbox);
     backgroundOptions->addChild(resetButton);
-    backgroundOptions->addChild(emptyButton);
+    backgroundOptions->addChild(showTutorial);
     backgroundOptions->addChild(exitButton);
 
     return true;
