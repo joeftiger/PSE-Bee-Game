@@ -1,5 +1,6 @@
 
 #include "../Resources/SpriteContainer.h"
+#include "../HeaderFiles/HealthStates.h"
 #include "HealthIndicators.h"
 #include "cocos2d.h"
 
@@ -16,6 +17,19 @@ bool HealthIndicators::init() {
     this->update(123);
 
     return true;
+}
+
+void HealthIndicators::setHealth(HealthState _currentHealth) {
+	if (_currentHealth == Healthy) {
+
+    } else if (_currentHealth == Average) {
+
+	} else if (_currentHealth == Unhealthy) {
+
+    } else {
+        //dead
+    }
+
 }
 
 void HealthIndicators::nextParticlesPos(float dt) {
