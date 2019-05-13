@@ -15,11 +15,11 @@ class StoryScene : public cocos2d::Node {
 private:
     Time* time;
     //bool state;
-    bool firstTime0;
-    bool firstTime1;
-    bool firstTime2;
-    bool firstTime3;
-    bool firstTime4;
+    bool firstTime0 = true;
+    bool firstTime1 = true;
+    bool firstTime2 = true;
+    bool firstTime3 = true;
+    bool firstTime4 = true;
 
 public:
     static StoryScene *getInstance() {
