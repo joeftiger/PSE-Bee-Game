@@ -56,7 +56,7 @@ void BeeHivePopup::initInfoPanel() {
     _beesLabel->setPosition(Vec2(box.width * 5 / 8, box.height / 2));
     _beesLabel->setScale(2);
     auto beeSprite = SpriteContainer::getInstance()->getSpriteOf(
-            Sprites::erlenmeyer); //to change with a bee sprite
+            Sprites::erlenmeyer); // TODO: change with a bee sprite
     beeSprite->setScale(0.3f);
     beeSprite->setAnchorPoint(Vec2(1, 0.5f));
     beeSprite->setPosition(Vec2(-30, 15));
@@ -70,7 +70,8 @@ void BeeHivePopup::initInfoPanel() {
     _varroaLabel->setAnchorPoint(Vec2(0, 0.5));
     _varroaLabel->setPosition(Vec2(box.width * 5 / 8, box.height * 1 / 3));
     _varroaLabel->setScale(2);
-    auto varroaSprite = SpriteContainer::getInstance()->getSpriteOf(Sprites::honey_glass_3d);
+    auto varroaSprite = SpriteContainer::getInstance()->getSpriteOf(
+        Sprites::honey_glass_3d); // TODO: change with a varroa sprite
     varroaSprite->setScale(0.3f);
     varroaSprite->setAnchorPoint(Vec2(1, 0.5f));
     varroaSprite->setPosition(Vec2(-30, 15));
@@ -233,7 +234,7 @@ std::string BeeHivePopup::stringShortener(std::string s) {
             return temp;
 
         case 10:
-            temp = "stop playing already";
+            temp = "Stop playing already";
             return temp;
 
         default:
