@@ -20,6 +20,7 @@ private:
 	int _beesAlive;
 	int _varroaAlive;
 	float _rawHoney;
+	float _mapScale;
 	BeeParticles* _particlesNode;
 	HealthIndicators* _healthIndicatorNode;
 	cocos2d::Vec2 _position;
