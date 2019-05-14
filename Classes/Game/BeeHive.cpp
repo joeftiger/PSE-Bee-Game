@@ -26,6 +26,9 @@ BeeHive::BeeHive(int bees, int varroa) {
 	_rawHoney = 0;
 	_particlesNode = nullptr;
 	_healthIndicatorNode = nullptr;
+
+	// initialize with "healthy" image
+    auto stateImage = Sprite::create("indicators/greenSquare.png");
 	assert(invariant());
 }
 
@@ -70,12 +73,16 @@ float BeeHive::takeRawHoney(float amount) {
 
 HealthState BeeHive::currentHealth() {
 	if (_beesAlive / _varroaAlive  >= 0.75) {
+		auto stateImage = Sprite::create("indicators/greenSquare.png");
 		return HealthState::Healthy;
 	} else if (_beesAlive / _varroaAlive  >= 0.40) {
+		auto stateImage = Sprite::create("indicators/yellowSquare.png");
 		return HealthState::Average;
     } else if (_beesAlive / _varroaAlive  >= 0.01) {
+		auto stateImage = Sprite::create("indicators/redSquare.png");
 	    return HealthState::Unhealthy;
-    } else {
+    } else { //dead
+        auto stateImage = Sprite::create("indicators/blackSquare.png");
 	    return HealthState::Dead;
     }
 }
@@ -99,7 +106,7 @@ void BeeHive::update() {
 	if (_varroaAlive > 0) {
 	    _varroaAlive = (int) clampf(_varroaAlive + alg->nextVarroa(_varroaAlive), 0, std::numeric_limits<int>::max());
 	}
-
+	currentHealth();
 	varroaRandomizer();
 	assert(invariant());
 }
