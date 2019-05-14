@@ -23,7 +23,7 @@ UICustom::Popup* StoryScene::createPopup(int id) {
             if (firstTime0) {
                 auto popup = UICustom::Popup::createAsMessage("GROSSVATER",
                                                  "Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich.\n"
-                                                 "Kannst du auf meine Bienen aufpassen? Keine Angst, sie sind sehr lieb.");
+                                                 "Kannst du auf meine Bienen aufpassen? Keine Angst, sie stechen nicht.");
                 firstTime0 = false;
                 SaveLoad::saveStory();
                 return popup;
