@@ -5,10 +5,10 @@
  * List of the 4 health states
  */
 enum HealthState {
-	Dead,
-	Unhealthy,
-	Average,
-	Healthy
+	Healthy = 1,
+	Average = 2,
+	Unhealthy = 3,
+	Dead = 4
 };
 
 #endif // !HEALTHSTATES_H
