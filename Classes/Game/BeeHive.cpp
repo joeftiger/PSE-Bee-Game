@@ -2,8 +2,8 @@
 #include <cassert>
 #include <string>
 #include <stdexcept>
-#include <Algorithm/GameAlgorithm.h>
-#include <Settings.h>
+#include "../Algorithm/GameAlgorithm.h"
+#include "../Settings.h"
 #include "BeeHive.h"
 #include "GameScene.h"
 #include "../HeaderFiles/HealthStates.h"
@@ -68,18 +68,20 @@ float BeeHive::takeRawHoney(float amount) {
 
 HealthState BeeHive::currentHealth() {
 	_beesToVarroaRatio = _beesAlive / _varroaAlive;
+	cocos2d::log("Current bees alive %d", _varroaAlive);
+	cocos2d::log("Current varroa alive %d", _beesAlive);
 	if (_beesToVarroaRatio   >= 0.75) {
 		_currentHealth = HealthState::Healthy;
-		cocos2d::log("Set health to healthy");
+		cocos2d::log("Set health to healthy, ratio %f", _beesToVarroaRatio);
 	} else if (_beesToVarroaRatio   >= 0.35) {
 		_currentHealth = HealthState::Average;
-		cocos2d::log("Set health to average");
+		cocos2d::log("Set health to average %f", _beesToVarroaRatio);
     } else if (_beesToVarroaRatio   >= 0.001) {
 	    _currentHealth = HealthState::Unhealthy;
-	    cocos2d::log("Set health to unhealthy");
+	    cocos2d::log("Set health to unhealthy %f", _beesToVarroaRatio);
     } else { //dead
 	    _currentHealth = HealthState::Dead;
-	    cocos2d::log("Set health to dead");
+	    cocos2d::log("Set health to dead, ratio %f", _beesToVarroaRatio);
     }
     return _currentHealth;
 }
