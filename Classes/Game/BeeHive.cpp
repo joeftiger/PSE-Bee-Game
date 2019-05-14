@@ -176,12 +176,14 @@ void BeeHive::setParticles() {
 }
 
 void BeeHive::setHealthIndicators() {
+    currentHealth();
     _tileMapLayer = (TileMapLayer*) Director::getInstance()->getRunningScene()->getChildByName(TILE_MAP_LAYER_NAME);
 	_mapScale = Settings::getInstance()->getAsFloat(Settings::Map_Scale);
 
 	// instantiate with "healthy" color
 	auto _healthImage = Sprite::create("indicators/greenSquare.png");
-	currentHealth();
+	_healthImage->setScale(0.08f);
+
 	switch (_currentHealth){
 		case (Healthy):
 			_healthImage = Sprite::create("indicators/greenSquare.png");
@@ -201,7 +203,6 @@ void BeeHive::setHealthIndicators() {
 			_healthImage = Sprite::create("indicators/greenSquare.png");
 	}
 
-	_healthImage->setScale(0.08f);
 	_tileMapLayer->addChild(_healthImage);
         _healthImage->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * _mapScale
                     + _tileMapLayer->getMap()->getTileSize() * _mapScale / 2));
