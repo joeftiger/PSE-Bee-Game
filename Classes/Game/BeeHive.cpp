@@ -73,18 +73,15 @@ float BeeHive::takeRawHoney(float amount) {
 
 HealthState BeeHive::currentHealth() {
 	if (_beesAlive / _varroaAlive  >= 0.75) {
-		auto stateImage = Sprite::create("indicators/greenSquare.png");
-		return HealthState::Healthy;
+		_currentHealth = HealthState::Healthy;
 	} else if (_beesAlive / _varroaAlive  >= 0.40) {
-		auto stateImage = Sprite::create("indicators/yellowSquare.png");
-		return HealthState::Average;
+		_currentHealth = HealthState::Average;
     } else if (_beesAlive / _varroaAlive  >= 0.01) {
-		auto stateImage = Sprite::create("indicators/redSquare.png");
-	    return HealthState::Unhealthy;
+	    _currentHealth = HealthState::Unhealthy;
     } else { //dead
-        auto stateImage = Sprite::create("indicators/blackSquare.png");
-	    return HealthState::Dead;
+	    _currentHealth = HealthState::Dead;
     }
+    return _currentHealth;
 }
 
 void BeeHive::killVarroa() {
@@ -107,6 +104,7 @@ void BeeHive::update() {
 	    _varroaAlive = (int) clampf(_varroaAlive + alg->nextVarroa(_varroaAlive), 0, std::numeric_limits<int>::max());
 	}
 	currentHealth();
+	setHealthIndicators();
 	varroaRandomizer();
 	assert(invariant());
 }
@@ -181,13 +179,31 @@ void BeeHive::setParticles() {
 
 void BeeHive::setHealthIndicators() {
     _tileMapLayer = (TileMapLayer*) Director::getInstance()->getRunningScene()->getChildByName(TILE_MAP_LAYER_NAME);
-	if(!_healthIndicatorNode) {
-			_currentHealth = currentHealth();
-            _healthIndicatorNode = HealthIndicators::create();
-            _tileMapLayer->addChild(_healthIndicatorNode);
-            _healthIndicatorNode->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * Settings::getInstance()->getAsFloat(Settings::Map_Scale)
-                                                 + _tileMapLayer->getMap()->getTileSize() * Settings::getInstance()->getAsFloat(Settings::Map_Scale)/2));
+	// instantiate with "healthy" color
+	auto stateImage = Sprite::create("indicators/greenSquare.png");
+	currentHealth();
+	switch (_currentHealth){
+		case (Healthy):
+			stateImage = Sprite::create("indicators/greenSquare.png");
+			break;
+		case (Average):
+            stateImage = Sprite::create("indicators/yellowSquare.png");
+            break;
+
+        case (Unhealthy):
+            stateImage = Sprite::create("indicators/redSquare.png");
+            break;
+
+        case (Dead):
+            stateImage = Sprite::create("indicators/blackSquare.png");
+            break;
 	}
+
+	stateImage->setScale(0.08f);
+	_tileMapLayer->addChild(stateImage);
+        stateImage->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * Settings::getInstance()->getAsFloat(Settings::Map_Scale)
+                    + _tileMapLayer->getMap()->getTileSize() * Settings::getInstance()->getAsFloat(Settings::Map_Scale)/2));
+
 
         //node movement
         //_particlesNode->setPosition(Vec2(_particlesNode->getPosition().x + random(-1.0, 1.0),
