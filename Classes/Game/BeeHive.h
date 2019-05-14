@@ -133,10 +133,9 @@ public:
 	BeeParticles* getParticles();
 
 	/**
-     * Creating the health Indicators to display
-     * TODO
+     * returns health indicator
      */
-    BeeParticles* getHealthIndicators();
+    HealthIndicators* getHealthIndicators();
 
 	void setParticles();
 

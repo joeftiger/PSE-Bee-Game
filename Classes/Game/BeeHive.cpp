@@ -154,8 +154,8 @@ BeeParticles* BeeHive::getParticles() {
     return _particlesNode;
 }
 
-BeeParticles* BeeHive::getHealthIndicators() {
-    //return _healthIndicatorNode;
+HealthIndicators* BeeHive::getHealthIndicators() {
+    return _healthIndicatorNode;
 }
 
 void BeeHive::setParticles() {
