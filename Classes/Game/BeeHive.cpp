@@ -7,7 +7,6 @@
 #include "BeeHive.h"
 #include "GameScene.h"
 #include "../HeaderFiles/HealthStates.h"
-#include "Time.h"
 
 bool BeeHive::invariant() {
 	//assert(_beesAlive >= 0);
@@ -25,7 +24,6 @@ BeeHive::BeeHive(int bees, int varroa) {
 	_varroaAlive = varroa;
 	_rawHoney = 0;
 	_particlesNode = nullptr;
-	_healthIndicatorNode = nullptr;
 
 	// initialize with "healthy" image
     auto stateImage = Sprite::create("indicators/greenSquare.png");
@@ -159,10 +157,6 @@ BeeParticles* BeeHive::getParticles() {
     return _particlesNode;
 }
 
-HealthIndicators* BeeHive::getHealthIndicators() {
-    return _healthIndicatorNode;
-}
-
 void BeeHive::setParticles() {
     _tileMapLayer = (TileMapLayer*) Director::getInstance()->getRunningScene()->getChildByName(TILE_MAP_LAYER_NAME);
      _mapScale = Settings::getInstance()->getAsFloat(Settings::Map_Scale);
@@ -211,10 +205,10 @@ void BeeHive::setHealthIndicators() {
         stateImage->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * _mapScale
                     + _tileMapLayer->getMap()->getTileSize() * _mapScale / 2));
 
-		// displacement to the top right of sprite
+		// displacement of the indicator
 		// TODO Test which position is the most intuitive
-		stateImage->setPosition(Vec2(stateImage->getPosition().x + 50 * _mapScale,
-									stateImage->getPosition().y + 50 * _mapScale));
+		stateImage->setPosition(Vec2(stateImage->getPosition().x + 10 * _mapScale,
+									stateImage->getPosition().y + 10 * _mapScale));
 
 }
 
