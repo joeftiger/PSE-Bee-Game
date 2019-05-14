@@ -24,9 +24,6 @@ BeeHive::BeeHive(int bees, int varroa) {
 	_varroaAlive = varroa;
 	_rawHoney = 0;
 	_particlesNode = nullptr;
-
-	// initialize with "healthy" image
-    auto stateImage = Sprite::create("indicators/greenSquare.png");
 	assert(invariant());
 }
 
@@ -73,13 +70,16 @@ HealthState BeeHive::currentHealth() {
 	_beesToVarroaRatio = _beesAlive / _varroaAlive;
 	if (_beesToVarroaRatio   >= 0.75) {
 		_currentHealth = HealthState::Healthy;
+		cocos2d::log("Set health to healthy");
 	} else if (_beesToVarroaRatio   >= 0.35) {
 		_currentHealth = HealthState::Average;
+		cocos2d::log("Set health to average");
     } else if (_beesToVarroaRatio   >= 0.001) {
 	    _currentHealth = HealthState::Unhealthy;
+	    cocos2d::log("Set health to unhealthy");
     } else { //dead
 	    _currentHealth = HealthState::Dead;
-	    //cocos2d::log("Set health to dead");
+	    cocos2d::log("Set health to dead");
     }
     return _currentHealth;
 }
@@ -103,7 +103,6 @@ void BeeHive::update() {
 	if (_varroaAlive > 0) {
 	    _varroaAlive = (int) clampf(_varroaAlive + alg->nextVarroa(_varroaAlive), 0, std::numeric_limits<int>::max());
 	}
-	currentHealth();
 	setHealthIndicators();
 	varroaRandomizer();
 	assert(invariant());
