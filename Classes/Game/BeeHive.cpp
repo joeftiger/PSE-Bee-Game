@@ -67,21 +67,15 @@ float BeeHive::takeRawHoney(float amount) {
 }
 
 HealthState BeeHive::currentHealth() {
-	_beesToVarroaRatio = _beesAlive / _varroaAlive;
-	cocos2d::log("Current bees alive %d", _varroaAlive);
-	cocos2d::log("Current varroa alive %d", _beesAlive);
-	if (_beesToVarroaRatio   >= 0.75) {
+	_beesToVarroaRatio = _beesAlive / (_varroaAlive + 0.001f);
+	if (_beesToVarroaRatio   >= 0.75f) {
 		_currentHealth = HealthState::Healthy;
-		cocos2d::log("Set health to healthy, ratio %f", _beesToVarroaRatio);
-	} else if (_beesToVarroaRatio   >= 0.35) {
+	} else if (_beesToVarroaRatio   >= 0.45f) {
 		_currentHealth = HealthState::Average;
-		cocos2d::log("Set health to average %f", _beesToVarroaRatio);
-    } else if (_beesToVarroaRatio   >= 0.001) {
+    } else if (_beesToVarroaRatio   >= 0.01f) {
 	    _currentHealth = HealthState::Unhealthy;
-	    cocos2d::log("Set health to unhealthy %f", _beesToVarroaRatio);
     } else { //dead
 	    _currentHealth = HealthState::Dead;
-	    cocos2d::log("Set health to dead, ratio %f", _beesToVarroaRatio);
     }
     return _currentHealth;
 }
@@ -182,7 +176,7 @@ void BeeHive::setHealthIndicators() {
     _tileMapLayer = (TileMapLayer*) Director::getInstance()->getRunningScene()->getChildByName(TILE_MAP_LAYER_NAME);
 	_mapScale = Settings::getInstance()->getAsFloat(Settings::Map_Scale);
 
-	// instantiate with "healthy" color
+	// instantiate with "healthy" state image
 	auto _healthImage = Sprite::create("indicators/greenSquare.png");
 
 
