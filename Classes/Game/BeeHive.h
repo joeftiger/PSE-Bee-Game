@@ -1,12 +1,12 @@
 
-#ifndef PSE_BEE_GAME_BEEHIVE_H
-#define PSE_BEE_GAME_BEEHIVE_H
+#ifndef GAME_BEEHIVE_H
+#define GAME_BEEHIVE_H
 
-#include "../Effects/BeeParticles.h"
 #include "cocos2d.h"
+#include "../Effects/BeeParticles.h"
 #include "../HeaderFiles/Restorable.h"
-#include "TileMapLayer.h"
 #include "../HeaderFiles/HealthStates.h"
+#include "TileMapLayer.h"
 
 static const int MAX_BEES = 50000;
 static const float MAX_RAW_HONEY = 15000;
@@ -137,10 +137,13 @@ public:
 
 	void setParticles();
 
+	/**
+	 * gets the healthState via currentHealth() and sets one of the appropriate colors
+	 */
 	void setHealthIndicators();
 
 	void setTileMap(TileMapLayer* tileMap);
 
 };
 
-#endif //PSE_BEE_GAME_BEEHIVE_H
+#endif //GAME_BEEHIVE_H
