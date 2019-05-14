@@ -79,6 +79,7 @@ HealthState BeeHive::currentHealth() {
 	    _currentHealth = HealthState::Unhealthy;
     } else { //dead
 	    _currentHealth = HealthState::Dead;
+	    //cocos2d::log("Set health to dead");
     }
     return _currentHealth;
 }
@@ -182,7 +183,7 @@ void BeeHive::setHealthIndicators() {
 
 	// instantiate with "healthy" color
 	auto _healthImage = Sprite::create("indicators/greenSquare.png");
-	_healthImage->setScale(0.08f);
+
 
 	switch (_currentHealth){
 		case (Healthy):
@@ -202,6 +203,7 @@ void BeeHive::setHealthIndicators() {
         default: // when in doubt, they're healthy
 			_healthImage = Sprite::create("indicators/greenSquare.png");
 	}
+	_healthImage->setScale(0.08f);
 
 	_tileMapLayer->addChild(_healthImage);
         _healthImage->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * _mapScale
