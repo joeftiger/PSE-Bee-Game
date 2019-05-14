@@ -1,6 +1,6 @@
 
-#ifndef PROJ_ANDROID_HONEYEXTRACTOR_H
-#define PROJ_ANDROID_HONEYEXTRACTOR_H
+#ifndef HONEYEXTRACTOR_H
+#define HONEYEXTRACTOR_H
 
 #include "cocos2d.h"
 #include "../HeaderFiles/Restorable.h"
@@ -83,4 +83,4 @@ public:
 
 };
 
-#endif //PROJ_ANDROID_HONEYEXTRACTOR_H
+#endif //HONEYEXTRACTOR_H

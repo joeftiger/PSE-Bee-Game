@@ -1,6 +1,6 @@
 
-#ifndef PSE_BEE_GAME_DRAGDROP_H
-#define PSE_BEE_GAME_DRAGDROP_H
+#ifndef DRAGDROP_H
+#define DRAGDROP_H
 
 #include <TileMapObjects/PlaceableTile.h>
 #include "cocos2d.h"
@@ -54,4 +54,4 @@ public:
 };
 
 
-#endif //PSE_BEE_GAME_DRAGDROP_H
+#endif //DRAGDROP_H

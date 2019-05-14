@@ -1,6 +1,6 @@
 
-#ifndef PSE_BEE_GAME_HONEYMOVER_H
-#define PSE_BEE_GAME_HONEYMOVER_H
+#ifndef HONEYMOVER_H
+#define HONEYMOVER_H
 
 #include <Game/TileMapLayer.h>
 #include "cocos2d.h"
@@ -44,4 +44,4 @@ public:
 };
 
 
-#endif //PSE_BEE_GAME_HONEYMOVER_H
+#endif //HONEYMOVER_H

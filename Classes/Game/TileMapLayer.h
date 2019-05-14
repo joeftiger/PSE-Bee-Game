@@ -1,6 +1,6 @@
 
-#ifndef PSE_BEE_GAME_TILEMAPLAYER_H
-#define PSE_BEE_GAME_TILEMAPLAYER_H
+#ifndef TILEMAPLAYER_H
+#define TILEMAPLAYER_H
 
 #include <TileMapObjects/Placeable.h>
 #include <Resources/Tiles.h>
@@ -146,6 +146,6 @@ public:
 };
 
 
-#endif //PSE_BEE_GAME_TILEMAPLAYER_H
+#endif //TILEMAPLAYER_H
 
 

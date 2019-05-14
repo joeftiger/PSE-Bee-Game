@@ -1,6 +1,6 @@
 
-#ifndef PSE_BEE_GAME_OBSERVER_H
-#define PSE_BEE_GAME_OBSERVER_H
+#ifndef OBSERVER_H
+#define OBSERVER_H
 
 /**
  * Observer that can be notified of changes and then respond or react accordingly
@@ -13,4 +13,4 @@ public:
 	virtual void notify(void *) = 0;
 };
 
-#endif //PSE_BEE_GAME_OBSERVER_H
+#endif //OBSERVER_H

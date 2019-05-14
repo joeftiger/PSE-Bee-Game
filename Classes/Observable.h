@@ -1,7 +1,6 @@
 
-
-#ifndef PSE_BEE_GAME_OBSERVABLE_H
-#define PSE_BEE_GAME_OBSERVABLE_H
+#ifndef OBSERVABLE_H
+#define OBSERVABLE_H
 
 #include "Observer.h"
 
@@ -60,4 +59,4 @@ public:
 	}
 };
 
-#endif //PSE_BEE_GAME_OBSERVABLE_H
+#endif //OBSERVABLE_H

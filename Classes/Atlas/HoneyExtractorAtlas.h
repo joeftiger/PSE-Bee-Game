@@ -1,6 +1,6 @@
 
-#ifndef PROJ_ANDROID_HONEYEXTRACTORATLAS_H
-#define PROJ_ANDROID_HONEYEXTRACTORATLAS_H
+#ifndef HONEYEXTRACTORATLAS_H
+#define HONEYEXTRACTORATLAS_H
 
 #include "cocos2d.h"
 #include "Observer.h"
@@ -67,4 +67,4 @@ public:
     void fromJSON(rapidjson::Document &doc) override;
 };
 
-#endif //PROJ_ANDROID_HONEYEXTRACTORATLAS_H
+#endif //HONEYEXTRACTORATLAS_H

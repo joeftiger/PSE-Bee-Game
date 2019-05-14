@@ -1,6 +1,6 @@
 
-#ifndef PSE_BEE_GAME_SPRITES_H
-#define PSE_BEE_GAME_SPRITES_H
+#ifndef SPRITES_H
+#define SPRITES_H
 
 
 #include <cocos/2d/CCSprite.h>
@@ -84,4 +84,4 @@ public:
 };
 
 
-#endif //PSE_BEE_GAME_SPRITES_H
+#endif //SPRITES_H

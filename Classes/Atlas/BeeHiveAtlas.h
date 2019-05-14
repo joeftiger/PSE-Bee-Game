@@ -1,6 +1,6 @@
 
-#ifndef PSE_BEE_GAME_BEEHIVEATLAS_H
-#define PSE_BEE_GAME_BEEHIVEATLAS_H
+#ifndef BEEHIVEATLAS_H
+#define BEEHIVEATLAS_H
 
 #include "cocos2d.h"
 #include "Observer.h"
@@ -68,4 +68,4 @@ public:
 	void fromJSON(rapidjson::Document &doc) override;
 };
 
-#endif //PSE_BEE_GAME_BEEHIVEATLAS_H
+#endif //BEEHIVEATLAS_H
