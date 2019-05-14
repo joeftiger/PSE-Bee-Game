@@ -70,11 +70,12 @@ float BeeHive::takeRawHoney(float amount) {
 }
 
 HealthState BeeHive::currentHealth() {
-	if (_beesAlive / _varroaAlive  >= 0.75) {
+	_beesToVarroaRatio = _beesAlive / _varroaAlive;
+	if (_beesToVarroaRatio   >= 0.75) {
 		_currentHealth = HealthState::Healthy;
-	} else if (_beesAlive / _varroaAlive  >= 0.35) {
+	} else if (_beesToVarroaRatio   >= 0.35) {
 		_currentHealth = HealthState::Average;
-    } else if (_beesAlive / _varroaAlive  >= 0.001) {
+    } else if (_beesToVarroaRatio   >= 0.001) {
 	    _currentHealth = HealthState::Unhealthy;
     } else { //dead
 	    _currentHealth = HealthState::Dead;
@@ -179,36 +180,36 @@ void BeeHive::setHealthIndicators() {
 	_mapScale = Settings::getInstance()->getAsFloat(Settings::Map_Scale);
 
 	// instantiate with "healthy" color
-	auto stateImage = Sprite::create("indicators/greenSquare.png");
+	auto _healthImage = Sprite::create("indicators/greenSquare.png");
 	currentHealth();
 	switch (_currentHealth){
 		case (Healthy):
-			stateImage = Sprite::create("indicators/greenSquare.png");
+			_healthImage = Sprite::create("indicators/greenSquare.png");
 			break;
 		case (Average):
-            stateImage = Sprite::create("indicators/yellowSquare.png");
+            _healthImage = Sprite::create("indicators/yellowSquare.png");
             break;
 
         case (Unhealthy):
-            stateImage = Sprite::create("indicators/redSquare.png");
+            _healthImage = Sprite::create("indicators/redSquare.png");
             break;
 
         case (Dead):
-            stateImage = Sprite::create("indicators/blackSquare.png");
+            _healthImage = Sprite::create("indicators/blackSquare.png");
             break;
         default: // when in doubt, they're healthy
-			stateImage = Sprite::create("indicators/greenSquare.png");
+			_healthImage = Sprite::create("indicators/greenSquare.png");
 	}
 
-	stateImage->setScale(0.08f);
-	_tileMapLayer->addChild(stateImage);
-        stateImage->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * _mapScale
+	_healthImage->setScale(0.08f);
+	_tileMapLayer->addChild(_healthImage);
+        _healthImage->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * _mapScale
                     + _tileMapLayer->getMap()->getTileSize() * _mapScale / 2));
 
 		// displacement of the indicator
 		// TODO Test which position is the most intuitive
-		stateImage->setPosition(Vec2(stateImage->getPosition().x + 10 * _mapScale,
-									stateImage->getPosition().y + 10 * _mapScale));
+		_healthImage->setPosition(Vec2(_healthImage->getPosition().x + 10 * _mapScale,
+										_healthImage->getPosition().y + 10 * _mapScale));
 
 }
 

@@ -18,17 +18,20 @@ class BeeHive : Restorable {
 private:
 	int _beesAlive;
 	int _varroaAlive;
+
 	float _rawHoney;
 	float _mapScale;
+	float _beesToVarroaRatio;
 
 	BeeParticles* _particlesNode;
+	HealthState _currentHealth;
+	TileMapLayer* _tileMapLayer;
 	cocos2d::Vec2 _position;
 
-	HealthState _currentHealth;
-
 	bool invariant();
+
 	void varroaRandomizer();
-	TileMapLayer* _tileMapLayer;
+
 
 public:
 	/**
