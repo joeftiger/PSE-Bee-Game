@@ -81,6 +81,8 @@ public:
 	 * @return corresponding seasonal sprite id
 	 */
     static Sprites::SpriteID getSeasonSpriteIDof(SpriteID id, Season season);
+
+	static int getPriceOfSprite(Sprites::SpriteID id);
 };
 
 

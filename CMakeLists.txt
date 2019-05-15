@@ -94,6 +94,7 @@ list(APPEND GAME_SOURCE
 		Classes/Game/TileMapLayer.cpp
         Classes/Game/Time.cpp
         Classes/Game/Wallet.cpp
+		Classes/Game/Prices.cpp
         Classes/Interaction/BeeHivePopup.cpp
         Classes/Interaction/HoneyExtractorPopup.cpp
 		Classes/Interaction/HoneyMover.cpp
@@ -111,7 +112,7 @@ list(APPEND GAME_SOURCE
         Classes/Story/Popup.cpp
         Classes/Story/StoryScene.cpp
         Classes/TileMapObjects/PlaceableSprite.cpp
-        Classes/TileMapObjects/PlaceableTile.cpp
+        Classes/TileMapObjects/PlaceableTile.cpp	
         )
 
 list(APPEND GAME_HEADER
@@ -129,6 +130,7 @@ list(APPEND GAME_HEADER
         Classes/Game/TileMapLayer.h
         Classes/Game/Time.h
         Classes/Game/Wallet.h
+		Classes/Game/Prices.cpp
         Classes/HeaderFiles/HealthStates.h
         Classes/HeaderFiles/Restorable.h
         Classes/HeaderFiles/Seasons.h

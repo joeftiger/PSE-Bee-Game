@@ -1,5 +1,6 @@
 
 #include "PlaceableTile.h"
+#include "Game/Prices.h"
 
 PlaceableTile::PlaceableTile(Tiles::TileGID gid) {
     _gid = gid;
@@ -15,4 +16,8 @@ void PlaceableTile::placeOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position)
 
 Sprite *PlaceableTile::getSprite() {
     return Tiles::getSpriteOf(_gid);
+}
+
+int PlaceableTile::getPrice() {
+	return Prices::getPriceForTile(_gid);
 }

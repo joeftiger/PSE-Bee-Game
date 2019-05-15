@@ -18,6 +18,8 @@ public:
 	virtual void placeOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) = 0;
 
 	virtual cocos2d::Sprite *getSprite() = 0;
+	
+	virtual int getPrice() = 0;
 };
 
 #endif //PLACEABLE_H

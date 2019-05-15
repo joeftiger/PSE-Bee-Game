@@ -11,6 +11,7 @@
 #include "MainMenu/MainMenuScene.h"
 #include "Game/TileMapLayer.h"
 #include "Game/Wallet.h"
+#include "Game/Prices.h"
 
 using namespace cocos2d;
 
@@ -97,7 +98,8 @@ void ItemPanelLayer::initializeItemPanel() {
 		sprite->setScale(box.width / (sprite->getBoundingBox().size.width * 3));
 		this->addChild(sprite, x + y);
 
-		auto price = Label::createWithTTF(labelConfig, std::to_string(100)); //TODO: Change Text to p->getPrice() once implemented
+		
+		auto price = Label::createWithTTF(labelConfig, std::to_string(p->getPrice())); //TODO: Change Text to p->getPrice() once implemented
 		price->enableOutline(Color4B::BLACK, 1);
 		price->setAnchorPoint(Vec2(0.5f, 1.0f));
 		price->setPositionX(pos.x + sprite->getBoundingBox().size.width * 0.5f); //TODO:fix Position
@@ -166,7 +168,7 @@ void ItemPanelLayer::onTouchEnded(Touch *touch, void *) {
     auto pos = touch->getLocation() + this->getParent()->getPosition();
     if (isDrag()) {
     	if (_tileMapLayer->canPlace(_draggedPlaceable, pos)) {
-			if (Wallet::getInstance()->subtractMoney(100)) { //TODO: actual price
+			if (Wallet::getInstance()->subtractMoney(_draggedPlaceable->getPrice())) { //TODO: actual price
 				_tileMapLayer->place(_draggedPlaceable, pos);
 			}
     	}
