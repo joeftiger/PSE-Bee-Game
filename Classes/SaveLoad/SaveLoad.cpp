@@ -12,8 +12,8 @@
 #include "json/ostreamwrapper.h"
 #include <iostream>
 #include <fstream>
-#include <json/stringbuffer.h>
-#include <json/writer.h>
+#include "json/stringbuffer.h"
+#include "json/writer.h"
 
 using namespace rapidjson;
 

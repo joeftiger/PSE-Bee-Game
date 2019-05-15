@@ -148,6 +148,9 @@ public:
 
 	 static bool storySaveExists();
 
+	/**
+     *	if it exists, deletes "story.json"
+     */
 	 static void deleteStorySave();
 };
 
