@@ -90,7 +90,7 @@ std::vector<cocos2d::Vec2> TileMapLayer::getHoneyExtractors() {
 			auto coordinate = Vec2(x, y);
 			auto gid = _objectLayer->getTileGIDAt(coordinate);
 	//TODO Change this to the honey extractor tile / sprite
-			if (gid == Tiles::beehive_big_overflow) {
+			if (Tiles::isHoneyExtractor(static_cast<Tiles::TileGID(gid)) {
 				honeyExtractors.push_back(coordinate);
 			}
 		}

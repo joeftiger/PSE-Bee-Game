@@ -82,6 +82,8 @@ public:
 	 * @return corresponding seasonal tile
 	 */
 	static TileGID getSeasonTileGIDof(TileGID gid, Season season);
+
+	static bool isHoneyExtractor(TileGID gid);
 };
 
 #endif /* TILES_H */

@@ -2,7 +2,9 @@
 #include "Tiles.h"
 #include "SpriteContainer.h"
 
-
+bool Tiles::isHoneyExtractor(Tiles::TileGID gid) {
+    return gid == honeyextractor_summer || gid == honeyextractor_winter;
+}
 bool Tiles::isBeeHive(Tiles::TileGID gid) {
 	return  gid == beehive_small  || gid == beehive_small_open  || gid == beehive_small_winter  ||
 			gid == beehive_middle || gid == beehive_middle_open || gid == beehive_middle_winter || gid == beehive_middle_overflow ||
