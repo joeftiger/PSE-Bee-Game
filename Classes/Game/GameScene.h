@@ -54,6 +54,8 @@ public:
 	 */
 	void onTouchMoved(Touch *touch, Event *event);
 
+	void setContainerPos(Vec2 pos);
+
 	void onTouchEnded(Touch *touch, Event *event);
 
 	void saveGameState(float dt);
