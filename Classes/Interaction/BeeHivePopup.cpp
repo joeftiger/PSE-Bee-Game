@@ -134,6 +134,9 @@ void BeeHivePopup::initButtons() {
 	giveMedicine->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
 		if (type == ui::Widget::TouchEventType::ENDED) {
 			_beeHive->killVarroa();
+			if (_beeHive->isDead()) {
+
+			}
 		}
 	});
 	buttons.pushBack(giveMedicine);
@@ -167,7 +170,23 @@ void BeeHivePopup::initButtons() {
 	exitButton->setAnchorPoint(Vec2(1.0f, 1.0f));
 	exitButton->setPosition(Vec2(box.width, box.height));
 	_background->addChild(exitButton);
-
+	
+	if (_beeHive->isDead()) {
+		auto reviveButton = ui::Button::create("menu/empty.png");
+		reviveButton->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
+			if (type == ui::Widget::TouchEventType::ENDED) {
+				_beeHive->revive();
+			}
+			});
+		reviveButton->setAnchorPoint(Vec2(1.0f, 0.0f));
+		reviveButton->setPosition(Vec2(box.width, 0));
+		std::string text = "Neubevölkerung\n" + std::to_string(Prices::getPriceForRevive()) + " CHF";
+		reviveButton->setTitleAlignment(TextHAlignment::CENTER);
+		reviveButton->setTitleText(text);
+		reviveButton->setTitleFontName(FONT);
+		reviveButton->setTitleFontSize(10);
+		_background->addChild(reviveButton);
+	}
 }
 
 void BeeHivePopup::initTouch() {
@@ -182,6 +201,7 @@ BeeHivePopup *BeeHivePopup::createWith(BeeHive *beeHive) {
     auto popup = BeeHivePopup::create();
     popup->_beeHive = beeHive;
     popup->update(0);       // loads information. Must be here.
+	popup->initButtons();
     return popup;
 }
 
@@ -194,7 +214,7 @@ bool BeeHivePopup::init() {
 
     initBackground();
     initImage();
-    initButtons();
+    //initButtons();
     initTouch();
     initInfoPanel();
 
