@@ -8,6 +8,7 @@
 #include "GameScene.h"
 #include "../HeaderFiles/HealthStates.h"
 #include "Wallet.h"
+#include "Story/StoryScene.h"
 
 bool BeeHive::invariant() {
 	//assert(_beesAlive >= 0);
@@ -153,6 +154,14 @@ void BeeHive::fromJSON(rapidjson::Document &doc) {
 void BeeHive::varroaRandomizer() {
     if(random(0, 10000) < 10) {
         _varroaAlive = (int) random(1, 10);
+
+        //Tutorial
+        auto storyScene = StoryScene::getInstance();
+        UICustom::Popup* popup = storyScene->createPopup(2);
+        if (popup){
+            auto scene = (GameScene*) Director::getInstance()->getRunningScene();
+            scene->getCameraContainer()->addChild(popup,200);
+        }
     }
 }
 

@@ -2,6 +2,8 @@
 #include <Resources/SpriteContainer.h>
 #include "Time.h"
 #include "SaveLoad/SaveLoad.h"
+#include "Story/StoryScene.h"
+#include "GameScene.h"
 
 Time::Time() {
 	setStartingMonth();
@@ -80,7 +82,7 @@ Season Time::getSeason() {
 	case 11:
 	case 0:
 	case 1: return Season::Winter; // Dezember, Januar, Februar
-	default:return Season::Spring;
+	default: return Season::Spring;
 	}
 }
 
@@ -127,6 +129,16 @@ void Time::update(float dt) {
 	}
 
 	auto nextSeason = getSeason();
+
+	//Tutorial
+	if (nextSeason == Season::Fall){
+        auto storyScene = StoryScene::getInstance();
+        UICustom::Popup* popup = storyScene->createPopup(4);
+        if (popup){
+            auto scene = (GameScene*) Director::getInstance()->getRunningScene();
+            scene->getCameraContainer()->addChild(popup,200);
+        }
+	}
 	if (nextSeason != _currentSeason) {
 		_currentSeason = nextSeason;
 		_currentRow = 0;
