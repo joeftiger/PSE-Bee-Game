@@ -19,6 +19,10 @@ public:
 
 	static int getPriceForSugarWater();
 
+	static int getPriceForSprite();
+
+	static int getPriceForRevive();
+
 };
 
 

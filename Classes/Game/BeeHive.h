@@ -147,6 +147,10 @@ public:
 
 	int getFood();
 
+	bool isDead();
+
+	void revive();
+
 	void setTileMap(TileMapLayer* tileMap);
 
 };

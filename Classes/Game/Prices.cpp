@@ -40,3 +40,7 @@ int Prices::getPriceForMedicine() {
 int Prices::getPriceForSugarWater() {
 	return 100;
 }
+
+int Prices::getPriceForRevive() {
+	return 300;
+}
