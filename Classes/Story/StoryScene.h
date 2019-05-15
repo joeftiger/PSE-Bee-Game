@@ -14,11 +14,11 @@ using namespace cocos2d;
 class StoryScene {
 private:
     Time* time;
-    bool firstTime0 = true;
-    bool firstTime1 = true;
-    bool firstTime2 = true;
-    bool firstTime3 = true;
-    bool firstTime4 = true;
+    bool seenPopUp0 = true;
+    bool seenPopUp1 = true;
+    bool seenPopUp2 = true;
+    bool seenPopUp3 = true;
+    bool seenPopUp4 = true;
 
 public:
     static StoryScene *getInstance() {
