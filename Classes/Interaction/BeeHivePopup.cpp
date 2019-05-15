@@ -55,9 +55,8 @@ void BeeHivePopup::initInfoPanel() {
     _beesLabel->setAnchorPoint(Vec2(0, 0.5));
     _beesLabel->setPosition(Vec2(box.width * 5 / 8, box.height * 5 / 9));
     _beesLabel->setScale(2);
-    auto beeSprite = SpriteContainer::getInstance()->getSpriteOf(
-            Sprites::erlenmeyer); // TODO: change with a bee sprite
-    beeSprite->setScale(0.3f);
+    auto beeSprite = Sprite::create("mascot.png"); // TODO: change with a bee sprite
+    beeSprite->setScale(0.1f);
     beeSprite->setAnchorPoint(Vec2(1, 0.5f));
     beeSprite->setPosition(Vec2(-30, 15));
 
