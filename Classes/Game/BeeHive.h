@@ -20,7 +20,7 @@ private:
 	int _varroaAlive;
 
 	float _rawHoney;
-	int _food;
+	int _food = 0;
 	float _mapScale;
 	float _beesToVarroaRatio;
 
