@@ -93,10 +93,10 @@ public:
 	float takeRawHoney();
 
 	/**
-	 * Takes and removes the specified amount from the raw honey currently in the beehive.
-	 * @param amount the amount to take (must be in between <code>[0, rawHoney()]</code>)
+	 * Takes and removes the specified amount or the maximum from the raw honey currently in the beehive.
+	 * @param amount the amount to take (must be greater than 0)
 	 * @return the amount taken
-	 * @throws std::out_of_range() if amount is an invalid value
+	 * @throws std::out_of_range() if amount is negative
 	 */
 	float takeRawHoney(float amount);
 

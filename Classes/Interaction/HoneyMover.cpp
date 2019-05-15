@@ -80,7 +80,8 @@ void HoneyMover::onTouchEnded(Touch *touch, void *) {
 
         _extractor = extractorAtlas->getHoneyExtractorAt(pos);
         if(_isDrag) {
-            _extractor->addHoneyToExtractor(_beeHive->takeRawHoney());
+            auto removed = _extractor->addHoneyToExtractor(_beeHive->rawHoney());
+            _beeHive->takeRawHoney(removed);
         } else {
             auto popup = HoneyExtractorPopup::createWith(_extractor);
             this->addChild(popup, 100);

@@ -117,12 +117,6 @@ void GameScene::setContainerPos(Vec2 pos) {
     pos.x = clampf(pos.x, -50, box.width - visibleSize.width + 50);
     pos.y = clampf(pos.y, -50, box.height - visibleSize.height + 50);
     container->setPosition(pos);
-
-//    pos += visibleSize / 2;
-//    auto box = _tileMapLayer->getMap()->getBoundingBox().size;
-//    pos.x = clampf(pos.x, 0 + visibleSize.width/4, box.width - visibleSize.width/4);
-//    pos.y = clampf(pos.y, 0 + visibleSize.width/4, box.height - visibleSize.height/4);
-//    container->setPosition(pos - visibleSize / 2);
 }
 
 void GameScene::onTouchEnded(Touch *touch, Event *event) {

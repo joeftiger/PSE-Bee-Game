@@ -57,10 +57,12 @@ float BeeHive::takeRawHoney() {
 }
 
 float BeeHive::takeRawHoney(float amount) {
-	if (amount < 0 || amount > _rawHoney) {
+	if (amount < 0) {
 		throw std::out_of_range(
 				"[" + std::to_string(amount) + "] is out of range for [_rawHoney = " + std::to_string(_rawHoney) + "]");
 	}
+
+	amount = min(_rawHoney, amount);
 	_rawHoney -= amount;
 
 	assert(invariant());

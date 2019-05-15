@@ -8,7 +8,7 @@
 #include <stdexcept>
 
 
-static const float MAX__HONEY_IN_EXTRACTOR = 100.0f;
+static const float MAX__HONEY_IN_EXTRACTOR = 15000;
 static const int CONVERSION_RATE = 400;
 static const int MULTIPLIER = 1/50;
 
@@ -59,7 +59,7 @@ public:
 	 * @param amountAdded: must be in between <code>[0, rawHoney()]</code>
 	 * @throws std::out_of_range() if amount is an invalid value
 	 */
-	void addHoneyToExtractor(float amountAdded);
+	float addHoneyToExtractor(float amountAdded);
 
 	/**
 	 * @return position in the tilemap
