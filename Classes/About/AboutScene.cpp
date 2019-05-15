@@ -48,7 +48,7 @@ bool AboutScene::init() {
                          "Tobias Brugger\n"
                          "Brian Schweigler\n\n"
                          "Artworks von Olivier Fontaine, Logo von Mauro Quarta\n\n"
-                         "Mehr Informationen über Bienen sowie Imkern:\n"
+                         "Mehr Informationen über Bienen sowie über die Leidenschaft des Imkerns:\n"
                          "Film: 'More Than Honey' (2012) von Markus Imhoof\n"
                          "Eidgenössisches Department für Wirtschaft, Bildung und Forschung: agroscope.admin.ch\n\n"
                          "Danke viel Mals für's Spielen, wir hoffen du hattest Spass!"
