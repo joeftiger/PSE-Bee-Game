@@ -176,15 +176,16 @@ void BeeHivePopup::initButtons() {
 		reviveButton->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
 			if (type == ui::Widget::TouchEventType::ENDED) {
 				_beeHive->revive();
+				this->removeFromParentAndCleanup(true);
 			}
-			});
+		});
 		reviveButton->setAnchorPoint(Vec2(1.0f, 0.0f));
 		reviveButton->setPosition(Vec2(box.width, 0));
-		std::string text = "Neubevölkerung\n" + std::to_string(Prices::getPriceForRevive()) + " CHF";
+		std::string text = "Neubevoelkerung\n" + std::to_string(Prices::getPriceForRevive()) + " CHF";
 		reviveButton->setTitleAlignment(TextHAlignment::CENTER);
 		reviveButton->setTitleText(text);
 		reviveButton->setTitleFontName(FONT);
-		reviveButton->setTitleFontSize(10);
+		reviveButton->setTitleFontSize(TEXT_SIZE_HUD);
 		_background->addChild(reviveButton);
 	}
 }

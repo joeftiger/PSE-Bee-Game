@@ -7,6 +7,7 @@
 #include "../HeaderFiles/Restorable.h"
 #include "../HeaderFiles/HealthStates.h"
 #include "TileMapLayer.h"
+#include "ui/CocosGUI.h"
 
 static const int MAX_BEES = 50000;
 static const float MAX_RAW_HONEY = 15000;
@@ -18,12 +19,14 @@ class BeeHive : Restorable {
 private:
 	int _beesAlive;
 	int _varroaAlive;
-
+	bool firstLoad = true;
 	float _rawHoney;
 	int _food = 0;
 	float _mapScale;
 	float _beesToVarroaRatio;
 
+
+	ui::LoadingBar * _healthImage;
 	BeeParticles* _particlesNode;
 	HealthState _currentHealth;
 	TileMapLayer* _tileMapLayer;
@@ -142,6 +145,8 @@ public:
 	 * gets the healthState via currentHealth() and sets one of the appropriate colors
 	 */
 	void setHealthIndicators();
+
+	void initHealthBar();
 
 	void addFood();
 

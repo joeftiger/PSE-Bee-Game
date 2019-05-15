@@ -8,7 +8,6 @@
 #include "GameScene.h"
 #include "../HeaderFiles/HealthStates.h"
 #include "Wallet.h"
-#include "ui/CocosGUI.h"
 #include "Story/StoryScene.h"
 
 
@@ -28,6 +27,7 @@ BeeHive::BeeHive(int bees, int varroa) {
 	_varroaAlive = varroa;
 	_rawHoney = 0;
 	_particlesNode = nullptr;
+	_currentHealth = currentHealth();
 	assert(invariant());
 }
 
@@ -75,15 +75,14 @@ float BeeHive::takeRawHoney(float amount) {
 HealthState BeeHive::currentHealth() {
 	_beesToVarroaRatio = _beesAlive / (_varroaAlive + 0.001f);
 	if (_beesToVarroaRatio   >= 0.75f) {
-		_currentHealth = HealthState::Healthy;
+		return HealthState::Healthy;
 	} else if (_beesToVarroaRatio   >= 0.45f) {
-		_currentHealth = HealthState::Average;
+		return HealthState::Average;
     } else if (_beesToVarroaRatio   >= 0.01f) {
-	    _currentHealth = HealthState::Unhealthy;
+	    return HealthState::Unhealthy;
     } else { //dead
-	    _currentHealth = HealthState::Dead;
+	    return HealthState::Dead;
     }
-    return _currentHealth;
 }
 
 void BeeHive::killVarroa() {
@@ -187,43 +186,55 @@ void BeeHive::setParticles() {
 }
 
 void BeeHive::setHealthIndicators() {
-    currentHealth();
-    _tileMapLayer = (TileMapLayer*) Director::getInstance()->getRunningScene()->getChildByName(TILE_MAP_LAYER_NAME);
+	if (firstLoad) {
+		initHealthBar();
+		firstLoad = false;
+	}
+
+	if (_currentHealth != currentHealth()) {
+		_currentHealth = currentHealth();
+		switch (_currentHealth){
+			case (Healthy):
+				_healthImage->setColor(Color3B::GREEN);
+				_healthImage->setPercent(100.0f);
+				break;
+			case (Average):
+				_healthImage->setColor(Color3B::YELLOW);
+				_healthImage->setPercent(75.0f);
+				break;
+
+			case (Unhealthy):
+				_healthImage->setColor(Color3B::RED);
+				_healthImage->setPercent(45.0f);
+				break;
+
+			case (Dead):
+				_healthImage->setColor(Color3B::BLACK);
+				_healthImage->setPercent(15.0f);
+				break;
+			default: // when in doubt, they're healthy
+				_healthImage->setColor(Color3B::GREEN);
+				_healthImage->setPercent(100.0f);
+		}
+		
+	}
+}
+
+void BeeHive::initHealthBar() {
+	_tileMapLayer = (TileMapLayer*)Director::getInstance()->getRunningScene()->getChildByName(TILE_MAP_LAYER_NAME);
 	_mapScale = Settings::getInstance()->getAsFloat(Settings::Map_Scale);
-	
+
 
 	// instantiate with "healthy" state image
-	auto _healthImage = ui::LoadingBar::create("indicators/greenSquare_long.png");
-	_healthImage->setPercent(0.0f);
+	_healthImage = ui::LoadingBar::create("indicators/greenSquare_long.png");
+	_healthImage->setPercent(100.0f);
 
-	switch (_currentHealth){
-		case (Healthy):
-			_healthImage->setColor(Color3B::GREEN);
-			_healthImage->setPercent(100.0f);
-			break;
-		case (Average):
-			_healthImage->setColor(Color3B::YELLOW);
-			_healthImage->setPercent(75.0f);
-            break;
-
-        case (Unhealthy):
-			_healthImage->setColor(Color3B::RED);
-			_healthImage->setPercent(45.0f);
-            break;
-
-        case (Dead):
-			_healthImage->setColor(Color3B::BLACK);
-			_healthImage->setPercent(15.0f);
-            break;
-        default: // when in doubt, they're healthy
-			_healthImage->setColor(Color3B::GREEN);
-			_healthImage->setPercent(100.0f);
-	}
 	_healthImage->setScale(0.08f);
-	
+
 	_tileMapLayer->addChild(_healthImage, 100);
-    auto pos = Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * _mapScale
-                    + _tileMapLayer->getMap()->getTileSize() * _mapScale / 2);
+	auto pos = Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * _mapScale
+		+ _tileMapLayer->getMap()->getTileSize() * _mapScale / 2);
+
 	// displacement of the indicator
 	// TODO Test which position is the most intuitive
 	_healthImage->setPosition(Vec2(pos.x + 10 * _mapScale, pos.y + 10 * _mapScale));
@@ -231,10 +242,6 @@ void BeeHive::setHealthIndicators() {
 	auto _background = Sprite::create("indicators/progressbar_background.png");
 	_healthImage->addChild(_background, 101);
 	_background->setPosition(Vec2(_background->getBoundingBox().size.width / 2, _background->getBoundingBox().size.height / 2));
-	
-	
-	
-
 }
 
 void BeeHive::setTileMap(TileMapLayer* tileMap) {
