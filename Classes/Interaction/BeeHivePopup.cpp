@@ -96,25 +96,12 @@ void BeeHivePopup::initInfoPanel() {
 }
 
 void BeeHivePopup::initButtons() {
-    /* TODO: Show Buttons to interact with like:
-     * - takeHoney();
-     * - giveSugarWater();
-     * - giveMedicine();
-     */
-    Vector<ui::Button*> buttons;
 
 	auto box = _background->getContentSize();
-	/*
-	auto takeHoney = ui::Button::create("menu/empty.png");
-	takeHoney->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
-		if (type == ui::Widget::TouchEventType::ENDED) {
-			
-		}
-	});
-	//takeHoney->setScale(0.3f);
-	//buttons.pushBack(takeHoney);
-	*/
 
+	Vector<ui::Button*> buttons;
+
+	//SugarButton
 	auto giveSugarWater = ui::Button::create("menu/empty.png");
 	giveSugarWater->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
 		if (type == ui::Widget::TouchEventType::ENDED) {
@@ -130,6 +117,7 @@ void BeeHivePopup::initButtons() {
 	
 	buttons.pushBack(giveSugarWater);
 
+	//MedicineButton
 	auto giveMedicine = ui::Button::create("menu/empty.png");
 	giveMedicine->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
 		if (type == ui::Widget::TouchEventType::ENDED) {
@@ -160,6 +148,7 @@ void BeeHivePopup::initButtons() {
 		_background->addChild(b);
 	}
 
+	//ExitButton
 	auto exitButton = ui::Button::create("menu/no.png");
 	exitButton->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
 		if (type == ui::Widget::TouchEventType::ENDED) {
@@ -171,6 +160,8 @@ void BeeHivePopup::initButtons() {
 	exitButton->setPosition(Vec2(box.width, box.height));
 	_background->addChild(exitButton);
 	
+
+	//ReviveButton
 	if (_beeHive->isDead()) {
 		auto reviveButton = ui::Button::create("menu/empty.png");
 		reviveButton->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
@@ -202,7 +193,7 @@ BeeHivePopup *BeeHivePopup::createWith(BeeHive *beeHive) {
     auto popup = BeeHivePopup::create();
     popup->_beeHive = beeHive;
     popup->update(0);       // loads information. Must be here.
-	popup->initButtons();
+	popup->initButtons(); //Called here, so we can create ReviveButton depending on healthstate of beeHive
     return popup;
 }
 
