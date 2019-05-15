@@ -84,9 +84,8 @@ void BeeHivePopup::initInfoPanel() {
     _varroaLabel->setAnchorPoint(Vec2(0, 0.5));
     _varroaLabel->setPosition(Vec2(box.width * 5 / 8, box.height * 1 / 3));
     _varroaLabel->setScale(2);
-    auto varroaSprite = SpriteContainer::getInstance()->getSpriteOf(
-        Sprites::honey_glass_3d); // TODO: change with a varroa sprite
-    varroaSprite->setScale(0.3f);
+    auto varroaSprite = Sprite::create("mites.png"); // TODO: change with a varroa sprite
+    varroaSprite->setScale(0.03f);
     varroaSprite->setAnchorPoint(Vec2(1, 0.5f));
     varroaSprite->setPosition(Vec2(-30, 15));
 
