@@ -42,7 +42,7 @@ public:
     /**
     * @return the total money after subtracting a specified amount
     */
-    int subtractMoney(int amount);
+    bool subtractMoney(int amount);
 
     void toJSON(rapidjson::Document &doc) override;
 

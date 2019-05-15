@@ -166,17 +166,8 @@ void ItemPanelLayer::onTouchEnded(Touch *touch, void *) {
     auto pos = touch->getLocation() + this->getParent()->getPosition();
     if (isDrag()) {
     	if (_tileMapLayer->canPlace(_draggedPlaceable, pos)) {
-			if (Wallet::getInstance()->returnTotalMoney() >= 100) { //TODO: actual price
+			if (Wallet::getInstance()->subtractMoney(100)) { //TODO: actual price
 				_tileMapLayer->place(_draggedPlaceable, pos);
-				Wallet::getInstance()->subtractMoney(100);
-			}
-			else { 
-				auto noMoneyLabel = Label::createWithTTF("Du hast nicht genug Geld", FONT, 40);
-				noMoneyLabel->enableOutline(Color4B::BLACK, 1);
-				auto winSize = Director::getInstance()->getWinSize();
-				noMoneyLabel->setPosition(winSize.width / 2 , winSize.height * 0.75f);
-				this->getParent()->addChild(noMoneyLabel, 1000);
-				noMoneyLabel->runAction(Sequence::create(FadeTo::create(4.0f, 0), RemoveSelf::create(), NULL));
 			}
     	}
 

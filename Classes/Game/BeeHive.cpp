@@ -7,6 +7,7 @@
 #include "BeeHive.h"
 #include "GameScene.h"
 #include "../HeaderFiles/HealthStates.h"
+#include "Wallet.h"
 
 bool BeeHive::invariant() {
 	//assert(_beesAlive >= 0);
@@ -81,8 +82,10 @@ HealthState BeeHive::currentHealth() {
 }
 
 void BeeHive::killVarroa() {
-	_varroaAlive = (int) max(0.0f, _varroaAlive * 0.05f);
-    _beesAlive = (int) max(0.0f, _beesAlive * 0.9f);
+    if(Wallet::getInstance()->subtractMoney(10)) {
+	    _varroaAlive = (int) max(0.0f, _varroaAlive * 0.05f);
+        _beesAlive = (int) max(0.0f, _beesAlive * 0.9f);
+    }
 }
 
 void BeeHive::update() {
@@ -220,8 +223,9 @@ void BeeHive::setTileMap(TileMapLayer* tileMap) {
 
 
 void BeeHive::addFood() {
-    _food += 1000;
-    //TODO subtract amount of money.
+    if(Wallet::getInstance()->subtractMoney(2)) {
+        _food += 1000;
+    }
 }
 
 int BeeHive::getFood() {
