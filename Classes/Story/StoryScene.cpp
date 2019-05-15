@@ -3,6 +3,7 @@
 #include "Popup.h"
 #include "Game/Time.h"
 #include "SaveLoad/SaveLoad.h"
+#include "../Settings.h"
 
 void StoryScene::init() {
 	if (SaveLoad::storySaveExists()) {
@@ -11,6 +12,13 @@ void StoryScene::init() {
 }
 
 UICustom::Popup* StoryScene::createPopup(int id) {
+
+	auto settings = Settings::getInstance();
+
+	if (!settings->getAsBool(Settings::Show_Tutorial)){
+		return nullptr;
+	}
+
     switch (id) {
         case 0: //Intro
             if (firstTime0) {
