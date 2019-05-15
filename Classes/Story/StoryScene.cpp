@@ -4,17 +4,10 @@
 #include "Game/Time.h"
 #include "SaveLoad/SaveLoad.h"
 
-bool StoryScene::init() {
-
-	if (!Node::init()) {
-		return false;
-	}
-
+void StoryScene::init() {
 	if (SaveLoad::storySaveExists()) {
 		SaveLoad::loadStory();
 	}
-
-	return true;
 }
 
 UICustom::Popup* StoryScene::createPopup(int id) {
@@ -93,7 +86,9 @@ void StoryScene::fromJSON(rapidjson::Document &doc) {
     assert(doc.IsArray());
     const rapidjson::Value &story = doc[0];
     assert(story["firstTime0"].IsBool());
+	cocos2d::log("0 %d", firstTime0);
     firstTime0 = story["firstTime0"].GetBool();
+	cocos2d::log("0 %d", firstTime0);
     assert(story["firstTime1"].IsBool());
     firstTime1 = story["firstTime1"].GetBool();
     assert(story["firstTime2"].IsBool());

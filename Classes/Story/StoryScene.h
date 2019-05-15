@@ -11,7 +11,7 @@ using namespace cocos2d;
 /**
  * Story dialogue via pop-ups that display text with the "granddaddy" sprite
  */
-class StoryScene : public cocos2d::Node {
+class StoryScene {
 private:
     Time* time;
     bool firstTime0 = true;
@@ -22,10 +22,11 @@ private:
 
 public:
     static StoryScene *getInstance() {
-        static auto instance = new StoryScene();
+        static auto instance = new StoryScene;
         return instance;
     }
-	virtual bool init();
+
+	void init();
 
     /**
      * creates a popup with a given ID:
@@ -38,7 +39,6 @@ public:
      */
 	UICustom::Popup* createPopup(int);
 
-	CREATE_FUNC(StoryScene);
 
     /**
      * Saving and loading states in "story.json" if the popup has shown already

@@ -64,6 +64,8 @@ bool GameScene::init() {
 		SaveLoad::loadMoney();
 	}
 
+	StoryScene::getInstance()->init();
+
 	//HUD Layer
 	_HUDLayer = HUDLayer::create();
 
