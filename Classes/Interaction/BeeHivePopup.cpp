@@ -170,7 +170,7 @@ void BeeHivePopup::initButtons() {
 			}
 		});
 		reviveButton->setAnchorPoint(Vec2(1.0f, 0.0f));
-		reviveButton->setPosition(Vec2(box.width, 0));
+		reviveButton->setPosition(Vec2(box.width - offsetX, offsetX));
 		std::string text = "Neubevoelkerung\n" + std::to_string(Prices::getPriceForRevive()) + " CHF";
 		reviveButton->setTitleAlignment(TextHAlignment::CENTER);
 		reviveButton->setTitleText(text);
