@@ -1,15 +1,15 @@
 
-#ifndef PSE_BEE_GAME_PLACEABLE_H
-#define PSE_BEE_GAME_PLACEABLE_H
+#ifndef PLACEABLE_H
+#define PLACEABLE_H
 
-#include <Game/TileMapLayer.h>
-#include <Resources/Tiles.h>
+#include "../Game/TileMapLayer.h"
+#include "../Resources/Tiles.h"
 #include "cocos2d.h"
 
 class TileMapLayer;
 
 /**
- * A placeable object is handled by the TileMapLayer to place tile/trees/houses etc.
+ * A placeable object is handled by the TileMapLayer to place tile/trees etc.
  */
 class Placeable {
 public:
@@ -20,4 +20,4 @@ public:
 	virtual cocos2d::Sprite *getSprite() = 0;
 };
 
-#endif //PSE_BEE_GAME_PLACEABLE_H
+#endif //PLACEABLE_H

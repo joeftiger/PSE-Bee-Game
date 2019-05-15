@@ -1,6 +1,6 @@
 
-#ifndef PSE_BEE_GAME_BEEPARTICLES_H
-#define PSE_BEE_GAME_BEEPARTICLES_H
+#ifndef BEEPARTICLES_H
+#define BEEPARTICLES_H
 
 #include "cocos2d.h"
 
@@ -43,4 +43,4 @@ public:
 };
 
 
-#endif //PSE_BEE_GAME_BEEPARTICLES_H
+#endif //BEEPARTICLES_H

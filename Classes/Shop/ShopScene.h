@@ -1,6 +1,6 @@
 
-#ifndef PSE_BEE_GAME_SHOPSCENE_H
-#define PSE_BEE_GAME_SHOPSCENE_H
+#ifndef SHOPSCENE_H
+#define SHOPSCENE_H
 
 #include "cocos2d.h"
 #include "HeaderFiles/DEFINITIONS.h"
@@ -22,4 +22,4 @@ public:
 };
 
 
-#endif //PSE_BEE_GAME_SHOPSCENE_H
+#endif //SHOPSCENE_H

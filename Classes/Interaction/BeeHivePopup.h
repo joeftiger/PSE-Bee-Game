@@ -1,6 +1,6 @@
 
-#ifndef PSE_BEE_GAME_BEEHIVEPOPUP_H
-#define PSE_BEE_GAME_BEEHIVEPOPUP_H
+#ifndef BEEHIVEPOPUP_H
+#define BEEHIVEPOPUP_H
 
 #include <Game/BeeHive.h>
 #include "cocos2d.h"
@@ -75,4 +75,4 @@ public:
 };
 
 
-#endif //PSE_BEE_GAME_BEEHIVEPOPUP_H
+#endif //BEEHIVEPOPUP_H

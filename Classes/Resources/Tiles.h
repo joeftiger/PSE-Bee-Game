@@ -1,7 +1,7 @@
 #ifndef TILES_H
 #define TILES_H
 
-#include <HeaderFiles/Seasons.h>
+#include "../HeaderFiles/Seasons.h"
 #include "cocos2d.h"
 
 /**

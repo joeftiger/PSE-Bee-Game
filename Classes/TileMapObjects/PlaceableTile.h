@@ -1,6 +1,6 @@
 
-#ifndef PSE_BEE_GAME_PLACEABLETILE_H
-#define PSE_BEE_GAME_PLACEABLETILE_H
+#ifndef PLACEABLETILE_H
+#define PLACEABLETILE_H
 
 
 #include <TileMapObjects/Placeable.h>
@@ -23,4 +23,4 @@ public:
 };
 
 
-#endif //PSE_BEE_GAME_PLACEABLETILE_H
+#endif //PLACEABLETILE_H

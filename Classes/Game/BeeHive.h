@@ -1,13 +1,12 @@
 
-#ifndef PSE_BEE_GAME_BEEHIVE_H
-#define PSE_BEE_GAME_BEEHIVE_H
+#ifndef GAME_BEEHIVE_H
+#define GAME_BEEHIVE_H
 
-#include "../Effects/BeeParticles.h"
-#include "../Effects/HealthIndicators.h"
 #include "cocos2d.h"
+#include "../Effects/BeeParticles.h"
 #include "../HeaderFiles/Restorable.h"
-#include "TileMapLayer.h"
 #include "../HeaderFiles/HealthStates.h"
+#include "TileMapLayer.h"
 
 static const int MAX_BEES = 50000;
 static const float MAX_RAW_HONEY = 15000;
@@ -19,17 +18,21 @@ class BeeHive : Restorable {
 private:
 	int _beesAlive;
 	int _varroaAlive;
+
 	float _rawHoney;
 	int _food;
+	float _mapScale;
+	float _beesToVarroaRatio;
+
 	BeeParticles* _particlesNode;
-	HealthIndicators* _healthIndicatorNode;
+	HealthState _currentHealth;
+	TileMapLayer* _tileMapLayer;
 	cocos2d::Vec2 _position;
 
-	HealthState _currentHealth;
-
 	bool invariant();
+
 	void varroaRandomizer();
-	TileMapLayer* _tileMapLayer;
+
 
 public:
 	/**
@@ -133,14 +136,11 @@ public:
      */
 	BeeParticles* getParticles();
 
-	/**
-     * Creating the health Indicators to display
-     * TODO
-     */
-    BeeParticles* getHealthIndicators();
-
 	void setParticles();
 
+	/**
+	 * gets the healthState via currentHealth() and sets one of the appropriate colors
+	 */
 	void setHealthIndicators();
 
 	void addFood();
@@ -151,4 +151,4 @@ public:
 
 };
 
-#endif //PSE_BEE_GAME_BEEHIVE_H
+#endif //GAME_BEEHIVE_H

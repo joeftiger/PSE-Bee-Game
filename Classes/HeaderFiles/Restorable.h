@@ -1,6 +1,6 @@
 
-#ifndef PSE_BEE_GAME_RESTORABLE_H
-#define PSE_BEE_GAME_RESTORABLE_H
+#ifndef RESTORABLE_H
+#define RESTORABLE_H
 
 
 #include "json/rapidjson.h"
@@ -23,4 +23,4 @@ public:
 	virtual void fromJSON(rapidjson::Document &doc) = 0;
 };
 
-#endif //PSE_BEE_GAME_RESTORABLE_H
+#endif //RESTORABLE_H

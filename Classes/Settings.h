@@ -1,6 +1,6 @@
 
-#ifndef PSE_BEE_GAME_SETTINGS_H
-#define PSE_BEE_GAME_SETTINGS_H
+#ifndef SETTINGS_H
+#define SETTINGS_H
 
 
 #include <map>
@@ -91,4 +91,4 @@ public:
 };
 
 
-#endif //PSE_BEE_GAME_SETTINGS_H
+#endif //SETTINGS_H

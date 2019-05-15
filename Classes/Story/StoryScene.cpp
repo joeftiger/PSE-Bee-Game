@@ -23,7 +23,7 @@ UICustom::Popup* StoryScene::createPopup(int id) {
             if (firstTime0) {
                 auto popup = UICustom::Popup::createAsMessage("GROSSVATER",
                                                  "Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich.\n"
-                                                 "Kannst du auf meine Bienen aufpassen? Nur bis ich wieder da bin...");
+                                                 "Kannst du auf meine Bienen aufpassen? Keine Angst, sie stechen nicht.");
                 firstTime0 = false;
                 SaveLoad::saveStory();
                 return popup;
@@ -44,7 +44,7 @@ UICustom::Popup* StoryScene::createPopup(int id) {
         case 2: //Varroa Info
             if (firstTime2) {
                 auto popup = UICustom::Popup::createAsMessage("GROSSVATER",
-                                                              "Achtung! Deine Bienen sind an Varroa erkrankt.\n"
+                                                              "Achtung! Deine Bienen sind an Varroa Milben erkrankt.\n"
                                                               "Schau doch im Shop nach, ob du etwas dagegen finden kannst.");
                 firstTime2 = false;
                 SaveLoad::saveStory();

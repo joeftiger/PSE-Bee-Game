@@ -1,6 +1,6 @@
 
-#ifndef PSE_BEE_GAME_SPRITECONTAINER_H
-#define PSE_BEE_GAME_SPRITECONTAINER_H
+#ifndef SPRITECONTAINER_H
+#define SPRITECONTAINER_H
 
 #include "cocos2d.h"
 #include "Sprites.h"
@@ -58,4 +58,4 @@ public:
 };
 
 
-#endif //PSE_BEE_GAME_SPRITECONTAINER_H
+#endif //SPRITECONTAINER_H

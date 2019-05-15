@@ -2,12 +2,11 @@
 #include <cassert>
 #include <string>
 #include <stdexcept>
-#include <Algorithm/GameAlgorithm.h>
-#include <Settings.h>
+#include "../Algorithm/GameAlgorithm.h"
+#include "../Settings.h"
 #include "BeeHive.h"
 #include "GameScene.h"
 #include "../HeaderFiles/HealthStates.h"
-#include "Time.h"
 
 bool BeeHive::invariant() {
 	//assert(_beesAlive >= 0);
@@ -25,7 +24,6 @@ BeeHive::BeeHive(int bees, int varroa) {
 	_varroaAlive = varroa;
 	_rawHoney = 0;
 	_particlesNode = nullptr;
-	_healthIndicatorNode = nullptr;
 	assert(invariant());
 }
 
@@ -69,15 +67,17 @@ float BeeHive::takeRawHoney(float amount) {
 }
 
 HealthState BeeHive::currentHealth() {
-	if (_beesAlive / _varroaAlive  >= 0.75) {
-		return HealthState::Healthy;
-	} else if (_beesAlive / _varroaAlive  >= 0.40) {
-		return HealthState::Average;
-    } else if (_beesAlive / _varroaAlive  >= 0.01) {
-	    return HealthState::Unhealthy;
-    } else {
-	    return HealthState::Dead;
+	_beesToVarroaRatio = _beesAlive / (_varroaAlive + 0.001f);
+	if (_beesToVarroaRatio   >= 0.75f) {
+		_currentHealth = HealthState::Healthy;
+	} else if (_beesToVarroaRatio   >= 0.45f) {
+		_currentHealth = HealthState::Average;
+    } else if (_beesToVarroaRatio   >= 0.01f) {
+	    _currentHealth = HealthState::Unhealthy;
+    } else { //dead
+	    _currentHealth = HealthState::Dead;
     }
+    return _currentHealth;
 }
 
 void BeeHive::killVarroa() {
@@ -102,6 +102,7 @@ void BeeHive::update() {
 
     _food = (int) clampf(_food - alg->foodConsumption(_beesAlive), 0, MAX_BEES);
 
+	setHealthIndicators();
 	varroaRandomizer();
 	assert(invariant());
 }
@@ -156,17 +157,16 @@ BeeParticles* BeeHive::getParticles() {
     return _particlesNode;
 }
 
-BeeParticles* BeeHive::getHealthIndicators() {
-    //return _healthIndicatorNode;
-}
-
 void BeeHive::setParticles() {
     _tileMapLayer = (TileMapLayer*) Director::getInstance()->getRunningScene()->getChildByName(TILE_MAP_LAYER_NAME);
+     _mapScale = Settings::getInstance()->getAsFloat(Settings::Map_Scale);
+
     if(!_particlesNode) {
         _particlesNode = BeeParticles::create();
         _tileMapLayer->addChild(_particlesNode);
-        _particlesNode->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * Settings::getInstance()->getAsFloat(Settings::Map_Scale)
-                                    + _tileMapLayer->getMap()->getTileSize() * Settings::getInstance()->getAsFloat(Settings::Map_Scale)/2));
+
+        _particlesNode->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * _mapScale
+                                    + _tileMapLayer->getMap()->getTileSize() * _mapScale / 2));
     }
     //node movement
     //_particlesNode->setPosition(Vec2(_particlesNode->getPosition().x + random(-1.0, 1.0),
@@ -175,18 +175,43 @@ void BeeHive::setParticles() {
 }
 
 void BeeHive::setHealthIndicators() {
+    currentHealth();
     _tileMapLayer = (TileMapLayer*) Director::getInstance()->getRunningScene()->getChildByName(TILE_MAP_LAYER_NAME);
-	if(!_healthIndicatorNode) {
-			_currentHealth = currentHealth();
-            _healthIndicatorNode = HealthIndicators::create();
-            _tileMapLayer->addChild(_healthIndicatorNode);
-            _healthIndicatorNode->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * Settings::getInstance()->getAsFloat(Settings::Map_Scale)
-                                                 + _tileMapLayer->getMap()->getTileSize() * Settings::getInstance()->getAsFloat(Settings::Map_Scale)/2));
-	}
+	_mapScale = Settings::getInstance()->getAsFloat(Settings::Map_Scale);
 
-        //node movement
-        //_particlesNode->setPosition(Vec2(_particlesNode->getPosition().x + random(-1.0, 1.0),
-     //       _particlesNode->getPosition().y + random(-1.0, 1.0)));
+	// instantiate with "healthy" state image
+	auto _healthImage = Sprite::create("indicators/greenSquare.png");
+
+
+	switch (_currentHealth){
+		case (Healthy):
+			_healthImage = Sprite::create("indicators/greenSquare.png");
+			break;
+		case (Average):
+            _healthImage = Sprite::create("indicators/yellowSquare.png");
+            break;
+
+        case (Unhealthy):
+            _healthImage = Sprite::create("indicators/redSquare.png");
+            break;
+
+        case (Dead):
+            _healthImage = Sprite::create("indicators/blackSquare.png");
+            break;
+        default: // when in doubt, they're healthy
+			_healthImage = Sprite::create("indicators/greenSquare.png");
+	}
+	_healthImage->setScale(0.08f);
+
+	_tileMapLayer->addChild(_healthImage);
+        _healthImage->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * _mapScale
+                    + _tileMapLayer->getMap()->getTileSize() * _mapScale / 2));
+
+		// displacement of the indicator
+		// TODO Test which position is the most intuitive
+		_healthImage->setPosition(Vec2(_healthImage->getPosition().x + 10 * _mapScale,
+										_healthImage->getPosition().y + 10 * _mapScale));
+
 }
 
 void BeeHive::setTileMap(TileMapLayer* tileMap) {

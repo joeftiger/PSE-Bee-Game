@@ -1,6 +1,6 @@
 
-#ifndef PSE_BEE_GAME_ITEMPANELLayer_H
-#define PSE_BEE_GAME_ITEMPANELLayer_H
+#ifndef ITEMPANELLayer_H
+#define ITEMPANELLayer_H
 
 #include <Game/TileMapLayer.h>
 #include <cocos/ui/UIButton.h>
@@ -47,4 +47,4 @@ public:
 };
 
 
-#endif //PSE_BEE_GAME_ITEMPANELLayer_H
+#endif //ITEMPANELLayer_H

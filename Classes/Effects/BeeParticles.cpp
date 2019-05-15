@@ -46,7 +46,7 @@ void BeeParticles::updateList(int delta) {
     } else if(delta < 0) {
         for(int i = 0; i < abs(delta); i++) {
             auto temp = SpriteContainer::getInstance()->getSpriteOf(Sprites::honey_glass_2d);
-            temp->setScale(0.03);
+            temp->setScale(0.03f);
             _particles.push_back(temp);
             this->addChild(temp);
         }

@@ -1,6 +1,6 @@
 
-#ifndef PSE_BEE_GAME_PLAYER_H
-#define PSE_BEE_GAME_PLAYER_H
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #include <cassert>
 #include <vector>
@@ -56,4 +56,4 @@ public:
 	void notify(void *pVoid) override;
 };
 
-#endif //PSE_BEE_GAME_PLAYER_H
+#endif //PLAYER_H

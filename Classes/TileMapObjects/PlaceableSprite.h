@@ -1,12 +1,9 @@
-//
-// Created by julius on 14.04.19.
-//
 
-#ifndef PSE_BEE_GAME_PLACEABLESPRITE_H
-#define PSE_BEE_GAME_PLACEABLESPRITE_H
+#ifndef PLACEABLESPRITE_H
+#define PLACEABLESPRITE_H
 
 
-#include <Resources/Sprites.h>
+#include "../Resources/Sprites.h"
 #include "Placeable.h"
 
 class PlaceableSprite : public Placeable {
@@ -26,4 +23,4 @@ public:
 	Sprite *getSprite() override;
 };
 
-#endif //PSE_BEE_GAME_PLACEABLESPRITE_H
+#endif //PLACEABLESPRITE_H
