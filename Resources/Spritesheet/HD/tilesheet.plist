@@ -615,7 +615,7 @@
                 <key>spriteSourceSize</key>
                 <string>{194,263}</string>
                 <key>textureRect</key>
-                <string>{{0,1056},{194,263}}</string>
+                <string>{{0,1052},{194,263}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -630,7 +630,7 @@
                 <key>spriteSourceSize</key>
                 <string>{194,263}</string>
                 <key>textureRect</key>
-                <string>{{194,1056},{194,263}}</string>
+                <string>{{194,1052},{194,263}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
