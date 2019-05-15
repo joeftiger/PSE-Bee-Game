@@ -80,7 +80,7 @@ void ItemPanelLayer::initializeItemPanel() {
 	_placeables.emplace_back(new PlaceableTile(Tiles::flower_red_big));
 	_placeables.emplace_back(new PlaceableTile(Tiles::flower_pink_big));
 	_placeables.emplace_back(new PlaceableTile(Tiles::bush_big));
-	_placeables.emplace_back(new PlaceableTile(Tiles::road));
+	_placeables.emplace_back(new PlaceableTile(Tiles::honeyextractor_summer));
 	_placeables.emplace_back(new PlaceableSprite(Sprites::tree_1_spring_summer));
 	_placeables.emplace_back(new PlaceableSprite(Sprites::tree_2_spring_summer));
 	_placeables.emplace_back(new PlaceableSprite(Sprites::tree_3_spring_summer_fall));
