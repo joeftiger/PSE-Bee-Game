@@ -604,6 +604,37 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>5_1_honeyextractor_summer.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{194,263}</string>
+                <key>spriteSourceSize</key>
+                <string>{194,263}</string>
+                <key>textureRect</key>
+                <string>{{0,1056},{194,263}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>5_2_honeyextractor_winter.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{194,263}</string>
+                <key>spriteSourceSize</key>
+                <string>{194,263}</string>
+                <key>textureRect</key>
+                <string>{{194,1056},{194,263}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+
         </dict>
         <key>metadata</key>
         <dict>

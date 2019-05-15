@@ -49,7 +49,9 @@ public:
 	    snow_3                  = 37,
 	    snow_4                  = 38,
 	    no_obstruction          = 39,
-	    obstruction             = 40
+	    obstruction             = 40,
+	    honeyextractor_summer   = 41,
+	    honeyextractor_winter   = 42
     };
 
     /**

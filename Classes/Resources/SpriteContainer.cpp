@@ -64,6 +64,8 @@ Sprite *SpriteContainer::getSpriteOf(Tiles::TileGID gid) {
         case Tiles::snow_4:                     return Sprite::createWithSpriteFrameName("schneetextur_rand4.png");
         case Tiles::obstruction:                return Sprite::createWithSpriteFrameName("4_9_obstruction.png");
         case Tiles::no_obstruction:             return Sprite::createWithSpriteFrameName("4_10_no_obstruction.png");
+        case Tiles::honeyextractor_summer       return Sprite::createWithSpriteFrameName("5_1_honeyextractor_summer.png");
+        case Tiles::honeyextractor_winter       return Sprite::createWithSpriteFrameName("5_2_honeyextractor_winter.png");
         default:                                return nullptr;
     }
 }
