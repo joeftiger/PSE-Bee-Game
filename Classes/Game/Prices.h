@@ -4,6 +4,9 @@
 #include "Resources/Sprites.h"
 #include "Resources/Tiles.h"
 
+/**
+*	Responsible for holding Pricing-Information about Placeables
+*/
 class Prices {
 private:
 public:
