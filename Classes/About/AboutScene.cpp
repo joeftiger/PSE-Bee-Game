@@ -30,7 +30,7 @@ bool AboutScene::init() {
 
 
 	// create a title and set it on the top of the screen
-	auto title = Label::createWithTTF("About", "fonts/OpenSans-ExtraBold.ttf", 48);
+	auto title = Label::createWithTTF("Credits", "fonts/OpenSans-ExtraBold.ttf", 48);
 	title->setPosition(Vec2(origin.x + visibleSize.width / 2,
 	                        origin.y + visibleSize.height - title->getContentSize().height));
 	this->addChild(title, 1);
@@ -50,10 +50,11 @@ bool AboutScene::init() {
                     "Brian Schweigler\n\n"
                     "Artworks von Olivier Fontaine, Logo von Mauro Quarto\n\n"
                     "Mehr Informationen über Bienen:\n"
-                    "Film: 'More Than Honey' (2012) von Markus Imhoof"
-                    , font, 27));
+                    "Film: 'More Than Honey' (2012) von Markus Imhoof\n"
+                    "Eidgenössisches Department für Wirtschaft, Bildung und Forschung: agroscope.admin.ch"
+                    , font, 28));
 
-    text->setAnchorPoint(Vec2(0.61f, -0.5f));
+    text->setAnchorPoint(Vec2(0.61f, -0.35f));
 	text->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
 	backgroundAbout->addChild(text);
 
@@ -67,8 +68,8 @@ bool AboutScene::init() {
 	});
 	auto backMenu = Menu::create(menuItem, nullptr);
 	backMenu->setPosition(Vec2::ZERO);
-	backMenu->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - onePofScreenW * 8,
-                                               visibleRect.origin.y + onePofScreenH * 6));
+	backMenu->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - onePofScreenW * 8.5f,
+                                               visibleRect.origin.y + onePofScreenH * 6.0f));
 	this->addChild(backMenu, 10);
 
 
