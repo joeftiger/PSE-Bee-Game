@@ -154,7 +154,7 @@ void BeeHivePopup::initButtons() {
 	});
 	exitButton->setScale(0.15f);
 	exitButton->setAnchorPoint(Vec2(1.0f, 1.0f));
-	exitButton->setPosition(Vec2(box.width, box.height));
+	exitButton->setPosition(Vec2(box.width - 6, box.height - 6));
 	_background->addChild(exitButton);
 	
 
