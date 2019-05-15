@@ -38,7 +38,7 @@ void HoneyExtractor::addHoneyToExtractor(float amountAdded) {
 
 void HoneyExtractor::update() {
 	if (!isEmpty()) {
-		Wallet::getInstance()->addMoney(CONVERSION_RATE * MULTIPLIER);
+		Wallet::getInstance()->addMoney(8);
 		_honeyInExtractor = fmax (_honeyInExtractor - CONVERSION_RATE, 0.0f);
 	}
 	assert(invariant());

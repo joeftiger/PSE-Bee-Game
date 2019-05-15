@@ -9,8 +9,8 @@
 
 
 static const float MAX__HONEY_IN_EXTRACTOR = 100.0f;
-static const int CONVERSION_RATE = 5;
-static const int MULTIPLIER = 2;
+static const int CONVERSION_RATE = 400;
+static const int MULTIPLIER = 1/50;
 
 /**
  * HoneyExtractor object that takes honey and converts it into money.

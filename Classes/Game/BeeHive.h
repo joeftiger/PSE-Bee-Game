@@ -20,6 +20,7 @@ private:
 	int _beesAlive;
 	int _varroaAlive;
 	float _rawHoney;
+	int _food;
 	BeeParticles* _particlesNode;
 	HealthIndicators* _healthIndicatorNode;
 	cocos2d::Vec2 _position;
@@ -141,6 +142,10 @@ public:
 	void setParticles();
 
 	void setHealthIndicators();
+
+	void addFood();
+
+	int getFood();
 
 	void setTileMap(TileMapLayer* tileMap);
 

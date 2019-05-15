@@ -53,7 +53,7 @@ void BeeHivePopup::initInfoPanel() {
     _beesLabel = Label::createWithTTF(labelConfig, "0");
     _beesLabel->enableOutline(Color4B::BLACK, 1);
     _beesLabel->setAnchorPoint(Vec2(0, 0.5));
-    _beesLabel->setPosition(Vec2(box.width * 5 / 8, box.height / 2));
+    _beesLabel->setPosition(Vec2(box.width * 5 / 8, box.height * 5 / 9));
     _beesLabel->setScale(2);
     auto beeSprite = SpriteContainer::getInstance()->getSpriteOf(
             Sprites::erlenmeyer); //to change with a bee sprite
@@ -63,6 +63,20 @@ void BeeHivePopup::initInfoPanel() {
 
 	_background->addChild(_beesLabel);
     _beesLabel->addChild(beeSprite);
+
+    //food
+    _foodLabel = Label::createWithTTF(labelConfig, "0");
+    _foodLabel->enableOutline(Color4B::BLACK, 1);
+    _foodLabel->setAnchorPoint(Vec2(0, 0.5));
+    _foodLabel->setPosition(Vec2(box.width * 5 / 8, box.height * 4 / 9));
+    _foodLabel->setScale(2);
+    auto foodSprite = SpriteContainer::getInstance()->getSpriteOf(Sprites::erlenmeyer);
+    foodSprite->setScale(0.3);
+    foodSprite->setAnchorPoint(Vec2(1, 0.5));
+    foodSprite->setPosition(Vec2(-30, 15));
+
+    _background->addChild(_foodLabel);
+    _foodLabel->addChild(foodSprite);
 
     //varroa
     _varroaLabel = Label::createWithTTF(labelConfig, "0");
@@ -101,7 +115,7 @@ void BeeHivePopup::initButtons() {
 	auto giveSugarWater = ui::Button::create("menu/yes.png");
 	giveSugarWater->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
 		if (type == ui::Widget::TouchEventType::ENDED) {
-			
+			_beeHive->addFood();
 		}
 	});
 	buttons.pushBack(giveSugarWater);
@@ -109,7 +123,7 @@ void BeeHivePopup::initButtons() {
 	auto giveMedicine = ui::Button::create("menu/yes.png");
 	giveMedicine->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
 		if (type == ui::Widget::TouchEventType::ENDED) {
-			
+			_beeHive->killVarroa();
 		}
 	});
 	buttons.pushBack(giveMedicine);
@@ -188,6 +202,8 @@ void BeeHivePopup::update(float dt) {
     _beesLabel->setString(stringShortener(std::to_string((int) _beeHive->beesAlive())));
 
     _varroaLabel->setString(stringShortener(std::to_string((int) _beeHive->varroaAlive())));
+
+    _foodLabel->setString(stringShortener(std::to_string((int) _beeHive->getFood())) + "g");
 }
 
 std::string BeeHivePopup::stringShortener(std::string s) {

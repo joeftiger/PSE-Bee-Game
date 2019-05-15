@@ -15,6 +15,7 @@ private:
     Label * _honeyLabel;
     Label * _beesLabel;
     Label * _varroaLabel;
+    Label * _foodLabel;
 	Sprite *_background;
 
     /**

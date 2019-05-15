@@ -56,7 +56,7 @@ bool ItemPanelLayer::init() {
     bg->setScale(this->getContentSize().width/bg->getContentSize().width);
     bg->setAnchorPoint(Vec2(1,1));
     bg->setPosition(this->_contentSize);
-    this->addChild(bg);
+    //this->addChild(bg);
 
 	initializeItemPanel();
 

@@ -14,10 +14,14 @@ GameAlgorithm *GameAlgorithm::getInstance() {
 }
 
 
-float GameAlgorithm::honeyProduction(int bees) {
+float GameAlgorithm::honeyProduction(int bees, int food) {
     float honey;
     if(Time::getInstance()->getMonth() <= 8 && Time::getInstance()->getMonth() > 2) {
         honey = bees * HONEY_PER_BEE;
+    }
+
+    if(food <= 0) {
+        honey -= bees * FOOD_EATEN_PER_BEE;
     }
 
 
@@ -26,16 +30,20 @@ float GameAlgorithm::honeyProduction(int bees) {
     return honey;
 }
 
-int GameAlgorithm::nextBees(int bees, int varroa) {
+int GameAlgorithm::nextBees(int bees, int varroa, int food, int honey) {
     int newBees;
 
-    if(Time::getInstance()->getMonth() <= 7 && Time::getInstance()->getMonth() > 4) {
+    if(Time::getInstance()->getMonth() <= 5 && Time::getInstance()->getMonth() > 2) {
         newBees += BEES_PER_UPDATE;
     }
 
     newBees -= BEES_DEAD_PER_UPDATE;
 
     newBees -= varroa * VARROA_KILL_RATE;
+
+    if(food <= 0 && honey <= 0) {
+        newBees -= 200;
+    }
 
     return newBees;
 }
@@ -50,4 +58,8 @@ int GameAlgorithm::nextVarroa(int varroa) {
 
 void GameAlgorithm::setBeeHives() {
     BeeHiveAtlas::getInstance()->getBeeHives(_beeHives);
+}
+
+int GameAlgorithm::foodConsumption(int bees) {
+    return bees * FOOD_EATEN_PER_BEE;
 }
