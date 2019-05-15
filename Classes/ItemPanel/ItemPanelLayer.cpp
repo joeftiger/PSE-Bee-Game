@@ -12,6 +12,8 @@
 #include "Game/TileMapLayer.h"
 #include "Game/Wallet.h"
 #include "Game/Prices.h"
+#include "Story/StoryScene.h"
+#include "Game/GameScene.h"
 
 using namespace cocos2d;
 
@@ -42,8 +44,19 @@ bool ItemPanelLayer::init() {
     auto showButton = ui::Button::create("shop/shop_1.png");
 
     showButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-		if (type == ui::Widget::TouchEventType::ENDED)
-			this->showHideItemPanel();
+		if (type == ui::Widget::TouchEventType::ENDED){
+            // Tutorial
+            auto storyScene = StoryScene::getInstance();
+            UICustom::Popup* popup = storyScene->createPopup(3);
+            if (popup){
+                auto scene = (GameScene*) Director::getInstance()->getRunningScene();
+                scene->getCameraContainer()->addChild(popup,200);
+            }
+
+		    this->showHideItemPanel();
+            // create Intro popup
+
+		}
     });
 
     //showButton = SpriteContainer::getInstance()->getSpriteOf(Sprites::SpriteID::shop_1);
