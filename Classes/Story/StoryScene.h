@@ -22,7 +22,7 @@ private:
 
 public:
     static StoryScene *getInstance() {
-        static auto instance = new StoryScene;
+        static auto instance = new StoryScene();
         return instance;
     }
 
