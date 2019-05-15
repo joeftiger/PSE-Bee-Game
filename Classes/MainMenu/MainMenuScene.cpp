@@ -26,7 +26,6 @@ bool MainMenu::init() {
 
 
 	// Adding the sprites for the main menu with location and size adjustment
-	// all scaling and position through trial-and-error
     auto playButton = ui::Button::create("menu/start.png");
     playButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
         if (type == ui::Widget::TouchEventType::ENDED) {
