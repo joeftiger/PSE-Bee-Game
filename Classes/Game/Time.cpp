@@ -129,16 +129,6 @@ void Time::update(float dt) {
 	}
 
 	auto nextSeason = getSeason();
-
-	//Tutorial
-	if (nextSeason == Season::Fall){
-        auto storyScene = StoryScene::getInstance();
-        UICustom::Popup* popup = storyScene->createPopup(4);
-        if (popup){
-            auto scene = (GameScene*) Director::getInstance()->getRunningScene();
-            scene->getCameraContainer()->addChild(popup,200);
-        }
-	}
 	if (nextSeason != _currentSeason) {
 		_currentSeason = nextSeason;
 		_currentRow = 0;

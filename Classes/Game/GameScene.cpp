@@ -11,6 +11,7 @@
 #include "Player.h"
 #include "Interaction/HoneyExtractorPopup.h"
 #include "Interaction/HoneyMover.h"
+#include "Story/StoryScene.h"
 
 
 using namespace cocos2d;
@@ -87,6 +88,7 @@ bool GameScene::init() {
 	this->schedule(schedule_selector(GameScene::saveGameState), 60.0f);
 	this->schedule(schedule_selector(GameScene::beeHiveAtlasUpdate), 1.0f);
 	this->schedule(schedule_selector(GameScene::honeyExtractorAtlasUpdate), 1.0f);
+	this->schedule(schedule_selector(GameScene::tutorialUpdate), 1.0f);
 	this->schedule(schedule_selector(GameScene::timeUpdate), UPDATE_TIME);
 	return true;
 }
@@ -100,6 +102,16 @@ void GameScene::beeHiveAtlasUpdate(float dt) {
 
 void GameScene::honeyExtractorAtlasUpdate(float dt) {
 	HoneyExtractorAtlas::getInstance()->updateHoneyExtractors(dt);
+}
+
+void GameScene::tutorialUpdate(float dt) {
+	if (Time::getInstance()->getSeason() == Season::Fall) {
+		auto storyScene = StoryScene::getInstance();
+		UICustom::Popup* popup = storyScene->createPopup(4);
+		if (popup) {
+			this->getCameraContainer()->addChild(popup, 200);
+		}	
+	}
 }
 
 bool GameScene::onTouchBegan(Touch *touch, Event *event) {

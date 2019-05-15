@@ -28,7 +28,7 @@ public:
 	virtual bool init();
 
     /**
-     * creates a popup with a gived ID:
+     * creates a popup with a given ID:
      * 0 = Intro
      * 1 = Beehive
      * 2 = Varroa

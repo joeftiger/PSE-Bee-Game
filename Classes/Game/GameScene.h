@@ -47,6 +47,8 @@ public:
      */
 	void honeyExtractorAtlasUpdate(float dt);
 
+	void tutorialUpdate(float dt);
+
 	bool onTouchBegan(Touch *touch, Event *event);
 
 	/**
