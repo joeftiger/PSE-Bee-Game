@@ -38,8 +38,8 @@ bool HUDLayer::init() {
 		Director::getInstance()->replaceScene(MainMenu::scene());
 	});
 	auto backMenu = Menu::create(menuItem, nullptr);
-	backMenu->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - onePofScreenW * 8,
-	                           visibleRect.origin.y + onePofScreenH * 5));
+	backMenu->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - onePofScreenW * 8.5f,
+	                           visibleRect.origin.y + onePofScreenH * 6.0f));
 	this->addChild(backMenu, 10);
 
 	// HoneyCounter + HoneySprite
