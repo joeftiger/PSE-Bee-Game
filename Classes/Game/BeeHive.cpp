@@ -75,9 +75,9 @@ float BeeHive::takeRawHoney(float amount) {
 
 HealthState BeeHive::currentHealth() {
 	_beesToVarroaRatio = _beesAlive / (_varroaAlive + 0.001f);
-	if (_beesToVarroaRatio   >= 0.9f) {
+	if (_beesToVarroaRatio   >= 0.96f) {
 		return HealthState::Healthy;
-	} else if (_beesToVarroaRatio   >= 0.65f) {
+	} else if (_beesToVarroaRatio   >= 0.70f) {
 		return HealthState::Average;
     } else if (_beesToVarroaRatio   >= 0.01f) {
 	    return HealthState::Unhealthy;
@@ -201,12 +201,12 @@ void BeeHive::setHealthIndicators() {
 				break;
 			case (Average):
 				_healthImage->setColor(Color3B::YELLOW);
-				_healthImage->setPercent(75.0f);
+				_healthImage->setPercent(70.0f);
 				break;
 
 			case (Unhealthy):
 				_healthImage->setColor(Color3B::RED);
-				_healthImage->setPercent(45.0f);
+				_healthImage->setPercent(35.0f);
 				break;
 
 			case (Dead):
