@@ -74,9 +74,9 @@ float BeeHive::takeRawHoney(float amount) {
 
 HealthState BeeHive::currentHealth() {
 	_beesToVarroaRatio = _beesAlive / (_varroaAlive + 0.001f);
-	if (_beesToVarroaRatio   >= 0.75f) {
+	if (_beesToVarroaRatio   >= 0.9f) {
 		return HealthState::Healthy;
-	} else if (_beesToVarroaRatio   >= 0.45f) {
+	} else if (_beesToVarroaRatio   >= 0.65f) {
 		return HealthState::Average;
     } else if (_beesToVarroaRatio   >= 0.01f) {
 	    return HealthState::Unhealthy;
@@ -236,7 +236,6 @@ void BeeHive::initHealthBar() {
 		+ _tileMapLayer->getMap()->getTileSize() * _mapScale / 2);
 
 	// displacement of the indicator
-	// TODO Test which position is the most intuitive
 	_healthImage->setPosition(Vec2(pos.x + 10 * _mapScale, pos.y + 10 * _mapScale));
 
 	auto _background = Sprite::create("indicators/progressbar_background.png");
