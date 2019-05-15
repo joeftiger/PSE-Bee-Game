@@ -214,7 +214,7 @@ void TileMapLayer::placeTile(const Vec2 &position, Tiles::TileGID &gid) {
 		notifyObservers();
 	}
 	// TODO: Implement correct honey extractor gid
-	else if (gid == Tiles::beehive_big_overflow) {
+	else if (Tiles::isHoneyExtractor(gid)) {
 		notifyObservers();
 	}
 }
