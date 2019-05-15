@@ -12,7 +12,6 @@ void BeeHivePopup::initBackground() {
 
     _background = Sprite::create("menu/background.png");
 	_background->setTextureRect(Rect(0, 0, size.width, size.height));    // background size
-	//_background->setColor(Color3B(255, 243, 190));
 	_background->setAnchorPoint(Vec2(0.5, 0.5));
 
     this->addChild(_background, -1, "background");
