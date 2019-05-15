@@ -1,13 +1,13 @@
 
-#include <Atlas/HoneyExtractorAtlas.h>
-#include <Atlas/BeeHiveAtlas.h>
-#include <Resources/SpriteContainer.h>
+#include "../Atlas/HoneyExtractorAtlas.h"
+#include "../Atlas/BeeHiveAtlas.h"
+#include "../Resources/SpriteContainer.h"
 #include "HoneyMover.h"
 #include "cocos2d.h"
 #include "Game/GameScene.h"
 #include "BeeHivePopup.h"
 #include "HoneyExtractorPopup.h"
-#include "Story/StoryScene.h"
+#include "../Story/StoryScene.h"
 
 Node *HoneyMover::createNode() {return HoneyMover::create();}
 
@@ -34,7 +34,7 @@ bool HoneyMover::onTouchBegan(Touch *touch, Event *event) {
     if (!_honeySprite) {
         _honeySprite = SpriteContainer::getInstance()->getSpriteOf(Sprites::SpriteID::honey_glass_2d);
         _honeySprite->setAnchorPoint(Vec2(0.5, 0));
-        _honeySprite->setScale(0.6f);
+        _honeySprite->setScale(1.1f);
         _honeySprite->setVisible(false);
         this->addChild(_honeySprite);
     }
