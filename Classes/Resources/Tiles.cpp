@@ -80,6 +80,11 @@ Tiles::TileGID Tiles::getSeasonTileGIDof(Tiles::TileGID gid, Season season) {
 			if (season == Season::Fall)   return flower_pink_small;
 			return snow_4;
 
+		case honeyextractor_summer:
+		case honeyextractor_winter:
+			if (season == Season::Winter) return honeyextractor_winter;
+			return honeyextractor_summer;
+
 		default:
 			return gid;
 	}
