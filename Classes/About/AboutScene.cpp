@@ -27,16 +27,23 @@ bool AboutScene::init() {
 	this->addChild(title, 1);
 
 	// create a richtext button with text about many relevant things
-	// TODO Add information, links and maybe images? (18.4)
 	auto text = cocos2d::ui::RichText::create();
 	const auto font = std::string("fonts/OpenSans-Regular.ttf");
 	text->ignoreContentAdaptWithSize(false);
 	text->setContentSize(Size(visibleSize.width - 40, visibleSize.height - 40));
 	text->pushBackElement(ui::RichElementText::create(0, Color3B::WHITE, 0xff,
-	                                                  "Created in cooperation with by Abilium by university of Berne students as part of the Praktikum Software Engineering lecture.",
-	                                                  font, 24));
+                    "Das Spiel wurde erstellt in Zusammenarbeit mit dem Unternehmen Abilium GmbH, von Studenten an der Universität Bern, \n"
+                    "als Teil der Vorlesung Praktikum Software Engineering, unter Beratung von Mario Hess.\n\n"
+                    "Wir sind:\n"
+                    "Mauro Quarta\n"
+                    "Alec Schuermann\n"
+                    "Tobias Brugger\n"
+                    "Brian Schweigler"
+                    , font, 26));
+
+
 	text->setPosition(Vec2(origin.x + visibleSize.width / 2,
-	                       origin.y + visibleSize.height - title->getContentSize().height - 80));
+	                       origin.y + visibleSize.height - title->getContentSize().height - 100));
 	this->addChild(text, 2);
 
 
