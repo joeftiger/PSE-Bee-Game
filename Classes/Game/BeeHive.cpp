@@ -264,7 +264,7 @@ bool BeeHive::isDead() {
 
 void BeeHive::revive() {
 	if (Wallet::getInstance()->subtractMoney(300)) {
-		this->_beesAlive = 4000;
+		this->_beesAlive = 15000;
 		this->_varroaAlive = 0;
 		this->_food = 0;
 		this->_rawHoney = 0;
