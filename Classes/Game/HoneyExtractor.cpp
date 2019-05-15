@@ -33,11 +33,12 @@ float HoneyExtractor::addHoneyToExtractor(float amountAdded) {
 			"[" + std::to_string(amountAdded) + "] is out of range for [_rawHoney = " + std::to_string(_rawHoney) + "]");
 	}
 	if(_honeyInExtractor + amountAdded > MAX__HONEY_IN_EXTRACTOR) {
+	    auto temp =_honeyInExtractor;
 	    _honeyInExtractor = MAX__HONEY_IN_EXTRACTOR;
-       return MAX__HONEY_IN_EXTRACTOR - _honeyInExtractor;
+       return MAX__HONEY_IN_EXTRACTOR - temp;
 	} else {
 	    _honeyInExtractor += amountAdded;
-	    return 0;
+	    return amountAdded;
 	}
 	assert(invariant());
 }

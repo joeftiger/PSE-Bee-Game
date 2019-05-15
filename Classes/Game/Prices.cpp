@@ -26,6 +26,8 @@ int Prices::getPriceForTile(Tiles::TileGID id) {
 		case Tiles::bush_small:
 		case Tiles::bush_big: return 100;
 
+		case Tiles::honeyextractor_summer: return 400;
+
 		default: return 50;
 		}
 	}
