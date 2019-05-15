@@ -31,30 +31,30 @@ bool AboutScene::init() {
 
 	// create a title and set it on the top of the screen
 	auto title = Label::createWithTTF("Credits", "fonts/OpenSans-ExtraBold.ttf", 48);
+	title->enableOutline(Color4B::BLACK, 1);
 	title->setPosition(Vec2(origin.x + visibleSize.width / 2,
 	                        origin.y + visibleSize.height - title->getContentSize().height));
 	this->addChild(title, 1);
 
 	// create a richtext button with text about many relevant things
-	auto text = cocos2d::ui::RichText::create();
 	const auto font = std::string("fonts/OpenSans-Bold.ttf");
-	text->ignoreContentAdaptWithSize(false);
-	text->setContentSize(Size(visibleSize.width - 40, visibleSize.height - 10));
-	text->pushBackElement(ui::RichElementText::create(0, Color3B::WHITE, 0xff,
-                    "Das Spiel wurde erstellt in Zusammenarbeit mit dem Unternehmen Abilium GmbH, von Studenten an \n"
-                    "der Universität Bern, als Teil der Vorlesung Praktikum Software Engineering, unter Beratung von Mario Hess.\n\n"
-                    "Wir sind:\n"
-                    "Mauro Quarta\n"
-                    "Alec Schuermann\n"
-                    "Tobias Brugger\n"
-                    "Brian Schweigler\n\n"
-                    "Artworks von Olivier Fontaine, Logo von Mauro Quarto\n\n"
-                    "Mehr Informationen über Bienen:\n"
-                    "Film: 'More Than Honey' (2012) von Markus Imhoof\n"
-                    "Eidgenössisches Department für Wirtschaft, Bildung und Forschung: agroscope.admin.ch"
-                    , font, 28));
 
-    text->setAnchorPoint(Vec2(0.61f, -0.35f));
+    auto text = Label::createWithTTF("Das Spiel wurde erstellt in Zusammenarbeit mit dem Unternehmen Abilium GmbH, von Studenten an der \n"
+                         "Universität Bern, als Teil der Vorlesung Praktikum Software Engineering, unter Beratung von Mario Hess.\n\n"
+                         "Wir sind:\n"
+                         "Mauro Quarta\n"
+                         "Alec Schuermann\n"
+                         "Julius Oeftiger\n"
+                         "Tobias Brugger\n"
+                         "Brian Schweigler\n\n"
+                         "Artworks von Olivier Fontaine, Logo von Mauro Quarta\n\n"
+                         "Mehr Informationen über Bienen sowie Imkern:\n"
+                         "Film: 'More Than Honey' (2012) von Markus Imhoof\n"
+                         "Eidgenössisches Department für Wirtschaft, Bildung und Forschung: agroscope.admin.ch\n\n"
+                         "Danke viel Mals für's Spielen, wir hoffen du hattest Spass!"
+                         , font, 28);
+	text->enableOutline(Color4B::BLACK, 1);
+    text->setAnchorPoint(Vec2(0.61f, -0.03f));
 	text->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
 	backgroundAbout->addChild(text);
 
