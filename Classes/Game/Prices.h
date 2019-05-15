@@ -15,6 +15,10 @@ public:
 
 	static int getPriceForTile(Tiles::TileGID id);
 
+	static int getPriceForMedicine();
+
+	static int getPriceForSugarWater();
+
 };
 
 

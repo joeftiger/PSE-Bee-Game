@@ -213,7 +213,7 @@ void TileMapLayer::placeTile(const Vec2 &position, Tiles::TileGID &gid) {
 
 		notifyObservers();
 	}
-	// TODO: Implement correct honey extractor gid
+	
 	else if (Tiles::isHoneyExtractor(gid)) {
 		notifyObservers();
 	}

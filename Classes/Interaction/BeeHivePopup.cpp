@@ -4,14 +4,15 @@
 #include <Game/GameScene.h>
 #include "BeeHivePopup.h"
 #include "HeaderFiles/DEFINITIONS.h"
+#include "Game/Prices.h"
 
 void BeeHivePopup::initBackground() {
     auto visibleSize = Director::getInstance()->getOpenGLView()->getVisibleSize();
     auto size = visibleSize * 0.75;
 
-    _background = Sprite::create();
+    _background = Sprite::create("menu/background.png");
 	_background->setTextureRect(Rect(0, 0, size.width, size.height));    // background size
-	_background->setColor(Color3B(255, 243, 190));
+	//_background->setColor(Color3B(255, 243, 190));
 	_background->setAnchorPoint(Vec2(0.5, 0.5));
 
     this->addChild(_background, -1, "background");
@@ -23,7 +24,7 @@ void BeeHivePopup::initImage() {
 
     image->setAnchorPoint(Vec2(0.0f, 1.0f));
     image->setPosition(box.width / 10, box.height);
-	image->setScale(2.0f);
+	image->setScale(1.5f);
     _background->addChild(image, 1, "image");
 }
 
@@ -103,25 +104,33 @@ void BeeHivePopup::initButtons() {
     Vector<ui::Button*> buttons;
 
 	auto box = _background->getContentSize();
-
-	auto takeHoney = ui::Button::create("menu/yes.png");
+	/*
+	auto takeHoney = ui::Button::create("menu/empty.png");
 	takeHoney->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
 		if (type == ui::Widget::TouchEventType::ENDED) {
 			
 		}
 	});
-	takeHoney->setScale(0.3f);
-	buttons.pushBack(takeHoney);
+	//takeHoney->setScale(0.3f);
+	//buttons.pushBack(takeHoney);
+	*/
 
-	auto giveSugarWater = ui::Button::create("menu/yes.png");
+	auto giveSugarWater = ui::Button::create("menu/empty.png");
 	giveSugarWater->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
 		if (type == ui::Widget::TouchEventType::ENDED) {
 			_beeHive->addFood();
 		}
 	});
+	std::string textSugar = "Zuckerwasser\n";
+	textSugar += std::to_string(Prices::getPriceForSugarWater()) + " CHF";
+	giveSugarWater->setTitleText(textSugar);
+	giveSugarWater->setTitleAlignment(TextHAlignment::CENTER);
+	giveSugarWater->setTitleFontName(FONT);
+	giveSugarWater->setTitleFontSize(TEXT_SIZE_HUD);
+	
 	buttons.pushBack(giveSugarWater);
 
-	auto giveMedicine = ui::Button::create("menu/yes.png");
+	auto giveMedicine = ui::Button::create("menu/empty.png");
 	giveMedicine->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
 		if (type == ui::Widget::TouchEventType::ENDED) {
 			_beeHive->killVarroa();
@@ -129,18 +138,23 @@ void BeeHivePopup::initButtons() {
 	});
 	buttons.pushBack(giveMedicine);
 
-	int index = 0;
-	auto buttonSize = takeHoney->getBoundingBox().size;
-	auto offset = buttonSize.width * 2.5f;
-	auto basePos = Vec2(-offset, 0);
+	std::string textMedicine = "Medizin\n";
+	textMedicine += std::to_string(Prices::getPriceForMedicine()) + " CHF";
+	giveMedicine->setTitleText(textMedicine);
+	giveMedicine->setTitleAlignment(TextHAlignment::CENTER);
+	giveMedicine->setTitleFontName(FONT);
+	giveMedicine->setTitleFontSize(TEXT_SIZE_HUD);
+
+	auto buttonSize = giveSugarWater->getBoundingBox().size;
+	auto offsetX = buttonSize.width / 5;
+	auto offsetY = buttonSize.height / 4;
 	
-	
+	giveSugarWater->setPosition(Vec2(offsetX, offsetX));
+	giveMedicine->setPosition(Vec2(buttonSize.width + offsetX * 2, offsetX));
+
 	for (ui::Button* b : buttons) {
 		b->setAnchorPoint(Vec2(0, 0));
-		b->setScale(0.3f);
 		_background->addChild(b);
-		b->setPosition(Vec2(basePos.x + (buttonSize.width * index) + offset, basePos.y));
-		index++;
 	}
 
 	auto exitButton = ui::Button::create("menu/no.png");

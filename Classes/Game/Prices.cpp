@@ -32,3 +32,11 @@ int Prices::getPriceForTile(Tiles::TileGID id) {
 		}
 	}
 }
+
+int Prices::getPriceForMedicine() {
+	return 200;
+}
+
+int Prices::getPriceForSugarWater() {
+	return 100;
+}
