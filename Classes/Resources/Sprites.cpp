@@ -79,3 +79,9 @@ Sprites::SpriteID Sprites::getSeasonSpriteIDof(Sprites::SpriteID id, Season seas
 			return id;
 	}
 }
+
+int Sprites::getPriceOfSprite(Sprites::SpriteID id) {
+	switch (id) {
+	default: return 200;
+	}
+}

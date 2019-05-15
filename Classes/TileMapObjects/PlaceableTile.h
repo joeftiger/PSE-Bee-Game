@@ -20,6 +20,8 @@ public:
 	void placeOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &position) override;
 
 	Sprite *getSprite() override;
+
+	int getPrice() override;
 };
 
 

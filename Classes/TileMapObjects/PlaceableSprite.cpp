@@ -1,6 +1,7 @@
 
 
 #include "PlaceableSprite.h"
+#include "Game/Prices.h"
 
 
 PlaceableSprite::PlaceableSprite(Sprites::SpriteID id) {
@@ -22,4 +23,8 @@ void PlaceableSprite::placeOn(TileMapLayer *tileMapLayer, cocos2d::Vec2 &positio
 
 Sprite *PlaceableSprite::getSprite() {
 	return Sprites::getSpriteOf(_id);
+}
+
+int PlaceableSprite::getPrice() {
+	return Prices::getPriceForSprite(_id);
 }

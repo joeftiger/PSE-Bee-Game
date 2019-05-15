@@ -160,6 +160,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Game\HoneyExtractor.cpp" />
     <ClCompile Include="..\Classes\Game\HUDLayer.cpp" />
     <ClCompile Include="..\Classes\Game\Player.cpp" />
+    <ClCompile Include="..\Classes\Game\Prices.cpp" />
     <ClCompile Include="..\Classes\Game\TileMapLayer.cpp" />
     <ClCompile Include="..\Classes\Game\Time.cpp" />
     <ClCompile Include="..\Classes\Game\Wallet.cpp" />
@@ -195,6 +196,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Game\HoneyExtractor.h" />
     <ClInclude Include="..\Classes\Game\HUDLayer.h" />
     <ClInclude Include="..\Classes\Game\Player.h" />
+    <ClInclude Include="..\Classes\Game\Prices.h" />
     <ClInclude Include="..\Classes\Game\TileMapLayer.h" />
     <ClInclude Include="..\Classes\Game\Time.h" />
     <ClInclude Include="..\Classes\Game\Wallet.h" />
