@@ -55,7 +55,7 @@ bool AboutScene::init() {
                          "Danke viel Mals für's Spielen, wir hoffen du hattest Spass!"
                          , font, 26);
 	text->enableOutline(Color4B::BLACK, 1);
-    text->setAnchorPoint(Vec2(0.75f, 0.11f));
+    text->setAnchorPoint(Vec2(0.75f, 0.13f));
 	text->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
 	backgroundAbout->addChild(text);
 
