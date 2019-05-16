@@ -18,7 +18,7 @@ bool AboutScene::init() {
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 	auto *backgroundAbout = cocos2d::Sprite::create("menu/background.png");
-	backgroundAbout->setScale(1.2f);
+	backgroundAbout->setScale(1.1f);
 	backgroundAbout->setAnchorPoint(Vec2(0.0f, 0.5f));
     backgroundAbout->setPosition(Vec2(0, origin.y));
     this->addChild(backgroundAbout, -1000);
@@ -53,9 +53,9 @@ bool AboutScene::init() {
                          "Film: 'More Than Honey' (2012) von Markus Imhoof\n"
                          "Eidgenössisches Department für Wirtschaft, Bildung und Forschung: agroscope.admin.ch\n\n"
                          "Danke viel Mals für's Spielen, wir hoffen du hattest Spass!"
-                         , font, 28);
+                         , font, 26);
 	text->enableOutline(Color4B::BLACK, 1);
-    text->setAnchorPoint(Vec2(0.61f, -0.03f));
+    text->setAnchorPoint(Vec2(0.76f, 0.0f));
 	text->setPosition(Vec2(buttonsBed.x, buttonsBed.y));
 	backgroundAbout->addChild(text);
 
