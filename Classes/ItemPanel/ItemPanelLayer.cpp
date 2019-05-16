@@ -42,7 +42,6 @@ bool ItemPanelLayer::init() {
 
 	//show Item Panel Layer
     auto showButton = ui::Button::create("shop/shop_1.png");
-
     showButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
 		if (type == ui::Widget::TouchEventType::ENDED){
             // Tutorial
@@ -54,8 +53,6 @@ bool ItemPanelLayer::init() {
             }
 
 		    this->showHideItemPanel();
-            // create Intro popup
-
 		}
     });
 
