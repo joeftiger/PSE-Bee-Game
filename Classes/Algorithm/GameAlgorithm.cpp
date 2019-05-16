@@ -56,7 +56,7 @@ int GameAlgorithm::nextVarroa(float bees, int varroa) {
         _varroaCounter = 0;
         float ratio = bees/MAX_BEES;
 
-        return varroa * ratio;
+        return static_cast<int>(varroa * ratio);
     } else {return 0;}
 }
 

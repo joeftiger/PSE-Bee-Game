@@ -74,7 +74,16 @@ float BeeHive::takeRawHoney(float amount) {
 }
 
 HealthState BeeHive::currentHealth() {
-	if (_beesAlive <= 0)     return HealthState::Dead;
+	if (_beesAlive <= 0) {
+		//Tutorial
+		auto storyScene = StoryScene::getInstance();
+		UICustom::Popup* popup = storyScene->createPopup(5);
+		if (popup){
+			auto scene = (GameScene*) Director::getInstance()->getRunningScene();
+			scene->getCameraContainer()->addChild(popup,200);
+		}
+		return HealthState::Dead;
+	}
 	if (_varroaAlive <= 20)  return HealthState::Healthy;
 	if (_varroaAlive <= 200) return HealthState::Average;
     return HealthState::Unhealthy;
