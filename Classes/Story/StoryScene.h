@@ -50,7 +50,7 @@ public:
     /**
      *  Call this to disable Story Popups
      */
-     void skipTutorial();
+     void setTutorial(bool value);
 };
 
 

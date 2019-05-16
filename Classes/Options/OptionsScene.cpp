@@ -5,6 +5,7 @@
 #include "MainMenu/MainMenuScene.h"
 #include "ui/UIWidget.h"
 #include "ui/CocosGUI.h"
+#include "../Story/StoryScene.h"
 
 using namespace cocos2d::ui;
 
@@ -17,6 +18,8 @@ bool OptionsScene::init() {
     cocos2d::Rect visibleRect = Director::getInstance()->getOpenGLView()->getVisibleRect();
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Vec2(visibleSize.width / 2, visibleSize.height / 2);
+
+    auto settings = Settings::getInstance();
 
     // adding a background, setting the middle as the anchor point and putting as far back as possible
     auto *backgroundOptions = cocos2d::Sprite::create("menu/main-menu-background-title.png");
@@ -58,8 +61,13 @@ bool OptionsScene::init() {
                                          "Sprites/tutorial_off.png", "Sprites/tutorial_off.png");
 	showTutorial->addTouchEventListener([&](Ref *sender, Widget::TouchEventType type) {
 		if (type == Widget::TouchEventType::ENDED) {
-			Settings::getInstance()->set(Settings::Show_Tutorial,
-			                             !Settings::getInstance()->getAsBool(Settings::Show_Tutorial));
+			auto tutorial = !Settings::getInstance()->getAsBool(Settings::Show_Tutorial);
+
+			Settings::getInstance()->set(Settings::Show_Tutorial, tutorial);
+
+            StoryScene::getInstance()->setTutorial(tutorial);
+
+
 		}
 	});
 	showTutorial->setSelected(Settings::getInstance()->getAsBool(Settings::Option::Show_Tutorial));
