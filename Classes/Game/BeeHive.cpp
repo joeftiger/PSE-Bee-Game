@@ -121,6 +121,7 @@ void BeeHive::toJSON(rapidjson::Document &doc) {
 	obj.AddMember("_beesAlive", _beesAlive, doc.GetAllocator());
 	obj.AddMember("_varroaAlive", _varroaAlive, doc.GetAllocator());
 	obj.AddMember("_rawHoney", _rawHoney, doc.GetAllocator());
+	obj.AddMember("_food", _food, doc.GetAllocator());
 	obj.AddMember("_posX", int(_position.x), doc.GetAllocator());
 	obj.AddMember("_posY", int(_position.y), doc.GetAllocator());
 	doc.PushBack(obj, doc.GetAllocator());
@@ -140,11 +141,16 @@ void BeeHive::fromJSON(rapidjson::Document &doc) {
 	assert(beeHive["_rawHoney"].IsFloat());
 	_rawHoney = beeHive["_rawHoney"].GetFloat();
 
+	assert(beeHive["_food"].IsInt());
+	_food = beeHive["_food"].GetInt();
+
 	assert(beeHive["_posX"].IsInt());
 	_position.x = beeHive["_posX"].GetInt();
 
 	assert(beeHive["_posY"].IsInt());
 	_position.y = beeHive["_posY"].GetInt();
+
+
 }
 
 void BeeHive::varroaRandomizer() {
