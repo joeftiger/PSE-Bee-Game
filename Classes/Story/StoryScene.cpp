@@ -42,7 +42,7 @@ UICustom::Popup* StoryScene::createPopup(int id) {
                                       "Achtung! Die Bienen sind an Varroa Milben erkrankt.\n"
                                       "Schau doch im Shop nach, ob du etwas dagegen finden kannst.");
                 popups[id] = false;
-                SaveLoad::saveStory();
+	            SaveLoad::saveStory();
                 return popup;
             }
             else return nullptr;
