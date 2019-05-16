@@ -15,59 +15,71 @@ UICustom::Popup* StoryScene::createPopup(int id) {
 
     switch (id) {
         case 0: //Intro
-            if (seenPopUp0) {
+            if (popups[id]) {
                 auto popup = UICustom::Popup::createAsMessage("GROSSVATER",
                                      "Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich.\n"
                                      "Kannst du auf meine Bienen aufpassen? Keine Angst, sie stechen nicht.");
-                seenPopUp0 = false;
+                popups[id] = false;
                 SaveLoad::saveStory();
                 return popup;
             }
-            else return nullptr;
+            return nullptr;
 
         case 1: //Beehive Info
-            if (seenPopUp1) {
+            if (popups[id]) {
                 auto popup = UICustom::Popup::createAsMessage("GROSSVATER",
                                       "Hier findest du Informationen über deine Bienenstöcke.\n"
                                       "Überprüfe möglichst oft die Gesundheit der Bienen und ihre Nahrung!");
-                seenPopUp1 = false;
+                popups[id] = false;
                 SaveLoad::saveStory();
                 return popup;
             }
-            else return nullptr;
+            return nullptr;
 	
         case 2: //Varroa Info
-            if (seenPopUp2) {
+            if (popups[id]) {
                 auto popup = UICustom::Popup::createAsMessage("GROSSVATER",
                                       "Achtung! Deine Bienen sind an Varroa Milben erkrankt.\n"
                                       "Schau doch im Shop nach, ob du etwas dagegen finden kannst.");
-                seenPopUp2 = false;
+                popups[id] = false;
                 SaveLoad::saveStory();
                 return popup;
             }
             else return nullptr;
 			
         case 3: //Shop Info
-            if (seenPopUp3) {
+            if (popups[id]) {
                 auto popup = UICustom::Popup::createAsMessage("GROSSVATER",
                                       "Hier kannst du alles kaufen was du für die Bienen brauchst.\n"
                                       "Ziehe dazu einfach was du kaufen willst auf die Karte.");
-                seenPopUp3 = false;
+                popups[id] = false;
                 SaveLoad::saveStory();
                 return popup;
             }
-            else return nullptr;
+            return nullptr;
 			
         case 4: //Fall/Winter Season Info
-            if (seenPopUp4) {
+            if (popups[id]) {
                 auto popup = UICustom::Popup::createAsMessage("GROSSVATER",
                                       "Der Winter naht.\n"
-                                      "Die Bienen brauchen genug Nahrung um den Winter zu überleben");
-                seenPopUp4 = false;
+                                      "Die Bienen brauchen genug Nahrung um den Winter zu überleben.");
+                popups[id] = false;
                 SaveLoad::saveStory();
                 return popup;
             }
-            else return nullptr;
+            return nullptr;
+
+	    case 5: // Beehive dead
+            if (popups[id]) {
+                auto popup = UICustom::Popup::createAsMessage("GROSSVATER",
+                                                              "Oh nein...\n"
+                                                              "Ein Bienenvolk ist gestorben!\n"
+                                                              "Eventuell kannst du es neu bevölkern.");
+                popups[id] = false;
+                SaveLoad::saveStory();
+                return popup;
+	        }
+	        return nullptr;
 
         default:
             return nullptr;
@@ -76,36 +88,31 @@ UICustom::Popup* StoryScene::createPopup(int id) {
 
 void StoryScene::toJSON(rapidjson::Document &doc) {
     rapidjson::Value obj(rapidjson::kObjectType);
-    obj.AddMember("seenPopUp0", seenPopUp0, doc.GetAllocator());
-    obj.AddMember("seenPopUp1", seenPopUp1, doc.GetAllocator());
-    obj.AddMember("seenPopUp2", seenPopUp2, doc.GetAllocator());
-    obj.AddMember("seenPopUp3", seenPopUp3, doc.GetAllocator());
-    obj.AddMember("seenPopUp4", seenPopUp4, doc.GetAllocator());
+
+    for (auto i = 0; i < popups.size(); i++) {
+        const char s[] = {'p', 'o', 'p', 'o', 'p', static_cast<const char>(i)};
+        obj.AddMember(s, popups[i], doc.GetAllocator());
+    }
     doc.PushBack(obj, doc.GetAllocator());
 }
 
 void StoryScene::fromJSON(rapidjson::Document &doc) {
     assert(doc.IsArray());
     const rapidjson::Value &story = doc[0];
-    assert(story["seenPopUp0"].IsBool());
-	cocos2d::log("0 %d", seenPopUp0);
-    seenPopUp0 = story["seenPopUp0"].GetBool();
-	cocos2d::log("0 %d", seenPopUp0);
-    assert(story["seenPopUp1"].IsBool());
-    seenPopUp1 = story["seenPopUp1"].GetBool();
-    assert(story["seenPopUp2"].IsBool());
-    seenPopUp2 = story["seenPopUp2"].GetBool();
-    assert(story["seenPopUp3"].IsBool());
-    seenPopUp3 = story["seenPopUp3"].GetBool();
-    assert(story["seenPopUp4"].IsBool());
-    seenPopUp4 = story["seenPopUp4"].GetBool();
+    for (auto i = 0; i < popups.size(); i++) {
+	    const char s[] = {'p', 'o', 'p', 'o', 'p', static_cast<const char>(i)};
+        assert(story[s].IsBool());
+        popups[i] = story[s].GetBool();
+    }
 }
 
  void StoryScene::setTutorial(bool value){
-    seenPopUp0 = value;
-    seenPopUp1 = value;
-    seenPopUp2 = value;
-    seenPopUp3 = value;
-    seenPopUp4 = value;
+    for (auto && popup : popups) {
+        popup = value;
+    }
     SaveLoad::saveStory();
+}
+
+StoryScene::StoryScene() {
+    for (int i = 0; i < 5; i++) popups.push_back(true); // all tutorials. Need to increase counter in case of new one
 }

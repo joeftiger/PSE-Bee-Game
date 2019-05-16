@@ -14,11 +14,9 @@ using namespace cocos2d;
 class StoryScene {
 private:
     Time* time;
-    bool seenPopUp0 = true;
-    bool seenPopUp1 = true;
-    bool seenPopUp2 = true;
-    bool seenPopUp3 = true;
-    bool seenPopUp4 = true;
+    std::vector<bool> popups;
+
+    StoryScene();
 
 public:
     static StoryScene *getInstance() {
@@ -35,6 +33,7 @@ public:
      * 2 = Varroa
      * 3 = Shop
      * 4 = First Winter Info
+     * 5 = First beehive dead
      * @return the popup
      */
 	UICustom::Popup* createPopup(int);
