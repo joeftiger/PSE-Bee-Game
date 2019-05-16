@@ -74,15 +74,10 @@ float BeeHive::takeRawHoney(float amount) {
 }
 
 HealthState BeeHive::currentHealth() {
-	if (_varroaAlive <= 20) {
-		return HealthState::Healthy;
-	} else if (_varroaAlive > 20 && _varroaAlive <= 200) {
-		return HealthState::Average;
-    } else if (_beesAlive <= 0) { //dead
-        return HealthState::Dead;
-    } else {
-	    return HealthState::Unhealthy;
-    }
+	if (_beesAlive <= 0)     return HealthState::Dead;
+	if (_varroaAlive <= 20)  return HealthState::Healthy;
+	if (_varroaAlive <= 200) return HealthState::Average;
+    return HealthState::Unhealthy;
 }
 
 void BeeHive::killVarroa() {
