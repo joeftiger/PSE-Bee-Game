@@ -17,7 +17,7 @@ UICustom::Popup* StoryScene::createPopup(int id) {
         case 0: //Intro
             if (popups[id]) {
                 auto popup = UICustom::Popup::createAsMessage("GROSSVATER",
-                                     "Hallo mein Enkel, schön bist du da. Ich hätte eine bitte an dich.\n"
+                                     "Hallo mein Enkel, schön bist du da. Ich hätte eine Bitte an dich.\n"
                                      "Kannst du auf meine Bienen aufpassen? Keine Angst, sie stechen nicht.");
                 popups[id] = false;
                 SaveLoad::saveStory();
@@ -28,7 +28,7 @@ UICustom::Popup* StoryScene::createPopup(int id) {
         case 1: //Beehive Info
             if (popups[id]) {
                 auto popup = UICustom::Popup::createAsMessage("GROSSVATER",
-                                      "Hier findest du Informationen über deine Bienenstöcke.\n"
+                                      "Hier findest du Informationen über die Bienenstöcke.\n"
                                       "Überprüfe möglichst oft die Gesundheit der Bienen und ihre Nahrung!");
                 popups[id] = false;
                 SaveLoad::saveStory();
@@ -39,7 +39,7 @@ UICustom::Popup* StoryScene::createPopup(int id) {
         case 2: //Varroa Info
             if (popups[id]) {
                 auto popup = UICustom::Popup::createAsMessage("GROSSVATER",
-                                      "Achtung! Deine Bienen sind an Varroa Milben erkrankt.\n"
+                                      "Achtung! Die Bienen sind an Varroa Milben erkrankt.\n"
                                       "Schau doch im Shop nach, ob du etwas dagegen finden kannst.");
                 popups[id] = false;
                 SaveLoad::saveStory();
