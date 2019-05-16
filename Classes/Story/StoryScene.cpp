@@ -87,22 +87,16 @@ UICustom::Popup* StoryScene::createPopup(int id) {
 }
 
 void StoryScene::toJSON(rapidjson::Document &doc) {
-    rapidjson::Value obj(rapidjson::kObjectType);
-
     for (auto i = 0; i < popups.size(); i++) {
-        const char s[] = {'p', 'o', 'p', 'o', 'p', static_cast<const char>(i)};
-        obj.AddMember(s, popups[i], doc.GetAllocator());
+        doc.PushBack((bool)popups[i], doc.GetAllocator());
     }
-    doc.PushBack(obj, doc.GetAllocator());
 }
 
 void StoryScene::fromJSON(rapidjson::Document &doc) {
     assert(doc.IsArray());
-    const rapidjson::Value &story = doc[0];
     for (auto i = 0; i < popups.size(); i++) {
-	    const char s[] = {'p', 'o', 'p', 'o', 'p', static_cast<const char>(i)};
-        assert(story[s].IsBool());
-        popups[i] = story[s].GetBool();
+        assert(doc[i].IsBool());
+        popups[i] = doc[i].GetBool();
     }
 }
 
