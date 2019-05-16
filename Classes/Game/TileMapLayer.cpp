@@ -215,6 +215,9 @@ void TileMapLayer::placeTile(const Vec2 &position, Tiles::TileGID &gid) {
 	}
 	
 	else if (Tiles::isHoneyExtractor(gid)) {
+
+		_obstructionLayer->setTileGID(Tiles::obstruction, pos);
+
 		notifyObservers();
 	}
 }
