@@ -28,7 +28,7 @@ bool OptionsScene::init() {
                            backgroundOptions->getBoundingBox().size.height / 2 - 3.0f);
 
 
-    // Adding the sprites for the main menu with location and size adjustment
+    // Adding the Sprites for the main menu with location and size adjustment
     auto resetButton = ui::Button::create("menu/reset.png");
     resetButton->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
         if (type == ui::Widget::TouchEventType::ENDED) {
@@ -40,8 +40,8 @@ bool OptionsScene::init() {
     resetButton->setScale(1.3f);
 
 
-    auto textureCheckbox = CheckBox::create("sprites/SD.png", "sprites/HD.png", "sprites/HD.png",
-                                            "sprites/SD.png", "sprites/SD.png");
+    auto textureCheckbox = CheckBox::create("Sprites/SD.png", "Sprites/HD.png", "Sprites/HD.png",
+                                            "Sprites/SD.png", "Sprites/SD.png");
     textureCheckbox->addTouchEventListener([&](Ref *sender, Widget::TouchEventType type) {
         if (type == Widget::TouchEventType::ENDED) {
             Settings::getInstance()->set(Settings::HD_Textures,
@@ -54,8 +54,8 @@ bool OptionsScene::init() {
     textureCheckbox->setScale(1.3f);
 
 
-    auto showTutorial = CheckBox::create("sprites/tutorial_off.png", "sprites/tutorial_on.png", "sprites/tutorial_on.png",
-                                         "sprites/tutorial_off.png", "sprites/tutorial_off.png");
+    auto showTutorial = CheckBox::create("Sprites/tutorial_off.png", "Sprites/tutorial_on.png", "Sprites/tutorial_on.png",
+                                         "Sprites/tutorial_off.png", "Sprites/tutorial_off.png");
 	showTutorial->addTouchEventListener([&](Ref *sender, Widget::TouchEventType type) {
 		if (type == Widget::TouchEventType::ENDED) {
 			Settings::getInstance()->set(Settings::Show_Tutorial,

@@ -55,7 +55,7 @@ void BeeHivePopup::initInfoPanel() {
     _beesLabel->setAnchorPoint(Vec2(0, 0.5));
     _beesLabel->setPosition(Vec2(box.width * 5 / 8, box.height * 5 / 9));
     _beesLabel->setScale(2);
-    auto beeSprite = Sprite::create("sprites/mascot.png"); // TODO: change with a bee sprite
+    auto beeSprite = Sprite::create("Sprites/mascot.png"); // TODO: change with a bee sprite
     beeSprite->setScale(0.1f);
     beeSprite->setAnchorPoint(Vec2(1, 0.5f));
     beeSprite->setPosition(Vec2(-30, 15));
@@ -83,7 +83,7 @@ void BeeHivePopup::initInfoPanel() {
     _varroaLabel->setAnchorPoint(Vec2(0, 0.5));
     _varroaLabel->setPosition(Vec2(box.width * 5 / 8, box.height * 1 / 3));
     _varroaLabel->setScale(2);
-    auto varroaSprite = Sprite::create("sprites/mites.png"); // TODO: change with a varroa sprite
+    auto varroaSprite = Sprite::create("Sprites/mites.png"); // TODO: change with a varroa sprite
     varroaSprite->setScale(0.03f);
     varroaSprite->setAnchorPoint(Vec2(1, 0.5f));
     varroaSprite->setPosition(Vec2(-30, 15));

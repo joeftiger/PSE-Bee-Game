@@ -74,15 +74,14 @@ float BeeHive::takeRawHoney(float amount) {
 }
 
 HealthState BeeHive::currentHealth() {
-	_beesToVarroaRatio = _beesAlive / (_varroaAlive + 0.001f);
-	if (_beesToVarroaRatio   >= 0.96f) {
+	if (_varroaAlive <= 20) {
 		return HealthState::Healthy;
-	} else if (_beesToVarroaRatio   >= 0.70f) {
+	} else if (_varroaAlive > 20 && _varroaAlive <= 200) {
 		return HealthState::Average;
-    } else if (_beesToVarroaRatio   >= 0.01f) {
+    } else if (_beesAlive <= 0) { //dead
+        return HealthState::Dead;
+    } else {
 	    return HealthState::Unhealthy;
-    } else { //dead
-	    return HealthState::Dead;
     }
 }
 
@@ -95,13 +94,15 @@ void BeeHive::killVarroa() {
 
 void BeeHive::update() {
 	auto alg = GameAlgorithm::getInstance();
-	_beesAlive = (int) clampf(_beesAlive + alg->nextBees(_beesAlive, _varroaAlive, _food, _rawHoney), 0, MAX_BEES);
-	setParticles();
+	if(!isDead()) {
+	    _beesAlive = (int) clampf(_beesAlive + alg->nextBees(_beesAlive, _varroaAlive, _food, _rawHoney), 0, MAX_BEES);
+	    setParticles();
+	}
 
 	_rawHoney = (int) clampf(_rawHoney + alg->honeyProduction(_beesAlive, _food), 0, MAX_RAW_HONEY);
 
 	if (_varroaAlive > 0) {
-	    _varroaAlive = (int) clampf(_varroaAlive + alg->nextVarroa(_varroaAlive), 0, std::numeric_limits<int>::max());
+	    _varroaAlive = (int) clampf(_varroaAlive + alg->nextVarroa(_beesAlive, _varroaAlive), 0, std::numeric_limits<int>::max());
 	}
 
     _food = (int) clampf(_food - alg->foodConsumption(_beesAlive), 0, MAX_BEES);
@@ -152,7 +153,7 @@ void BeeHive::fromJSON(rapidjson::Document &doc) {
 }
 
 void BeeHive::varroaRandomizer() {
-    if(random(0, 10000) < 10) {
+    if(random(0, 10000) < 10 + 10 * (_beesAlive/MAX_BEES)) {
         _varroaAlive = (int) random(1, 10);
 
         //Tutorial
@@ -173,17 +174,26 @@ void BeeHive::setParticles() {
     _tileMapLayer = (TileMapLayer*) Director::getInstance()->getRunningScene()->getChildByName(TILE_MAP_LAYER_NAME);
      _mapScale = Settings::getInstance()->getAsFloat(Settings::Map_Scale);
 
-    if(!_particlesNode) {
-        _particlesNode = BeeParticles::create();
-        _tileMapLayer->addChild(_particlesNode);
+    if(Time::getInstance()->getMonth() > 2 && Time::getInstance()->getMonth() < 10) {
+        if(!_particlesNode) {
+            _particlesNode = BeeParticles::create();
+            _tileMapLayer->addChild(_particlesNode);
 
-        _particlesNode->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * _mapScale
-                                    + _tileMapLayer->getMap()->getTileSize() * _mapScale / 2));
+            _particlesNode->setPosition(Vec2(_tileMapLayer->getLayer()->getTileAt(position())->getPosition() * _mapScale
+                                        + _tileMapLayer->getMap()->getTileSize() * _mapScale / 4));
+        } else if(!_particlesNode->isVisible()) {
+            _particlesNode->setVisible(true);
+        }
+        _particlesNode->setQuantity(_beesAlive);
+    } else {
+        if(_particlesNode) {
+            _particlesNode->setVisible(false);
+        }
     }
     //node movement
     //_particlesNode->setPosition(Vec2(_particlesNode->getPosition().x + random(-1.0, 1.0),
      //       _particlesNode->getPosition().y + random(-1.0, 1.0)));
-    _particlesNode->setQuantity(_beesAlive);
+
 }
 
 void BeeHive::setHealthIndicators() {
@@ -240,6 +250,7 @@ void BeeHive::initHealthBar() {
 	_healthImage->setPosition(Vec2(pos.x + 10 * _mapScale, pos.y + 10 * _mapScale));
 
 	auto _background = Sprite::create("indicators/progressbar_background.png");
+	_healthImage->setAnchorPoint(Vec2(1, -4));
 	_healthImage->addChild(_background, 101);
 	_background->setPosition(Vec2(_background->getBoundingBox().size.width / 2, _background->getBoundingBox().size.height / 2));
 }

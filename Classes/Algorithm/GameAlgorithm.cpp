@@ -30,14 +30,16 @@ float GameAlgorithm::honeyProduction(int bees, int food) {
     return honey;
 }
 
-int GameAlgorithm::nextBees(int bees, int varroa, int food, int honey) {
+int GameAlgorithm::nextBees(float bees, float varroa, float food, float honey) {
     int newBees;
 
-    if(Time::getInstance()->getMonth() <= 5 && Time::getInstance()->getMonth() > 2) {
+    if(Time::getInstance()->getSeason() == Season::Spring) {
         newBees += BEES_PER_UPDATE;
+    } else if(Time::getInstance()->getSeason() == Season::Fall) {
+        newBees -= 130;
     }
 
-    newBees -= BEES_DEAD_PER_UPDATE;
+    newBees = newBees - BEES_DEAD_PER_UPDATE;
 
     newBees -= varroa * VARROA_KILL_RATE;
 
@@ -48,11 +50,13 @@ int GameAlgorithm::nextBees(int bees, int varroa, int food, int honey) {
     return newBees;
 }
 
-int GameAlgorithm::nextVarroa(int varroa) {
+int GameAlgorithm::nextVarroa(float bees, int varroa) {
     _varroaCounter++;
     if(_varroaCounter >= 19) {
         _varroaCounter = 0;
-        return varroa;
+        float ratio = bees/MAX_BEES;
+
+        return varroa * ratio + 1;
     } else {return 0;}
 }
 

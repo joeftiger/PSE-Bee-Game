@@ -3,11 +3,11 @@
 #ifndef GAMEALGORITHM_H
 #define GAMEALGORITHM_H
 
-#define HONEY_PER_BEE 9/5/12/60;
-#define FOOD_EATEN_PER_BEE 9/10/12/60;
-#define BEES_PER_UPDATE 62*3;
-#define BEES_DEAD_PER_UPDATE 7*3;
-#define VARROA_KILL_RATE 0.03f;
+#define HONEY_PER_BEE 0.0025;
+#define FOOD_EATEN_PER_BEE 0.00125;
+#define BEES_PER_UPDATE 186;
+#define BEES_DEAD_PER_UPDATE 21;
+#define VARROA_KILL_RATE 0.25f;
 
 #include "Game/BeeHive.h"
 #include "Atlas/BeeHiveAtlas.h"
@@ -41,7 +41,7 @@ public:
      * @param varroa
      * @return
      */
-    int nextBees(int bees, int varroa, int food, int honey);
+    int nextBees(float bees, float varroa, float food, float honey);
 
     /**
      * Doubles the amount of varroa of a beehive every 10 days in-game time.
@@ -50,7 +50,7 @@ public:
      * @param varroa
      * @return
      */
-    int nextVarroa(int varroa);
+    int nextVarroa(float bees, int varroa);
 
     /**
      * Returns the amount of food consumed by bees.

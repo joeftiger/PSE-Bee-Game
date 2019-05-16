@@ -13,7 +13,7 @@ int Prices::getPriceForSprite(Sprites::SpriteID id) {
 
 int Prices::getPriceForTile(Tiles::TileGID id) {
 	if (Tiles::isBeeHive(id)) {
-		return 200;
+		return 300;
 	}
 	else if(Tiles::isFlower(id)){
 		return 50;
@@ -24,7 +24,7 @@ int Prices::getPriceForTile(Tiles::TileGID id) {
 		case Tiles::road:  return 50;
 
 		case Tiles::bush_small:
-		case Tiles::bush_big: return 100;
+		case Tiles::bush_big: return 40;
 
 		case Tiles::honeyextractor_summer: return 400;
 
@@ -34,11 +34,11 @@ int Prices::getPriceForTile(Tiles::TileGID id) {
 }
 
 int Prices::getPriceForMedicine() {
-	return 200;
+	return 15;
 }
 
 int Prices::getPriceForSugarWater() {
-	return 100;
+	return 2;
 }
 
 int Prices::getPriceForRevive() {
