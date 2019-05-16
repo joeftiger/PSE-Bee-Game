@@ -62,9 +62,7 @@ bool GameScene::init() {
 
 	if (SaveLoad::moneySaveExists()) {
 		SaveLoad::loadMoney();
-	}
-
-	StoryScene::getInstance()->init();
+	}I
 
 	//HUD Layer
 	_HUDLayer = HUDLayer::create();
