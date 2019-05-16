@@ -163,8 +163,8 @@ void BeeHive::fromJSON(rapidjson::Document &doc) {
 }
 
 void BeeHive::varroaRandomizer() {
-    if(random(0, 10000) < 10 + 10 * (_beesAlive/MAX_BEES)) {
-        _varroaAlive = (int) random(1, 10);
+    if(random(0, 10000) < 20 * (_beesAlive/MAX_BEES)) {
+        _varroaAlive = (int) random(2, 10);
 
         //Tutorial
         auto storyScene = StoryScene::getInstance();
@@ -211,8 +211,6 @@ void BeeHive::setHealthIndicators() {
 		initHealthBar();
 		firstLoad = false;
 	}
-
-	if (_currentHealth != currentHealth()) {
 		_currentHealth = currentHealth();
 		switch (_currentHealth){
 			case (Healthy):
@@ -220,8 +218,8 @@ void BeeHive::setHealthIndicators() {
 				_healthImage->setPercent(100.0f);
 				break;
 			case (Average):
-				_healthImage->setColor(Color3B::YELLOW);
 				_healthImage->setPercent(70.0f);
+				_healthImage->setColor(Color3B::YELLOW);
 				break;
 
 			case (Unhealthy):
@@ -237,8 +235,7 @@ void BeeHive::setHealthIndicators() {
 				_healthImage->setColor(Color3B::GREEN);
 				_healthImage->setPercent(100.0f);
 		}
-		
-	}
+
 }
 
 void BeeHive::initHealthBar() {
@@ -247,7 +244,7 @@ void BeeHive::initHealthBar() {
 
 
 	// instantiate with "healthy" state image
-	_healthImage = ui::LoadingBar::create("indicators/greenSquare_long.png");
+	_healthImage = ui::LoadingBar::create("indicators/white_bar.png");
 	_healthImage->setPercent(100.0f);
 
 	_healthImage->setScale(0.08f);
@@ -286,7 +283,7 @@ bool BeeHive::isDead() {
 
 void BeeHive::revive() {
 	if (Wallet::getInstance()->subtractMoney(300)) {
-		this->_beesAlive = 15000;
+		this->_beesAlive = 20000;
 		this->_varroaAlive = 0;
 		this->_food = 0;
 		this->_rawHoney = 0;
