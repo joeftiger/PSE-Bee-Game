@@ -68,14 +68,28 @@ bool HUDLayer::init() {
 	moneySprite->setPosition(Vec2(-30, 15));
 	moneyLabel->addChild(moneySprite);
 
-	//Timer
-
+	// Timer
 	timeLabel = Label::createWithTTF(labelConfig, std::to_string(Time::getInstance()->getMonth()));
 	timeLabel->enableOutline(Color4B::BLACK, 1);
 	this->addChild(timeLabel, HUD_PRIORITY);
 	timeLabel->setPosition(Vec2(visibleRect.origin.x + visibleRect.size.width - onePofScreenW * 5,
 	                            visibleRect.origin.y + visibleRect.size.height - onePofScreenH * 5));
 	this->schedule(schedule_selector(HUDLayer::timer), 0.1f);
+
+	// Fast forward
+	auto fastForward = ui::CheckBox::create("Sprites/f.png", "Sprites/ff.png", "Sprites/ff.png",
+	                                        "Sprites/f.png", "Sprites/f.png");
+	fastForward->addTouchEventListener([&](Ref *sender, ui::Widget::TouchEventType type) {
+		if (type == ui::Widget::TouchEventType::ENDED) {
+			auto scheduler = Director::getInstance()->getScheduler();
+			scheduler->setTimeScale(scheduler->getTimeScale() == 1 ? 5 : 1);
+		}
+	});
+	fastForward->setSelected(false);
+	fastForward->setAnchorPoint(Vec2(0, 0.5));
+	fastForward->setPosition(Vec2(0, this->getContentSize().height / 2));
+	fastForward->setScale(0.6f);
+	this->addChild(fastForward);
 
 	// create Intro popup
     auto storyScene = StoryScene::getInstance();
