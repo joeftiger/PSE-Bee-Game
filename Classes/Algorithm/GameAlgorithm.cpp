@@ -15,7 +15,7 @@ GameAlgorithm *GameAlgorithm::getInstance() {
 
 
 float GameAlgorithm::honeyProduction(int bees, int food) {
-    float honey;
+    float honey = 0;
     if(Time::getInstance()->getMonth() <= 8 && Time::getInstance()->getMonth() > 2) {
         honey = bees * HONEY_PER_BEE;
     }
@@ -31,7 +31,7 @@ float GameAlgorithm::honeyProduction(int bees, int food) {
 }
 
 int GameAlgorithm::nextBees(float bees, float varroa, float food, float honey) {
-    int newBees;
+    int newBees = 0;
 
     if(Time::getInstance()->getSeason() == Season::Spring) {
         newBees += BEES_PER_UPDATE;

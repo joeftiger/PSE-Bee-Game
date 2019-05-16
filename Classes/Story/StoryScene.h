@@ -48,9 +48,9 @@ public:
     void fromJSON(rapidjson::Document &doc) ;
 
     /**
-     *  Call this to disable Story Popups
+     *  pass boolean value to set tutorial visibility
      */
-     void skipTutorial();
+     void setTutorial(bool value);
 };
 
 

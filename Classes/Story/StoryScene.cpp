@@ -5,12 +5,6 @@
 #include "SaveLoad/SaveLoad.h"
 #include "../Settings.h"
 
-void StoryScene::init() {
-	if (SaveLoad::storySaveExists()) {
-		SaveLoad::loadStory();
-	}
-}
-
 UICustom::Popup* StoryScene::createPopup(int id) {
 
 	auto settings = Settings::getInstance();
@@ -107,11 +101,11 @@ void StoryScene::fromJSON(rapidjson::Document &doc) {
     seenPopUp4 = story["seenPopUp4"].GetBool();
 }
 
-void StoryScene::skipTutorial(){ // todo: implement button in options scene
-    seenPopUp0 = false;
-    seenPopUp1 = false;
-    seenPopUp2 = false;
-    seenPopUp3 = false;
-    seenPopUp4 = false;
+ void StoryScene::setTutorial(bool value){
+    seenPopUp0 = value;
+    seenPopUp1 = value;
+    seenPopUp2 = value;
+    seenPopUp3 = value;
+    seenPopUp4 = value;
     SaveLoad::saveStory();
 }
