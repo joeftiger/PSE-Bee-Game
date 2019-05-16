@@ -18,6 +18,7 @@ bool AboutScene::init() {
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 	auto *backgroundAbout = cocos2d::Sprite::create("menu/background.png");
+	backgroundAbout->setScale(1.2f);
 	backgroundAbout->setAnchorPoint(Vec2(0.0f, 0.5f));
     backgroundAbout->setPosition(Vec2(0, origin.y));
     this->addChild(backgroundAbout, -1000);
